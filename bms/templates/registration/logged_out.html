@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Logout</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+</head>
+<style>
+    body{
+        background-image:url({% static 'bms_app/images/templates.jpg' %});
+        background-size:cover;
+    }
+    .panel-title{
+        text-align: center;
+        font-weight: bold;
+        font-size: 30px;
+    }
+    #logcenter
+    {
+    	text-align: center;
+    }
+</style>
+
+<body>  
+    {% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div id="loginbox" style="margin-top:100px; align-content: center;" class="mainbox col-md-6 col-md-offset-3 row vertical-center-row">                    
+            <div class="panel panel-info" >
+
+                <div class="panel-heading">
+                    <div class="panel-title">Bug Management System</div>
+                </div>   
+ 
+                <div style="padding-top:10px" class="panel-body" >
+                    <form id="loginform" class="form-horizontal" role="form">
+
+                    	<h3 id="logcenter">You Have Been Logged Out</h3>
+                    	<p id="logcenter">Thank you for using our website</p>
+
+                        <div class="form-group">
+                            <div class="col-md-12 control" style="padding: 30px;">
+                                <div style="border-top: 1px solid#888; padding-top:30px; font-size:15px;" >
+                                    Please 
+                                    <a href="/login" onClick="$('/login')">
+                                       Click Here
+                                    </a> to login back to our site.
+                                </div>
+                            </div>
+                        </div>   
+                        
+                    </form>     
+                </div>                     
+            </div>  
+        </div>
+    </form>
+    {% endblock %}
+</body>
+
+
+</html>
