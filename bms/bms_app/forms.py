@@ -6,3 +6,4 @@ class User_inof_form(ModelForm):
     class Meta:
         model = User_info
         fields = ("username","email","password")
+        

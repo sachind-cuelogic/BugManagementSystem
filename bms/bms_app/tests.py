@@ -6,8 +6,6 @@ from django.contrib.auth.models import User
 import string
 import unittest
 
-
-
 class FormTestCase(TestCase):
 	def test_form(self):
 		self.assertTrue(User.objects.create_user(username="sacc", email="sacc@mail.com",password="abcde123"))
@@ -34,4 +32,3 @@ class FormTestCase(TestCase):
 		pass2 = "sachinasdf"
 		#self.assertEqual(pass1,pass2)
 		self.assertNotEqual(pass1, pass2)
-

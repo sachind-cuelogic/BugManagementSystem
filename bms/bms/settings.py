@@ -18,8 +18,6 @@ EMAIL_HOST_USER = 'bug.system.app1@gmail.com'
 EMAIL_HOST_PASSWORD = 'bugsystem'
 EMAIL_PORT = 587
 
-# Application definition
-
 INSTALLED_APPS = [
     'bms_app.apps.BmsAppConfig',
     'django.contrib.admin',

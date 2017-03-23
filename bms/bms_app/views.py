@@ -44,3 +44,4 @@ def register(request):
 @login_required(login_url='/login/')
 def product_home_page(request):
     return render(request, 'registration/home_page.html')
+    

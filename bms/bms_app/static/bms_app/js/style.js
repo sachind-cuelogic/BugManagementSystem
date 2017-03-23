@@ -1,57 +1,66 @@
 
-function checkusername()
-{
-  var userbox = document.getElementById('username');
-  var usermessage = document.getElementById('usermsg');
-  re = /^\w+$/;
-  if(!re.test(userbox.value)) 
-  {
-    usermessage.style.color = "#ff6666" ;
-    usermessage.innerHTML ="Username must contain only letters, numbers and underscores!";
-    checkusername();
-  }
-  else
-  {
-    usermessage.innerHTML = "";
-  }
-}
+    $(document).ready(function() {
+      $('#reg_form').bootstrapValidator({
 
-function checkemail() 
-{
-  var emailbox = document.getElementById('email');
-  var mailmessage = document.getElementById('mailmsg');
-  var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  if(filter.test(emailbox.value) == "")
-  {
-    mailmessage.innerHTML = "";
-  }
-  if (!filter.test(emailbox.value)) 
-  {
-    mailmessage.style.color = "#ff6666" ;
-    mailmessage.innerHTML = "Not a valid e-mail address";
-  }
-  else
-  {
-    mailmessage.innerHTML = "";
-  }
-}
-
-$(function () 
-{
-  $("#regbtn").click(function () 
-  {
-    var pass1 = $("#password").val();
-    var pass2 = $("#password_confirm").val();
-    if (pass1 != pass2) 
-    {
-      alert("Passwords do not match.");
-      return false;
+feedbackIcons: {
+  valid: 'glyphicon glyphicon-ok',
+  invalid: 'glyphicon glyphicon-remove',
+  validating: 'glyphicon glyphicon-refresh'
+},
+fields: {
+  username: {
+    validators: {
+      stringLength: {
+        min: 2,
+      },
+      notEmpty: {
+        message: 'Please supply your first name'
+      }
     }
-    return true;
-  });
-/*  $(document).ready(function(){
-    $("#regbtn").click(function(){
-      $("#successmsg").fadeIn(1000);
-    });
-  });*/
+  },
+
+  email: {
+    validators: {
+      notEmpty: {
+        message: 'Please supply your email address'
+      },
+      emailAddress: {
+        message: 'Please supply a valid email address'
+      }
+    }
+  },
+
+  password: {
+    validators: {
+      identical: {
+        field: 'confirmPassword',
+        message: 'Confirm your password below - type same password please'
+      }
+    }
+  },
+  confirmPassword: {
+    validators: {
+      identical: {
+        field: 'password',
+        message: 'The password and its confirm are not the same'
+      }
+    }
+  },
+}
+})
+      
+      .on('success.form.bv', function(e) {
+$('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+$('#reg_form').data('bootstrapValidator').resetForm();
+
+e.preventDefault();
+
+var $form = $(e.target);
+
+var bv = $form.data('bootstrapValidator');
+
+$.post($form.attr('action'), $form.serialize(), function(result) {
+  console.log(result);
+}, 'json');
 });
+    });
