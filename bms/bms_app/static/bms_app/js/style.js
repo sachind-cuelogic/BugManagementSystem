@@ -10,11 +10,17 @@ feedbackIcons: {
 fields: {
   username: {
     validators: {
-      stringLength: {
-        min: 2,
-      },
       notEmpty: {
-        message: 'Please supply your first name'
+        message: 'The username is required and can\'t be empty'
+      },
+      stringLength: {
+        min: 6,
+        max: 30,
+        message: 'The username must be more than 6 and less than 30 characters long'
+      },
+      regexp: {
+        regexp: /^[a-zA-Z0-9_\.]+$/,
+        message: 'The username can only consist of alphabetical, number, dot and underscore'
       }
     }
   },
@@ -32,6 +38,16 @@ fields: {
 
   password: {
     validators: {
+      stringLength: {
+        min: 8,
+        max: 30,
+        message: 'The password must be more than 8 and less than 30 characters long'
+      },
+      regexp: {
+        regexp: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        message: 'Password must contain Minimum 8 characters at least 1 Alphabet and 1 Number:'
+      },
+
       identical: {
         field: 'confirmPassword',
         message: 'Confirm your password below - type same password please'

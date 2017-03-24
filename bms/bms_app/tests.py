@@ -1,34 +1,48 @@
 from django.test import TestCase
-from forms import User_inof_form
-from django import forms
+import unittest
+import os
+import string
+from django.core.mail import EmailMessage
 import re
 from django.contrib.auth.models import User
-import string
-import unittest
 
-class FormTestCase(TestCase):
-	def test_form(self):
-		self.assertTrue(User.objects.create_user(username="sacc", email="sacc@mail.com",password="abcde123"))
+class Testpass(unittest.TestCase):
+	def test_pass1_pass2(self):
+		pass1=os.environ.get('pass1')
+		pass2=os.environ.get('pass2')
+		self.assertEqual(pass1,pass2)	
+		self.assertNotEqual(pass1,pass2)
 
-	def test_email(self):
-		temp_mail = 'sachin@mail.com'
-		regexp = re.compile('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$')
-		if regexp.search(temp_mail):
-			self.assertTrue(temp_mail)
-		else:
-			self.assertFalse(temp_mail)
+	def test_pass_len(self):
+	 	passwd = os.environ.get('passlen')
+	 	self.assertGreater(len(passwd),8)
+		self.assertLess(len(passwd),16)
 
 	def test_username(self):	
-		name = "sachin"
+		name = os.environ.get('user')
 		for c in name:
 			if c in string.punctuation:
 				self.assertFalse(c)
-				
+				break
 			else:
 				self.assertTrue(c)
-				
-	def test_pass1_pass2(self):
-		pass1 = "sachin"
-		pass2 = "sachinasdf"
-		#self.assertEqual(pass1,pass2)
-		self.assertNotEqual(pass1, pass2)
+
+	def test_username1(self):	
+		uname = os.environ.get('u')
+		self.assertGreater(len(uname),6)
+
+	def test_email(self):
+	 	temp_mail = os.environ.get('mail')
+	 	regexp = re.compile('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$')
+	 	if regexp.search(temp_mail):
+	 		self.assertTrue(temp_mail)
+	 	else:
+	 		self.assertFalse(temp_mail)
+		
+	def test_password(self):
+	  	temp_pass = os.environ.get('password')
+	  	regexp = re.compile('^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/')	
+	  	if regexp.search(temp_pass):
+	  		self.assertTrue(temp_pass)
+	  	else:
+	  		self.assertFalse(temp_pass)
