@@ -1,0 +1,38 @@
+body{
+	background-image:url(/static/bms_app/images/templates.jpg);
+	background-size:cover;
+}
+.panel-title{
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+}
+#loginbox
+{
+	margin-top:100px; 
+	align-content: center;
+}
+.panel-body
+{
+	padding-top:30px;
+	padding-left: 50px;
+    padding-right:50px;
+}
+.input-group
+{
+	margin-bottom: 25px;
+}
+.form-group
+{
+	margin-top:10px;
+}
+.notmember
+{
+	border-top: 1px solid#888;
+	padding-top:20px; 
+	font-size:15px;
+}
+
+.col-md-12{
+	padding: 20px;
+}
