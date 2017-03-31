@@ -4,13 +4,14 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django import forms
 from .forms import User_inof_form
-from .forms import ProductDetailsForm
+from .forms import ProductDetailsForm, ProductUserForm
 from django.core.mail import EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import User_info, Product_type, ProductDetails
+from django.forms.formsets import formset_factory
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -50,8 +51,7 @@ def login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return render_to_response('registration/create_product.html')
-        
+        return HttpResponseRedirect('/website_home')
     else:
         return HttpResponse("invalid login")
 
@@ -60,16 +60,21 @@ def website_home(request):
 
 @login_required(login_url='/login/')
 def create_product(request):
+
     if request.method == 'POST':
         form = ProductDetailsForm(request.POST, request.FILES)
-        if form.is_valid():
-            userObj = form.cleaned_data
-            form.save()
+        form1 = ProductUserForm(request.POST)
+        if form.is_valid() and form1.is_valid():
+            userObj = form.cleaned_data and form1.cleaned_data
+            product_details = form.save(commit = True)
+            product_user = form1.save(commit = True, args=[product_details])
+
             return HttpResponseRedirect('/product_list/')    
     else:
         form = ProductDetailsForm()
+        form1 = ProductUserForm()
 
-    return render(request, 'registration/create_product.html', {'form' : form})
+    return render(request, 'registration/create_product.html', {'form' : form,'form1':form1})
 
 @login_required(login_url='/login/')
 def product_list(request):

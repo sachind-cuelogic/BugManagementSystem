@@ -107,7 +107,6 @@
     color: #fff;
 }
 
-
 .navbar-brand {
     padding: 5px 15px;
 }
@@ -123,7 +122,6 @@ ul, ol {
 }
 
 .navbar-brand{
-
     padding-top: 18px;
     color: white;
 }
@@ -144,30 +142,32 @@ footer
     background-color: #679BB7; 
     padding: 10px 0;
 }
+
 footer p{
     text-align: center; 
     margin: 5px;
 }
+
 #content
 {
     padding: 20px
 }
+
 .panel-body
 {
     padding: 30px; 
 }
 
-
 #panelinfo
 {   
     height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
 
 }
 .modal-body
 {
     height: 170px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 [data-role="dynamic-fields"] > .form-inline + .form-inline {
@@ -185,10 +185,12 @@ footer p{
 [data-role="dynamic-fields"] > .form-inline:last-child [data-role="remove"] {
     display: none;
 }
+
 .form-inline
 {
     padding-bottom: 5px;
 }
+
 .control-label::after{
     content:":";
     color:#999999;
@@ -196,9 +198,16 @@ footer p{
     float:right;
     margin-right:10px;
 }
+
 .modal{
     vertical-align: middle;
 }
+
 .form-horizontal .control-label{
     text-align: left;
+}
+
+.downarrow
+{
+    padding-left:8px;
 }

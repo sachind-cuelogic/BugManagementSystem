@@ -47,3 +47,19 @@ class Testpass(unittest.TestCase):
 	  		self.assertTrue(temp_pass)
 	  	else:
 	  		self.assertFalse(temp_pass)
+
+	def product_type(self):
+		list=['web','desktop','android']
+		string=os.environ.get('product')
+		if string in list:
+			self.assertTrue(string)
+		else:
+			self.assertFalse(string)
+
+	def test_product_name_len(self):
+	 	prod_name = os.environ.get('prodnamelen')
+	 	self.assertGreater(len(prod_name),50)
+
+ 	def test_product_description(self):
+ 		prod_desc = os.environ.get('prod_desc')
+ 		self.assertGreater(len(prod_desc),1000)

@@ -10,12 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'bms_app/js/jquery.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'bms_app/bootstrap/js/bootstrap.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
 	<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js
+"></script>
 
-</head>
+ </head>
 <body>
 	<div id="wrapper">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -32,7 +35,7 @@
 			<ul class="nav navbar-right top-nav">
 				<li class="dropdown">
 					{% if user.is_authenticated %}
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}<b class="fa fa-angle-down"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}<b class="fa fa-angle-down downarrow"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
@@ -42,8 +45,8 @@
 					{% endif %}
 				</li>
 			</ul>
-			<div class="col-md-4 collapse navbar-collapse navbar-ex1-collapse"> <!-- sidebar -->
-				<a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+			<div class="col-md-4 collapse navbar-collapse navbar-ex1-collapse">
+
 				<ul class="nav navbar-nav side-nav toggled" id="wrapper1">
 					<li>
 						<a href="/website_home"><i class="fa fa-home"></i> Home</a>
@@ -77,10 +80,11 @@
 			<div id="page-wrapper">
 				<div class="container-fluid">
 					<div class="row" id="main">
-						<div class="col-sm-12 col-md-12" id="content"> -->
+						<div class="col-sm-12 col-md-12" id="content">
 
 							{% block content %}
 							{{ form.non_field_errors }}
+							{{ form1.non_field_errors }}
 							<form method="POST" id="fileForm" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
 								<div id="loginbox" class="mainbox col-md-8 col-md-offset-2 row vertical-center-row">   
 									<div class="panel panel-info" id="panelinfo">
@@ -127,13 +131,15 @@
 																<div data-role="dynamic-fields">
 																	<div class="form-inline">
 																		<div class="form-group">
+																		{{ form1.prod_user.errors }}
 																			<label class="sr-only" >Field Name</label>
-																			{{ form.prod_user }}
+																			{{ form1.prod_user }}
 																		</div>
 
 																		<div class="form-group">
+																		{{form1.prod_user_role.errors}}
 																			<label class="sr-only" for="field-name">Field Name</label>
-																			{{ form.user_role }}
+																			{{ form1.prod_user_role }}
 
 																		</select>
 																	</div>
@@ -144,8 +150,8 @@
 															</div>
 														</div>
 														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Save changes</button>
+															<a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+															<a type="button" data-dismiss="modal" class="btn btn-primary">Save changes</a>
 														</div>
 													</div>
 												</div>

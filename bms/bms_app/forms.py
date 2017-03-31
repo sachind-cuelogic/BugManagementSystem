@@ -3,7 +3,7 @@ from .models import User_info
 from django.forms import ModelForm
 from .models import Product_type
 from .models import ProductDetails
-from .models import UserRole
+from .models import ProductUser
 
 class User_inof_form(ModelForm):
 	class Meta:
@@ -26,19 +26,7 @@ class ProductDetailsForm(ModelForm):
 					queryset=Product_type.objects.all(),
 						widget=forms.Select(
 								attrs={'class':'form-control',
-									   'name':'proddrop'}))
-
-	prod_user = forms.ModelChoiceField(required=True, 
-				queryset=User_info.objects.all(),
-					widget=forms.Select(
-							attrs={'class':'form-control',
-								   'name':'proddrop1'}))
-
-	user_role = forms.ModelChoiceField(required=True, 
-			queryset=UserRole.objects.all(),
-				widget=forms.Select(
-						attrs={'class':'form-control',
-							   'name':'proddrop1'}))
+									   'name':'proddrop','label':'Select product type', 'initial':'Select product type'}))
 
 	prod_version = forms.CharField(required=True,label="prod_version",
 					widget=forms.TextInput(
@@ -61,5 +49,36 @@ class ProductDetailsForm(ModelForm):
 
 	class Meta:
 		model = ProductDetails
-		fields = ('prod_name','prod_type','prod_user','user_role',
+		fields = ('prod_name','prod_type',
 					'prod_version','prod_description','prod_file',)
+
+class ProductUserForm(ModelForm):
+
+	role_choice = (
+		(1, ("Software Engineer")),
+		(2, ("Tech Lead")),
+		(3, ("Project Manager")),
+		(4, ("Quality Assurance")),
+		(5, ("Tester"))
+		)
+
+	prod_user = forms.ModelChoiceField(required=True,
+		queryset=User_info.objects.all(),
+		widget=forms.Select(
+			attrs={'class':'form-control col-md-offset-4',
+			}))
+
+	prod_user_role = forms.ChoiceField(choices = role_choice, label="", initial='', 
+		widget=forms.Select(attrs={'class':'form-control col-md-offset-8',
+			'name':'proddrop2'}), required=True)
+
+
+	def save(self, commit=True, *args, **kwargs):
+		self.instance.product = ProductDetails.objects.get(pk=kwargs.get('args')[0].id)
+		self.instance.save()
+		print "save me from demo please."
+
+	class Meta:
+		model = ProductUser
+		fields = ('prod_user','prod_user_role',)
+		

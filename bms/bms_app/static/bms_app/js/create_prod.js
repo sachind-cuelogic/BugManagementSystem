@@ -31,29 +31,3 @@ $(document).ready(function(){
         $(".modal:visible").each(alignModal);
     });   
 });
-
-$(document).ready(function() {
-    $('#fileForm').formValidation({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            prod_file: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select an image'
-                    },
-                    file: {
-                        extension: 'jpeg,jpg,png',
-                        type: 'image/jpeg,image/png',
-                        maxSize: 100,   // 2048 * 1024
-                        message: 'The selected file is not valid'
-                    }
-                }
-            }
-        }
-    });
-});
