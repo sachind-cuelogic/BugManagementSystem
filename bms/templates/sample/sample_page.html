@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+</head>
+<body>
+	<form id="sample-form" class="form-horizontal" role="form">
+		{% csrf_token %}
+		<input type="hidden" id="csrf" value="{%csrf_token%}">
+<!--         <div class="input-group">
+            <input id="sample-data" type="text" class="form-control" name="sample-data" placeholder="Your data here" required="" autofocus="">                                     
+        </div> -->
+        <div class="input-group">
+        <select id="sample-data">
+                {% for each in roles%}
+                <option value="{{each.id}}">{{each.role}}</option>
+                {% endfor %}
+            </select>                                     
+        </div>
+        <br>
+        <div class="input-group">
+            <select id="sample-users">
+            	{% for each in users%}
+            		<option value="{{each.id}}">{{each.username}}</option>
+            	{% endfor %}
+            </select>                                     
+        </div>
+        <br>
+        <div id="output-text" ><span style="color:gray">No output</span></div>
+        <br>
+        <div class="form-group">
+            <div class="col-md-12 control">
+				<button id="submit-sample-data">Submit data</button>
+            </div>
+        </div>  
+	</form>   
+</body>
+<script type="text/javascript" src="{% static 'bms_app/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/sample-ajax.js' %}"></script>
+</html>

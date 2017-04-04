@@ -1,0 +1,12 @@
+https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/content/optional_postgresql_installation/
+
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
+
+http://www.indjango.com/ubuntu-install-postgresql-and-pgadmin/
+
+http://serverfault.com/questions/619879/psycopg2-not-found-by-django-after-installing-in-virtualenv
+
+http://stackoverflow.com/questions/21158918/django-mod-wsgi-psycopg2-improperlyconfigured-error-loading-psycopg2-module
+
+http://stackoverflow.com/questions/8237842/django-core-exceptions-improperlyconfigured-error-loading-psycopg-module-no-mo
+
