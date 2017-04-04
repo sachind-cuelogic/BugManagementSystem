@@ -1,13 +1,14 @@
 from django import forms
-from .models import User_info
+# from .models import User_info
 from django.forms import ModelForm
 from .models import Product_type
 from .models import ProductDetails
 from .models import ProductUser
+from django.contrib.auth.models import User
 
 class User_inof_form(ModelForm):
 	class Meta:
-		model = User_info
+		model = User
 		fields = ("username","email","password")
 
 class Product_type_form(ModelForm):
@@ -63,7 +64,7 @@ class ProductUserForm(ModelForm):
 		)
 
 	prod_user = forms.ModelChoiceField(required=True,
-		queryset=User_info.objects.all(),
+		queryset=User.objects.all(),
 		widget=forms.Select(
 			attrs={'class':'form-control col-md-offset-4',
 			}))

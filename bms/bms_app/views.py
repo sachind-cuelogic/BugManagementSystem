@@ -1,3 +1,6 @@
+import json
+import os
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -10,8 +13,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User_info, Product_type, ProductDetails
+from .models import Product_type, ProductDetails, UserRole,ProductUser
 from django.forms.formsets import formset_factory
+# from jfu.http import upload_receive, UploadResponse, JFUResponse
+# from django.core.urlresolvers import reverse
+# from django.views import generic
+# from django.views.decorators.http import require_POST
+
+
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -29,9 +38,9 @@ def register(request):
                 User.objects.create_user(username, email, password)
                 user = authenticate(username = username, password = password)
                 user.save()
-                form.save()
+                #form.save()
                 emaill = EmailMessage('Registration Confirmation for Bug Management System'
-                    ,'Dear '+ username+',\n\nThank you for registering to Bug Managment System.  We have good features the can help you to the management of the bugs as follows:\nAuthentication and Authorization, Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, Comments and tagging.\n\nLogin: http://127.0.0.1:8000/login/  \n\nIf you have any questions please contact: bug.system.app1@gmail.com. \n\nThank you,\nBug Management System.'
+                    ,'Dear '+ username+',\n\nThank you for registering to Bug Managment System.  We have good features the can help you to the management of the bugs which are as follows:\nAuthentication and Authorization, Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, Comments and tagging.\n\nLogin: http://127.0.0.1:8000/login/  \n\nIf you have any questions please contact: bug.system.app1@gmail.com. \n\nThank you,\nBug Management System.'
                     , to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
@@ -61,21 +70,47 @@ def website_home(request):
 @login_required(login_url='/login/')
 def create_product(request):
 
-    if request.method == 'POST':
-        form = ProductDetailsForm(request.POST, request.FILES)
-        form1 = ProductUserForm(request.POST)
-        if form.is_valid() and form1.is_valid():
-            userObj = form.cleaned_data and form1.cleaned_data
-            product_details = form.save(commit = True)
-            product_user = form1.save(commit = True, args=[product_details])
-
-            return HttpResponseRedirect('/product_list/')    
+    if request.method == 'GET':
+        users = User.objects.filter()
+        roles = UserRole.objects.filter()
+        prod_types =Product_type.objects.filter() 
+        return render(request, 'registration/create_product.html', {'users':users,'roles':roles,'prod_types':prod_types})
     else:
-        form = ProductDetailsForm()
-        form1 = ProductUserForm()
+        # import pdb
+        # pdb.set_trace()
+        data = request.POST
+        prod_desc =  data['prod_desc']
+        prod_name = data['prod_name'] 
+        prod_type = data['prod_type']
+        prod_ver = data['prod_ver']
+        prod_file = data['prod_file']
+        # user_data = data['prod_user_data']
 
-    return render(request, 'registration/create_product.html', {'form' : form,'form1':form1})
+        u= ProductDetails.objects.create(prod_name=prod_name,prod_version=prod_ver,prod_description=prod_desc,prod_type=prod_type)
+        u.save()
+        #return HttpResponse(json.dumps({'response':""+user1.username+":"+user2.role}), content_type="application/json")
+
 
 @login_required(login_url='/login/')
 def product_list(request):
-    return render(request, 'registration/product_list.html')
+    return render(request, 'registration/product_list.html')  
+            
+# @require_POST
+# def upload(request):
+#     file = upload_receive(request)
+#     instance = ProductDetails( prod_file = file )
+#     instance.save()
+#     basename = os.path.basename( instance.file.path )
+
+#     file_dict = {
+#         'name' : basename,
+#         'size' : file.size,
+
+#         'url': settings.MEDIA_URL + basename,
+#         'thumbnailUrl': settings.MEDIA_URL + basename,
+
+#         'deleteUrl': reverse('jfu_delete', kwargs = { 'pk': instance.pk }),
+#         'deleteType': 'POST',
+#     }
+
+#     return UploadResponse( request, file_dict )

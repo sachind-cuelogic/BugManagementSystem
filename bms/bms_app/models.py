@@ -1,20 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-
-class User_info(models.Model):
-	username = models.CharField(max_length=50)
-	email    = models.EmailField(unique=True, blank=False)
-	password = models.CharField(max_length=50)
-	designation = models.CharField(max_length=50,default="Software Engineer")
-	is_active   = models.BooleanField(default=True)
-	is_admin    = models.BooleanField(default=False)
-	is_staff    = models.BooleanField(default=False)
-
-	def __str__(self):
-		return self.username
-
-	def __str__(self):
-		return u'{0}'.format(self.username)
+from django.contrib.auth.models import User
 
 class Product_type(models.Model):
 	product_type_name = models.CharField(max_length=50)
@@ -32,9 +18,14 @@ class ProductDetails(models.Model):
 	def __str__(self):
 		return self.prod_name
 
+class UserRole(models.Model):
+	role = models.CharField(max_length=50)
+	def __str__(self):
+		return self.role
+
 class ProductUser(models.Model):
 
-	prod_user = models.ForeignKey(User_info,null=True)
+	prod_user = models.ForeignKey(User,null=True)
 	product = models.ForeignKey(ProductDetails,null=True)
 	prod_user_role = models.CharField(max_length = 50)
 

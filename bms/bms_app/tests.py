@@ -5,6 +5,7 @@ import string
 from django.core.mail import EmailMessage
 import re
 from django.contrib.auth.models import User
+from .forms import ProductDetailsForm
 
 class Testpass(unittest.TestCase):
 	def test_pass1_pass2(self):
@@ -63,3 +64,12 @@ class Testpass(unittest.TestCase):
  	def test_product_description(self):
  		prod_desc = os.environ.get('prod_desc')
  		self.assertGreater(len(prod_desc),1000)
+
+	def test_form(self):
+		data = {
+		"ProductDetailsForm": "foo",
+		"prod_version": "bar",
+		"prod_description": "bar"
+		}
+		form = ProductDetailsForm(data)
+		self.assertFalse(form.is_valid())	

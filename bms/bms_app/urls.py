@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^register/', register),
     url(r'^login/', login),
     url(r'^create_product/',views.create_product),
+    #url(r'^create_product/',views.upload,name = 'jfu_upload'),
     url(r'^website_home/',views.website_home),
     url(r'^product_list/',views.product_list),
     url(r'^logout/', auth_views.logout),
+  #  url(r'^sample_url/', views.get_sample_data),
 ]
