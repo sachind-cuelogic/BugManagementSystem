@@ -1,0 +1,44 @@
+
+body{
+    background-image:url('/static/bms_app/images/templates.jpg');
+    background-attachment:fixed;
+    background-size:cover;
+}
+.panel-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+#loginbox{
+    margin-top:70px; 
+    align-content: center;
+}
+.panel-body{
+    padding-top:10px;
+    padding-left: 50px;
+    padding-right:50px;
+}
+.input-group
+{
+    margin-bottom: 10px;
+}
+.form-group
+{
+    margin-top:10px;
+}
+#regloginhere
+{
+    padding-right: 30px;
+}
+.inputgroup
+{
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.alreadymember
+{
+    border-top: 1px solid#888;
+    padding-top:20px; 
+    font-size:15px;
+}
