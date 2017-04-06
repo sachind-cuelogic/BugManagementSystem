@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/loginStyle.css' %}">
+</head>
+<body>  
+    {% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 row vertical-center-row">                    
+            <div class="panel panel-info" >
+
+                <div class="panel-heading">
+                    <div class="panel-title">LOG IN</div>
+                </div>   
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} ">{{ message }}</div>
+                {% endfor %}
+ 
+                <div class="panel-body" >
+                    <form id="loginform" class="form-horizontal" role="form">
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="login-username" type="text" class="form-control" name="username" placeholder="Your username" required="" autofocus="" >                                        
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="Your password" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12 controls">
+                                <button class="btn btn-md btn-primary btn-block" type="submit"><strong>LOGIN</strong></button> 
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 control">
+                                <div class="notmember">
+                                    Not a member yet ? 
+                                    <a href="/register" onClick="$('/register')">
+                                        Sign Up Here
+                                    </a>
+                                </div>
+                            </div>
+                        </div>  
+
+                    </form>     
+                </div>                     
+            </div>  
+        </div>
+    </form>
+    {% endblock %}
+</body>
+</html>
