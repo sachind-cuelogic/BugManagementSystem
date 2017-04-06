@@ -90,3 +90,20 @@ def create_product(request):
 @login_required(login_url='/login/')
 def product_list(request):
     return render(request, 'registration/product_list.html')  
+
+def services(request):
+    return render(request, 'registration/services.html')  
+
+def about(request):
+    return render(request, 'registration/about.html')  
+
+def contact_us(request):
+    return render(request, 'registration/contact.html') 
+
+def languages(request):
+    return render(request, 'registration/languages.html')
+
+def privacy(request):
+    return render(request, 'registration/privacy.html')
+def terms_use(request):
+    return render(request, 'registration/terms_use.html')

@@ -15,4 +15,10 @@ urlpatterns = [
     url(r'^website_home/',views.website_home),
     url(r'^product_list/',views.product_list),
     url(r'^logout/', auth_views.logout),
+    url(r'^services/',views.services),
+    url(r'^about/',views.about),
+    url(r'^contact/',views.contact_us),
+    url(r'^languages/',views.languages),
+    url(r'^privacy/',views.privacy),
+    url(r'^terms_use/',views.terms_use),
 ]
