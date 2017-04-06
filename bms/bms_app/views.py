@@ -48,7 +48,7 @@ def register(request):
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
-    user = authenticate(username = username, password = password)
+    user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
         return HttpResponseRedirect('/website_home')
@@ -58,32 +58,35 @@ def login(request):
 def website_home(request):
     return render(request, 'registration/website_home.html')
 
-@login_required(login_url = '/login/')
+@login_required(login_url='/login/')
 def create_product(request):
 
     if request.method == 'GET':
         users = User.objects.filter()
         roles = UserRole.objects.filter()
-        prod_types = Product_type.objects.filter() 
+        prod_types =Product_type.objects.filter() 
         return render(request, 'registration/create_product.html', {'users':users,'roles':roles,'prod_types':prod_types})
     else:
 
         data = request.POST
         data1 = request.FILES
-        save_prod_detail = ProductDetails(prod_name = data['prod_name'],
-                                            prod_type_id = int(ptype),
-                                            prod_version = data['prod_version'],
-                                            prod_description = data['prod_description'],
-                                            prod_file = data1['prod_file'])
+        
+        list1 = data['user_data']
+        ptype= data['ptype']
+        save_prod_detail = ProductDetails(prod_name=data['prod_name'],
+                                            prod_type_id=int(ptype),
+                                            prod_version=data['prod_version'],
+                                            prod_description=data['prod_description'],
+                                            prod_file=data1['prod_file'])
 
         save_prod_detail.save()
        
         for each in json.loads(list1):
-            save_prod_user = ProductUser(prod_user_id = int(each['user_id']), prod_user_role_id = int(each['user_role']))
-            save_prod_user.save()
+            save_prod_user = ProductUser(prod_user_id=int(each['user_id']), prod_user_role_id=int(each['user_role']))
+ 
+        save_prod_user.save()
+        return HttpResponse(json.dumps({'success':True}), content_type="application/json")
 
-        return HttpResponse(json.dumps({'success':True}), content_type = "application/json")
-
-@login_required(login_url = '/login/')
+@login_required(login_url='/login/')
 def product_list(request):
     return render(request, 'registration/product_list.html')  
