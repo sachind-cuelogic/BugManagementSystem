@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_prodStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href=""> <strong> Bug Management System</strong>
+                </a>
+            </div>
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    {% if user.is_authenticated %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}<b class="fa fa-angle-down downarrow"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    </ul>
+                    {% endif %}
+                </li>
+            </ul>
+            <div class="col-md-4 collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav toggled" id="wrapper1">
+                    <li>
+                        <a href="/website_home"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-camera-retro"></i>
+							Product <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <ul id="submenu-1" class="collapse">
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Create Product</a></li>
+                            <li><a href="/product_list"><i class="fa fa-angle-double-right"></i> View Product</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Update Product</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-bug"></i>  Bug Details <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <ul id="submenu-2" class="collapse">
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Create Bug</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> View Bug</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Update Bug</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sugerencias"><i class="fa fa-info"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="faq"><i class="fa fa-search"></i> Search</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row" id="main">
+                    <div class="col-sm-12 col-md-12" id="content">
+                        <div id="loginbox" class="mainbox col-md-8 col-md-offset-2 row vertical-center-row">
+                            <div class="panel panel-info" id="panelinfo">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Create Product</div>
+                                </div>
+                                <div class="panel-body">
+                                    {% block content %}
+                                    <form method="POST" id="fileForm" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                                        <input type="hidden" id="csrf" value="{%csrf_token%}">
+                                        <div class="form-group" id="nameofprod">
+                                            
+                                            <label for="prod_name" class="control-label col-md-4">Product Name</label>
+                                            <div class="col-md-6">
+                                                <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="nameofprodtype">
+                                            <label for="prodType" class="control-label col-md-4">Product Type</label>
+                                            <div class="col-md-6">
+                                                <select id="producttype">
+                                                    {% for pt in prod_types %}
+                                                    <option value={{pt.id}}>{{pt.product_type_name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id=" nameofadduser">
+                                            <label for="add_user" class="control-label col-md-4">Add User</label>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user"><span class="glyphicon glyphicon-plus"></span></button>
+                                            </div>
+                                        </div>
+                                        <div id="output-text"><span style="color:gray">No output</span></div>
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        <h4 class="modal-title">Add User</h4>
+                                                    </div>
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary col-sm-offset-11 adduser" title="Click here to add one more user">Add</button>
+                                                    </div>
+                                                    <div class="modal-body" id="modalbody">
+                                                        <div data-role="dynamic-fields">
+                                                            <div class="form-inline">
+                                                                <div class="form-group ">
+                                                                    <select id="user-role" class="user-role">
+                                                                        {% for each in roles%}
+                                                                        <option value="{{each.id}}">{{each.role}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-group col-md-offset-2">
+                                                                    <select id="user-name" class="user-name">
+                                                                        {% for each in users%}
+                                                                        <option value="{{each.id}}">{{each.username}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                                <button class="btn-xs btn-danger col-md-offset-4" data-role="remove">
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                        <a type="button" data-dismiss="modal" class="btn btn-primary" id="submit-sample-data">Save changes</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="nameofversion">
+                                            <label for="prod_version" class="control-label col-md-4">Product Version</label>
+                                            <div class="col-md-6">
+                                                <input type="text" name="prod_version" class="form-control" id="prod_version" placeholder="Name of the product">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="nameofdesc">
+                                            <label for="prod_description" class="control-label col-md-4">Product Description</label>
+                                            <div class="col-md-6">
+                                                <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of product"></textarea>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="form-group" id="nameoffile">
+                                            <label for="prod_file" class="control-label col-md-4">Upload File</label>
+                                            <div class="col-md-6">
+                                                <input id="prod_file" type="file" class="file">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="nameofbuton">
+                                            <div class="col-sm-12 controls">
+                                                <a class="btn btn-md btn-primary pull-left col-md-offset-2" id="" type="button" href="/website_home/"> <strong>Cancel </strong> </a>
+                                                <button class="btn btn-md btn-primary col-md-offset-2" id="submit-data" type="submit"> <strong>Create Product</strong> </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js
+"></script>
+</html>
