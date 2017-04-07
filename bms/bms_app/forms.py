@@ -5,7 +5,7 @@ from .models import ProductDetails
 from .models import ProductUser
 from django.contrib.auth.models import User
 
-class User_inof_form(ModelForm):
+class User_info_form(ModelForm):
 	class Meta:
 		model = User
 		fields = ("username","email","password")

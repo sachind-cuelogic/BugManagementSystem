@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django import forms
-from .forms import User_inof_form
+from .forms import User_info_form
 from django.core.mail import EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -19,7 +19,7 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = User_inof_form(request.POST)
+        form = User_info_form(request.POST)
         if form.is_valid():
             userObj = form.cleaned_data
             username = userObj['username']
@@ -41,7 +41,7 @@ def register(request):
                 messages.warning(request, "Looks like a username with that email already exists!")
                 
     else:
-        form = User_inof_form()
+        form = User_info_form()
 
     return render(request, 'bms_app/register.html', {'form' : form})
 
@@ -104,3 +104,4 @@ def privacy(request):
     return render(request, 'registration/privacy.html')
 def terms_use(request):
     return render(request, 'registration/terms_use.html')
+    
