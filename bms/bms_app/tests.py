@@ -5,7 +5,9 @@ import string
 from django.core.mail import EmailMessage
 import re
 from django.contrib.auth.models import User
-from .forms import ProductDetailsForm
+
+from django.test import RequestFactory
+from django.core.urlresolvers import reverse
 
 class Testpass(unittest.TestCase):
 	def test_pass1_pass2(self):
@@ -79,3 +81,17 @@ class Testpass(unittest.TestCase):
     	self.test_user = User.objects.create_user(self.username, self.email, self.password)
     	login = self.client.login(username=self.username, password=self.password)
     	self.assertEqual(login, True)
+
+class SnippetCreateViewTest(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+        self.factory = RequestFactory()
+        
+    def test_get(self):
+        request = self.factory.get(reverse('snippet_create'))
+        request.user = self.user
+        response = login.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context_data['user'], self.user)
+        self.assertEqual(response.context_data['request'], request)

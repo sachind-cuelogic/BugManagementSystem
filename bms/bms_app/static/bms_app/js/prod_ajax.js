@@ -55,8 +55,10 @@ $(document).ready(function() {
             contentType: false,
             type: 'POST',
             url: "create_product/",
-            success: function(result) {
-                if(result['success']) {
+            success: function(result) 
+            {
+                if(result['success']) 
+                {
                     $("#output-text").html(result['response']);
                     window.location.href = "/product_list/"
                     console.log(data);

@@ -32,7 +32,7 @@ body {
 
 .center-container {
     position: relative;
-    background: url(/static/bms_app/images/macbook.jpg);
+    background: url(/static/bms_app/images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -56,6 +56,7 @@ body {
     margin: 0;
     padding-top: 3px;
     float: right;
+    padding-right: 170px;
 }
 
 .social ul {

@@ -3,12 +3,13 @@
 <html lang="en">
 
 <head>
-    <title>Project List</title>
+    <title>Create Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/prod_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_prodStyle.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -25,8 +26,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
-                <a class="navbar-brand" href="#" id="logo-tag">YBTS</a>
-                <a class="navbar-brand createprod" href="#">Create Project</a>
+                <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
+                <a class="navbar-brand createprod" id="navbrand" href="#">Create Project</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -37,7 +38,7 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                         </div>
                     </div>
                 </form>
@@ -51,24 +52,27 @@
                     <br>
                 </li>
                 <li>
+                    <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true" id="sidebarlink"></span> Home</a>
+                </li>
+                <li>
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     <font color="#337AB7"> Project</font>
                 </li>
                 <li>
-                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Create Project</a>
+                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true" id="sidebarlink"></span> Create Project</a>
                 </li>
                 <li>
-                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Project List</a>
+                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true" id="sidebarlink"></span>Project List</a>
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     <font color="#337AB7"> Bug</font>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Bug</a>
+                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span id="sidebarlink"> Create Bug</a>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Update Bug</a>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span id="sidebarlink"> Update Bug</a>
                 </li>
             </ul>
         </div>
@@ -83,13 +87,13 @@
                             <form method="POST" id="fileForm" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                                 <input type="hidden" id="csrf" value="{%csrf_token%}">
                                 <div class="form-group" id="nameofprod">
-                                    <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Product Name :</label>
+                                    <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
                                     <div class="col-sm-4">
                                         <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
                                     </div>
                                 </div>
                                 <div class="form-group" id="nameofprodtype">
-                                    <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Product Type :</label>
+                                    <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
                                     <div class="col-sm-4">
                                         <select id="producttype" class="selectpicker form-control">
                                             {% for pt in prod_types %}
@@ -99,11 +103,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group" id=" nameofadduser">
-                                    <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User</label>
+                                    <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User:</label>
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user"><span class="glyphicon glyphicon-plus"></span></button>
                                     </div>
                                 </div>
+                              
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -117,24 +122,29 @@
                                             <div class="modal-body" id="modalbody">
                                                 <div data-role="dynamic-fields">
                                                     <div class="form-inline">
-                                                        <div class="form-group ">
-                                                            <select id="user-role" class="user-role">
+                                                    
+                                                        <div class="form-group">
+
+                                                            <select id="user-name" class="user-name form-control col-md-offset-2">
+                                                                {% for each in users%}
+                                                                <option value="{{each.id}}">{{each.username}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        
+                                                            <select id="user-role" class="user-role form-control form-control col-md-offset-4">
                                                                 {% for each in roles%}
                                                                 <option value="{{each.id}}">{{each.role}}</option>
                                                                 {% endfor %}
                                                             </select>
                                                         </div>
                                                         <br>
-                                                        <div class="form-group col-md-offset-2">
-                                                            <select id="user-name" class="user-name">
-                                                                {% for each in users%}
-                                                                <option value="{{each.id}}">{{each.username}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
-                                                        <button class="btn-xs btn-danger col-md-offset-4" data-role="remove">
+                                                        <div class="form-group">
+                                                        <button class="btn-xs btn-danger col-md-offset-2" data-role="remove">
                                                             <span class="glyphicon glyphicon-remove"></span>
                                                         </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,27 +156,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group" id="nameofversion">
-                                    <label for="prod_version" class="control-label col-sm-2 col-sm-offset-2">Product Version</label>
+                                    <label for="prod_version" class="control-label col-sm-2 col-sm-offset-2">Project Version:</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="prod_version" class="form-control col-md-4" id="prod_version" placeholder="Name of the product">
+                                        <input type="text" name="prod_version" class="form-control col-md-4" id="prod_version" placeholder="Enter your project version">
                                     </div>
                                 </div>
                                 <div class="form-group" id="nameofdesc">
-                                    <label for="prod_description" class="control-label col-sm-2 col-sm-offset-2">Product Description</label>
+                                    <label for="prod_description" class="control-label col-sm-2 col-sm-offset-2">Project Description:</label>
                                     <div class="col-sm-4">
-                                        <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of product"></textarea>
+                                        <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group" id="nameoffile">
-                                    <label for="prod_file" class="control-label col-sm-2 col-sm-offset-2">Upload File</label>
+                                    <label for="prod_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
                                     <div class="col-sm-4">
                                         <input id="prod_file" type="file" class="file">
                                     </div>
                                 </div>
                                 <div class="form-group" id="nameofbuton">
                                     <div class="controls">
-                                        <a class="btn btn-sm btn-primary col-sm-offset-4" id="" type="button" href="/website_home/" id="cancelbuton"> <strong>Cancel </strong> </a>
-                                        <button class="btn btn-sm btn-primary col-md-offset-2" id="submit-data" type="submit"> <strong>Create Product</strong> </button>
+                                        <a class="btn btn-sm btn-primary col-sm-offset-5" type="button" href="/website_home/" id="cancelbuton"> <strong>Cancel </strong> </a>
+                                        <button class="btn btn-sm btn-primary" id="submit-data" type="submit"> <strong>Create Product</strong> </button>
                                     </div>
                                 </div>
                             </form>

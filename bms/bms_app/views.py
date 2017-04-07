@@ -31,7 +31,7 @@ def register(request):
                 user = authenticate(username = username, password = password)
                 user.save()
                 emaill = EmailMessage('Registration Confirmation for Bug Management System'
-                    ,'Dear '+ username+',\n\nThank you for registering to Bug Managment System.  We have good features the can help you to the management of the bugs which are as follows:\nAuthentication and Authorization, Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, Comments and tagging.\n\nLogin: http://127.0.0.1:8000/login/  \n\nIf you have any questions please contact: bug.system.app1@gmail.com. \n\nThank you,\nBug Management System.'
+                    ,'Dear '+ username+',\n\nThank you for registering to Bug Managment System.  We have good features the can help you to the management of the bugs which are as follows:\nAuthentication and Authorization, Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  \n\nIf you have any questions please contact: bug.system.app1@gmail.com. \n\nThank you,\nBug Management System.'
                     , to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
@@ -85,7 +85,7 @@ def create_product(request):
             save_prod_user = ProductUser(prod_user_id=int(each['user_id']), prod_user_role_id=int(each['user_role']))
  
         save_prod_user.save()
-        return HttpResponse(json.dumps({'success':True}), content_type="application/json")
+        return HttpResponse(json.dumps({'success':True}), content_type="application/json") 
 
 @login_required(login_url='/login/')
 def product_list(request):
@@ -99,9 +99,6 @@ def about(request):
 
 def contact_us(request):
     return render(request, 'registration/contact.html') 
-
-def languages(request):
-    return render(request, 'registration/languages.html')
 
 def privacy(request):
     return render(request, 'registration/privacy.html')

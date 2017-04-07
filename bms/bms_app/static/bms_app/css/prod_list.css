@@ -214,6 +214,6 @@
     margin: 0px;
 }
 
-.navbar-brand {
-    font-weight: bold;
+#navbrand {
+    padding-left: 200px;
 }

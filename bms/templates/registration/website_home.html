@@ -3,11 +3,12 @@
 <html lang="en">
 
 <head>
-    <title>Create Product</title>
+    <title>Website Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_prodStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/prod_list.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/websitehome.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
@@ -15,85 +16,76 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""> <strong> Bug Management System</strong>
-                </a>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+                <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
+
             </div>
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    {% if user.is_authenticated %}
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}<b class="fa fa-angle-down downarrow"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
-                    </ul>
-                    {% endif %}
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="#">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <br>
+                </li>
+                                <li>
+                    <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Project</font>
+                </li>
+                <li>
+                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Create Project</a>
+                </li>
+                <li>
+                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Project List</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Bug</font>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Bug</a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Update Bug</a>
                 </li>
             </ul>
-            <div class="col-md-4 collapse navbar-collapse navbar-ex1-collapse">
-                <!-- sidebar -->
-                <ul class="nav navbar-nav side-nav toggled" id="wrapper1">
-                    <li>
-                        <a href="/website_home"><i class="fa fa-home"></i> Home</a>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-camera-retro"></i>
-							Product <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-1" class="collapse">
-                            <li><a href="/create_product"><i class="fa fa-angle-double-right"></i> Create Product</a></li>
-                            <li><a href="/product_list"><i class="fa fa-angle-double-right"></i> View Product</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Update Product</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-bug"></i>  Bug Details <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-2" class="collapse">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Create Bug</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> View Bug</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Update Bug</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="sugerencias"><i class="fa fa-info"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="faq"><i class="fa fa-search"></i> Search</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row" id="main">
-                    <div class="col-sm-12 col-md-12" id="content">
-                        <h2> Web site home page </h2>
-                    </div>
-                </div>
-            </div>
-            </form>
+        </div>
+        <div class="back">   
+
+        
         </div>
     </div>
-    </div>
-    <div class="clearfix"></div>
-    </div>
-    </div>
 </body>
-<script type="text/javascript" src="{% static 'bms_app/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js
-"></script>
-
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
 </html>
