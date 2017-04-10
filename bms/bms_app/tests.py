@@ -6,6 +6,9 @@ from django.core.mail import EmailMessage
 import re
 from django.contrib.auth.models import User
 
+from django.test import RequestFactory
+from django.core.urlresolvers import reverse
+
 class Testpass(unittest.TestCase):
 	def test_pass1_pass2(self):
 		pass1=os.environ.get('pass1')
@@ -33,7 +36,8 @@ class Testpass(unittest.TestCase):
 
 	def test_email(self):
 	 	temp_mail = os.environ.get('mail')
-	 	regexp = re.compile('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$')
+	 	regexp = re.compile
+	 			('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$')
 	 	if regexp.search(temp_mail):
 	 		self.assertTrue(temp_mail)
 	 	else:
@@ -46,3 +50,48 @@ class Testpass(unittest.TestCase):
 	  		self.assertTrue(temp_pass)
 	  	else:
 	  		self.assertFalse(temp_pass)
+
+	def product_type(self):
+		list=['web','desktop','android']
+		string=os.environ.get('product')
+		if string in list:
+			self.assertTrue(string)
+		else:
+			self.assertFalse(string)
+
+	def test_product_name_len(self):
+	 	prod_name = os.environ.get('prodnamelen')
+	 	self.assertGreater(len(prod_name),50)
+
+ 	def test_product_description(self):
+ 		prod_desc = os.environ.get('prod_desc')
+ 		self.assertGreater(len(prod_desc),1000)	
+
+	def test_valid_form(self):
+	    w = User.objects.create(username=os.environ.get('uname'), email=os.environ.get('uemail'))
+	    data = {'username': w.username, 'body': w.email,}
+	    form = User_inof_form(data=data)
+	    self.assertFalse(form.is_valid())
+
+    def test_login_success(self):
+    	self.client = Client()
+    	self.username = os.environ.get('uname')
+    	self.email = 'test@test.com'
+    	self.password = os.environ.get('pass')        
+    	self.test_user = User.objects.create_user(self.username, self.email, self.password)
+    	login = self.client.login(username=self.username, password=self.password)
+    	self.assertEqual(login, True)
+
+class SnippetCreateViewTest(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+        self.factory = RequestFactory()
+        
+    def test_get(self):
+        request = self.factory.get(reverse('snippet_create'))
+        request.user = self.user
+        response = login.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context_data['user'], self.user)
+        self.assertEqual(response.context_data['request'], request)

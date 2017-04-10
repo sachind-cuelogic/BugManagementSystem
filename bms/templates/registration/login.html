@@ -3,16 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/loginStyle.css' %}">
 </head>
 <body>  
     {% block content %}
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+      <strong>Your username and password didn't match. Please try again.</strong>
+    </div>
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
         <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 row vertical-center-row">                    
-            <div class="panel panel-info" >
+            <div class="panel panel-primary">
 
                 <div class="panel-heading">
                     <div class="panel-title">LOG IN</div>
@@ -26,7 +34,7 @@
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" placeholder="Your username" required="" autofocus="" >                                        
+                            <input id="login-username" type="text" class="form-control" name="username" placeholder="Your username" required="" autofocus="">                                     
                         </div>
 
                         <div class="input-group">

@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/prod_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_prodStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+                <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
+                <a class="navbar-brand createprod" id="navbrand" href="#">Create Project</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="#">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <br>
+                </li>
+                <li>
+                    <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true" id="sidebarlink"></span> Home</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Project</font>
+                </li>
+                <li>
+                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true" id="sidebarlink"></span> Create Project</a>
+                </li>
+                <li>
+                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true" id="sidebarlink"></span>Project List</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Bug</font>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span id="sidebarlink"> Create Bug</a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span id="sidebarlink"> Update Bug</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <br>
+            <div class="col-sm-12 col-md-12" id="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12" id="table-row">
+                            <!-- main content -->
+                            {% block content %}
+                            <form method="POST" id="fileForm" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                                <input type="hidden" id="csrf" value="{%csrf_token%}">
+                                <div class="form-group" id="nameofprod">
+                                    <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
+                                    <div class="col-sm-4">
+                                        <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="nameofprodtype">
+                                    <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
+                                    <div class="col-sm-4">
+                                        <select id="producttype" class="selectpicker form-control">
+                                            {% for pt in prod_types %}
+                                            <option value={{pt.id}}>{{pt.product_type_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" id=" nameofadduser">
+                                    <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User:</label>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </div>
+                                </div>
+                              
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title">Add User</h4>
+                                            </div>
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary col-sm-offset-11 adduser" title="Click here to add one more user">Add</button>
+                                            </div>
+                                            <div class="modal-body" id="modalbody">
+                                                <div data-role="dynamic-fields">
+                                                    <div class="form-inline">
+                                                    
+                                                        <div class="form-group">
+
+                                                            <select id="user-name" class="user-name form-control col-md-offset-2">
+                                                                {% for each in users%}
+                                                                <option value="{{each.id}}">{{each.username}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        
+                                                            <select id="user-role" class="user-role form-control form-control col-md-offset-4">
+                                                                {% for each in roles%}
+                                                                <option value="{{each.id}}">{{each.role}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-group">
+                                                        <button class="btn-xs btn-danger col-md-offset-2" data-role="remove">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                <a type="button" data-dismiss="modal" class="btn btn-primary" id="submit-sample-data">Save changes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="nameofversion">
+                                    <label for="prod_version" class="control-label col-sm-2 col-sm-offset-2">Project Version:</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="prod_version" class="form-control col-md-4" id="prod_version" placeholder="Enter your project version">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="nameofdesc">
+                                    <label for="prod_description" class="control-label col-sm-2 col-sm-offset-2">Project Description:</label>
+                                    <div class="col-sm-4">
+                                        <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="nameoffile">
+                                    <label for="prod_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
+                                    <div class="col-sm-4">
+                                        <input id="prod_file" type="file" class="file">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="nameofbuton">
+                                    <div class="controls">
+                                        <a class="btn btn-sm btn-primary col-sm-offset-5" type="button" href="/website_home/" id="cancelbuton"> <strong>Cancel </strong> </a>
+                                        <button class="btn btn-sm btn-primary" id="submit-data" type="submit"> <strong>Create Product</strong> </button>
+                                    </div>
+                                </div>
+                            </form>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
+
+</html>
