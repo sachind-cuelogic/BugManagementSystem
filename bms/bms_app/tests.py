@@ -18,8 +18,6 @@ class SimpleTest(TestCase):
 
 	def test_login(self):
 		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
-		print "user ---->>>",user.username
-		print "email ---->>>",user.email
 		user.save()
 		client=Client()
 		response=self.client.post(reverse('login'),{'username':'mahesh','password':'mahesh123'})
@@ -29,8 +27,6 @@ class SimpleTest(TestCase):
 
 	def test_login_fail(self):
 		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
-		print "user ---->>>",user.username
-		print "email ---->>>",user.email
 		user.save()
 		client=Client()
 		response=self.client.post(reverse('login'),{'username':'madsfdshesh','password':'mahesh123'})
