@@ -11,19 +11,13 @@ import json
 
 class SimpleTest(TestCase):
 
-    def test_landing_page(self):
-        resp = self.client.get('/')
-        print resp
-        self.assertEqual(resp.status_code, 200)
-
 	def test_login(self):
 		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
 		user.save()
 		client=Client()
-		response=self.client.post(reverse('login'),{'username':'mahesh','password':'mahesh123'})
+		response=self.client.post(	reverse('login'),{'username':'mahesh','password':'mahesh123'})
 		print response
 		self.assertTrue(response.status_code,200)
-
 
 	def test_login_fail(self):
 		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
@@ -32,7 +26,6 @@ class SimpleTest(TestCase):
 		response=self.client.post(reverse('login'),{'username':'madsfdshesh','password':'mahesh123'})
 		print response
 		self.assertTrue(response.status_code,200)
-
 
 	def test_register(self):
 		client=Client()
@@ -43,8 +36,12 @@ class SimpleTest(TestCase):
 	def test_register_fail(self):
 		client=Client()
 		response=self.client.post(reverse('register'),{'username':'mahesh','email':'mahesh@mail.com'})
-		print response
+		print "registration failed"
 		self.assertTrue(response.status_code,200)
+
+	def test_landing_page(self):
+		resp = self.client.get('/')
+		self.assertEqual(resp.status_code, 200)
 
 	def test_website_home(self):
 		resp = self.client.get('/website_home/')
@@ -53,7 +50,6 @@ class SimpleTest(TestCase):
 	def test_services(self):
 		resp = self.client.get('/services/')
 		self.assertEqual(resp.status_code, 200)
-
 
 	def test_contact(self):
 		resp = self.client.get('/contact/')
