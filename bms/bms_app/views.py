@@ -32,8 +32,15 @@ def register(request):
                 User.objects.create_user(username, email, password)
                 user = authenticate(username=username, password=password)
                 user.save()
-                emaill = EmailMessage('Registration Confirmation for Bug Management System', 'Dear ' + username +
-                                      ',\n\nThank you for registering to Bug Managment System.  We have good features the can help you to the management of the bugs which are as follows:\nAuthentication and Authorization, Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  \n\nIf you have any questions please contact: bug.system.app1@gmail.com. \n\nThank you,\nBug Management System.', to=[user.email])
+                emaill = EmailMessage('Registration Confirmation for Bug Management System', 
+                                        'Dear ' + username +
+                                      ',\n\nThank you for registering to Bug Managment System. '
+                                      ' We have good features the can help you to the management '
+                                      'of the bugs which are as follows:\nAuthentication and Authorization,'
+                                      ' Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, '
+                                      'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
+                                      '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
+                                      ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
                 return HttpResponseRedirect('/login/')
@@ -70,7 +77,8 @@ def create_product(request):
         users = User.objects.filter()
         roles = UserRole.objects.filter()
         prod_types = Product_type.objects.filter()
-        return render(request, 'registration/create_product.html', {'users': users, 'roles': roles, 'prod_types': prod_types})
+        return render(request, 'registration/create_product.html', 
+            {'users': users, 'roles': roles, 'prod_types': prod_types})
     else:
         data = request.POST
         data1 = request.FILES

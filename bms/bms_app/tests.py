@@ -8,34 +8,47 @@ from django.contrib.auth import authenticate
 from django.test import RequestFactory
 from .views import login, register
 import json
-
+import os
 class SimpleTest(TestCase):
 
 	def test_login(self):
-		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
+		user = User.objects.create_user('username':os.environ.get('log_uname'),
+											'email':os.environ.get('log_email'),
+											'password':os.environ.get('log_pass'))
 		user.save()
 		client=Client()
-		response=self.client.post(	reverse('login'),{'username':'mahesh','password':'mahesh123'})
+		response=self.client.post(reverse('login'),{'username':os.environ.get('log_uname1'),
+													'password':os.environ.get('log_pass1')})
 		print response
 		self.assertTrue(response.status_code,200)
 
 	def test_login_fail(self):
-		user = User.objects.create_user('mahesh', 'mahesh@mail.com','mahesh123')
+		user = User.objects.create_user({'username':os.environ.get('logf_uname'),
+											'email':os.environ.get('logf_email'),
+											'password':os.environ.get('logf_pass')})
 		user.save()
 		client=Client()
-		response=self.client.post(reverse('login'),{'username':'madsfdshesh','password':'mahesh123'})
+		response=self.client.post(reverse('login'),{'username':os.environ.get('logf_uname1'),
+													'password':os.environ.get('logf_pass1')})
 		print response
 		self.assertTrue(response.status_code,200)
 
 	def test_register(self):
 		client=Client()
-		response=self.client.post(reverse('register'),{'username':'mahesh','email':'mahesh@mail.com','password':'mahesh123'})
+		response=self.client.post(reverse('register'),
+											{'username':os.environ.get('reg_uname'),
+											'email':os.environ.get('reg_email'),
+											'password':os.environ.get('reg_pass')})
 		print response
 		self.assertTrue(response.status_code,200)
 
 	def test_register_fail(self):
 		client=Client()
-		response=self.client.post(reverse('register'),{'username':'mahesh','email':'mahesh@mail.com'})
+		response=self.client.post(reverse('register'),
+								{'username':os.environ.get('regf_uname'),
+								'email':os.environ.get('regf_email'),
+								'password':os.environ.get('regf_pass')})
+
 		print "registration failed"
 		self.assertTrue(response.status_code,200)
 
@@ -64,22 +77,22 @@ class SimpleTest(TestCase):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
 
-	# def test_basic_post_get(self):
+	def test_basic_post_get(self):
 
-	#         data = {
-	#         u'ptype': u'1',
-	#         u'user_data': u'[{"user_id":"129","user_role":"2"}]',
-	#         u'prod_version': u'aaa',
-	#         u'prod_description': u'aaaa',
-	#         u'prod_name': u'aaaa',
-	#         u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
-	#         }
-	#         client = Client()
+	        data = {
+	        u'ptype': u'1',
+	        u'user_data': u'[{"user_id":"129","user_role":"2"}]',
+	        u'prod_version': u'aaa',
+	        u'prod_description': u'aaaa',
+	        u'prod_name': u'aaaa',
+	        u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
+	        }
+	        client = Client()
 
-	#         response = client.post('/create_product/', json.dumps(data), content_type='application/json')
-	#         self.assertEquals(response.status_code, 302)
-	#         #self.assertEquals(response['Location'], '/product_list/')
+	        response = client.post('/create_product/', json.dumps(data), content_type='application/json')
+	        self.assertEquals(response.status_code, 302)
+	        #self.assertEquals(response['Location'], '/product_list/')
 
-	#         response = client.get('/create_product?format=json')
-	#         self.assertEquals(response.status_code, 200)
-	#         self.assertEquals(json.loads(response.content), [data])
+	        response = client.get('/create_product?format=json')
+	        self.assertEquals(response.status_code, 200)
+	        self.assertEquals(json.loads(response.content), [data])
