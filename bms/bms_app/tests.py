@@ -53,25 +53,20 @@ class SimpleTest(TestCase):
 		print "registration failed"
 		self.assertTrue(response.status_code,200)
 
-	# def test_basic_post_get(self):
+	def test_basic_post_get(self):
 
-	#         data = {
-	#         u'ptype': u'1',
-	#         u'user_data': u'[{"user_id":"129","user_role":"2"}]',
-	#         u'prod_version': u'aaa',
-	#         u'prod_description': u'aaaa',
-	#         u'prod_name': u'aaaa',
-	#         u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
-	#         }
-	#         client = Client()
+	        data = {
+	        u'ptype': u'1',
+	        u'user_data': u'[{"user_id":"129","user_role":"2"}]',
+	        u'prod_version': u'aaa',
+	        u'prod_description': u'aaaa',
+	        u'prod_name': u'aaaa',
+	        u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
+	        }
+	        client = Client()
 
-	#         response = client.post('/create_product/', json.dumps(data), content_type='application/json')
-	#         self.assertEquals(response.status_code, 302)
-	#         #self.assertEquals(response['Location'], '/product_list/')
-
-	#         response = client.get('/create_product?format=json')
-	#         self.assertEquals(response.status_code, 200)
-	#         self.assertEquals(json.loads(response.content), [data])
+	        response = client.post('/create_product/', json.dumps(data), content_type='application/json')
+	        self.assertEquals(response.status_code, 302)
 
 	def test_user_form(self):
 		data = {'username':os.environ.get('uform_uname'),
