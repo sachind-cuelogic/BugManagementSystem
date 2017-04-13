@@ -14,9 +14,9 @@ from .forms import User_info_form
 class SimpleTest(TestCase):
 
 	def test_login(self):
-		user = User.objects.create_user('username':os.environ.get('log_uname'),
+		user = User.objects.create_user({'username':os.environ.get('log_uname'),
 											'email':os.environ.get('log_email'),
-											'password':os.environ.get('log_pass'))
+											'password':os.environ.get('log_pass')})
 		user.save()
 		client=Client()
 		response=self.client.post(reverse('login'),{'username':os.environ.get('log_uname1'),
