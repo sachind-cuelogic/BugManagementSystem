@@ -37,10 +37,6 @@ body {
     background-repeat: no-repeat;
 }
 
-#laptop {
-    padding-top: 150px;
-    padding-left: 10px;
-}
 
 #footernav {
     padding-top: 4px;
@@ -48,7 +44,7 @@ body {
 
 #footernav>li {
     padding-right: 10px;
-    color: grey;
+    color: gray;
     font-size: 15px;
 }
 
@@ -117,74 +113,6 @@ body {
 
 #footerlink {
     display: inline-block;
-}
-
-.trans {
-    padding: 15px;
-    height: 549px;
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-}
-
-#logo {
-    padding-top: 20px;
-    height: 100px;
-    width: 100px;
-}
-
-.para1 {
-    padding-top: 20px;
-}
-
-.para1>p {
-    margin: 0px;
-    text-align: center;
-    font-size: 17px;
-}
-
-.para2 {
-    padding-top: 20px;
-}
-
-.para2>p {
-    margin: 0px;
-    text-align: center;
-    font-size: 17px;
-}
-
-.para3 {
-    padding-top: 20px;
-}
-
-.para3>p {
-    margin: 0px;
-    text-align: center;
-    font-size: 17px;
-}
-
-.land-button {
-    padding-top: 30px;
-    text-align: center;
-}
-
-#logbtn {
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    margin-right: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 25px;
-}
-
-#regbtn {
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 25px;
 }
 
 #header-logo {
