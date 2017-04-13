@@ -106,7 +106,16 @@
                                         <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user"><span class="glyphicon glyphicon-plus"></span></button>
                                     </div>
                                 </div>
-                              
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-md-offset-4">
+                                                <div class="panel panel-default collapse" id="collapseExample">
+                                                    <div class="panel-body">
+                                                        <div class="form-group" id="user_info" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -124,16 +133,16 @@
                                                         <div class="form-group">
 
                                                             <select id="user-name" class="user-name form-control col-md-offset-2">
-                                                                {% for each in users%}
-                                                                <option value="{{each.id}}">{{each.username}}</option>
+                                                            {% for each in users%}
+                                                                <option value="{{each.id}}" username="{{each.username}}">{{each.username}}</option>
                                                                 {% endfor %}
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                         
-                                                            <select id="user-role" class="user-role form-control form-control col-md-offset-4">
+                                                            <select id="user-role" class="user-role form-control col-md-offset-4">
                                                                 {% for each in roles%}
-                                                                <option value="{{each.id}}">{{each.role}}</option>
+                                                                <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
                                                                 {% endfor %}
                                                             </select>
                                                         </div>
@@ -148,8 +157,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                <a type="button" data-dismiss="modal" class="btn btn-primary" id="submit-sample-data">Save changes</a>
+                                                <a type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" id="submit-sample-data">Save changes</a>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
