@@ -86,7 +86,7 @@ class SimpleTest(TestCase):
 				'password':os.environ.get('uform_f_pass')
 				}
 		form = User_info_form(data=data)
-		self.assertTrue(form.is_valid())
+		self.assertFalse(form.is_valid())
 		print "form is not valid"
 
 	def test_landing_page(self):
