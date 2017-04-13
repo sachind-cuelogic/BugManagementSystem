@@ -15,31 +15,33 @@ class SimpleTest(TestCase):
 
 	def test_login(self):
 		user = User.objects.create_user({'username':os.environ.get('log_uname'),
-											'email':os.environ.get('log_email'),
-											'password':os.environ.get('log_pass')})
+										'email':os.environ.get('log_email'),
+										'password':os.environ.get('log_pass')})
 		user.save()
 		client=Client()
-		response=self.client.post(reverse('login'),{'username':os.environ.get('log_uname1'),
-													'password':os.environ.get('log_pass1')})
+		response=self.client.post(reverse('login'),
+									{'username':os.environ.get('log_uname1'),
+									'password':os.environ.get('log_pass1')})
 		self.assertTrue(response.status_code,200)
 
 	def test_login_fail(self):
 		user = User.objects.create_user({'username':os.environ.get('logf_uname'),
-											'email':os.environ.get('logf_email'),
-											'password':os.environ.get('logf_pass')})
+									'email':os.environ.get('logf_email'),
+									'password':os.environ.get('logf_pass')})
 		user.save()
 		client=Client()
-		response=self.client.post(reverse('login'),{'username':os.environ.get('logf_uname1'),
-													'password':os.environ.get('logf_pass1')})
+		response=self.client.post(reverse('login'),
+						{'username':os.environ.get('logf_uname1'),
+						'password':os.environ.get('logf_pass1')})
 		print response
 		self.assertTrue(response.status_code,200)
 
 	def test_register(self):
 		client=Client()
 		response=self.client.post(reverse('register'),
-											{'username':os.environ.get('reg_uname'),
-											'email':os.environ.get('reg_email'),
-											'password':os.environ.get('reg_pass')})
+									{'username':os.environ.get('reg_uname'),
+									'email':os.environ.get('reg_email'),
+									'password':os.environ.get('reg_pass')})
 		print response
 		self.assertTrue(response.status_code,200)
 
@@ -65,7 +67,8 @@ class SimpleTest(TestCase):
 	        }
 	        client = Client()
 
-	        response = client.post('/create_product/', json.dumps(data), content_type='application/json')
+	        response = client.post('/create_product/', json.dumps(data),
+	        						 content_type='application/json')
 	        self.assertEquals(response.status_code, 302)
 
 	def test_user_form(self):
@@ -107,4 +110,3 @@ class SimpleTest(TestCase):
 	def test_contact(self):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
-
