@@ -12,7 +12,6 @@
 
 #sidebar-wrapper {
     position: fixed;
-    left: 250px;
     z-index: 1000;
     overflow-y: auto;
     margin-left: -250px;
@@ -107,118 +106,11 @@
     }
 }
 
-#content {
-    padding: 20px
-}
-
-.panel-body {
-    padding: 30px;
-}
-
-#panelinfo {
-    margin-top: 30px;
-    height: 500px;
-    overflow-y: scroll;
-}
-
-.modal-body {
-    height: 170px;
-    overflow-y: scroll;
-}
-
-[data-role="dynamic-fields"] > .form-inline + .form-inline {
-    margin-top: 10px;
-}
-
-[data-role="dynamic-fields"] > .form-inline [data-role="add"] {
-    display: none;
-}
-
-[data-role="dynamic-fields"] > .form-inline:last-child [data-role="add"] {
-    display: inline-block;
-}
-
-[data-role="dynamic-fields"] > .form-inline:last-child [data-role="remove"] {
-    display: none;
-}
-
-.form-inline {
-    padding-bottom: 5px;
-}
-
-.form-horizontal .control-label {
-    text-align: left;
-}
-
-.createprod {
-    padding-left: 50px;
-}
-
-.bs-example {
-    padding-top: 50px;
-}
-
-#nameofbuton {
-    padding-top: 5px;
-}
-
-.filterable {
-    margin-top: 15px;
-}
-
-.filterable .panel-heading .pull-right {
-    margin-top: -20px;
-}
-
-.filterable .filters input[disabled] {
-    background-color: transparent;
-    border: none;
-    cursor: auto;
-    box-shadow: none;
-    padding: 0;
-    height: auto;
-}
-
-.filterable .filters input[disabled]::-webkit-input-placeholder {
-    color: #333;
-}
-
-.filterable .filters input[disabled]::-moz-placeholder {
-    color: #333;
-}
-
-.filterable .filters input[disabled]:-ms-input-placeholder {
-    color: #333;
-}
-
-.table>tbody>tr>td {
-    padding: 5px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.table>thead>tr>th {
-    text-align: center;
-}
-
-#table-row {
-    padding-top: 40px;
-}
-
-.table>thead {
-    background-color: #101010;
-    color: white;
-}
-
-.pagination {
-    margin: 0px;
-}
-
 .navbar-brand {
     font-weight: bold;
 }
 
-.back {
+.content {
     background: url(/static/bms_app/images/home_background.jpg);
     background-size: cover;
     height: calc(100vh - 50px);

@@ -28,7 +28,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#fileForm').on('submit', function(event) {
+    $('#file-form').on('submit', function(event) {
         event.preventDefault();
         user_data = []
         if($('.user-name').length){
