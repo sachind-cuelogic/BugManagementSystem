@@ -112,4 +112,4 @@ class SimpleTest(TestCase):
 	def test_contact(self):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
-		
+
