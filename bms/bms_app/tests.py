@@ -9,6 +9,8 @@ from django.test import RequestFactory
 from .views import login, register
 import json
 import os
+from .forms import User_info_form
+
 class SimpleTest(TestCase):
 
 	def test_login(self):
@@ -52,6 +54,40 @@ class SimpleTest(TestCase):
 		print "registration failed"
 		self.assertTrue(response.status_code,200)
 
+	def test_basic_post_get(self):
+
+	        data = {
+	        u'ptype': u'1',
+	        u'user_data': u'[{"user_id":"129","user_role":"2"}]',
+	        u'prod_version': u'aaa',
+	        u'prod_description': u'aaaa',
+	        u'prod_name': u'aaaa',
+	        u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
+	        }
+	        client = Client()
+
+	        response = client.post('/create_product/', json.dumps(data), content_type='application/json')
+	        self.assertEquals(response.status_code, 302)
+	        #self.assertEquals(response['Location'], '/product_list/')
+
+	        response = client.get('/create_product?format=json')
+	        self.assertEquals(response.status_code, 200)
+	        self.assertEquals(json.loads(response.content), [data])
+
+	def test_user_form(self):
+		data = {'username':os.environ.get('uform_uname'),
+				'email':os.environ.get('uform_email'),
+				'password':os.environ.get('uform_pass')}
+		form = User_info_form(data=data)
+		self.assertTrue(form.is_valid())
+
+	def test_user_form_fail(self):
+		data = {'username':os.environ.get('uform_f_uname'),
+				'email':os.environ.get('uform_f_email')
+				}
+		form = User_info_form(data=data)
+		self.assertTrue(form.is_valid())
+
 	def test_landing_page(self):
 		resp = self.client.get('/')
 		self.assertEqual(resp.status_code, 200)
@@ -76,23 +112,3 @@ class SimpleTest(TestCase):
 	def test_contact(self):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
-
-	def test_basic_post_get(self):
-
-	        data = {
-	        u'ptype': u'1',
-	        u'user_data': u'[{"user_id":"129","user_role":"2"}]',
-	        u'prod_version': u'aaa',
-	        u'prod_description': u'aaaa',
-	        u'prod_name': u'aaaa',
-	        u'prod_file': u'[<InMemoryUploadedFile: link.txt (text/plain)>]'
-	        }
-	        client = Client()
-
-	        response = client.post('/create_product/', json.dumps(data), content_type='application/json')
-	        self.assertEquals(response.status_code, 302)
-	        #self.assertEquals(response['Location'], '/product_list/')
-
-	        response = client.get('/create_product?format=json')
-	        self.assertEquals(response.status_code, 200)
-	        self.assertEquals(json.loads(response.content), [data])
