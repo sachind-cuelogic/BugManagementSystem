@@ -1,14 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Home</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Bootstrap Rounded Buttons Example">
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/land_common.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/landing.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-
 <body>
-    <p><a href="/login">Login</a></p>
-    
-    <p><a href="/register">Register</a></p>
+	<div id="wrap">
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="head-logo">
+						<img src="/static/bms_app/images/logo1.png" class="img-responsive center-block" id="header-logo"> 
+					</div>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav pull-right">
+						<li class="active"><a href="#" id="head-menu">HOME</a></li>
+						<li><a href="/services" id="head-menu" class="nav-link">SERVICES</a></li>
+						<li><a href="/about" id="head-menu" class="nav-link">ABOUT</a></li>
+						<li><a href="/contact" id="head-menu" class="nav-link">CONTACT</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="center-content">   
+			<div class="leftside col-md-6">
+				<img src="/static/bms_app/images/laptop.png" class="img-responsive" id="laptop" width="704" height="400"> 
+			</div>
+			<div class="col-md-4 col-md-offset-1">
+				<div class="trans">
+					<img src="/static/bms_app/images/logo.png" class="img-responsive center-block" id="logo"> 
+					<div class="para1">
+						<p>YBTS is an ideal solution to track bugs</p>
+						<p>of project, solution or an application.</p>
+					</div>
+					<div class="para2">
+						<p>YBTS allows individual or group of</p>
+						<p>developers to keep track of outstanding</p>
+						<p>bugs in their project effectively.</p>
+					</div>
+					<div class="para3">
+						<p>Features: Sign up, Login,</p>
+						<p>Forgot Password, Products, Bug,</p>
+						<p>Attachment, Bug life cycle flow</p>
+						<p>Comments and tagging, Prepare Logs</p>
+						<p>& Report, Email Notifications.</p>
+					</div>
+					<div class="land-button">
+						<a type="button" class="btn btn-secondary-outline btn-round" id="login-button" href="/login/">LOGIN</a>
+						<a type="button" class="btn btn-secondary-outline" id="register-button" href="/register/">REGISTER</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<ul class="nav navbar-nav" id="footernav">
+				<li><a href="#">Languages</a></li>
+				<li><a href="/privacy">Privacy Policy</a></li>
+				<li><a href="/terms_use">Terms of use</a></li>
+				<li><a href="#">Copyright@2017 Cuelogic</a></li>
+			</ul>
+			<div class="social">
+				<ul>
+					<li><a href="https://www.facebook.com/ybts.ybts.9"><i class="fa fa-lg fa-facebook"></i></a></li>
+					<li><a href="https://twitter.com/YBTS_Tool"><i class="fa fa-lg fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-lg fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fa fa-lg fa-youtube-play"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bms_app/bootstrap/js/bootstrap.min.js' %}"></script>
 </html>

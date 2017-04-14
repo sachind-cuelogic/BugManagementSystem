@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Project List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/prod_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+                <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
+                <a class="navbar-brand" href="#" id="navbrand">Project List</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="#">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <br>
+                </li>
+                <li>
+                <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Project</font>
+                </li>
+                <li>
+                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Create Project</a>
+                </li>
+                <li>
+                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Project List</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Bug</font>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Bug</a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Update Bug</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <br>
+            <div class="col-sm-12 col-md-12" id="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12" id="table-row">
+                            <div class="table-responsive">
+                                <table id="mytable" class="table table-bordered table-striped">
+                                    <thead>
+                                        <th>
+                                            <input type="checkbox" id="checkall" />
+                                        </th>
+                                        <th data-filter-control="input" data-sortable="true">Project Id</th>
+                                        <th>Project Name</th>
+                                        <th>Project Version</th>
+                                        <th>Access Type</th>
+                                        <th>Bug Count</th>
+                                        <th>Open Bugs</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>1</td>
+                                            <td>Attendance</td>
+                                            <td>v1.0.1</td>
+                                            <td>Admin</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>2</td>
+                                            <td>eLearning</td>
+                                            <td>v2.0.1</td>
+                                            <td>Developer</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>3</td>
+                                            <td>Bug Management</td>
+                                            <td>v3.0.1</td>
+                                            <td>QA</td>
+                                            <td>9</td>
+                                            <td>3</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>4</td>
+                                            <td>eCommerce</td>
+                                            <td>v4.0.1</td>
+                                            <td>Tester</td>
+                                            <td>8</td>
+                                            <td>3</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>5</td>
+                                            <td>Blog Management</td>
+                                            <td>v5.0.1</td>
+                                            <td>Admin</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>6</td>
+                                            <td>Document Management</td>
+                                            <td>v6.0.1</td>
+                                            <td>Admin</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>7</td>
+                                            <td>Chat Application</td>
+                                            <td>v7.0.1</td>
+                                            <td>Developer</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>8</td>
+                                            <td>Airline Reservation</td>
+                                            <td>v8.0.1</td>
+                                            <td>Developer</td>
+                                            <td>12</td>
+                                            <td>8</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>9</td>
+                                            <td>Online News Portal</td>
+                                            <td>v9.0.1</td>
+                                            <td>Developer</td>
+                                            <td>18</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkthis" />
+                                            </td>
+                                            <td>10</td>
+                                            <td>Clinic Appointment</td>
+                                            <td>v10.0.1</td>
+                                            <td>Developer</td>
+                                            <td>10</td>
+                                            <td>5</td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="clearfix"></div>
+                                <ul class="pagination pull-right">
+                                    <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input class="form-control " type="text" placeholder="Mohsin">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control " type="text" placeholder="Irshad">
+                                </div>
+                                <div class="form-group">
+                                    <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer ">
+                                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                            </div>
+                            <div class="modal-footer ">
+                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+        <!-- <div class="row">
+<div class="col-lg-12">
+</div>
+</div>
+-->
+    </div>
+</body>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+
+</html>

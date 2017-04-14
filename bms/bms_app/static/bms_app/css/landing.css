@@ -1,0 +1,116 @@
+#wrap > .center-content {
+    padding: 50px 0 0 0;
+    margin: 0;
+}
+
+.center-content {
+    height: 100%;
+    margin: 0;
+}
+
+.center-content {
+    position: relative;
+    background: url(/static/bms_app/images/macbook.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#laptop {
+    padding-top: 150px;
+    padding-left: 10px;
+}
+
+#footernav {
+    padding-top: 4px;
+}
+
+#footernav>li{
+    padding-right: 10px;
+    color: gray;
+    font-size: 15px;
+}
+#footerlink {
+    display: inline-block;
+}
+
+.trans {
+    padding: 15px;
+    height: 549px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+#logo {
+    padding-top: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.para1 {
+    padding-top: 20px;
+}
+
+.para1>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.para2 {
+    padding-top: 20px;
+}
+
+.para2>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.para3 {
+    padding-top: 20px;
+}
+
+.para3>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.land-button {
+    padding-top: 30px;
+    text-align: center;
+}
+
+#login-button {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin-right: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 25px;
+}
+
+#register-button {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 25px;
+}
+
+#header-logo {
+    height: 40px;
+}
+
+.head-logo {
+    padding-top: 5px;
+}
+
+#head-menu {
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+}

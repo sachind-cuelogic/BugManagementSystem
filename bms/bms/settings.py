@@ -1,9 +1,7 @@
-
 import os
 from django.contrib.messages import constants as message_constants
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 SECRET_KEY = 'l3jp1otpe@z+4h!r$zrpju13pbqp0*%or9riuursg)2@o#wk(@'
 
@@ -11,12 +9,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bug.system.app1@gmail.com'
 EMAIL_HOST_PASSWORD = 'bugsystem'
 EMAIL_PORT = 587
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 INSTALLED_APPS = [
     'bms_app.apps.BmsAppConfig',
@@ -59,6 +60,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bms.wsgi.application'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -96,5 +100,5 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = '/home_page/'
+LOGIN_REDIRECT_URL = '/website_home/'
 LOGIN_URL = '/login/'

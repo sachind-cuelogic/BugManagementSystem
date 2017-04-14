@@ -1,0 +1,42 @@
+
+.create-project-title
+{
+    padding-left: 100px;
+}
+#navbrand
+{
+    padding-left: 200px;
+}
+#cancel-button
+{
+    margin-right: 20px;
+}
+
+.form-group
+{
+    padding-bottom: 7px;
+}
+
+#sidebar-link
+{
+	margin-right: 8px;
+}
+
+#user-display-box
+{
+	height: 10px;
+	width: 10px;
+	border: 1px solid black;
+}
+.title{ 
+	color:black; 
+	font-size:22px; 
+	font-weight: bold;
+}
+
+.page-header
+{
+	padding-top: 5px;
+	margin: 0px;
+	
+}
