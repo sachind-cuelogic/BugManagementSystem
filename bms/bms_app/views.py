@@ -80,6 +80,9 @@ def create_product(request):
         return render(request, 'registration/create_product.html', 
             {'users': users, 'roles': roles, 'prod_types': prod_types})
     else:
+        # import pdb;
+        # pdb.set_trace()
+
         data = request.POST
         data1 = request.FILES
 
@@ -94,11 +97,18 @@ def create_product(request):
 
         save_prod_detail.save()
 
+        product_id = save_prod_detail.id
+    
+
+        
+        # obj = ProductDetails.objects.earliest('id')
+
         for each in json.loads(list1):
             save_prod_user = ProductUser(prod_user_id=int(
-                each['user_id']), prod_user_role_id=int(each['user_role']))
-
-        save_prod_user.save()
+                each['user_id']), prod_user_role_id=int(each['user_role']),
+                           product_id=product_id)
+            save_prod_user.save()
+        
         return HttpResponse(json.dumps({'success': True}), 
                             content_type="application/json")
 
