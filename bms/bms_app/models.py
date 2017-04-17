@@ -35,4 +35,7 @@ class ProductUser(models.Model):
     prod_user_role = models.ForeignKey(UserRole)
 
     def __str__(self):
+        return self.prod_user_role
+
+    def __str__(self):
         return u'{0}'.format(self.prod_user_role)

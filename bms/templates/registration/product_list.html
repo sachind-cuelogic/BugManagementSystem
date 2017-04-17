@@ -30,17 +30,49 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-                    <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" action="#">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    <form class="navbar-form navbar-left" action="#">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                    <li class="navbar-left"><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>                    <li class="dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <strong>{{ user.username }}</strong>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="navbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-left"><strong>{{ user.username }}</strong></p>
+                                            <p class="text-left small">{{ user.email }}</p>
+                                            <p class="text-left">
+                                                <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider navbar-login-session-bg"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog pull-right"></span>Account Settings </a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-stats pull-right"></span>User stats</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out pull-right"></span>Log Out </a></li>
+                        </ul>
+                        {% endif %}
+                    </li>
             </div>
         </div>
     </nav>
@@ -58,20 +90,20 @@
                     <font color="#337AB7"> Project</font>
                 </li>
                 <li>
-                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Create Project</a>
+                    <a href="/create_product"><span class="glyphicon glyphicon-tasks" aria-hidden="true" id="sidebar-link"></span> Create Project</a>
                 </li>
                 <li>
-                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Project List</a>
+                    <a href="/product_list"><span class="glyphicon glyphicon-stats" aria-hidden="true" id="sidebar-link"></span>Project List</a>
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     <font color="#337AB7"> Bug</font>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Bug</a>
+                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" id="sidebar-link"></span> Create Bug</a>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Update Bug</a>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true" id="sidebar-link"></span> Update Bug</a>
                 </li>
             </ul>
         </div>
@@ -97,14 +129,15 @@
                                         <th>Delete</th>
                                     </thead>
                                     <tbody>
+                                    {% for item in user_list %}
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="checkthis" />
                                             </td>
-                                            <td>1</td>
-                                            <td>Attendance</td>
+                                            <td>{{ item.product_id }}</td>
+                                            <td>{{ item.product }}</td>
                                             <td>v1.0.1</td>
-                                            <td>Admin</td>
+                                            <td>{{ item.prod_user_role }}</td>
                                             <td>10</td>
                                             <td>5</td>
                                             <td>
@@ -118,195 +151,7 @@
                                                 </p>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>2</td>
-                                            <td>eLearning</td>
-                                            <td>v2.0.1</td>
-                                            <td>Developer</td>
-                                            <td>10</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>3</td>
-                                            <td>Bug Management</td>
-                                            <td>v3.0.1</td>
-                                            <td>QA</td>
-                                            <td>9</td>
-                                            <td>3</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>4</td>
-                                            <td>eCommerce</td>
-                                            <td>v4.0.1</td>
-                                            <td>Tester</td>
-                                            <td>8</td>
-                                            <td>3</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>5</td>
-                                            <td>Blog Management</td>
-                                            <td>v5.0.1</td>
-                                            <td>Admin</td>
-                                            <td>10</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>6</td>
-                                            <td>Document Management</td>
-                                            <td>v6.0.1</td>
-                                            <td>Admin</td>
-                                            <td>10</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>7</td>
-                                            <td>Chat Application</td>
-                                            <td>v7.0.1</td>
-                                            <td>Developer</td>
-                                            <td>10</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>8</td>
-                                            <td>Airline Reservation</td>
-                                            <td>v8.0.1</td>
-                                            <td>Developer</td>
-                                            <td>12</td>
-                                            <td>8</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>9</td>
-                                            <td>Online News Portal</td>
-                                            <td>v9.0.1</td>
-                                            <td>Developer</td>
-                                            <td>18</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="checkthis" />
-                                            </td>
-                                            <td>10</td>
-                                            <td>Clinic Appointment</td>
-                                            <td>v10.0.1</td>
-                                            <td>Developer</td>
-                                            <td>10</td>
-                                            <td>5</td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </p>
-                                            </td>
-                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                                 <div class="clearfix"></div>
@@ -370,13 +215,11 @@
                 </div>
             </div>
         </div>
-        <!-- </div> -->
-        <!-- <div class="row">
-<div class="col-lg-12">
-</div>
-</div>
--->
+              <div class="col-sm-12 footer">
+        <ul class="list-inline"><li><a href="">Footer</a></li></ul>
+      </div>
     </div>
+
 </body>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

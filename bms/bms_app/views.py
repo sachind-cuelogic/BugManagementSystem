@@ -115,6 +115,18 @@ def create_product(request):
 
 @login_required(login_url='/login/')
 def product_list(request):
+    if request.user.is_authenticated():
+        current_user = request.user
+        print current_user.id
+        # user_list = ProductUser.objects.all().filter(prod_user_id=current_user)
+        # print user_list
+
+        user_list =  ProductUser.objects.all().filter(prod_user_id=current_user)
+
+        # print user_list
+        return render(request, 'registration/product_list.html', 
+            {'user_list':user_list})
+
     return render(request, 'registration/product_list.html')
 
 
