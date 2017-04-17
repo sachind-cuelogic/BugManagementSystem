@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product_type, ProductDetails, UserRole, ProductUser
+from .models import Product_type, ProductDetails, UserRole, ProductUser, Bug_Details
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -26,7 +26,6 @@ def register(request):
             username = userObj['username']
             email = userObj['email']
             password = userObj['password']
-
 
             if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
                 User.objects.create_user(username, email, password)
@@ -80,9 +79,6 @@ def create_product(request):
         return render(request, 'registration/create_product.html', 
             {'users': users, 'roles': roles, 'prod_types': prod_types})
     else:
-        # import pdb;
-        # pdb.set_trace()
-
         data = request.POST
         data1 = request.FILES
 
@@ -98,10 +94,6 @@ def create_product(request):
         save_prod_detail.save()
 
         product_id = save_prod_detail.id
-    
-
-        
-        # obj = ProductDetails.objects.earliest('id')
 
         for each in json.loads(list1):
             save_prod_user = ProductUser(prod_user_id=int(
@@ -117,17 +109,35 @@ def create_product(request):
 def product_list(request):
     if request.user.is_authenticated():
         current_user = request.user
-        print current_user.id
-        # user_list = ProductUser.objects.all().filter(prod_user_id=current_user)
-        # print user_list
+        # user_list =  ProductUser.objects.all().filter(prod_user_id=current_user)
+        #product_user_list = ProductUser.get_product_user_list(current_user)
 
-        user_list =  ProductUser.objects.all().filter(prod_user_id=current_user)
+        user_list = ProductUser.objects.raw("SELECT "
+                        "pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id "
+                        "FROM bms_app_productuser pu "
+                        "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
+                        "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
+                        "where pu.prod_user_id = %s ", [current_user.id])
 
-        # print user_list
+        # user_list = ProductUser.objects.raw("SELECT "
+        #                 "pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id, bd.title "
+        #                 "FROM bms_app_productuser pu "
+        #                 "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
+        #                 "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
+        #                 "JOIN bms_app_bug_details bd ON bd.id = pu.bug_data_id "
+        #                 "where pu.prod_user_id = %s ", [current_user.id])
+
+        print user_list
+
         return render(request, 'registration/product_list.html', 
             {'user_list':user_list})
 
     return render(request, 'registration/product_list.html')
+
+def create_bug(request):
+    bug_count = Bug_Details.objects.all().filter().count()
+    print bug_count
+    return render(request, 'registration/create_bug.html')
 
 
 def services(request):

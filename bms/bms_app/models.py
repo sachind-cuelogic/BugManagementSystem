@@ -17,6 +17,7 @@ class ProductDetails(models.Model):
     prod_description = models.CharField(max_length=1000, null=True)
     prod_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True)
 
+
     def __str__(self):
         return self.prod_name
 
@@ -29,13 +30,54 @@ class UserRole(models.Model):
 
 
 class ProductUser(models.Model):
-
     prod_user = models.ForeignKey(User, null=True)
     product = models.ForeignKey(ProductDetails, null=True)
     prod_user_role = models.ForeignKey(UserRole)
+    bug_data = models.ForeignKey('Bug_Details',null=True)
+
+    # @staticmethod
+    # def get_product_user_list(current_user):
+    #     product_user_list = ProductUser.objects.filter(prod_user_id=current_user).values('product__id', 'product__prod_version', 'product__prod_name', 'prod_user_role__role')
+    #     print product_user_list
+    #     return product_user_list
 
     def __str__(self):
         return self.prod_user_role
 
     def __str__(self):
         return u'{0}'.format(self.prod_user_role)
+
+
+class BugType(models.Model):
+    bug_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.bug_name
+
+class BugStatus(models.Model):
+    status_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.status_name
+
+
+class Bug_Details(models.Model):
+    project_name = models.ForeignKey(ProductDetails)
+    title = models.CharField(max_length=50)
+    bug_type = models.ForeignKey(BugType)
+    status = models.ForeignKey(BugStatus)
+    build_version = models.CharField(max_length=50)
+    sprint_no = models.CharField(max_length=50)
+    details = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000)
+    bug_owner = models.ForeignKey(User, related_name='bug_owner')
+    bug_assigned_to = models.ForeignKey(User, related_name='bug_assigned_to')
+    bug_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True)
+
+    def __str__(self):
+        return self.title
+
+
+    # def count_bug():
+    #     no_of_bug = Bug_Details.objects.all().count()
+    #     print no_of_bug

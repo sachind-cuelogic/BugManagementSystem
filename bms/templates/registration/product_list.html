@@ -100,7 +100,7 @@
                     <font color="#337AB7"> Bug</font>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true" id="sidebar-link"></span> Create Bug</a>
+                    <a href="/create_bug"><span class="glyphicon glyphicon-user" aria-hidden="true" id="sidebar-link"></span> Create Bug</a>
                 </li>
                 <li>
                     <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true" id="sidebar-link"></span> Update Bug</a>
@@ -130,14 +130,15 @@
                                     </thead>
                                     <tbody>
                                     {% for item in user_list %}
+                                    --->{{ item }}
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="checkthis" />
                                             </td>
-                                            <td>{{ item.product_id }}</td>
-                                            <td>{{ item.product }}</td>
-                                            <td>v1.0.1</td>
-                                            <td>{{ item.prod_user_role }}</td>
+                                            <td>{{ item.id }}</td>
+                                            <td>{{ item.prod_name }}</td>
+                                            <td>{{item.prod_version}}</td>
+                                            <td>{{ item.role }}</td>
                                             <td>10</td>
                                             <td>5</td>
                                             <td>
