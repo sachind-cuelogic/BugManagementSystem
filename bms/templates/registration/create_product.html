@@ -30,17 +30,50 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-                    <li><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" action="#">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    <form class="navbar-form navbar-left" action="#">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                    <li class="navbar-left"><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                    <li class="dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <strong>{{ user.username }}</strong>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="navbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-left"><strong>{{ user.username }}</strong></p>
+                                            <p class="text-left small">{{ user.email }}</p>
+                                            <p class="text-left">
+                                                <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider navbar-login-session-bg"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog pull-right"></span>Account Settings </a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-stats pull-right"></span>User stats</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out pull-right"></span>Log Out </a></li>
+                        </ul>
+                        {% endif %}
+                    </li>
             </div>
         </div>
     </nav>
@@ -68,10 +101,10 @@
                     <font color="#337AB7"> Bug</font>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span id="sidebar-link"> Create Bug</a>
+                    <a href="/create_bug"><span class="glyphicon glyphicon-user" aria-hidden="true" id="sidebar-link"></span> Create Bug</a>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span id="sidebar-link"> Update Bug</a>
+                    <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true" id="sidebar-link"></span> Update Bug</a>
                 </li>
             </ul>
         </div>
@@ -96,7 +129,9 @@
                                     <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
                                     <div class="col-sm-4">
                                         <select id="producttype" class="selectpicker form-control">
+                                        <option value="" selected disabled>Please select</option>
                                             {% for pt in prod_types %}
+
                                             <option value={{pt.id}}>{{pt.product_type_name}}</option>
                                             {% endfor %}
                                         </select>
@@ -136,7 +171,7 @@
                                                     
                                                         <div class="form-group">
 
-                                                            <select id="user-name" class="user-name form-control col-md-offset-2">
+                                                            <select id="user-name" class="user-name form-control col-sm-offset-3">
                                                             {% for each in users%}
                                                                 <option value="{{each.id}}" username="{{each.username}}">{{each.username}}</option>
                                                                 {% endfor %}
@@ -144,18 +179,18 @@
                                                         </div>
                                                         <div class="form-group">
                                                         
-                                                            <select id="user-role" class="user-role form-control col-md-offset-4">
+                                                            <select id="user-role" class="user-role form-control col-sm-offset-4">
                                                                 {% for each in roles%}
                                                                 <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
                                                                 {% endfor %}
                                                             </select>
                                                         </div>
-                                                        <br>
-                                                        <div class="form-group">
-                                                        <button class="btn-xs btn-danger col-md-offset-2" data-role="remove">
+                                                        
+                                                      
+                                                        <button class="btn-xs btn-danger col-sm-offset-2" data-role="remove">
                                                             <span class="glyphicon glyphicon-remove"></span>
                                                         </button>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>

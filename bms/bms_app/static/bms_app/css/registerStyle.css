@@ -3,6 +3,7 @@ body{
     background-image:url('/static/bms_app/images/templates.jpg');
     background-attachment:fixed;
     background-size:cover;
+    overflow-y: hidden;
 }
 .panel-title{
     text-align: center;
@@ -41,4 +42,20 @@ body{
     border-top: 1px solid#888;
     padding-top:20px; 
     font-size:15px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .panel{
+       display: block;
+       float: none;
+    }
+    .panel{
+       width: 450px;
+       align-content: center;
+    }
+    #loginbox{
+        padding-left: 200px;
+        vertical-align: middle;
+    }
 }
