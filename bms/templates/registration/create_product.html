@@ -119,16 +119,16 @@
                             {% block content %}
                             <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                                 <input type="hidden" id="csrf" value="{%csrf_token%}">
-                                <div class="form-group" id="nameofprod">
+                                <div class="form-group required" id="nameofprod">
                                     <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
                                     <div class="col-sm-4">
                                         <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
                                     </div>
                                 </div>
-                                <div class="form-group" id="nameofprodtype">
+                                <div class="form-group required" id="nameofprodtype">
                                     <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
                                     <div class="col-sm-4">
-                                        <select id="producttype" class="selectpicker form-control">
+                                        <select id="producttype" class="selectpicker form-control" required="required">
                                         <option value="" selected disabled>Please select</option>
                                             {% for pt in prod_types %}
 
@@ -137,18 +137,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group" id=" nameofadduser">
+                                <div class="form-group required" id="add-user-plus-button">
                                     <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User:</label>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user" required="required"><span class="glyphicon glyphicon-plus"></span></button>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-4 col-md-offset-4">
+                                    <div class="col-sm-4 col-md-offset-4 user-box">
                                         <div class="panel panel-default collapse" id="collapseExample">
                                             <div class="panel-body">
                                               <div class="form-group alert alert-info fade in alert-dismissable" id="user_info" style="display:none;">
-                                                  
                                               </div>
                                             </div>
                                         </div>
@@ -169,7 +168,7 @@
                                                 <div data-role="dynamic-fields">
                                                     <div class="form-inline">
                                                     
-                                                        <div class="form-group">
+                                                        <div class="form-group required">
 
                                                             <select id="user-name" class="user-name form-control col-sm-offset-3">
                                                             {% for each in users%}
@@ -177,9 +176,9 @@
                                                                 {% endfor %}
                                                             </select>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group required">
                                                         
-                                                            <select id="user-role" class="user-role form-control col-sm-offset-4">
+                                                            <select id="user-role" class="user-role form-control col-sm-offset-6">
                                                                 {% for each in roles%}
                                                                 <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
                                                                 {% endfor %}
@@ -187,7 +186,7 @@
                                                         </div>
                                                         
                                                       
-                                                        <button class="btn-xs btn-danger col-sm-offset-2" data-role="remove">
+                                                        <button class="btn-xs btn-danger col-sm-offset-3" data-role="remove">
                                                             <span class="glyphicon glyphicon-remove"></span>
                                                         </button>
                                                        

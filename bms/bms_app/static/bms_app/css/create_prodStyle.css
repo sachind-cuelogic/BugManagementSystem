@@ -40,3 +40,17 @@
 	margin: 0px;
 	
 }
+.alert
+{
+	margin: -10px;
+}
+
+.user-box
+{
+	margin-bottom: -15px;
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}

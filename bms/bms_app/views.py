@@ -72,6 +72,7 @@ def website_home(request):
 
 @login_required(login_url='/login/')
 def create_product(request):
+
     if request.method == 'GET':
         users = User.objects.filter()
         roles = UserRole.objects.filter()
@@ -81,7 +82,11 @@ def create_product(request):
     else:
         data = request.POST
         data1 = request.FILES
-
+        if request.FILES:
+            data1['prod_file'] = request.FILES['prod_file']
+        else:
+            data1['prod_file'] = ""
+        
         list1 = data['user_data']
         ptype = data['ptype']
         save_prod_detail = ProductDetails(prod_name=data['prod_name'],
@@ -105,44 +110,41 @@ def create_product(request):
         return HttpResponse(json.dumps({'success': True}), 
                             content_type="application/json")
 
-
 @login_required(login_url='/login/')
 def product_list(request):
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
-            "pu.id, count(bd.id) as bugcount, count(bd.status_id <> 10) as openbug, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id "
+            "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id,(select count(id) from bms_app_bug_details where status_id <> 10 and project_name_id = pd.id) as openbug "
             "FROM bms_app_productuser pu "
             "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
             "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
-            "LEFT JOIN bms_app_bug_details bd ON (bd.project_name_id = pd.id and bd.status_id <> 10) "
+            "LEFT JOIN bms_app_bug_details bd ON bd.project_name_id = pd.id "
             "where pu.prod_user_id = %s "
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id])
 
+        # q =  ProductUser.objects.values('product_id').filter(prod_user_id=current_user)
+        # print q
+
         return render(request, 'registration/product_list.html', 
-                        {'user_list':user_list})
+                        {'user_list': list(user_list)})
 
     return render(request, 'registration/product_list.html')
 
 def create_bug(request):
     return render(request, 'registration/create_bug.html')
 
-
 def services(request):
     return render(request, 'registration/services.html')
-
 
 def about(request):
     return render(request, 'registration/about.html')
 
-
 def contact_us(request):
     return render(request, 'registration/contact.html')
 
-
 def privacy(request):
     return render(request, 'registration/privacy.html')
-
 
 def terms_use(request):
     return render(request, 'registration/terms_use.html')
