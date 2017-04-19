@@ -13,7 +13,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product_type, ProductDetails, UserRole, ProductUser, Bug_Details
+from .models import Product_type, ProductDetails, UserRole, ProductUser 
+from .models import Bug_Details
+from .forms import Bug_Details_Form
+
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -123,16 +126,28 @@ def product_list(request):
             "where pu.prod_user_id = %s "
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id])
 
-        # q =  ProductUser.objects.values('product_id').filter(prod_user_id=current_user)
-        # print q
-
         return render(request, 'registration/product_list.html', 
                         {'user_list': list(user_list)})
 
     return render(request, 'registration/product_list.html')
 
 def create_bug(request):
-    return render(request, 'registration/create_bug.html')
+    if request.method == 'POST':
+
+        bug_form = Bug_Details_Form(request.POST, request.FILES)
+        pdb.set_trace()
+        if bug_form.is_valid():
+            userObj = bug_form.cleaned_data
+            print userObj
+            bug_form.save()
+            return HttpResponseRedirect('/bug_view/')    
+    else:
+        bug_form = Bug_Details_Form()
+
+    return render(request, 'registration/create_bug.html', {'bug_form' : bug_form})
+
+def bug_view(request):
+    return render(request, 'registration/bug_view.html')
 
 def services(request):
     return render(request, 'registration/services.html')
