@@ -126,6 +126,7 @@ def product_list(request):
             "where pu.prod_user_id = %s "
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id])
 
+        messages.success(request, "You have successfully created project!")
         return render(request, 'registration/product_list.html', 
                         {'user_list': list(user_list)})
 
@@ -135,11 +136,11 @@ def create_bug(request):
     if request.method == 'POST':
 
         bug_form = Bug_Details_Form(request.POST, request.FILES)
-        pdb.set_trace()
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
             print userObj
             bug_form.save()
+            messages.success(request, "You have successfully created bug!")
             return HttpResponseRedirect('/bug_view/')    
     else:
         bug_form = Bug_Details_Form()

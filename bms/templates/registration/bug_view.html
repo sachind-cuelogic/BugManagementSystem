@@ -1,13 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
 <h4>
-	Bug view
 
-	<a href="/logout"><span class="glyphicon glyphicon-log-out pull-right"></span>Log Out </a>
+	{% for message in messages %}
+	<div class="alert alert-{{ message.tags }} ">{{ message }}</div>
+	{% endfor %}
+
+	Bug view
+	<a href="/logout"></span>Log Out </a>
 </h4>
 </body>
 </html>

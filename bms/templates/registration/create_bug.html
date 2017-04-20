@@ -148,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group required">
                                 <label for="status" class="control-label col-sm-2 col-sm-offset-2">Bug Status:</label>
                                 <div class="col-sm-4">
 									{{bug_form.status.errors}}
@@ -200,7 +200,7 @@
                             </div>
 
 
-                            <div class="form-group" id="nameofprodtype">
+                            <div class="form-group required" id="nameofprodtype">
                                 <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Assigned To:</label>
                                 <div class="col-sm-4">
 									{{bug_form.bug_assigned_to.errors}}
@@ -221,7 +221,7 @@
                             <div class="form-group" id="nameofbuton">
                                 <div class="controls">
                                     <a class="btn btn-sm btn-primary col-sm-offset-6" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                                    <button class="btn btn-sm btn-primary" type="submit"> <strong>Create</strong> </button>
+                                    <button class="btn btn-sm btn-primary" type="submit" id="myWish"> <strong>Create</strong> </button>
                                 </div>
                             </div>
                         </form>
