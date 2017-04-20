@@ -1,24 +1,18 @@
-
-.create-project-title
-{
+.create-project-title{
     padding-left: 100px;
 }
-#navbrand
-{
+#navbrand{
     padding-left: 200px;
 }
-#cancel-button
-{
+#cancel-button{
     margin-right: 20px;
 }
 
-#sidebar-link
-{
+#sidebar-link{
 	margin-right: 8px;
 }
 
-#user-display-box
-{
+#user-display-box{
 	height: 10px;
 	width: 10px;
 	border: 1px solid black;
@@ -29,18 +23,15 @@
 	font-weight: bold;
 }
 
-.page-header
-{
+.page-header{
 	padding-top: 5px;
 	margin: 0px;
 }
-.alert
-{
+.alert{
 	margin: -10px;
 }
 
-.user-box
-{
+.user-box{
 	margin-bottom: -15px;
 }
 
@@ -48,7 +39,6 @@
   content:"*";
   color:red;
 }
-.page-header
-{
+.page-header{
 	padding-top: 30px;
 }

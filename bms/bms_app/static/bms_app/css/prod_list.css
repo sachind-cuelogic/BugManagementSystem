@@ -213,28 +213,24 @@
     padding-left: 200px;
 }
 
-#sidebar-link
-{
+#sidebar-link{
     padding-left: 28px;
     margin-right: 8px;
 }
 
-.navbar-login
-{
+.navbar-login{
     width: 305px;
     padding: 10px;
     padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
+.navbar-login-session{
     padding: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
-.icon-size
-{
+.icon-size{
     font-size: 87px;
 }
 
@@ -245,13 +241,10 @@
       position:fixed;
       padding-top:10px;
   }
-
-body
-{
+body{
     counter-reset: Serial;      
 }
-  tr td:first-child:before
-{
+tr td:first-child:before{
   counter-increment: Serial;    
   content:counter(Serial); 
 }

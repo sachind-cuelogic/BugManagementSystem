@@ -112,22 +112,20 @@ class SimpleTest(TestCase):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
 
-
-
 	def test_bug(self):
 		client = Client()
 		response = self.client.post(reverse('create_bug'),
-				{'project_name':'Bug Management System',
-				'title':'file not found',
-				'bug_type':'Bug',
-				'status':'Progress',
-				'build_version':'2.0.1',
-				'sprint_no':'2',
-				'dependent_module':'project',
-				'description':'project',
-				'bug_owner':'dane',
-				'bug_assigned_to':'dane',
-				'bug_file':'documents/2017/04/20/1240.jpg'})
+				{'project_name':os.environ.get('pname'),
+				'title':os.environ.get('title'),
+				'bug_type':os.environ.get('type'),
+				'status':os.environ.get('status'),
+				'build_version':os.environ.get('version'),
+				'sprint_no':os.environ.get('sprintno'),
+				'dependent_module':os.environ.get('dependentmodule'),
+				'description':os.environ.get('description'),
+				'bug_owner':os.environ.get('bugowner'),
+				'bug_assigned_to':os.environ.get('bugassign'),
+				'bug_file':os.environ.get('file')})
 
 		print "success"
 		self.assertTrue(response.status_code,200)
@@ -135,14 +133,17 @@ class SimpleTest(TestCase):
 	def test_bug_fail(self):
 		client = Client()
 		response = self.client.post(reverse('create_bug'),
-				{'project_name':'Bug Management System',
-				'status':'Progress',
-				'build_version':'2.0.1',
-				'sprint_no':'2',
-				'dependent_module':'project',
-				'description':'project',
-				'bug_file':'documents/2017/04/20/1240.jpg'})
+				{'project_name':os.environ.get('pname'),
+				'title':os.environ.get('title'),
+				'bug_type':os.environ.get('type'),
+				'status':os.environ.get('status'),
+				'build_version':os.environ.get('version'),
+				'sprint_no':os.environ.get('sprintno'),
+				'dependent_module':os.environ.get('dependentmodule'),
+				'description':os.environ.get('description'),
+				'bug_owner':os.environ.get('bugowner'),
+				'bug_assigned_to':os.environ.get('bugassign'),
+				'bug_file':os.environ.get('file')})
 
 		print "Failed"
 		self.assertFalse(response.status_code,200)
-		

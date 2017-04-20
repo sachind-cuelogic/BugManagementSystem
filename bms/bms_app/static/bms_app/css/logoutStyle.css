@@ -7,21 +7,17 @@ body{
     font-weight: bold;
     font-size: 30px;
 }
-#logcenter
-{
+#logcenter{
     text-align: center;
 }
-#loginbox
-{
+#loginbox{
     margin-top:70px; 
     align-content: center;
 }
-.col-md-12
-{
+.col-md-12{
     padding: 30px;
 }
-.logout_logn
-{
+.logout_logn{
     border-top: 1px solid#888;  
     padding-top:30px; 
     font-size:15px;"
