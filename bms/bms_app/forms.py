@@ -81,11 +81,12 @@ class Bug_Details_Form(forms.ModelForm):
 								'name':'bug_assigned_to'}))
 
 	bug_file = forms.FileField(required=False,
-				label='Select a file',
-				help_text='max. size 10 MB',
-				widget=forms.FileInput(attrs={'class':'form-control',
-				'name':'bug_file',
-				'accept':".jpg, .png, .pdf, .xlsx, .jpeg, .xls, .txt, .doc"}),)
+								label='Select a file',
+								help_text='max. size 10 MB',
+								widget=forms.FileInput(attrs={
+								'class':'form-control',
+								'name':'bug_file',
+								'accept':".jpg, .png, .pdf, .xlsx, .jpeg, .xls, .txt, .doc"}),)
 
 	class Meta:
 		model = Bug_Details

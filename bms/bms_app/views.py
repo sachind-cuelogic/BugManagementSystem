@@ -134,7 +134,6 @@ def product_list(request):
 
 def create_bug(request):
     if request.method == 'POST':
-
         bug_form = Bug_Details_Form(request.POST, request.FILES)
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
