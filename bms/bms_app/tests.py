@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import authenticate
 from django.test import RequestFactory
-from .views import login, register
+from .views import login, register, create_bug
 import json
 import os
-from .forms import User_info_form
+from .models import Bug_Details
+from .forms import User_info_form, Bug_Details_Form
 
 class SimpleTest(TestCase):
 
@@ -18,8 +19,8 @@ class SimpleTest(TestCase):
 										'email':os.environ.get('log_email'),
 										'password':os.environ.get('log_pass')})
 		user.save()
-		client=Client()
-		response=self.client.post(reverse('login'),
+		client = Client()
+		response = self.client.post(reverse('login'),
 									{'username':os.environ.get('log_uname1'),
 									'password':os.environ.get('log_pass1')})
 		self.assertTrue(response.status_code,200)
@@ -29,16 +30,16 @@ class SimpleTest(TestCase):
 									'email':os.environ.get('logf_email'),
 									'password':os.environ.get('logf_pass')})
 		user.save()
-		client=Client()
-		response=self.client.post(reverse('login'),
+		client = Client()
+		response = self.client.post(reverse('login'),
 						{'username':os.environ.get('logf_uname1'),
 						'password':os.environ.get('logf_pass1')})
 		print response
 		self.assertTrue(response.status_code,200)
 
 	def test_register(self):
-		client=Client()
-		response=self.client.post(reverse('register'),
+		client = Client()
+		response = self.client.post(reverse('register'),
 									{'username':os.environ.get('reg_uname'),
 									'email':os.environ.get('reg_email'),
 									'password':os.environ.get('reg_pass')})
@@ -46,8 +47,8 @@ class SimpleTest(TestCase):
 		self.assertTrue(response.status_code,200)
 
 	def test_register_fail(self):
-		client=Client()
-		response=self.client.post(reverse('register'),
+		client = Client()
+		response = self.client.post(reverse('register'),
 								{'username':os.environ.get('regf_uname'),
 								'email':os.environ.get('regf_email'),
 								'password':os.environ.get('regf_pass')})
@@ -110,3 +111,39 @@ class SimpleTest(TestCase):
 	def test_contact(self):
 		resp = self.client.get('/terms_use/')
 		self.assertEqual(resp.status_code, 200)
+
+	def test_bug(self):
+		client = Client()
+		response = self.client.post(reverse('create_bug'),
+				{'project_name':os.environ.get('pname'),
+				'title':os.environ.get('title'),
+				'bug_type':os.environ.get('type'),
+				'status':os.environ.get('status'),
+				'build_version':os.environ.get('version'),
+				'sprint_no':os.environ.get('sprintno'),
+				'dependent_module':os.environ.get('dependentmodule'),
+				'description':os.environ.get('description'),
+				'bug_owner':os.environ.get('bugowner'),
+				'bug_assigned_to':os.environ.get('bugassign'),
+				'bug_file':os.environ.get('file')})
+		print "success"
+		
+		self.assertTrue(response.status_code,200)
+
+	def test_bug_fail(self):
+		client = Client()
+		response = self.client.post(reverse('create_bug'),
+				{'project_name':os.environ.get('pname'),
+				'title':os.environ.get('title'),
+				'bug_type':os.environ.get('type'),
+				'status':os.environ.get('status'),
+				'build_version':os.environ.get('version'),
+				'sprint_no':os.environ.get('sprintno'),
+				'dependent_module':os.environ.get('dependentmodule'),
+				'description':os.environ.get('description'),
+				'bug_owner':os.environ.get('bugowner'),
+				'bug_assigned_to':os.environ.get('bugassign'),
+				'bug_file':os.environ.get('file')})
+
+		print "Failed"
+		self.assertTrue(response.status_code,200)

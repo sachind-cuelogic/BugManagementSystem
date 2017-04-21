@@ -54,7 +54,7 @@ class Bug_Details(models.Model):
     status = models.ForeignKey(BugStatus)
     build_version = models.CharField(max_length=50)
     sprint_no = models.CharField(max_length=50)
-    details = models.CharField(max_length=1000)
+    dependent_module = models.CharField(max_length=50,null=True)
     description = models.CharField(max_length=1000)
     bug_owner = models.ForeignKey(User, related_name='bug_owner')
     bug_assigned_to = models.ForeignKey(User, related_name='bug_assigned_to')

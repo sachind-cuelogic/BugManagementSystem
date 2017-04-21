@@ -66,8 +66,8 @@ $(document).ready(function() {
         formdata = new FormData(this);
          if($("#prod_file")[0].files.length>0)
        		formdata.append("prod_file",$("#prod_file")[0].files[0]);
-       		formdata.append('user_data',(JSON.stringify(user_data)))
-        	formdata.append('ptype',(ptype))
+       	formdata.append('user_data',(JSON.stringify(user_data)))
+        formdata.append('ptype',(ptype))
 
         $.ajax({
             data:formdata,  

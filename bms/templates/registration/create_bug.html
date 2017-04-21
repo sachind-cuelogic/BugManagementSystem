@@ -1,13 +1,243 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<h2>
-	create Bug
-</h2>
+<html lang="en">
 
-<a href="/logout"><span class="glyphicon glyphicon-log-out pull-right"></span>Log Out </a>
+<head>
+    <title>Create Bug</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/prod_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_prodStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+                <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
+                
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="navbar-form navbar-left" action="#">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                    <li class="navbar-left"><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                    <li class="dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <strong>{{ user.username }}</strong>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="navbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-left"><strong>{{ user.username }}</strong></p>
+                                            <p class="text-left small">{{ user.email }}</p>
+                                            <p class="text-left">
+                                                <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider navbar-login-session-bg"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog pull-right"></span>Account Settings </a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-stats pull-right"></span>User stats</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out pull-right"></span>Log Out </a></li>
+                        </ul>
+                        {% endif %}
+                    </li>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <br>
+                </li>
+                <li>
+                    <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true" id="sidebar-link"></span> Home</a>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <font color="#337AB7"> Project</font>
+                </li>
+                <li>
+                    <a href="/create_product"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-plus-circle" aria-hidden="true"></i></span> Create Project</a>
+                </li>
+                <li>
+                    <a href="/product_list"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-list" aria-hidden="true"></i></span>Project List</a>
+                </li>
+                <li>
+                    <span class="fa fa-bug" aria-hidden="true"></span>
+                    <font color="#337AB7"> Bug</font>
+                </li>
+                <li>
+                    <a href="/create_bug"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-plus-circle" aria-hidden="true"></i></span> Create Bug</a>
+                </li>
+                <li>
+                    <a href="#"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-eye" aria-hidden="true"></i></span>Bug View</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <br>
+          
+            <div class="container-fluid">
+            <div class="page-header"><p class="title">Create Bug</p></div>
+                <div class="row">
+                    <div class="col-md-12" id="table-row">
+                        <!-- main content -->
+                        {% block content %} {{ bug_form.non_field_errors }}
+                        <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                            <input type="hidden" id="csrf" value="{%csrf_token%}">
+
+                            <div class="form-group required">
+                                <label for="project_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
+                                <div class="col-sm-4">
+									{{bug_form.project_name.errors}}
+													
+									{{ bug_form.project_name }}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group required">
+                            {{bug_form.title.errors}}
+                                <label for="title" class="control-label col-sm-2 col-sm-offset-2">Bug Title:</label>
+                                <div class="col-sm-4">
+                                    {{bug_form.title}}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="bug_type" class="control-label col-sm-2 col-sm-offset-2">Bug Type:</label>
+                                <div class="col-sm-4">
+									{{bug_form.bug_type.errors}}
+													
+									{{ bug_form.bug_type }}
+                                </div>
+                            </div>
+
+                            <div class="form-group required">
+                                <label for="status" class="control-label col-sm-2 col-sm-offset-2">Bug Status:</label>
+                                <div class="col-sm-4">
+									{{bug_form.status.errors}}
+													
+									{{ bug_form.status }}
+                                </div>
+                            </div>                                
+
+                            <div class="form-group">
+                            {{bug_form.build_version.errors}}
+                                <label for="build_version" class="control-label col-sm-2 col-sm-offset-2">Build Version:</label>
+                                <div class="col-sm-4">
+                                    {{bug_form.build_version}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                            {{bug_form.sprint_no.errors}}
+                                <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Sprint No:</label>
+                                <div class="col-sm-4">
+                                    {{bug_form.sprint_no}}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                            {{bug_form.dependent_module.errors}}
+                                <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Dependent Module:</label>
+                                    <div class="col-sm-4">
+                                        <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" required="required" autofocus="autofocus" disabled="disabled">
+                                    </div>
+                            </div>
+
+
+                            <div class="form-group " id="description">
+                                <label for="description" class="control-label col-sm-2 col-sm-offset-2">Bug Description:</label>
+                                <div class="col-sm-4">
+                                    <textarea class="form-control" cols="40" id="description" name="description" rows="3" placeholder="Enter Bug Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group required" id="nameofprodtype">
+                                <label for="bug_owner" class="control-label col-sm-2 col-sm-offset-2">Owner:</label>
+                                <div class="col-sm-4">
+									{{bug_form.bug_owner.errors}}
+													
+									{{ bug_form.bug_owner }}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group required" id="nameofprodtype">
+                                <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Assigned To:</label>
+                                <div class="col-sm-4">
+									{{bug_form.bug_assigned_to.errors}}
+													
+									{{ bug_form.bug_assigned_to }}
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="nameoffile">
+                                <label for="bug_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
+                                <div class="col-sm-4">
+                                    {{ bug_form.bug_file.errors }}
+                                   {{ bug_form.bug_file }}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" id="nameofbuton">
+                                <div class="controls">
+                                    <a class="btn btn-sm btn-primary col-sm-offset-6" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                                    <button class="btn btn-sm btn-primary" type="submit" id="myWish"> <strong>Create</strong> </button>
+                                </div>
+                            </div>
+                        </form>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+
 </html>

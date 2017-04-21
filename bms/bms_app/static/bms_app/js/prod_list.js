@@ -20,4 +20,6 @@ $(document).ready(function() {
 
 });
 
-
+$(document).ready(function() {
+    $('#mytable').DataTable();
+} );
