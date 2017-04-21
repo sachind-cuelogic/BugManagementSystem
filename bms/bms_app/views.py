@@ -72,7 +72,6 @@ def login(request):
 def website_home(request):
     return render(request, 'registration/website_home.html')
 
-
 @login_required(login_url='/login/')
 def create_product(request):
 
@@ -109,6 +108,7 @@ def create_product(request):
                             prod_user_role_id=int(each['user_role']),
                             product_id=product_id)
             save_prod_user.save()
+
         
         return HttpResponse(json.dumps({'success': True}), 
                             content_type="application/json")

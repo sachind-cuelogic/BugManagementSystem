@@ -1,4 +1,3 @@
-
 body{
     background-image:url('/static/bms_app/images/templates.jpg');
     background-attachment:fixed;
@@ -40,7 +39,6 @@ body{
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-
     .panel{
        display: block;
        float: none;

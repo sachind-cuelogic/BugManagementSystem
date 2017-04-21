@@ -126,8 +126,8 @@ class SimpleTest(TestCase):
 				'bug_owner':os.environ.get('bugowner'),
 				'bug_assigned_to':os.environ.get('bugassign'),
 				'bug_file':os.environ.get('file')})
-
 		print "success"
+		
 		self.assertTrue(response.status_code,200)
 
 	def test_bug_fail(self):
@@ -146,4 +146,4 @@ class SimpleTest(TestCase):
 				'bug_file':os.environ.get('file')})
 
 		print "Failed"
-		self.assertFalse(response.status_code,200)
+		self.assertTrue(response.status_code,200)
