@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-imageupload.css' %}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+
 </head>
 
 <body>
@@ -200,15 +202,7 @@
                             </div>
                             {% if user_list %}        
                             <div class="clearfix"></div>
-                            <ul class="pagination pull-right">
-                                <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                            </ul>
+
                             {% endif %}
                         </div>
                     </div>
@@ -227,5 +221,9 @@
 <script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
 </html>
