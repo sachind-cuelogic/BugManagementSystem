@@ -13,8 +13,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product_type, ProductDetails, UserRole, ProductUser 
-from .models import Bug_Details
+from .models import ProjectType, ProductDetails, UserRole, ProductUser, BugType, BugStatus
+from .models import BugDetails
 from .forms import Bug_Details_Form
 
 
@@ -73,13 +73,14 @@ def website_home(request):
     return render(request, 'registration/website_home.html')
 
 @login_required(login_url='/login/')
-def create_product(request):
+def create_project(request):
 
     if request.method == 'GET':
         users = User.objects.filter()
         roles = UserRole.objects.filter()
-        prod_types = Product_type.objects.filter()
-        return render(request, 'registration/create_product.html', 
+        prod_types = ProjectType.objects.filter()
+
+        return render(request, 'registration/create_project.html', 
             {'users': users, 'roles': roles, 'prod_types': prod_types})
     else:
         data = request.POST
@@ -114,27 +115,45 @@ def create_product(request):
                             content_type="application/json")
 
 @login_required(login_url='/login/')
-def product_list(request):
+def project_list(request):
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
-            "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id,(select count(id) from bms_app_bug_details where status_id <> 10 and project_name_id = pd.id) as openbug "
+            "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id,(select count(id) from bms_app_bugdetails where status_id <> 22 and project_name_id = pd.id) as openbug "
             "FROM bms_app_productuser pu "
             "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
             "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
-            "LEFT JOIN bms_app_bug_details bd ON bd.project_name_id = pd.id "
+            "LEFT JOIN bms_app_bugdetails bd ON bd.project_name_id = pd.id "
             "where pu.prod_user_id = %s "
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id])
 
         messages.success(request, "You have successfully created project!")
-        return render(request, 'registration/product_list.html', 
+        return render(request, 'registration/project_list.html', 
                         {'user_list': list(user_list)})
 
-    return render(request, 'registration/product_list.html')
+    return render(request, 'registration/project_list.html')
 
+@login_required(login_url='/login/')
 def create_bug(request):
+    if request.user.is_authenticated():
+        current_user = request.user
+        print current_user
+    if request.method == 'GET':
+        project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
+        bug_type = BugType.objects.all()
+        status = BugStatus.objects.all()
+        bug_owner = User.objects.all()
+        bug_assign = User.objects.all()
+        return render(request, 'registration/create_bug.html', 
+            {'project_name': project_name,'bug_type':bug_type,'status':status,
+            'bug_owner':bug_owner,'bug_assign':bug_assign})
+
     if request.method == 'POST':
+        print "request method-->",request.method
         bug_form = Bug_Details_Form(request.POST, request.FILES)
+        print "bug form-->",bug_form
+        print "form valid-->",bug_form.is_valid()
+        print bug_form.errors
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
             print userObj
@@ -144,7 +163,8 @@ def create_bug(request):
     else:
         bug_form = Bug_Details_Form()
 
-    return render(request, 'registration/create_bug.html', {'bug_form' : bug_form})
+    return render(request, 'registration/create_bug.html', 
+                    {'bug_form' : bug_form})
 
 def bug_view(request):
     return render(request, 'registration/bug_view.html')
@@ -163,3 +183,9 @@ def privacy(request):
 
 def terms_use(request):
     return render(request, 'registration/terms_use.html')
+
+def header_sidebar(request):
+    return render(request, 'registration/header_sidebar.html')
+
+def landing_header_footer(request):
+    return render(request, 'registration/landing_header_footer.html')

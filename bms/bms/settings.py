@@ -7,14 +7,13 @@ SECRET_KEY = 'l3jp1otpe@z+4h!r$zrpju13pbqp0*%or9riuursg)2@o#wk(@'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["172.21.32.79"]
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bug.system.app1@gmail.com'
 EMAIL_HOST_PASSWORD = 'bugsystem'
 EMAIL_PORT = 587
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

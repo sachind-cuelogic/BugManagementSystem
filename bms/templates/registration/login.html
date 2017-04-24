@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +8,19 @@
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/loginStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>  
-    {% block content %}
+    {% for message in messages %}
+    <div id="message"></div>
+    {% endfor %}
+    
     {% if form.errors %}
     <div class="alert alert-danger" role="alert">
       <strong>Your username and password didn't match. Please try again.</strong>
     </div>
     {% endif %}
+
     <form method="POST">
         {% csrf_token %}
         <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 row vertical-center-row">                    
@@ -25,12 +29,7 @@
                 <div class="panel-heading">
                     <div class="panel-title">LOG IN</div>
                 </div>   
-                  {% for message in messages %}
-                    <div class="alert alert-success" id="success-alert">
-                      <button type="button" class="close" data-dismiss="alert">x</button>
-                        You have successfully registered.
-                    </div>
-                  {% endfor %}
+
  
                 <div class="panel-body" >
                     <form id="loginform" class="form-horizontal" role="form">
@@ -67,10 +66,11 @@
             </div>  
         </div>
     </form>
-    {% endblock %}
 </body>
-<script type="text/javascript" src="{% static 'bms_app/js/login.js' %}"></script>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/login.js' %}"></script>
+
 </html>

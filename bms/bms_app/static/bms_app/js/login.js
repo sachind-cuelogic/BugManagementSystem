@@ -1,5 +1,10 @@
-  window.setTimeout(function () {
-      $(".alert-success").fadeTo(500, 0).slideUp(500, function () {
-          $(this).remove();
-      });
-  }, 5000);
+$(document).ready(function(){
+	if(document.getElementById('message')!==null)
+	{
+		$.notify.defaults({ className: "success" })
+		$.notify( 
+			"You have successfully registered.",
+			{ position:"top center" }
+			);
+	}
+});

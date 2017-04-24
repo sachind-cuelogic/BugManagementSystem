@@ -75,13 +75,13 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: "create_product/",
+            url: "create_project/",
             success: function(result) 
             {
                 if(result['success']) 
                 {
                     $("#output-text").html(result['response']);
-                    window.location.href = "/product_list/"
+                    window.location.href = "/project_list/"
                     console.log(data);
                 }
             }
