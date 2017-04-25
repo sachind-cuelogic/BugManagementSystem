@@ -9,7 +9,7 @@ from django.test import RequestFactory
 from .views import login, register, create_bug
 import json
 import os
-from .models import Bug_Details
+from .models import BugDetails
 from .forms import User_info_form, Bug_Details_Form
 
 class SimpleTest(TestCase):
@@ -68,7 +68,7 @@ class SimpleTest(TestCase):
 	        }
 	        client = Client()
 
-	        response = client.post('/create_product/', json.dumps(data),
+	        response = client.post('/create_project/', json.dumps(data),
 	        						 content_type='application/json')
 	        self.assertEquals(response.status_code, 302)
 
