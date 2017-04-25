@@ -76,9 +76,9 @@ def website_home(request):
 def create_project(request):
 
     if request.method == 'GET':
-        users = User.objects.filter()
-        roles = UserRole.objects.filter()
-        prod_types = ProjectType.objects.filter()
+        users = User.objects.all()
+        roles = UserRole.objects.all()
+        prod_types = ProjectType.objects.all()
 
         return render(request, 'registration/create_project.html', 
             {'users': users, 'roles': roles, 'prod_types': prod_types})
@@ -137,7 +137,6 @@ def project_list(request):
 def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
-        print current_user
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
         bug_type = BugType.objects.all()
@@ -149,14 +148,9 @@ def create_bug(request):
             'bug_owner':bug_owner,'bug_assign':bug_assign})
 
     if request.method == 'POST':
-        print "request method-->",request.method
         bug_form = Bug_Details_Form(request.POST, request.FILES)
-        print "bug form-->",bug_form
-        print "form valid-->",bug_form.is_valid()
-        print bug_form.errors
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
-            print userObj
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
             return HttpResponseRedirect('/bug_view/')    
