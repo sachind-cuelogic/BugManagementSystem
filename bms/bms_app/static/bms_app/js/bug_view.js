@@ -100,18 +100,19 @@ $(document).ready(function() {
             url: "bug_list/",
             success: function(result) 
             {
-              $("#project_name").text(result[0]['fields']['project_name']);
-              $("#title").text(result[0]['fields']['title']);
-              $("#bug_type").text(result[0]['fields']['bug_type']);
-              $("#status").text(result[0]['fields']['status']);
-              $("#build_version").text(result[0]['fields']['build_version']);
-              $("#sprint_no").text(result[0]['fields']['sprint_no']);
-              $("#dependent_module").text(result[0]['fields']['dependent_module']);
-              $("#description").text(result[0]['fields']['description']);
-              $("#bug_owner").text(result[0]['fields']['bug_owner']);
-              $("#bug_assign").text(result[0]['fields']['bug_assigned_to']);
-              $("#bug_file").text(result[0]['fields']['bug_file']);
-              console.log(result);
+              console.log(result[0]['project_name']);
+              $("#project_name").text(result[0]['project_name']);
+              $("#title").text(result[0]['title']);
+              $("#bug_type").text(result[0]['bug_type']);
+              $("#status").text(result[0]['status']);
+              $("#build_version").text(result[0]['build_version']);
+              $("#sprint_no").text(result[0]['sprint_no']);
+              //$("#dependent_module").text(result[0]['dependent_module']);
+              $("#description").text(result[0]['description']);
+              $("#bug_owner").text(result[0]['bug_owner']);
+              $("#bug_assign").text(result[0]['bug_assign']);
+              $("#bug_file").text(result[0]['bug_file']);
+              
             }
         });
     });

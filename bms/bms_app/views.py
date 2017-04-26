@@ -182,18 +182,32 @@ def bug_list(request):
         print bug_id
 
         bug_result = BugDetails.objects.raw("SELECT "
-            "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
+            "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name,bt.bug_name, au.username "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "JOIN bms_app_bugstatus bs on bs.id=bd.status_id "
+            "JOIN bms_app_bugtype bt on bt.id=bd.bug_type_id "
+            "JOIN auth_user au on au.id=pu.prod_user_id "
             "where pu.prod_user_id = %s and bd.id = %s", 
                         [current_user.id, bug_id])
         
-        # bug_response = []
-        # for index, bugs in list(bug_result):
-        #     bug_response["prod_name"] = bugs.prod_name
+        bug_response = []
+        for index, bugs in enumerate(bug_result):
+            bug_response.append({
+                "project_name" : bugs.prod_name,
+                "title" : bugs.title,
+                "build_version" : bugs.build_version,
+                "sprint_no" : bugs.sprint_no,
+                "description" :bugs.description,
+                "status" : bugs.status_name,
+                "bug_type" : bugs.bug_name,
+                "bug_owner" : bugs.username,
+                "bug_assign" : bugs.username
+            })
 
-        bugdata = serializers.serialize('json', bug_result)
+        # bugdata = serializers.serialize('json', bug_response)
+        bugdata = json.dumps(bug_response)
         print bugdata
         return HttpResponse(bugdata, content_type='application/json')
 
