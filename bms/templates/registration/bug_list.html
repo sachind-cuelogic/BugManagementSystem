@@ -1,0 +1,149 @@
+{% extends "registration/header_sidebar.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-header"><p class="title">Bug List</p></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="col1" class="well">
+                <div class="list-group">
+                    {% for pt in bug_data %}
+                    <a href="#" class="list-group-item bug" id="{{pt.id}}">
+                        <h4 class="list-group-item-heading" value={{pt.id}}>Bug Id - {{pt.id}}</h4>
+                        <p class="list-group-item-text">{{pt.prod_name}} : {{pt.title}}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div id="col2">
+                <div class="col-md-12 well">
+                    <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                        <input type="hidden" id="csrf" value="{%csrf_token%}">
+
+                        <div class="form-group required">
+                            <label for="project_name" class="control-label col-sm-3 col-sm-offset-1">Project Name:</label>
+                            <div class="col-sm-6">
+                            <span id="project_name"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+
+                            <label for="title" class="control-label col-sm-3 col-sm-offset-1">Bug Title:</label>
+                            <div class="col-sm-6">
+                                <span id="title"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="bug_type" class="control-label col-sm-3 col-sm-offset-1">Bug Type:</label>
+                            <div class="col-sm-6">
+                                <span id="bug_type"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="status" class="control-label col-sm-3 col-sm-offset-1">Bug Status:</label>
+                            <div class="col-sm-6">
+                                <span id="status"></span>
+                            </div>
+                        </div>                                
+
+                        <div class="form-group">
+
+                            <label for="build_version" class="control-label col-sm-3 col-sm-offset-1">Build Version:</label>
+                            <div class="col-sm-6">
+                                <span id="build_version"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="sprint_no" class="control-label col-sm-3 col-sm-offset-1">Sprint No:</label>
+                            <div class="col-sm-6">
+                                <span id="sprint_no"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="dependent_module" class="control-label col-sm-3 col-sm-offset-1">Dependent Module:</label>
+                            <div class="col-sm-6">
+                                <span id="dependent_module"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="description" class="control-label col-sm-3 col-sm-offset-1">Bug Description:</label>
+                            <div class="col-sm-6">
+                            <span id="description"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group required" id="nameofprodtype">
+                            <label for="bug_owner" class="control-label col-sm-3 col-sm-offset-1">Owner:</label>
+                            <div class="col-sm-6">
+                                <span id="bug_owner"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group required" id="nameofprodtype">
+                            <label for="prodType" class="control-label col-sm-3 col-sm-offset-1">Assigned To:</label>
+                            <div class="col-sm-6">
+                            <span id="bug_assign"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="nameoffile">
+                            <label for="bug_file" class="control-label col-sm-3 col-sm-offset-1">Upload File:</label>
+                            <div class="col-sm-6">
+                               <span id="bug_file"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="comments col-sm-9 col-sm-offset-1">
+                                <div class="list-comments">
+
+                                </div>
+                                <div class="insert-text">
+                                    <span class="loading">Loading...</span>
+                                    <span class="total-comment"></span>
+                                </div>
+                                <div class="editor">
+                                    <div class="editor-header">
+                                        <a href='#' data-role='bold'>B</a>
+                                        <a href='#' data-role='italic'>I</a>
+                                        <a href='#' data-role='underline'>U</a>
+                                        <a href='#' data-role='justifyleft'><i class="menu-left"></i></a>
+                                        <a href='#' data-role='justifycenter'><i class="menu-center"></i></a>
+                                        <a href='#' data-role='justifyright'><i class="menu-right"></i></a>
+                                    </div>    
+                                <div id="text" class="editor-content" contenteditable>
+
+                                </div>
+                            </div>
+
+                            <input class="btn btn-sm btn btn-sm col-sm-12" type="submit" value="Comment"> 
+
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="nameofbuton">
+
+                        <a class="btn btn-sm btn-primary col-sm-offset-6" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                        <button class="btn btn-sm btn-primary" type="submit"> <strong>Update</strong> </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/bug_list.css' %}">
+{% endblock %}

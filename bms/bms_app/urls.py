@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^website_home/', views.website_home),
     url(r'^project_list/', views.project_list),
     url(r'^create_bug/', views.create_bug, name="create_bug"),
-    url(r'^bug_view/', views.bug_view),
+    url(r'^bug_list/', views.bug_list),
     url(r'^logout/', auth_views.logout),
     url(r'^services/', views.services),
     url(r'^about/', views.about),

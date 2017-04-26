@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from .models import ProjectType, ProductDetails, UserRole, ProductUser, BugType, BugStatus
 from .models import BugDetails
 from .forms import Bug_Details_Form
-
+from django.core import serializers
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -153,15 +153,51 @@ def create_bug(request):
             userObj = bug_form.cleaned_data
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
-            return HttpResponseRedirect('/bug_view/')    
+            return HttpResponseRedirect('/bug_list/')    
     else:
         bug_form = Bug_Details_Form()
 
     return render(request, 'registration/create_bug.html', 
                     {'bug_form' : bug_form})
 
-def bug_view(request):
-    return render(request, 'registration/bug_view.html')
+def bug_list(request):
+    if request.user.is_authenticated():
+        current_user = request.user
+    if request.method == 'GET':
+        bug_data = BugDetails.objects.raw("SELECT "
+            "pd.prod_name, bd.id, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
+            "FROM bms_app_bugdetails bd "
+            "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
+            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "where pu.prod_user_id = %s ", [current_user.id])
+       
+        print bug_data
+        return render(request, 'registration/bug_list.html', 
+                        {'bug_data': list(bug_data)})
+    else:
+        # import pdb;
+        # pdb.set_trace()
+        data = request.POST
+        bug_id = data['bug_id']
+        print bug_id
+
+        bug_result = BugDetails.objects.raw("SELECT "
+            "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
+            "FROM bms_app_bugdetails bd "
+            "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
+            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "where pu.prod_user_id = %s and bd.id = %s", 
+                        [current_user.id, bug_id])
+        
+        # bug_response = []
+        # for index, bugs in list(bug_result):
+        #     bug_response["prod_name"] = bugs.prod_name
+
+        bugdata = serializers.serialize('json', bug_result)
+        print bugdata
+        return HttpResponse(bugdata, content_type='application/json')
+
+    return render(request, 'registration/bug_list.html')
 
 def services(request):
     return render(request, 'registration/services.html')
