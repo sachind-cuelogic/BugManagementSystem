@@ -41,7 +41,7 @@ $(document).ready(function(){
     } else{
       _data = $text.html();
       $.ajax({
-        type: "POST",
+        type: "GET",
         url: window.local,
         data: _data,
         cache: false,
@@ -91,6 +91,8 @@ $(document).ready(function() {
     $('.bug').on('click', function(event) {
         event.preventDefault();
         var bug_id = $(this).attr('id');
+        var project_id = $('#project_id').val();
+        console.log(bug_id);
         console.log(bug_id);
 
         $.ajax({
@@ -107,13 +109,28 @@ $(document).ready(function() {
               $("#status").text(result[0]['status']);
               $("#build_version").text(result[0]['build_version']);
               $("#sprint_no").text(result[0]['sprint_no']);
-              //$("#dependent_module").text(result[0]['dependent_module']);
+              $("#dependent_module").text(result[0]['dependent_module']);
               $("#description").text(result[0]['description']);
               $("#bug_owner").text(result[0]['bug_owner']);
               $("#bug_assign").text(result[0]['bug_assign']);
-              $("#bug_file").text(result[0]['bug_file']);
-              
             }
         });
     });
+});
+
+$(function(){
+    console.log('ready');
+    
+    $('.list-group a').click(function(e) {
+        e.preventDefault()
+        
+        $that = $(this);
+        $('.list-group').find('a').removeClass('active');
+        $that.addClass('active');
+    });
+})
+
+$('#project_id').change(function() {
+    var selected_proj_id = $(this).val();
+    window.location = "/bug_list/?pid="+selected_proj_id;
 });

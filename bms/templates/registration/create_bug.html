@@ -107,7 +107,7 @@
                     <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control">
                         {% if user.is_authenticated %}
                         {% for pt in bug_assign %}
-                        <option value="{{pt.id}}" {% if pt.username == user.username %}selected{% endif %}>{{pt.username}}</option>
+                        <option value="{{pt.id}}">{{pt.username}}</option>
                         {% endfor %}
 
                         {% endif %}

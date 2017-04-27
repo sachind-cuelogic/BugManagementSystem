@@ -60,3 +60,6 @@
 .form-inline > div{
     padding-bottom: 15px;
 }
+.form-horizontal .control-label {
+    text-align: left;
+}

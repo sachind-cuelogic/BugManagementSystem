@@ -56,7 +56,6 @@ def register(request):
 
     return render(request, 'bms_app/register.html', {'form': form})
 
-
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -109,7 +108,6 @@ def create_project(request):
                             prod_user_role_id=int(each['user_role']),
                             product_id=product_id)
             save_prod_user.save()
-
         
         return HttpResponse(json.dumps({'success': True}), 
                             content_type="application/json")
@@ -163,23 +161,40 @@ def create_bug(request):
 def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
+
+    pid = 0
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+
+
     if request.method == 'GET':
+
+        project_name_list = ProductDetails.objects.raw("SELECT *"
+            "FROM bms_app_productdetails pd "
+            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "where pu.prod_user_id = %s ", [current_user.id])
+
+        if pid == 0:
+            intcount = 0
+            for projectIds in project_name_list: 
+                if intcount == 0:
+                    pid = projectIds.id
+                intcount += 1 
+
         bug_data = BugDetails.objects.raw("SELECT "
-            "pd.prod_name, bd.id, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
+            " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
-            "where pu.prod_user_id = %s ", [current_user.id])
+            "where pu.prod_user_id = %s and pd.id = %s ", [current_user.id, pid])
        
         print bug_data
         return render(request, 'registration/bug_list.html', 
-                        {'bug_data': list(bug_data)})
+                        {'bug_data': list(bug_data),'project_name_list' :project_name_list,'pid' : pid })
     else:
-        # import pdb;
-        # pdb.set_trace()
+
         data = request.POST
         bug_id = data['bug_id']
-        print bug_id
 
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name,bt.bug_name, au.username "
@@ -206,7 +221,6 @@ def bug_list(request):
                 "bug_assign" : bugs.username
             })
 
-        # bugdata = serializers.serialize('json', bug_response)
         bugdata = json.dumps(bug_response)
         print bugdata
         return HttpResponse(bugdata, content_type='application/json')
@@ -233,3 +247,4 @@ def header_sidebar(request):
 
 def landing_header_footer(request):
     return render(request, 'registration/landing_header_footer.html')
+    

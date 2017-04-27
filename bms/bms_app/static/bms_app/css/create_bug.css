@@ -14,3 +14,6 @@
   content:"*";
   color:red;
 }
+.form-horizontal .control-label {
+    text-align: left;
+}

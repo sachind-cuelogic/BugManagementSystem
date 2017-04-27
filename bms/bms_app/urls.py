@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^terms_use/', views.terms_use),
     url(r'^header_sidebar/', views.header_sidebar),
     url(r'^landing_header_footer/', views.landing_header_footer),
+    url(r'^bug_list/(?P<pid>[0-9]+)/$', views.bug_list, 
+                                                name="bug_list")
 ]
