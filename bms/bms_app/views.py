@@ -158,6 +158,7 @@ def create_bug(request):
     return render(request, 'registration/create_bug.html', 
                     {'bug_form' : bug_form})
 
+@login_required(login_url='/login/')
 def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
@@ -168,7 +169,6 @@ def bug_list(request):
 
 
     if request.method == 'GET':
-
         project_name_list = ProductDetails.objects.raw("SELECT *"
             "FROM bms_app_productdetails pd "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "

@@ -1,17 +1,8 @@
-#navbrand{
-    padding-left: 200px;
-}
 #cancel-button{
     margin-right: 20px;
 }
 
-#user-display-box{
-	height: 10px;
-	width: 10px;
-	border: 1px solid black;
-}
-
-.alert{
+.selected-user-role{
 	margin: -10px;
 }
 
@@ -21,12 +12,6 @@
 
 .panel-body {
     padding: 30px;
-}
-
-#panelinfo {
-    margin-top: 30px;
-    height: 500px;
-    overflow-y: auto;
 }
 
 .modal-body {

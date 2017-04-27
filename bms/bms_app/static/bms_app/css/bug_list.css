@@ -1,4 +1,4 @@
-.list-group-item{
+.bug-list{
 	margin-bottom: 10px;
 }
 
@@ -12,48 +12,48 @@ input[type="submit"]{
   font-weight: bold;
 }
 
-.insert-text{
+.insert-text-in-comment{
   position: relative;
 }
 
-.insert-text .loading{
+.insert-text-in-comment .loading{
   position: absolute;
   bottom: -25px;
   display: none;
 }
 
-.insert-text .total-comment{
+.insert-text-in-comment .total-comment{
   position: absolute;
   bottom: -25px;
   right: 0px;
 }
 
-.insert-text .total-comment:before{
+.insert-text-in-comment .total-comment:before{
   content: "Total comment: ";
   font-weight: bold;
 }
 
-.list-comments{
+.comment-list{
   margin-top: 30px;
   border: 1px solid #ccc;
   background: #fff;
 }
 
-.list-comments > div{
+.comment-list > div{
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
 
-.list-comments > div:last-child{
+.comment-list > div:last-child{
   border-bottom: none;
 }
 
-.editor{
+.comment-editor{
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.editor-content{
+.comment-text{
   padding: 10px;
   outline: none;
   min-height: 80px;
@@ -61,17 +61,17 @@ input[type="submit"]{
   border-radius: 0px 0px 5px 5px;
 }
 
-.editor-content:focus{
+.comment-text:focus{
   background: #fff;
 }
 
-.list-comments{
+.comment-list{
   border-radius: 5px;
   height: 200px;
   overflow-y: scroll;
   margin-bottom: 15px;
-
 }
+
 .total-comment{
   margin-right: 10px;
 }

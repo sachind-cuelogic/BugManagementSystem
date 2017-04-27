@@ -18,7 +18,7 @@
             <div id="col1" class="well bug-list-background">
                 <div class="list-group">
                     {% for pt in bug_data %}
-                    <a href="#" class="list-group-item bug" id="{{pt.id}}" val="{{pt.projectid}}">
+                    <a href="#" class="list-group-item bug-list bug" id="{{pt.id}}" val="{{pt.projectid}}">
                         <h4 class="list-group-item-heading" value={{pt.id}}>Bug Id - {{pt.id}}</h4>
                         <p class="list-group-item-text">{{pt.prod_name}} : {{pt.title}}</p>
                     </a>
@@ -115,18 +115,18 @@
 
                         <div class="form-group">
                             <div class="comments col-sm-9 col-sm-offset-1">
-                                <div class="list-comments">
+                                <div class="list-comments comment-list">
 
                                 </div>
-                                <div class="insert-text">
+                                <div class="insert-text-in-comment">
                                     <span class="loading">Loading...</span>
                                     <span class="total-comment"></span>
                                 </div>
-                                <div class="editor">
+                                <div class="editor comment-editor">
                                     <div class="editor-header">
 
                                     </div>    
-                                    <div id="text" class="editor-content" contenteditable>
+                                    <div id="text" class="editor-content comment-text" contenteditable>
 
                                     </div>
                                 </div>

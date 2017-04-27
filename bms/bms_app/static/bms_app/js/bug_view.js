@@ -31,7 +31,6 @@ $(document).ready(function(){
       $loading = $(".loading"),
       _data,
       $totalCom = $(".total-comment");
-
   $totalCom.text($(".list-comments > div").length);
 
   $($submit).click(function(){
@@ -79,7 +78,6 @@ function csrfSafeMethod(method) {
 
 $(document).ready(function() {
     var csrftoken = getCookie('csrftoken');
-
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -128,6 +126,7 @@ $(function(){
         $('.list-group').find('a').removeClass('active');
         $that.addClass('active');
     });
+    $('a.bug').eq(0).trigger('click')
 })
 
 $('#project_id').change(function() {
