@@ -15,7 +15,7 @@
     {% if bug_data %}
     <div class="row">
         <div class="col-md-4">
-            <div id="col1" class="well">
+            <div id="col1" class="well bug-list-background">
                 <div class="list-group">
                     {% for pt in bug_data %}
                     <a href="#" class="list-group-item bug" id="{{pt.id}}" val="{{pt.projectid}}">
@@ -28,18 +28,18 @@
         </div>
         <div class="col-md-8">
             <div id="col2">
-                <div class="col-md-12 well">
+                <div class="col-md-12 well bug-list-background">
                     <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                         <input type="hidden" id="csrf" value="{%csrf_token%}">
 
-                        <div class="form-group required">
+                        <div class="form-group">
                             <label for="project_name" class="control-label col-sm-3 col-sm-offset-1">Project Name:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="project_name"></p>
                             </div>
                         </div>
 
-                        <div class="form-group required">
+                        <div class="form-group">
 
                             <label for="title" class="control-label col-sm-3 col-sm-offset-1">Bug Title:</label>
                             <div class="col-sm-6">
@@ -47,14 +47,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group required">
+                        <div class="form-group">
                             <label for="bug_type" class="control-label col-sm-3 col-sm-offset-1">Bug Type:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="bug_type"></p>
                             </div>
                         </div>
 
-                        <div class="form-group required">
+                        <div class="form-group">
                             <label for="status" class="control-label col-sm-3 col-sm-offset-1">Bug Status:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="status"></p>
@@ -92,14 +92,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group required" id="nameofprodtype">
+                        <div class="form-group" id="nameofprodtype">
                             <label for="bug_owner" class="control-label col-sm-3 col-sm-offset-1">Owner:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="bug_owner"></p>
                             </div>
                         </div>
 
-                        <div class="form-group required" id="nameofprodtype">
+                        <div class="form-group" id="nameofprodtype">
                             <label for="prodType" class="control-label col-sm-3 col-sm-offset-1">Assigned To:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="bug_assign"></p>
@@ -124,12 +124,7 @@
                                 </div>
                                 <div class="editor">
                                     <div class="editor-header">
-                                        <a href='#' data-role='bold'>B</a>
-                                        <a href='#' data-role='italic'>I</a>
-                                        <a href='#' data-role='underline'>U</a>
-                                        <a href='#' data-role='justifyleft'><i class="menu-left"></i></a>
-                                        <a href='#' data-role='justifycenter'><i class="menu-center"></i></a>
-                                        <a href='#' data-role='justifyright'><i class="menu-right"></i></a>
+
                                     </div>    
                                     <div id="text" class="editor-content" contenteditable>
 
