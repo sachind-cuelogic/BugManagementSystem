@@ -150,7 +150,6 @@ def create_bug(request):
         bug_form = Bug_Details_Form(request.POST, request.FILES)
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
-            print bug_form
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
             return HttpResponseRedirect('/bug_list/')    
@@ -190,7 +189,6 @@ def bug_list(request):
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
             "where pu.prod_user_id = %s and pd.id = %s ", [current_user.id, pid])
        
-        print bug_data
         return render(request, 'registration/bug_list.html', 
                         {'bug_data': list(bug_data),'project_name_list' :project_name_list,'pid' : pid })
     else:
@@ -224,7 +222,6 @@ def bug_list(request):
             })
 
         bugdata = json.dumps(bug_response)
-        print bugdata
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
