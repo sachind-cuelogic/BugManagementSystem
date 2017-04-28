@@ -89,3 +89,7 @@ input[type="submit"]{
 .alert-message{
   margin-top: 60px;
 }
+
+.form-group{
+  margin-bottom: 5px;
+}

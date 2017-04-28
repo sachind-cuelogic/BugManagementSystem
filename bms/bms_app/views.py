@@ -22,9 +22,6 @@ def home(request):
     return render(request, 'bms_app/home.html')
 
 def register(request):
-    import pdb;
-    pdb.set_trace()
-
     if request.method == 'POST':
         form = User_info_form(request.POST)
         if form.is_valid():
@@ -153,6 +150,7 @@ def create_bug(request):
         bug_form = Bug_Details_Form(request.POST, request.FILES)
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
+            print bug_form
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
             return HttpResponseRedirect('/bug_list/')    
