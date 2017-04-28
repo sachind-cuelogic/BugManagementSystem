@@ -150,6 +150,8 @@ def create_bug(request):
         bug_form = Bug_Details_Form(request.POST, request.FILES)
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
+            print bug_form
+
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
             return HttpResponseRedirect('/bug_list/')    
@@ -167,7 +169,6 @@ def bug_list(request):
     pid = 0
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
-
 
     if request.method == 'GET':
         project_name_list = ProductDetails.objects.raw("SELECT *"
