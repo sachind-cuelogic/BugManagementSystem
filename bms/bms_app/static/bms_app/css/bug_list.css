@@ -75,3 +75,17 @@ input[type="submit"]{
 .total-comment{
   margin-right: 10px;
 }
+.project-list{
+  padding-top: 20px;
+}
+
+.bug-list-row{
+  padding-top: 40px;
+}
+#project_id{
+  margin-left: -215px;
+}
+
+.alert-message{
+  margin-top: 60px;
+}

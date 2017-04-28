@@ -22,6 +22,9 @@ def home(request):
     return render(request, 'bms_app/home.html')
 
 def register(request):
+    import pdb;
+    pdb.set_trace()
+
     if request.method == 'POST':
         form = User_info_form(request.POST)
         if form.is_valid():
@@ -45,6 +48,7 @@ def register(request):
                                       ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
+                
                 return HttpResponseRedirect('/login/')
             else:
                 return render(request, 'bms_app/register.html')
@@ -62,11 +66,11 @@ def login(request):
     user = authenticate(username=username, password=password)
 
     if user is not None:
+
         auth_login(request, user)
         return HttpResponseRedirect('/website_home')
     else:
-        return HttpResponse("invalid login")
-
+        return HttpResponseRedirect('/login')
 
 def website_home(request):
     return render(request, 'registration/website_home.html')
