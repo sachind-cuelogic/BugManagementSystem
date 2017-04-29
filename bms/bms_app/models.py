@@ -11,9 +11,9 @@ class ProjectType(models.Model):
 class ProductDetails(models.Model):
     prod_name = models.CharField(max_length=50)
     prod_type = models.ForeignKey(ProjectType)
-    prod_version = models.CharField(max_length=50, null=True)
-    prod_description = models.CharField(max_length=1000, null=True)
-    prod_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True)
+    prod_version = models.CharField(max_length=50, null=True, blank=True)
+    prod_description = models.CharField(max_length=1000, null=True, blank=True)
+    prod_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, blank=True)
 
     def __str__(self):
         return self.prod_name

@@ -122,35 +122,28 @@ class SimpleTest(TestCase):
 		# import pdb;
 		# pdb.set_trace()
 
-		f = open() 
-
-		projecttype = ProjectType.objects.create(
+		ptype = ProjectType.objects.create(
 			project_type_name= 'mobile'
 			)
+		print ptype
 
 		bugtype = BugType.objects.create(
 			bug_name = 'bug'
 			)
+		print bugtype
 
 		status = BugStatus.objects.create(
 			status_name = 'open'
 			)
+		print status
 
-		project = ProductDetails.objects.create(
-			prod_name = 'desktop',
-			prod_type = projecttype.id,
-			prod_version = '2',
-			prod_description='sdfsdfsd',
-			prod_file=File(open('/home/sachin/Desktop/templates.jpg','r'))
-
-			)
-
-		user = User.objects.create(
-			username = 'sachin'
+		p = ProductDetails.objects.create(
+			prod_name='bugmanagement',
+			prod_type=ptype
 			)
 
 		bug = BugDetails.objects.create(
-				project_name= project,
+				project_name= p,
 				title=os.environ.get('title'),
 				bug_type= bugtype,
 				status= status,
@@ -158,10 +151,11 @@ class SimpleTest(TestCase):
 				sprint_no= os.environ.get('sprintno'),
 				dependent_module=os.environ.get('dependentmodule'),
 				description=os.environ.get('description'),
-				bug_owner=user,
-				bug_assigned_to=user,
-				bug_file=File(open('/home/sachin/Desktop/templates.jpg','r'))
+				bug_owner=user1,
+				bug_assigned_to=user1
 			)
+
+		print bug
 
 		data = {'project_name':os.environ.get('pname'),
 				'title':os.environ.get('title'),
@@ -172,15 +166,15 @@ class SimpleTest(TestCase):
 				'dependent_module':os.environ.get('dependentmodule'),
 				'description':os.environ.get('description'),
 				'bug_owner':os.environ.get('bugowner'),
-				'bug_assigned_to':os.environ.get('bugassign'),
-				'bug_file':os.environ.get('file')}
+				'bug_assigned_to':os.environ.get('bugassign')}
 
 		print response
 		print data
 
 		form = Bug_Details_Form(data=data)
+		print "--->",form.errors
 		self.assertTrue(form.is_valid())
-
+		print "===>", form.is_valid()
 
 		response = self.client.post(reverse('create_bug'),
 				{'project_name':os.environ.get('pname'),
@@ -193,7 +187,8 @@ class SimpleTest(TestCase):
 				'description':os.environ.get('description'),
 				'bug_owner':os.environ.get('bugowner'),
 				'bug_assigned_to':os.environ.get('bugassign'),
-				'bug_file':os.environ.get('file')})
+				'bug_file':os.environ.get('file')}
+				)
 
 		self.assertTrue(response.status_code,200)
 		print response
@@ -213,5 +208,4 @@ class SimpleTest(TestCase):
 	# 			'bug_assigned_to':os.environ.get('bugassign'),
 	# 			'bug_file':os.environ.get('file')})
 
-	# 	print "Failed"
 	# 	self.assertTrue(response.status_code,200)

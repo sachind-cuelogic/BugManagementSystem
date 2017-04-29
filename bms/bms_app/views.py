@@ -45,7 +45,6 @@ def register(request):
                                       ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
-                
                 return HttpResponseRedirect('/login/')
             else:
                 return render(request, 'bms_app/register.html')
@@ -148,6 +147,9 @@ def create_bug(request):
 
     if request.method == 'POST':
         bug_form = Bug_Details_Form(request.POST, request.FILES)
+        
+        print bug_form    
+
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
             print bug_form
