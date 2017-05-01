@@ -45,7 +45,6 @@ def register(request):
                                       ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
-                
                 return HttpResponseRedirect('/login/')
             else:
                 return render(request, 'bms_app/register.html')
@@ -75,6 +74,9 @@ def website_home(request):
 @login_required(login_url='/login/')
 def create_project(request):
 
+    # import pdb;
+    # pdb.set_trace()
+
     if request.method == 'GET':
         users = User.objects.all()
         roles = UserRole.objects.all()
@@ -91,6 +93,7 @@ def create_project(request):
             data1['prod_file'] = ""
         
         list1 = data['user_data']
+        print list1
         ptype = data['ptype']
         save_prod_detail = ProductDetails(prod_name=data['prod_name'],
                                           prod_type_id=int(ptype),
@@ -136,6 +139,7 @@ def project_list(request):
 def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
+
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
         bug_type = BugType.objects.all()
@@ -147,7 +151,11 @@ def create_bug(request):
             'bug_owner':bug_owner,'bug_assign':bug_assign})
 
     if request.method == 'POST':
+        
         bug_form = Bug_Details_Form(request.POST, request.FILES)
+        
+        print bug_form    
+
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
             print bug_form
