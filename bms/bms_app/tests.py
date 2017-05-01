@@ -27,6 +27,7 @@ class SimpleTest(TestCase):
 		print response
 		self.assertTrue(response.status_code,200)
 
+
 	def test_user_form(self):
 		data = {'username':os.environ.get('uform_uname'),
 				'email':os.environ.get('uform_email'),
@@ -342,13 +343,6 @@ class SimpleTest(TestCase):
 		self.assertTrue(response.status_code, 200)
 		print response
 
-
-
-
-
-
-
-
 #--------------------------------------------------------------------
 
 	# def test_bug_list(self):
@@ -409,7 +403,6 @@ class SimpleTest(TestCase):
 
 	# def test_that_user_gets_logged_in(self):
 	# 	client = Client()
-
 	# 	user1=User.objects.create(username=os.environ.get('reg_uname'),
 	# 	 							email=os.environ.get('reg_email'),
 	# 	 							password=os.environ.get('reg_pass'),
@@ -498,19 +491,3 @@ class SimpleTest(TestCase):
 
 		# self.assertTrue(response.status_code, 200)
 		# print response
-
-	# 	response = self.client.post(reverse('create_bug'),
-	# 			{'project_name':os.environ.get('pname'),
-	# 			'title':os.environ.get('title'),
-	# 			'bug_type':os.environ.get('type'),
-	# 			'status':os.environ.get('status'),
-	# 			'build_version':os.environ.get('version'),
-	# 			'sprint_no':os.environ.get('sprintno'),
-	# 			'dependent_module':os.environ.get('dependentmodule'),
-	# 			'description':os.environ.get('description'),
-	# 			'bug_owner':os.environ.get('bugowner'),
-	# 			'bug_assigned_to':os.environ.get('bugassign'),
-	# 			'bug_file':os.environ.get('file')})
-
-	# 	self.assertTrue(response.status_code,200)
-
