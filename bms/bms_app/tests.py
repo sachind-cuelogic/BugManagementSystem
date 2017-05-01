@@ -122,6 +122,12 @@ class SimpleTest(TestCase):
 
 		print ["logged in "+ str(user1.id)]
 
+<<<<<<< HEAD
+=======
+		# import pdb;
+		# pdb.set_trace()
+
+>>>>>>> 4aea892f7a431f7f214a47a4a945b5e67448ac35
 		ptype = ProjectType.objects.create(
 			project_type_name= 'mobile'
 			)
@@ -175,6 +181,7 @@ class SimpleTest(TestCase):
 		print "--->",form.errors
 		self.assertTrue(form.is_valid())
 		print "===>", form.is_valid()
+<<<<<<< HEAD
 
 		response = self.client.post(reverse('create_bug'),
 				{'project_name':os.environ.get('pname'),
@@ -261,6 +268,8 @@ class SimpleTest(TestCase):
 		print "--->",form.errors
 		self.assertFalse(form.is_valid())
 		print "===>", form.is_valid()
+=======
+>>>>>>> 4aea892f7a431f7f214a47a4a945b5e67448ac35
 
 		response = self.client.post(reverse('create_bug'),
 				{'project_name':os.environ.get('pname'),
@@ -410,6 +419,7 @@ class SimpleTest(TestCase):
 
 	# def test_that_user_gets_logged_in(self):
 	# 	client = Client()
+<<<<<<< HEAD
 	# 	user1=User.objects.create(username=os.environ.get('reg_uname'),
 	# 	 							email=os.environ.get('reg_email'),
 	# 	 							password=os.environ.get('reg_pass'),
@@ -498,3 +508,19 @@ class SimpleTest(TestCase):
 
 		# self.assertTrue(response.status_code, 200)
 		# print response
+=======
+	# 	response = self.client.post(reverse('create_bug'),
+	# 			{'project_name':os.environ.get('pname'),
+	# 			'title':os.environ.get('title'),
+	# 			'bug_type':os.environ.get('type'),
+	# 			'status':os.environ.get('status'),
+	# 			'build_version':os.environ.get('version'),
+	# 			'sprint_no':os.environ.get('sprintno'),
+	# 			'dependent_module':os.environ.get('dependentmodule'),
+	# 			'description':os.environ.get('description'),
+	# 			'bug_owner':os.environ.get('bugowner'),
+	# 			'bug_assigned_to':os.environ.get('bugassign'),
+	# 			'bug_file':os.environ.get('file')})
+
+	# 	self.assertTrue(response.status_code,200)
+>>>>>>> 4aea892f7a431f7f214a47a4a945b5e67448ac35
