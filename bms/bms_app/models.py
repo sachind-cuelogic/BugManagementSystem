@@ -59,3 +59,11 @@ class BugDetails(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comments(models.Model):
+    user = models.ForeignKey(User)
+    comment = models.CharField(max_length=2000)
+
+    def __str__(self):
+        return self.comment
+        

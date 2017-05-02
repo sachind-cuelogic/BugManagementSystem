@@ -15,7 +15,6 @@ from django.core.files import File
 from django.test import TestCase, RequestFactory
 from django.core.urlresolvers import reverse
 
-
 class SimpleTest(TestCase):
 
 	def test_register(self):
@@ -27,14 +26,12 @@ class SimpleTest(TestCase):
 		print response
 		self.assertTrue(response.status_code,200)
 
-
 	def test_user_form(self):
 		data = {'username':os.environ.get('uform_uname'),
 				'email':os.environ.get('uform_email'),
 				'password':os.environ.get('uform_pass')}
 		form = User_info_form(data=data)
 		self.assertTrue(form.is_valid())
-
 
 	def test_user_form_fail(self):
 		user =User.objects.create(username=os.environ.get('uform_f_uname'), password='')
@@ -125,17 +122,14 @@ class SimpleTest(TestCase):
 		ptype = ProjectType.objects.create(
 			project_type_name= 'mobile'
 			)
-		print ptype
 
 		bugtype = BugType.objects.create(
 			bug_name = 'bug'
 			)
-		print bugtype
 
 		status = BugStatus.objects.create(
 			status_name = 'open'
 			)
-		print status
 
 		p = ProductDetails.objects.create(
 			prod_name='bugmanagement',
@@ -155,8 +149,6 @@ class SimpleTest(TestCase):
 				bug_assigned_to=user1
 			)
 
-		print bug
-
 		data = {'project_name':os.environ.get('pname'),
 				'title':os.environ.get('title'),
 				'bug_type':os.environ.get('type'),
@@ -169,10 +161,8 @@ class SimpleTest(TestCase):
 				'bug_assigned_to':os.environ.get('bugassign')}
 
 		print response
-		print data
 
 		form = Bug_Details_Form(data=data)
-		print "--->",form.errors
 		self.assertTrue(form.is_valid())
 		print "===>", form.is_valid()
 
@@ -211,17 +201,14 @@ class SimpleTest(TestCase):
 		ptype = ProjectType.objects.create(
 			project_type_name= 'mobile'
 			)
-		print ptype
 
 		bugtype = BugType.objects.create(
 			bug_name = 'bug'
 			)
-		print bugtype
 
 		status = BugStatus.objects.create(
 			status_name = 'open'
 			)
-		print status
 
 		p = ProductDetails.objects.create(
 			prod_name='bugmanagement',
@@ -241,8 +228,6 @@ class SimpleTest(TestCase):
 				bug_assigned_to=user1
 			)
 
-		print bug
-
 		data = {'project_name':os.environ.get('pname'),
 				'title':os.environ.get('title'),
 				'bug_type':os.environ.get('type'),
@@ -255,10 +240,8 @@ class SimpleTest(TestCase):
 				}
 
 		print response
-		print data
 
 		form = Bug_Details_Form(data=data)
-		print "--->",form.errors
 		self.assertFalse(form.is_valid())
 		print "===>", form.is_valid()
 
@@ -298,17 +281,14 @@ class SimpleTest(TestCase):
 		ptype = ProjectType.objects.create(
 			project_type_name= 'mobile'
 			)
-		print ptype
 
 		bugtype = BugType.objects.create(
 			bug_name = 'bug'
 			)
-		print bugtype
 
 		status = BugStatus.objects.create(
 			status_name = 'open'
 			)
-		print status
 
 		p = ProductDetails.objects.create(
 			prod_name='bugmanagement',
@@ -327,167 +307,13 @@ class SimpleTest(TestCase):
 
 		response = self.client.post(reverse('create_project'),
 		{
-			'project_name':os.environ.get('pname'),
+			'project_name':os.environ.get('projname'),
 			'prod_type': os.environ.get('projtype'),
 			'prod_user': os.environ.get('produser'),
 			'prod_user_role': os.environ.get('userrole'),
 			'prod_version': os.environ.get('version'),
 			'prod_description':os.environ.get('description')
-			'user_data':
-						{'user_id':os.environ.get('produser'),
-						'user_role':os.environ.get('userrole')}
-		}
-		
-		)
+		})
 
 		self.assertTrue(response.status_code, 200)
 		print response
-
-#--------------------------------------------------------------------
-
-	# def test_bug_list(self):
-	# 	client = Client()
-		
-	# 	user1=User.objects.create(username=os.environ.get('reg_uname'),
-	# 		email=os.environ.get('reg_email'),
-	# 		password=os.environ.get('reg_pass'),
-	# 		is_active=True)
-	# 	user1.set_password(os.environ.get('reg_pass'))
-	# 	user1.save()
-	# 	# user1.save()
-	# 	response = client.post(reverse('login'),
-	# 		{'username':os.environ.get('reg_uname'),
-	# 		'password':os.environ.get('reg_pass')})
-
-	# 	print ["logged in "+ str(user1.id)]
-
-	# 	ptype = ProjectType.objects.create(
-	# 		project_type_name= 'mobile'
-	# 		)
-	# 	print ptype
-
-	# 	pd = ProductDetails.objects.create(
-	# 		prod_name='bugmanagement',
-	# 		prod_type=ptype,
-	# 		prod_version='2'
-	# 		)
-
-	# 	ur = UserRole.objects.create(
-	# 		role = 'engineer'
-	# 		)
-
-	# 	pu = ProductUser.objects.create(
-	# 		prod_user=user1,
-	# 		product=pd,
-	# 		prod_user_role=ur
-	# 		)
-
-	# 	# self.factory = RequestFactory()
-	# 	# request = self.factory.get('/bug_list/?pid=1')
-
-	# 	# response = self.client.post(reverse('bug_list',request),
-	# 	# 		{}
-	# 	# 		)
-
-
-	# 	self.factory = RequestFactory()
-
-	# 	request = self.factory.get(reverse('/bug_list/?pid=1'))
-
-	# 	response = bug_list(request)
-
-	# 	self.assertEqual(response.status_code, 200)
-	# 	print response
-
-
-
-	# def test_that_user_gets_logged_in(self):
-	# 	client = Client()
-	# 	user1=User.objects.create(username=os.environ.get('reg_uname'),
-	# 	 							email=os.environ.get('reg_email'),
-	# 	 							password=os.environ.get('reg_pass'),
-	# 	 							is_active=True)
- # 		user1.set_password(os.environ.get('reg_pass'))
-	# 	user1.save()
-
-	# 	response = self.client.post(reverse('register'),
-	# 								{'username':os.environ.get('reg_uname'),
-	# 								'email':os.environ.get('reg_email'),
-	# 								'password':os.environ.get('reg_pass')})
-	# 	print response
-
- #    	user = User.objects.get(username='mahesh')
- #    	assert user.is_authenticated()
-
-
- 	# def test_create_project(self):
-		# client = Client()
-		
-		# user1=User.objects.create(username=os.environ.get('reg_uname'),
-		#  							email=os.environ.get('reg_email'),
-		#  							password=os.environ.get('reg_pass'),
-		#  							is_active=True)
- 	# 	user1.set_password(os.environ.get('reg_pass'))
-		# user1.save()
-		# # user1.save()
-
- 	# 	self.client.login(username=os.environ.get('reg_uname'),
- 	# 						 password=os.environ.get('reg_pass'))
-
-		# # response = client.post(reverse('login'),
-		# # 							{'username':os.environ.get('reg_uname'),
-		# # 							'password':os.environ.get('reg_pass')})
-
-		# print ["logged in "+ str(user1.id)]
-
-		# # import pdb;
-		# # pdb.set_trace()
-
-		# ptype = ProjectType.objects.create(
-		# 	project_type_name= 'mobile'
-		# 	)
-		# print ptype
-
-		# bugtype = BugType.objects.create(
-		# 	bug_name = 'bug'
-		# 	)
-		# print bugtype
-
-		# status = BugStatus.objects.create(
-		# 	status_name = 'open'
-		# 	)
-		# print status
-
-		# p = ProductDetails.objects.create(
-		# 	prod_name='bugmanagement',
-		# 	prod_type=ptype
-		# 	)
-
-		# ur = UserRole.objects.create(
-		# 	role = 'engineer'
-		# 	)
-
-		# pu = ProductUser.objects.create(
-		# 	prod_user=user1,
-		# 	product=p,
-		# 	prod_user_role=ur
-		# 	)
-
-
-		# response = self.client.post(reverse('create_project'),
-		# {
-		# 	'project_name':os.environ.get('pname'),
-		# 	'prod_type': os.environ.get('projtype'),
-		# 	'prod_user': os.environ.get('produser'),
-		# 	'prod_user_role': os.environ.get('userrole'),
-		# 	'prod_version': os.environ.get('version'),
-		# 	'prod_description':os.environ.get('description')
-		# 	'user_data':
-		# 				{'user_id':os.environ.get('produser'),
-		# 				'user_role':os.environ.get('userrole')}
-		# }
-		
-		# )
-
-		# self.assertTrue(response.status_code, 200)
-		# print response

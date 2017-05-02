@@ -6,6 +6,8 @@ from .models import UserRole
 from .models import BugType
 from .models import BugStatus
 from .models import BugDetails	
+from .models import Comments	
+
 
 admin.site.register(ProjectType)
 admin.site.register(ProductDetails)
@@ -14,3 +16,4 @@ admin.site.register(UserRole)
 admin.site.register(BugType)
 admin.site.register(BugStatus)
 admin.site.register(BugDetails)
+admin.site.register(Comments)

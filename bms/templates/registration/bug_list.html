@@ -110,9 +110,10 @@
                         </div>
 
                         <div class="form-group">
+                        {% if user.is_authenticated %}
                             <div class="comments col-sm-9 col-sm-offset-1">
                                 <div class="list-comments comment-list">
-
+                                
                                 </div>
                                 <div class="insert-text-in-comment">
                                     <span class="loading">Loading...</span>
@@ -123,6 +124,7 @@
 
                                     </div>    
                                     <div id="text" class="editor-content comment-text" contenteditable>
+                                    <div><strong>{{ user.username }}</strong></div>
 
                                     </div>
                                 </div>
@@ -130,6 +132,7 @@
                                 <input class="btn btn-sm btn btn-sm col-sm-12" type="submit" value="Comment"> 
 
                             </div>
+                            {% endif %}
                         </div>
 
                         <div class="form-group" id="nameofbuton">

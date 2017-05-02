@@ -35,7 +35,7 @@ $(document).ready(function(){
 
   $($submit).click(function(){
     if($text.html() == ""){
-      alert("Plesea write a comment!");
+      alert("Plesae write a comment!");
       $text.focus();
     } else{
       _data = $text.html();
