@@ -14,9 +14,10 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import ProjectType, ProductDetails, UserRole, ProductUser, BugType, BugStatus
-from .models import BugDetails
-from .forms import Bug_Details_Form
+from .models import BugDetails, Comments
+from .forms import Bug_Details_Form, comment_form
 from django.core import serializers
+from itertools import chain
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -73,9 +74,6 @@ def website_home(request):
 
 @login_required(login_url='/login/')
 def create_project(request):
-
-    # import pdb;
-    # pdb.set_trace()
 
     if request.method == 'GET':
         users = User.objects.all()
@@ -153,12 +151,9 @@ def create_bug(request):
     if request.method == 'POST':
         
         bug_form = Bug_Details_Form(request.POST, request.FILES)
-        
-        print bug_form    
 
         if bug_form.is_valid():
             userObj = bug_form.cleaned_data
-            print bug_form
 
             bug_form.save()
             messages.success(request, "You have successfully created bug!")
@@ -200,10 +195,17 @@ def bug_list(request):
        
         return render(request, 'registration/bug_list.html', 
                         {'bug_data': list(bug_data),'project_name_list' :project_name_list,'pid' : pid })
-    else:
+
+    if request.method == 'POST':
+
 
         data = request.POST
-        bug_id = data['bug_id']
+        bugid = request.POST.get("bug_id")
+
+        bug_comment =  get_comments(bugid)
+        #bugcomment = dict(bug_comment)
+        # print "bug_comment==>",bug_comment
+
 
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name,bt.bug_name, au.username "
@@ -212,13 +214,17 @@ def bug_list(request):
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
             "JOIN bms_app_bugstatus bs on bs.id=bd.status_id "
             "JOIN bms_app_bugtype bt on bt.id=bd.bug_type_id "
-            "JOIN auth_user au on au.id=pu.prod_user_id "
+            "JOIN auth_user au on au.id=bd.bug_owner_id "
             "where pu.prod_user_id = %s and bd.id = %s", 
-                        [current_user.id, bug_id])
-        
+                        [current_user.id, bugid])
+            
+        # result_list = list(chain(bug_result, bug_comment))
+        # print "combine queryset == >",result_list
+
         bug_response = []
-        for index, bugs in enumerate(bug_result):
-            bug_response.append({
+        bug_data = {}
+        for bugs in bug_result:
+            bug_data = {
                 "project_name" : bugs.prod_name,
                 "title" : bugs.title,
                 "build_version" : bugs.build_version,
@@ -228,12 +234,59 @@ def bug_list(request):
                 "bug_type" : bugs.bug_name,
                 "bug_owner" : bugs.username,
                 "bug_assign" : bugs.username
-            })
+            }
+
+            bug_comment_list = []
+            for x in bug_comment.values():
+                bug_comment_list.append(x)
+
+            print "buglist==>",bug_comment_list
+
+            # for each in bug_comment:
+            #     bug_data['comment_data'] = each.comment,
+            #     bug_data['comment_user'] = each.user.username
+
+            bug_response.append(bug_data)
+            # bugcom = serializers.serialize('json',bug_response)
+            print "bug_response==>",bug_response
 
         bugdata = json.dumps(bug_response)
+       
+
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
+
+def comment_section(request):
+    # import pdb;
+    # pdb.set_trace()
+    if request.user.is_authenticated():
+        current_user = request.user
+
+    if request.method == 'POST':
+        data = request.POST
+        comment_text = data['comment_text']
+        bid = request.POST.get("bid")
+        userid = current_user.id
+
+        commment_save = Comments(comment=comment_text,
+                                    bug_id=bid,
+                                    user_id=userid)
+        commment_save.save()  
+        print "comment==>",comment_text
+        print "bid==>",bid
+        print "userid==>",userid
+
+        
+        # post_comment = Comments.objects.all().filter(bug_id=bid)
+        # print "post comment ==>",post_comment
+
+        # comment_data = json.dumps(post_comment)
+        comment_data = serializers.serialize('json',{})
+        return HttpResponse(comment_data, content_type='application/json')
+
+    return render(request, 'registration/bug_list.html')
+
 
 def services(request):
     return render(request, 'registration/services.html')
@@ -256,3 +309,9 @@ def header_sidebar(request):
 def landing_header_footer(request):
     return render(request, 'registration/landing_header_footer.html')
     
+def get_comments(bid):  
+    post_comment = Comments.objects.filter(bug_id=bid)
+    #print "post comment ==>",post_comment
+    return post_comment
+
+

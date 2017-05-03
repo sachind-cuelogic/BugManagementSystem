@@ -8,55 +8,6 @@ $(document).ready(function(){
 	}
 });
 
-$(document).ready(function(){
-  $(".editor-header a").click(function(e){
-    e.preventDefault();
-
-    var _val = $(this).data("role"),
-        _sizeValIn = parseInt($(this).data("size-val") + 1),
-        _sizeValRe = parseInt($(this).data("size-val") - 1),
-        _size = $(this).data("size");
-    if(_size == "in-size"){
-      document.execCommand(_val, false, _sizeValIn + "px");
-    } else{
-      document.execCommand(_val, false, _sizeValRe + "px");
-    }
-  });
-});
-
-$(document).ready(function(){
-  var $text = $("#text"),
-      $submit = $("input[type='submit']"),
-      $listComment = $(".list-comments"),
-      $loading = $(".loading"),
-      _data,
-      $totalCom = $(".total-comment");
-  $totalCom.text($(".list-comments > div").length);
-
-  $($submit).click(function(){
-    if($text.html() == ""){
-      alert("Plesae write a comment!");
-      $text.focus();
-    } else{
-      _data = $text.html();
-      $.ajax({
-        type: "GET",
-        url: window.local,
-        data: _data,
-        cache: false,
-        success: function(html){
-          $loading.show().fadeOut(300);
-          $listComment.append("<div>"+_data+"</div>");
-          $text.html("");
-          $totalCom.text($(".list-comments > div").length);
-        }
-      });
-      return false;
-    }
-  });
-});
-
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -90,17 +41,17 @@ $(document).ready(function() {
         event.preventDefault();
         var bug_id = $(this).attr('id');
         var project_id = $('#project_id').val();
-        console.log(bug_id);
-        console.log(bug_id);
+
 
         $.ajax({
-            data:{ bug_id: bug_id },  
+            data:{ bug_id: bug_id},  
             dataType: "JSON",
             type: 'POST',
             url: "bug_list/",
             success: function(result) 
             {
-              console.log(result[0]['project_name']);
+              console.log(result);
+              /*console.log(result[0]['project_name']);*/
               $("#project_name").text(result[0]['project_name']);
               $("#title").text(result[0]['title']);
               $("#bug_type").text(result[0]['bug_type']);
@@ -114,7 +65,65 @@ $(document).ready(function() {
             }
         });
     });
+
+/* pass comment to view */
+
+    $('[name="comment-button"]').on('click', function(event) {
+        event.preventDefault();
+        var comment_text = $('#comment').val();
+        var username = $("#username").text();
+        console.log(username);
+        console.log(comment_text);
+        var bid = document.getElementsByClassName("list-group-item active")[0].id;
+        console.log(bid);
+
+        $.ajax({
+            data:{ comment_text: comment_text, bid: bid },  
+            dataType: "JSON",
+            type: 'POST',
+            url: "../comment_section/",
+            success: function(result) 
+            {
+              $("#user").val("<div>"+username+"</div>") 
+              $("#comment-text").prepend("<div>"+comment_text+"</div>")                   
+              // console.log(result);
+              // for (var i=0; i<result.length; i++)  
+              //     {
+              //     $("#user").append(result[i].fields['user']);
+              //     $("#comment-text").append(result[i].fields['comment']);
+
+              //     console.log(result[i].fields['bug']); 
+              //     console.log(result[i].fields['comment']); 
+              //     console.log(result[i].fields['user']);  
+              //     }
+            }
+        });
+    });
+
+/* clear textarea on click button */
+
+$('.comment').on('click', function(event) {
+    event.preventDefault();
+    $("#comment").val('');
 });
+
+
+
+$('[name="comment-button"]').attr('disabled', true);
+
+$('textarea').on('keyup',function() {
+    var textarea_value = $("#comment").val();
+    if(textarea_value != '') {
+        $('[name="comment-button"]').attr('disabled' , false);
+    }else{
+        $('[name="comment-button"]').attr('disabled' , true);
+    }
+});
+
+
+});
+
+/* bug list group active on click */
 
 $(function(){
     console.log('ready');
@@ -129,7 +138,12 @@ $(function(){
     $('a.bug').eq(0).trigger('click')
 })
 
+/* pass project id to view */
+
 $('#project_id').change(function() {
     var selected_proj_id = $(this).val();
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
+
+
+

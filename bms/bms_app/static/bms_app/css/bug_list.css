@@ -68,7 +68,7 @@ input[type="submit"]{
 .comment-list{
   border-radius: 5px;
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 15px;
 }
 
@@ -92,4 +92,11 @@ input[type="submit"]{
 
 .form-group{
   margin-bottom: 5px;
+}
+
+.comments{
+  margin-bottom: 20px;
+}
+#username{
+  display: none;
 }

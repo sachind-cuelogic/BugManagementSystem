@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^project_list/', views.project_list),
     url(r'^create_bug/', views.create_bug, name="create_bug"),
     url(r'^bug_list/', views.bug_list, name="bug_list"),
+    url(r'^comment_section/', views.comment_section, name="comment_section"),  
+    url(r'^get_comments/', views.get_comments, name="get_comments"),  
     url(r'^logout/', auth_views.logout),
     url(r'^services/', views.services),
     url(r'^about/', views.about),
