@@ -67,7 +67,7 @@ input[type="submit"]{
 
 .comment-list{
   border-radius: 5px;
-  height: 200px;
+  height: 250px;
   overflow-y: auto;
   margin-bottom: 15px;
 }

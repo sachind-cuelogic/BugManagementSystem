@@ -203,8 +203,6 @@ def bug_list(request):
         bugid = request.POST.get("bug_id")
 
         bug_comment =  get_comments(bugid)
-        #bugcomment = dict(bug_comment)
-        # print "bug_comment==>",bug_comment
 
 
         bug_result = BugDetails.objects.raw("SELECT "
@@ -217,9 +215,6 @@ def bug_list(request):
             "JOIN auth_user au on au.id=bd.bug_owner_id "
             "where pu.prod_user_id = %s and bd.id = %s", 
                         [current_user.id, bugid])
-            
-        # result_list = list(chain(bug_result, bug_comment))
-        # print "combine queryset == >",result_list
 
         bug_response = []
         bug_data = {}
@@ -240,27 +235,27 @@ def bug_list(request):
             for x in bug_comment.values():
                 bug_comment_list.append(x)
 
-            print "buglist==>",bug_comment_list
+            print "bug comment list==>",bug_comment_list
+            # bug_comment_list.append(bug_data)
+
 
             # for each in bug_comment:
             #     bug_data['comment_data'] = each.comment,
             #     bug_data['comment_user'] = each.user.username
 
             bug_response.append(bug_data)
+            bug_response.append(bug_comment_list)
             # bugcom = serializers.serialize('json',bug_response)
             print "bug_response==>",bug_response
 
         bugdata = json.dumps(bug_response)
        
-
+        print "bug data==>",bugdata
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
 
 def comment_section(request):
-    # import pdb;
-    # pdb.set_trace()
-
 
     if request.method == 'POST':
         if request.user.is_authenticated():

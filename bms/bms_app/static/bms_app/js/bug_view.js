@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	if(document.getElementById('message')!==null){
-		$.notify.defaults({ className: "success" })
-		$.notify( 
-			"You have successfully created bug",
-			{ position:"top center" }
-			);
-	}
+  if(document.getElementById('message')!==null){
+    $.notify.defaults({ className: "success" })
+    $.notify( 
+      "You have successfully created bug",
+      { position:"top center" }
+      );
+  }
 });
 
 function getCookie(name) {
@@ -50,8 +50,14 @@ $(document).ready(function() {
             url: "bug_list/",
             success: function(result) 
             {
+              jQuery('#comment-text').html('');
               console.log(result);
-              /*console.log(result[0]['project_name']);*/
+              for(var i = 1; i < result[1].length; i++) 
+              {
+
+                $("#comment-text").append('<p>' + result[1][i]['user_id']  +" : "+result[1][i]['comment'] + '</p><hr>');
+              }
+
               $("#project_name").text(result[0]['project_name']);
               $("#title").text(result[0]['title']);
               $("#bug_type").text(result[0]['bug_type']);
@@ -62,6 +68,7 @@ $(document).ready(function() {
               $("#description").text(result[0]['description']);
               $("#bug_owner").text(result[0]['bug_owner']);
               $("#bug_assign").text(result[0]['bug_assign']);
+
             }
         });
     });
@@ -84,18 +91,8 @@ $(document).ready(function() {
             url: "../comment_section/",
             success: function(result) 
             {
-              $("#user").val("<div>"+username+"</div>") 
-              $("#comment-text").prepend("<div>"+comment_text+"</div>")                   
-              // console.log(result);
-              // for (var i=0; i<result.length; i++)  
-              //     {
-              //     $("#user").append(result[i].fields['user']);
-              //     $("#comment-text").append(result[i].fields['comment']);
-
-              //     console.log(result[i].fields['bug']); 
-              //     console.log(result[i].fields['comment']); 
-              //     console.log(result[i].fields['user']);  
-              //     }
+         /*     $("#user").val("<div>"+username+"</div>") */
+              $("#comment-text").prepend("<div>"+username+" : "+comment_text+"</div><hr>")
             }
         });
     });
@@ -144,6 +141,5 @@ $('#project_id').change(function() {
     var selected_proj_id = $(this).val();
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
-
 
 
