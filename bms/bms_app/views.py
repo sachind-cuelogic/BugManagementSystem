@@ -260,22 +260,23 @@ def bug_list(request):
 def comment_section(request):
     # import pdb;
     # pdb.set_trace()
-    if request.user.is_authenticated():
-        current_user = request.user
+
 
     if request.method == 'POST':
-        data = request.POST
-        comment_text = data['comment_text']
-        bid = request.POST.get("bid")
-        userid = current_user.id
+        if request.user.is_authenticated():
+            current_user = request.user
+            data = request.POST
+            comment_text = data['comment_text']
+            bid = request.POST.get("bid")
+            userid = current_user.id
 
-        commment_save = Comments(comment=comment_text,
-                                    bug_id=bid,
-                                    user_id=userid)
-        commment_save.save()  
-        print "comment==>",comment_text
-        print "bid==>",bid
-        print "userid==>",userid
+            commment_save = Comments(comment=comment_text,
+                                        bug_id=bid,
+                                        user_id=userid)
+            commment_save.save()  
+            print "comment==>",comment_text
+            print "bid==>",bid
+            print "userid==>",userid
 
         
         # post_comment = Comments.objects.all().filter(bug_id=bid)

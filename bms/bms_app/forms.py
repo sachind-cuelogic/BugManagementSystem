@@ -20,6 +20,7 @@ class Bug_Details_Form(forms.ModelForm):
 					'build_version','sprint_no','dependent_module','description',
 					'bug_owner','bug_assigned_to','bug_file',)
 		
-class comment_form(forms.ModelForm):
-	model = Comments
-	fields = ('user','bug','comment',)
+class comment_form(ModelForm):
+	class Meta:
+		model = Comments
+		fields = ('user','bug','comment',)
