@@ -383,11 +383,12 @@ class SimpleTest(TestCase):
     			comment = 'nice'
 			)
 
-		bid=1
-		post_comment = Comments.objects.filter(bug=bid)
+		
+		comment = Comments.objects.get(pk=1)
+		print "comment===>",comment
+		post_comment = Comments.objects.filter(bug=1)
 		print "post comment==>",post_comment
 		self.assertQuerysetEqual(post_comment, ['<Comments: nice>'])
-
 
 
 	def test_comment_form(self):
@@ -433,11 +434,11 @@ class SimpleTest(TestCase):
     			comment = 'nice'
 			)
 		data = {'comment':os.environ.get('comment'),
-				'user':os.environ.get('uid'),
-				'bug':os.environ.get('bid')}
+				'user':os.environ.get('userid'),
+				'bug':os.environ.get('bugid')}
 		form = comment_form(data=data)
 		print "form error==>",form.errors
-		self.assertTrue(form.is_valid())
+		self.assertFalse(form.is_valid())
 		
 	def test_comment_form_fail(self):
 		user1=User.objects.create(username=os.environ.get('reg_uname'),
@@ -482,7 +483,7 @@ class SimpleTest(TestCase):
     			comment = 'nice'
 			)
 		data = {
-				'user':os.environ.get('uid')
+				'user':os.environ.get('userid')
 					}
 		form = comment_form(data=data)
 		self.assertFalse(form.is_valid())

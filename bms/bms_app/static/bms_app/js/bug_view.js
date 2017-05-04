@@ -91,7 +91,6 @@ $(document).ready(function() {
             url: "../comment_section/",
             success: function(result) 
             {
-         /*     $("#user").val("<div>"+username+"</div>") */
               $("#comment-text").prepend("<div>"+username+" : "+comment_text+"</div><hr>")
             }
         });
@@ -103,8 +102,6 @@ $('.comment').on('click', function(event) {
     event.preventDefault();
     $("#comment").val('');
 });
-
-
 
 $('[name="comment-button"]').attr('disabled', true);
 

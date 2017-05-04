@@ -24,3 +24,4 @@ class comment_form(ModelForm):
 	class Meta:
 		model = Comments
 		fields = ('user','bug','comment',)
+		

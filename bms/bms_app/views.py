@@ -235,15 +235,11 @@ def bug_list(request):
             for x in bug_comment.values():
                 bug_comment_list.append(x)
 
-            print "bug comment list==>",bug_comment_list
-
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
-            print "bug_response==>",bug_response
 
         bugdata = json.dumps(bug_response)
-       
-        print "bug data==>",bugdata
+
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
@@ -262,9 +258,6 @@ def comment_section(request):
                                         bug_id=bid,
                                         user_id=userid)
             commment_save.save()  
-            print "comment==>",comment_text
-            print "bid==>",bid
-            print "userid==>",userid
 
         comment_data = serializers.serialize('json',{})
         return HttpResponse(comment_data, content_type='application/json')
@@ -295,7 +288,6 @@ def landing_header_footer(request):
     
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
-    #print "post comment ==>",post_comment
     return post_comment
 
 
