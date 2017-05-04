@@ -236,16 +236,9 @@ def bug_list(request):
                 bug_comment_list.append(x)
 
             print "bug comment list==>",bug_comment_list
-            # bug_comment_list.append(bug_data)
-
-
-            # for each in bug_comment:
-            #     bug_data['comment_data'] = each.comment,
-            #     bug_data['comment_user'] = each.user.username
 
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
-            # bugcom = serializers.serialize('json',bug_response)
             print "bug_response==>",bug_response
 
         bugdata = json.dumps(bug_response)
@@ -273,11 +266,6 @@ def comment_section(request):
             print "bid==>",bid
             print "userid==>",userid
 
-        
-        # post_comment = Comments.objects.all().filter(bug_id=bid)
-        # print "post comment ==>",post_comment
-
-        # comment_data = json.dumps(post_comment)
         comment_data = serializers.serialize('json',{})
         return HttpResponse(comment_data, content_type='application/json')
 

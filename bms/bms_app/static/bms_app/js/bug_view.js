@@ -142,4 +142,3 @@ $('#project_id').change(function() {
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
 
-
