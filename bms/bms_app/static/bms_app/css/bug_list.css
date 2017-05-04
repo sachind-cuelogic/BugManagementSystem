@@ -79,13 +79,6 @@ input[type="submit"]{
   padding-top: 20px;
 }
 
-.bug-list-row{
-  padding-top: 40px;
-}
-#project_id{
-  margin-left: -215px;
-}
-
 .alert-message{
   margin-top: 60px;
 }
@@ -104,4 +97,13 @@ input[type="submit"]{
 hr{
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.project-dropdown{
+  padding-top: 20px;
+}
+.list-group {
+    margin-bottom: 0px;
+}
+#nameofbuton{
+  text-align: center;
 }

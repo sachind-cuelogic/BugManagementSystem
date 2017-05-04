@@ -3,18 +3,19 @@
 {% block content %}
 
 
-<div class="page-header"><p class="title">Bug List</p></div>
-<div class="form-group project-list">
- <label class="control-label col-sm-3">Project name:</label>
-    <div class="col-sm-3">
-        <select id="project_id" name="project_id" class="selectpicker form-control">
+<div class="page-header"><p class="title">Task List</p></div>
+  
+<form class="form-inline project-dropdown" >
+  <div class="form-group">
+    <label class="control-label">Project name:</label>
+    <select id="project_id" name="project_id" class="selectpicker form-control">
             {% for pt in project_name_list %}
             <option value="{{pt.id}}" {%if pid == pt.id%} selected {%endif%}>{{pt.prod_name}}</option>
             {% endfor %}
-        </select>
-    </div>
-</div>
-  
+    </select>
+  </div>
+</form>
+
     {% if bug_data %}
     <div class="row bug-list-row">
         <div class="col-md-4">
@@ -31,16 +32,9 @@
         </div>
         <div class="col-md-8">
             <div id="col2">
-                <div class="col-md-12 well bug-list-background">
+                <div class="well bug-list-background">
                     <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                         <input type="hidden" id="csrf" value="{%csrf_token%}">
-
-                        <div class="form-group">
-                            <label for="project_name" class="control-label col-sm-3 col-sm-offset-1">Project Name:</label>
-                            <div class="col-sm-6">
-                                <p class="form-control-static" id="project_name"></p>
-                            </div>
-                        </div>
 
                         <div class="form-group">
 
@@ -115,7 +109,6 @@
                         <div class="form-group">
                             <div class="comments col-sm-9 col-sm-offset-1">
                                 <div class="list-comments comment-list">
-                                {# <div class="form-control-static" id="user"></div> #}
                                 <div id="comment-text"></div>
 
                                 </div>
@@ -124,14 +117,14 @@
                                     <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Type your comment here..."></textarea>
                                 </div>
 
-                                <input class="btn btn-sm col-sm-12 comment" id="comment" name="comment-button" type="button" value="Comment"> 
+                                <input class="btn btn-sm btn-block comment" id="comment" name="comment-button" type="button" value="Comment"> 
 
                             </div>
                         </div>
 
                         <div class="form-group" id="nameofbuton">
 
-                            <a class="btn btn-sm btn-primary col-sm-offset-6" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                            <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
                             <button class="btn btn-sm btn-primary" type="submit"> <strong>Update</strong> </button>
 
                         </div>

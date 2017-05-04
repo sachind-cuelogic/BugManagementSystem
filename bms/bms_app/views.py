@@ -91,7 +91,6 @@ def create_project(request):
             data1['prod_file'] = ""
         
         list1 = data['user_data']
-        print list1
         ptype = data['ptype']
         save_prod_detail = ProductDetails(prod_name=data['prod_name'],
                                           prod_type_id=int(ptype),
@@ -204,7 +203,6 @@ def bug_list(request):
 
         bug_comment =  get_comments(bugid)
 
-
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name,bt.bug_name, au.username "
             "FROM bms_app_bugdetails bd "
@@ -231,8 +229,8 @@ def bug_list(request):
                 "bug_assign" : bugs.username
             }
 
-            bug_comment_list = []
-            for x in bug_comment.values():
+            bug_comment_list = []       
+            for x in bug_comment.values("comment", "user__username"):
                 bug_comment_list.append(x)
 
             bug_response.append(bug_data)
@@ -289,5 +287,3 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
-
-

@@ -54,11 +54,9 @@ $(document).ready(function() {
               console.log(result);
               for(var i = 1; i < result[1].length; i++) 
               {
-
-                $("#comment-text").append('<p>' + result[1][i]['user_id']  +" : "+result[1][i]['comment'] + '</p><hr>');
+                $("#comment-text").append('<p><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</p><hr>');
               }
 
-              $("#project_name").text(result[0]['project_name']);
               $("#title").text(result[0]['title']);
               $("#bug_type").text(result[0]['bug_type']);
               $("#status").text(result[0]['status']);
@@ -91,7 +89,7 @@ $(document).ready(function() {
             url: "../comment_section/",
             success: function(result) 
             {
-              $("#comment-text").prepend("<div>"+username+" : "+comment_text+"</div><hr>")
+              $("#comment-text").append("<div><b>"+username+"</b>: "+comment_text+"</div><hr>")
             }
         });
     });
