@@ -42,7 +42,8 @@ def register(request):
                   ',\n\nThank you for registering to Bug Managment System. '
                   ' We have good features the can help you to the management '
                   'of the bugs which are as follows:\nAuthentication and Authorization,'
-                  ' Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, '
+                  'Products, Bug, Attachment, Admin, Users, Configuration,'
+                  'Log View, Search & View, '
                   'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
                   '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
                   ' \n\nThank you,\nBug Management System.', to=[user.email])
@@ -120,7 +121,9 @@ def project_list(request):
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
-            "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, ur.role, pd.id as product_id,(select count(id) from bms_app_bugdetails where status_id <> 22 and project_name_id = pd.id) as openbug "
+            "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, "
+            "ur.role, pd.id as product_id, "
+            "(select count(id) from bms_app_bugdetails where status_id <> 22 and project_name_id = pd.id) as openbug "
             "FROM bms_app_productuser pu "
             "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
             "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
@@ -188,7 +191,9 @@ def bug_list(request):
                 intcount += 1 
 
         bug_data = BugDetails.objects.raw("SELECT "
-            " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
+            " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, "
+            " bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, "
+            " bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
@@ -207,7 +212,10 @@ def bug_list(request):
         bug_comment =  get_comments(bugid)
 
         bug_result = BugDetails.objects.raw("SELECT "
-            "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name,bt.bug_name, au.username "
+            "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, "
+            "bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, "
+            "bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name, "
+            "bt.bug_name, au.username "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
