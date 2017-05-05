@@ -39,7 +39,8 @@ fields: {
         validators: {
             regexp: {
                 regexp: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message: 'Password must contain Minimum 8 characters at least 1 Alphabet and 1 Number:'
+                message: 'Password must contain Minimum 8 characters at least'
+                                            ' 1 Alphabet and 1 Number:'
             },
 
             identical: {

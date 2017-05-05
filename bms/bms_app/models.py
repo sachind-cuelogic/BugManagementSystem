@@ -13,7 +13,8 @@ class ProductDetails(models.Model):
     prod_type = models.ForeignKey(ProjectType)
     prod_version = models.CharField(max_length=50, null=True, blank=True)
     prod_description = models.CharField(max_length=1000, null=True, blank=True)
-    prod_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, blank=True)
+    prod_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True,
+                                                                 blank=True)
 
     def __unicode__(self):
         return self.prod_name
@@ -55,7 +56,8 @@ class BugDetails(models.Model):
     description = models.CharField(max_length=1000)
     bug_owner = models.ForeignKey(User, related_name='bug_owner')
     bug_assigned_to = models.ForeignKey(User, related_name='bug_assigned_to')
-    bug_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, blank=True)
+    bug_file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, 
+                                                                blank=True)
 
     def __unicode__(self):
         return self.title

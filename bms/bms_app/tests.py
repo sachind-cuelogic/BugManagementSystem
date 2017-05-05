@@ -9,7 +9,8 @@ from django.test import RequestFactory
 from .views import login, register, create_bug, bug_list
 import json
 import os
-from .models import BugDetails, ProductDetails, BugType, BugStatus, ProjectType, ProductUser, UserRole, Comments
+from .models import BugDetails, ProductDetails, BugType, BugStatus
+from .models import	ProjectType, ProductUser, UserRole, Comments
 from .forms import User_info_form, Bug_Details_Form, comment_form
 from django.core.files import File
 from django.test import TestCase, RequestFactory

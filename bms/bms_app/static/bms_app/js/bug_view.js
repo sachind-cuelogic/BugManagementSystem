@@ -65,6 +65,7 @@ $(document).ready(function() {
               $("#description").text(result[0]['description']);
               $("#bug_owner").text(result[0]['bug_owner']);
               $("#bug_assign").text(result[0]['bug_assign']);
+
             }
         });
     });
@@ -87,7 +88,8 @@ $(document).ready(function() {
             url: "../comment_section/",
             success: function(result) 
             {
-              $("#comment-text").prepend("<p><b>"+username+"</b>: "+comment_text+"</p><hr>")
+              $("#comment-text").prepend("<p><b>"+username+"</b>: "
+                                          +comment_text+"</p><hr>")
             }
         });
     });

@@ -13,7 +13,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import ProjectType, ProductDetails, UserRole, ProductUser, BugType, BugStatus
+from .models import ProjectType, ProductDetails, UserRole, ProductUser
+from .models import BugType, BugStatus
 from .models import BugDetails, Comments
 from .forms import Bug_Details_Form, comment_form
 from django.core import serializers
@@ -31,19 +32,20 @@ def register(request):
             email = userObj['email']
             password = userObj['password']
 
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+            if not (User.objects.filter(username=username).exists() or 
+                        User.objects.filter(email=email).exists()):
                 User.objects.create_user(username, email, password)
                 user = authenticate(username=username, password=password)
                 user.save()
                 emaill = EmailMessage('Registration Confirmation for Bug Management System', 
-                                        'Dear ' + username +
-                                      ',\n\nThank you for registering to Bug Managment System. '
-                                      ' We have good features the can help you to the management '
-                                      'of the bugs which are as follows:\nAuthentication and Authorization,'
-                                      ' Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, '
-                                      'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
-                                      '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
-                                      ' \n\nThank you,\nBug Management System.', to=[user.email])
+                    'Dear ' + username +
+                  ',\n\nThank you for registering to Bug Managment System. '
+                  ' We have good features the can help you to the management '
+                  'of the bugs which are as follows:\nAuthentication and Authorization,'
+                  ' Products, Bug, Attachment, Admin, Users, Configuration, Log View, Search & View, '
+                  'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
+                  '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
+                  ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
                 messages.success(request, "You have successfully registered!")
                 return HttpResponseRedirect('/login/')
@@ -193,7 +195,8 @@ def bug_list(request):
             "where pu.prod_user_id = %s and pd.id = %s ", [current_user.id, pid])
        
         return render(request, 'registration/bug_list.html', 
-                        {'bug_data': list(bug_data),'project_name_list' :project_name_list,'pid' : pid })
+                        {'bug_data': list(bug_data),
+                        'project_name_list' :project_name_list,'pid' : pid })
 
     if request.method == 'POST':
 
