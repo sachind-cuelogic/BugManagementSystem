@@ -51,10 +51,9 @@ $(document).ready(function() {
             success: function(result) 
             {
               jQuery('#comment-text').html('');
-              console.log(result);
               for(var i = 1; i < result[1].length; i++) 
               {
-                $("#comment-text").append('<p><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</p><hr>');
+                $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</div><hr>');
               }
 
               $("#title").text(result[0]['title']);
@@ -66,7 +65,6 @@ $(document).ready(function() {
               $("#description").text(result[0]['description']);
               $("#bug_owner").text(result[0]['bug_owner']);
               $("#bug_assign").text(result[0]['bug_assign']);
-
             }
         });
     });
@@ -89,7 +87,7 @@ $(document).ready(function() {
             url: "../comment_section/",
             success: function(result) 
             {
-              $("#comment-text").append("<div><b>"+username+"</b>: "+comment_text+"</div><hr>")
+              $("#comment-text").prepend("<p><b>"+username+"</b>: "+comment_text+"</p><hr>")
             }
         });
     });
@@ -136,4 +134,3 @@ $('#project_id').change(function() {
     var selected_proj_id = $(this).val();
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
-

@@ -246,7 +246,6 @@ class SimpleTest(TestCase):
 		self.assertFalse(form.is_valid())
 		print "form is valid ===>", form.is_valid()
 
-
 		response = self.client.post(reverse('create_bug'),
 				{'project_name':os.environ.get('pname'),
 				'title':os.environ.get('title'),
@@ -390,8 +389,6 @@ class SimpleTest(TestCase):
 		self.assertQuerysetEqual(post_comment, ['<Comments: nice>'])
 		self.assertEqual(str(comment), comment.comment)
 		self.assertTrue(isinstance(comment, Comments))
-
-
 
 	def test_comment_form(self):
 		user1=User.objects.create(username=os.environ.get('reg_uname'),

@@ -33,12 +33,6 @@ input[type="submit"]{
   font-weight: bold;
 }
 
-.comment-list{
-  margin-top: 30px;
-  border: 1px solid #ccc;
-  background: #fff;
-}
-
 .comment-list > div{
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -52,15 +46,6 @@ input[type="submit"]{
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-.comment-text{
-  padding: 10px;
-  outline: none;
-  min-height: 80px;
-  background: #f9f9f9;
-  border-radius: 0px 0px 5px 5px;
-}
-
 .comment-text:focus{
   background: #fff;
 }
@@ -70,6 +55,9 @@ input[type="submit"]{
   height: 250px;
   overflow-y: auto;
   margin-bottom: 15px;
+  margin-top: 30px;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
 .total-comment{
