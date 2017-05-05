@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/header_sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/layout.css' %}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
 
@@ -103,7 +103,7 @@
                     <a href="/create_bug"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-plus-circle" aria-hidden="true"></i></span> Create Bug</a>
                 </li>
                 <li>
-                    <a href="/bug_view"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-eye" aria-hidden="true"></i></span>Bug View</a>
+                    <a href="/bug_list"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-eye" aria-hidden="true"></i></span>Bug View</a>
                 </li>
                 </ul>
             </div>
@@ -125,4 +125,7 @@
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
+
 </html>
+

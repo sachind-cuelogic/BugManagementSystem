@@ -9,8 +9,10 @@ $(function() {
     );
 
     $('.adduser').on('click', function() {
-            var container = $('[data-role="dynamic-fields"]').closest('[data-role="dynamic-fields"]');
-            new_field_group = container.children().filter('.form-inline:first-child').clone();
+            var container = $('[data-role="dynamic-fields"]').
+                                        closest('[data-role="dynamic-fields"]');
+            new_field_group = container.children().
+                                    filter('.form-inline:first-child').clone();
             new_field_group.find('input').each(function(){
                 $(this).val('');
             });
@@ -23,7 +25,8 @@ $(document).ready(function(){
     function alignModal(){
         var modalDialog = $(this).find(".modal-dialog");
         
-        modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+        modalDialog.css("margin-top", Math.max(0, 
+                            ($(window).height() - modalDialog.height()) / 2));
     }
     $(".modal").on("shown.bs.modal", alignModal);
     
@@ -31,4 +34,3 @@ $(document).ready(function(){
         $(".modal:visible").each(alignModal);
     });   
 });
-

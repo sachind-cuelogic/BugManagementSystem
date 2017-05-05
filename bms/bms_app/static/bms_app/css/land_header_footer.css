@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     height: 100%;
 }
 
@@ -114,7 +113,6 @@ body {
     height: 100%;
     margin: 0;
 }
-
 
 #footernav {
     padding-top: 4px;
