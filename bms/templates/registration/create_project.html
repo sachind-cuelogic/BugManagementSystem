@@ -1,0 +1,130 @@
+{% extends "registration/header_sidebar.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-sm-12 col-md-12" id="content">
+    <div class="page-header"><p class="title">Create Project</p></div>
+    <div class="row">
+        <div class="col-md-12" id="table-row">
+            <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                <input type="hidden" id="csrf" value="{%csrf_token%}">
+                <div class="form-group required" id="nameofprod">
+                    <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
+                    <div class="col-sm-4">
+                        <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
+                    </div>
+                </div>
+                <div class="form-group required" id="nameofprodtype">
+                    <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
+                    <div class="col-sm-4">
+                        <select id="producttype" class="selectpicker form-control" required="required">
+
+                            {% for pt in prod_types %}
+
+                            <option value={{pt.id}}>{{pt.project_type_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group required" id="add-user-plus-button">
+                    <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User:</label>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user" required="required"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-md-offset-4 user-box">
+                        <div class="panel panel-default collapse" id="collapseExample">
+                            <div class="panel-body">
+                                <div class="form-group alert alert-info fade in alert-dismissable selected-user-role" id="user_info" style="display:none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Add User</h4>
+                            </div>
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-primary col-sm-offset-11 adduser" title="Click here to add one more user">Add</button>
+                            </div>
+                            <div class="modal-body" id="modalbody">
+                                <div data-role="dynamic-fields">
+                                    <div class="form-inline">
+
+                                        <div class="form-group required">
+
+                                            <select id="user-name" class="user-name form-control col-sm-offset-3">
+                                                {% if user.is_authenticated %}
+                                                {% for pt in users %}
+                                                <option value="{{pt.id}}" {% if pt.username == user.username %}selected{% endif %}>{{pt.username}}</option>
+                                                {% endfor %}
+
+                                                {% endif %}
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group required">
+
+                                            <select id="user-role" class="user-role form-control col-sm-offset-6">
+                                                {% for each in roles%}
+                                                <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <button class="btn-xs btn-danger col-sm-offset-3" data-role="remove">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                <a type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" id="submit-sample-data">Save changes</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="nameofversion">
+                    <label for="prod_version" class="control-label col-sm-2 col-sm-offset-2">Project Version:</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="prod_version" class="form-control col-md-4" id="prod_version" placeholder="Enter your project version">
+                    </div>
+                </div>
+                <div class="form-group" id="nameofdesc">
+                    <label for="prod_description" class="control-label col-sm-2 col-sm-offset-2">Project Description:</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" id="nameoffile">
+                    <label for="prod_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
+                    <div class="col-sm-4">
+                        <input id="prod_file" type="file" class="file">
+                    </div>
+                </div>
+                <div class="form-group" id="nameofbuton">
+                    <div class="controls">
+                        <a class="btn btn-sm btn-primary col-sm-offset-5" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                        <button class="btn btn-sm btn-primary" id="submit-data" type="submit"> <strong>Create project</strong> </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_project.css' %}">
+
+{% endblock %}
+
+

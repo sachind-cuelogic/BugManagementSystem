@@ -1,0 +1,97 @@
+.bug-list{
+	margin-bottom: 10px;
+}
+
+.bug-list-background{
+	padding: 5px;
+}
+
+input[type="submit"]{
+ 
+  padding: 5px 0px;
+  font-weight: bold;
+}
+
+.insert-text-in-comment{
+  position: relative;
+}
+
+.insert-text-in-comment .loading{
+  position: absolute;
+  bottom: -25px;
+  display: none;
+}
+
+.insert-text-in-comment .total-comment{
+  position: absolute;
+  bottom: -25px;
+  right: 0px;
+}
+
+.insert-text-in-comment .total-comment:before{
+  content: "Total comment: ";
+  font-weight: bold;
+}
+
+.comment-list > div{
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.comment-list > div:last-child{
+  border-bottom: none;
+}
+
+.comment-editor{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.comment-text:focus{
+  background: #fff;
+}
+
+.comment-list{
+  border-radius: 5px;
+  height: 250px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.total-comment{
+  margin-right: 10px;
+}
+.project-list{
+  padding-top: 20px;
+}
+
+.alert-message{
+  margin-top: 60px;
+}
+
+.form-group{
+  margin-bottom: 5px;
+}
+
+.comments{
+  margin-bottom: 20px;
+}
+#username{
+  display: none;
+}
+
+hr{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.project-dropdown{
+  padding-top: 20px;
+}
+.list-group {
+    margin-bottom: 0px;
+}
+#nameofbuton{
+  text-align: center;
+}

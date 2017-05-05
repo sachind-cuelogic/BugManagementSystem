@@ -1,0 +1,85 @@
+{% extends "registration/common_login_reg.html" %}
+{% load static %}
+
+{% block content %}
+<div id="loginbox" class="mainbox col-md-4 col-md-offset-4 row vertical-center-row">
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Looks like a username with that email already exists!</strong>
+    </div>
+    {% endif %}
+    <div class="panel panel-primary" >
+        <div class="panel-heading">
+            <div class="panel-title">SIGN UP</div>
+        </div> 
+
+        <div class="panel-body">
+
+            <form class="form-horizontal" action=" " method="POST"  id="reg_form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <div class="inputbox">
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="username" type="text" class="form-control" name="username" placeholder="Your username" required="required" autofocus="autofocus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="inputbox">
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input id="email" type="email" class="form-control" name="email" placeholder="Your email" required="required">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <div class="inputbox">
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input class="form-control" id="userPw" type="password" placeholder="password" 
+                            name="password" data-minLength="5"
+                            data-error="some error"
+                            required/>
+                            <span class="glyphicon form-control-feedback"></span>
+                            <span class="help-block with-errors" id="errormsg"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <div class="inputbox">
+                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input class="form-control {$borderColor}" id="userPw2" type="password" placeholder="Confirm password" 
+                            name="confirmPassword" data-match="#confirmPassword" data-minLength="5"
+                            data-match-error="some error 2"
+                            required/>
+                            <span class="glyphicon form-control-feedback"></span>
+                            <span class="help-block with-errors" id="errormsg"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 controls">
+                        <button class="btn btn-md btn-primary btn-block" id="regbtn" type="submit" onClick="$('/login')"> <strong>SIGN UP</strong> </button> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 control" id="already-member-login-here">
+                        <div class="alreadymember">
+                            Already a member ?
+                            <a href="/login" onClick="$('/login')">
+                                Login Here
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+
+            </form>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/registerStyle.css' %}">
+{% endblock %}

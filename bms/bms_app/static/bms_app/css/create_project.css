@@ -1,0 +1,24 @@
+#cancel-button{
+    margin-right: 20px;
+}
+
+.selected-user-role{
+	margin: -10px;
+}
+
+.user-box{
+	margin-bottom: -15px;
+}
+
+.panel-body {
+    padding: 30px;
+}
+
+.modal-body {
+    height: 170px;
+    overflow-y: auto;
+}
+
+.form-inline > div{
+    padding-bottom: 15px;
+}

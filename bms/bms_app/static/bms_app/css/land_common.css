@@ -1,0 +1,6 @@
+.center-container {
+    position: relative;
+    background: url(/static/bms_app/images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

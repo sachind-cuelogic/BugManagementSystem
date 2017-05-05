@@ -1,0 +1,7 @@
+.content {
+    background: url(/static/bms_app/images/home_background.jpg);
+    background-size: cover;
+    height: calc(100vh - 50px);
+    margin-top: 28px;
+    bottom: 0px;
+}
