@@ -15,25 +15,23 @@
                 <div class="col-sm-4">
                     <select id="project_name" name="project_name" class="selectpicker form-control" required="required">
                         {% for pt in project_name %}
-
-                        <option value={{pt.product_id}}>{{pt.product}}</option>
+                        <option value={{pt.product_id}} {%if pid == pt.id%} selected {%endif%}>{{pt.product}}</option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
 
             <div class="form-group required">
-              
                 <label for="title" class="control-label col-sm-2 col-sm-offset-2">Bug Title:</label>
                 <div class="col-sm-4">
-                    <input id="title" type="text" class="form-control" name="title" placeholder="Enter bug title"autofocus="autofocus">
+                    <input id="title" type="text" class="form-control" name="title" placeholder="Enter bug title" required="required">
                 </div>
             </div>
 
             <div class="form-group required">
                 <label for="bug_type" class="control-label col-sm-2 col-sm-offset-2">Bug Type:</label>
                 <div class="col-sm-4">
-                    <select id="bug_type" name="bug_type" class="selectpicker form-control">
+                    <select id="bug_type" name="bug_type" class="selectpicker form-control" required="required">
                         {% for pt in bug_type %}
 
                         <option value={{pt.id}}>{{pt.bug_name}}</option>
@@ -45,7 +43,7 @@
             <div class="form-group required">
                 <label for="status" class="control-label col-sm-2 col-sm-offset-2">Bug Status:</label>
                 <div class="col-sm-4">
-                    <select id="status" name="status" class="selectpicker form-control">
+                    <select id="status" name="status" class="selectpicker form-control" required="required">
                         {% for pt in status %}
 
                         <option value={{pt.id}}>{{pt.status_name}}</option>
@@ -58,7 +56,7 @@
                 
                 <label for="build_version" class="control-label col-sm-2 col-sm-offset-2">Build Version:</label>
                 <div class="col-sm-4">
-                    <input id="build_version" type="text" class="form-control" name="build_version" placeholder="Enter build Version" autofocus="autofocus">
+                    <input id="build_version" type="text" class="form-control" name="build_version" placeholder="Enter build Version">
                 </div>
             </div>
 
@@ -66,7 +64,7 @@
                 
                 <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Sprint No:</label>
                 <div class="col-sm-4">
-                    <input id="sprint_no" type="text" class="form-control" name="sprint_no" placeholder="Enter build Version" autofocus="autofocus">
+                    <input id="sprint_no" type="text" class="form-control" name="sprint_no" placeholder="Enter build Version">
                 </div>
             </div>
 
@@ -75,7 +73,7 @@
                
                 <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Dependent Module:</label>
                 <div class="col-sm-4">
-                    <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" autofocus="autofocus" disabled="disabled">
+                    <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" disabled="disabled">
                 </div>
             </div>
 
@@ -104,9 +102,9 @@
             <div class="form-group required" id="nameofprodtype">
                 <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Assigned To:</label>
                 <div class="col-sm-4">
-                    <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control">
+                    <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control" required="required">
                         {% if user.is_authenticated %}
-                        {% for pt in bug_assign %}
+                        {% for pt in bug_owner %}
                         <option value="{{pt.id}}">{{pt.username}}</option>
                         {% endfor %}
 
@@ -125,13 +123,11 @@
 
             <div class="form-group" id="nameofbuton">
                 <div class="controls">
-                    <a class="btn btn-sm btn-primary col-sm-offset-6" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                    <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
                     <button class="btn btn-sm btn-primary" type="submit" id="myWish"> <strong>Create</strong> </button>
                 </div>
             </div>
-
         </form>
-
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_bug.css' %}">

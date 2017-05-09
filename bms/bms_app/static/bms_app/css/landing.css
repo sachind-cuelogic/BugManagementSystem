@@ -20,19 +20,6 @@
     padding-left: 10px;
 }
 
-#footernav {
-    padding-top: 4px;
-}
-
-#footernav>li{
-    padding-right: 10px;
-    color: gray;
-    font-size: 15px;
-}
-#footerlink {
-    display: inline-block;
-}
-
 .trans {
     padding: 15px;
     height: 549px;

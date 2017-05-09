@@ -50,10 +50,12 @@ $(document).ready(function() {
             url: "bug_list/",
             success: function(result) 
             {
+
               jQuery('#comment-text').html('');
-              for(var i = 1; i < result[1].length; i++) 
+              for(var i = 0; i < result[1].length; i++) 
               {
                 $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</div><hr>');
+
               }
 
               $("#title").text(result[0]['title']);
@@ -76,10 +78,7 @@ $(document).ready(function() {
         event.preventDefault();
         var comment_text = $('#comment').val();
         var username = $("#username").text();
-        console.log(username);
-        console.log(comment_text);
         var bid = document.getElementsByClassName("list-group-item active")[0].id;
-        console.log(bid);
 
         $.ajax({
             data:{ comment_text: comment_text, bid: bid },  
@@ -107,7 +106,9 @@ $('textarea').on('keyup',function() {
     var textarea_value = $("#comment").val();
     if(textarea_value != '') {
         $('[name="comment-button"]').attr('disabled' , false);
-    }else{
+    }
+    else
+    {
         $('[name="comment-button"]').attr('disabled' , true);
     }
 });
@@ -136,3 +137,9 @@ $('#project_id').change(function() {
     var selected_proj_id = $(this).val();
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
+
+
+$(document).ready(function() {
+    console.log("inside table");
+    $('#bug-list-column').DataTable();
+} );

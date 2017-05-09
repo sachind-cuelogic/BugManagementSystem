@@ -118,6 +118,7 @@ def create_project(request):
 
 @login_required(login_url='/login/')
 def project_list(request):
+
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
@@ -135,22 +136,49 @@ def project_list(request):
         return render(request, 'registration/project_list.html', 
                         {'user_list': list(user_list)})
 
+
     return render(request, 'registration/project_list.html')
+
+def delete_project(request):
+
+    if request.method == 'POST':
+        del_project = request.POST.get("del_proj_id")
+        print "project delete id==>",del_project
+        ProductDetails.objects.filter(id=del_project).delete()
+        return HttpResponse(json.dumps({'success': True}), 
+                            content_type="application/json")
 
 @login_required(login_url='/login/')
 def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
+    pid=0
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+        print "project bug pid==>",pid
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
+        if pid == 0:
+            intcount = 0
+            for projectIds in project_name: 
+                if intcount == 0:
+                    pid = projectIds.id
+                intcount += 1 
+        
         bug_type = BugType.objects.all()
         status = BugStatus.objects.all()
-        bug_owner = User.objects.all()
-        bug_assign = User.objects.all()
+
+        bug_owner = User.objects.raw("SELECT "
+            "au.username, au.id "
+            "FROM auth_user au "
+            "JOIN bms_app_productuser pu on pu.prod_user_id=au.id "
+            "where pu.product_id = %s ", [pid])
+        print "bug owner==>",bug_owner
+
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner,'bug_assign':bug_assign})
+            'bug_owner':bug_owner, 'pid':pid})
 
     if request.method == 'POST':
         
@@ -176,6 +204,7 @@ def bug_list(request):
     pid = 0
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
+        print "bug list pid==>",pid
 
     if request.method == 'GET':
         project_name_list = ProductDetails.objects.raw("SELECT *"
@@ -205,7 +234,6 @@ def bug_list(request):
 
     if request.method == 'POST':
 
-
         data = request.POST
         bugid = request.POST.get("bug_id")
 
@@ -215,13 +243,14 @@ def bug_list(request):
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, "
             "bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, "
             "bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name, "
-            "bt.bug_name, au.username "
+            "bt.bug_name, au.username as bugowner, auu.username as bugassign "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
             "JOIN bms_app_bugstatus bs on bs.id=bd.status_id "
             "JOIN bms_app_bugtype bt on bt.id=bd.bug_type_id "
-            "JOIN auth_user au on au.id=bd.bug_owner_id "
+            "JOIN auth_user au on au.id=bd.bug_assigned_to_id "
+            "JOIN auth_user auu on auu.id=bd.bug_owner_id "
             "where pu.prod_user_id = %s and bd.id = %s", 
                         [current_user.id, bugid])
 
@@ -236,8 +265,8 @@ def bug_list(request):
                 "description" :bugs.description,
                 "status" : bugs.status_name,
                 "bug_type" : bugs.bug_name,
-                "bug_owner" : bugs.username,
-                "bug_assign" : bugs.username
+                "bug_owner" : bugs.bugassign,
+                "bug_assign" : bugs.bugowner
             }
 
             bug_comment_list = []       
@@ -246,7 +275,7 @@ def bug_list(request):
 
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
-
+            
         bugdata = json.dumps(bug_response)
 
         return HttpResponse(bugdata, content_type='application/json')

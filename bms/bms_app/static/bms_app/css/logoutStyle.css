@@ -10,10 +10,7 @@ body{
 #logcenter{
     text-align: center;
 }
-#loginbox{
-    margin-top:70px; 
-    align-content: center;
-}
+
 .col-md-12{
     padding: 30px;
 }
@@ -24,4 +21,13 @@ body{
 }
 .panel-body{
     padding-top:10px;
+}
+#loginbox{
+position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: table;
 }

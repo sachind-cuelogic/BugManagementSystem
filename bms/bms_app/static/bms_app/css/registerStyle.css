@@ -3,6 +3,7 @@ body{
     background-attachment:fixed;
     background-size:cover;
     overflow-y: hidden;
+
 }
 .panel-title{
     text-align: center;
@@ -10,8 +11,13 @@ body{
     font-size: 30px;
 }
 #loginbox{
-    margin-top:70px; 
-    align-content: center;
+position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: table;
 }
 .panel-body{
     padding-top:10px;
@@ -38,17 +44,3 @@ body{
     font-size:15px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .panel{
-       display: block;
-       float: none;
-    }
-    .panel{
-       width: 450px;
-       align-content: center;
-    }
-    #loginbox{
-        padding-left: 200px;
-        vertical-align: middle;
-    }
-}

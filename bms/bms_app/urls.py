@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^create_bug/', views.create_bug, name="create_bug"),
     url(r'^bug_list/', views.bug_list, name="bug_list"),
     url(r'^comment_section/', views.comment_section, name="comment_section"),  
+    url(r'^delete_project/', views.delete_project, name="delete_project"), 
     url(r'^get_comments/', views.get_comments, name="get_comments"),  
     url(r'^logout/', auth_views.logout),
     url(r'^services/', views.services),
@@ -26,5 +27,7 @@ urlpatterns = [
     url(r'^header_sidebar/', views.header_sidebar),
     url(r'^landing_header_footer/', views.landing_header_footer),
     url(r'^bug_list/(?P<pid>[0-9]+)/$', views.bug_list, 
-                                                name="bug_list")
+                                                name="bug_list"),
+    url(r'^create_bug/(?P<pid>[0-9]+)/$', views.create_bug, 
+                                                name="create_bug")
 ]
