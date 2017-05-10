@@ -1,29 +1,13 @@
-#wrap > .center-content {
-    padding: 50px 0 0 0;
-    margin: 0;
-}
-
-.center-content {
-    height: 100%;
-    margin: 0;
-}
-
-.center-content {
+.center-content{
     position: relative;
     background: url(/static/bms_app/images/macbook.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-#laptop {
-    padding-top: 150px;
-    padding-left: 10px;
-}
-
 .trans {
     padding: 15px;
-    height: calc(100vh - 105px);
-    /*background: rgb(0, 0, 0);*/
+    height: calc(100vh - 100px);
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }
@@ -70,7 +54,6 @@
 }
 
 #login-button {
-    background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.5);
     color: white;
     margin-right: 40px;
@@ -80,7 +63,7 @@
 }
 
 #register-button {
-    background: rgb(0, 0, 0);
+
     background: rgba(0, 0, 0, 0.5);
     color: white;
     padding-left: 30px;
@@ -100,4 +83,32 @@
     font-size: 15px;
     color: black;
     font-weight: bold;
+}
+.leftside{
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+@media(max-width:767px) {
+.leftside{
+    position: static;
+    bottom: 30px;
+    left: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+}
+
+
+
+@media(max-width:1280) {
+.trans {
+    padding: 15px;
+    height: calc(100vh - 100px);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
 }
