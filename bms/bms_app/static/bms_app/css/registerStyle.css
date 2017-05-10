@@ -3,13 +3,14 @@ body{
     background-attachment:fixed;
     background-size:cover;
     overflow-y: hidden;
-
 }
+
 .panel-title{
     text-align: center;
     font-weight: bold;
     font-size: 30px;
 }
+
 #loginbox{
 position: absolute;
   margin: auto;
@@ -19,20 +20,25 @@ position: absolute;
   left: 0;
   display: table;
 }
+
 .panel-body{
     padding-top:10px;
     padding-left: 50px;
     padding-right:50px;
 }
+
 .input-group{
     margin-bottom: 10px;
 }
+
 .form-group{
     margin-top:10px;
 }
+
 #already-member-login-here{
     padding-right: 30px;
 }
+
 .inputgroup{
     padding-left:30px;
     padding-right:30px;
