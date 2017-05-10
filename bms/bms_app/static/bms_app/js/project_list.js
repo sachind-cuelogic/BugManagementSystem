@@ -42,8 +42,18 @@ $(document).ready(function() {
                 type: 'POST',
                 url: "../delete_project/",
                 success: function(result) 
-                {
-                    row.remove();
+                {   
+                    console.log(result)
+                    console.log(result.success)
+                    if (result.success)
+                    {
+                        console.log("true");
+                        row.remove();
+                    }
+                    else
+                    {   alert("You don't have rights to delete project.")
+                        console.log("False");
+                    }
                 }
             });
         }

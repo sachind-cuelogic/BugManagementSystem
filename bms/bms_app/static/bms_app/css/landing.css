@@ -22,8 +22,8 @@
 
 .trans {
     padding: 15px;
-    height: 549px;
-    background: rgb(0, 0, 0);
+    height: calc(100vh - 105px);
+    /*background: rgb(0, 0, 0);*/
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }
