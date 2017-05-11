@@ -78,9 +78,6 @@ input[type="submit"]{
 .comments{
   margin-bottom: 20px;
 }
-#username{
-  display: none;
-}
 
 hr{
   margin-top: 10px;

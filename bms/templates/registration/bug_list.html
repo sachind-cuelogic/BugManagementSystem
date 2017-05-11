@@ -1,5 +1,11 @@
 {% extends "registration/header_sidebar.html" %}
 {% load static %}
+
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/bug_list.css' %}">
+
+{% endblock %}
+
 {% block content %}
 
 
@@ -167,11 +173,11 @@
 </div>
 {% endif %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/bug_list.css' %}">
 {% endblock %}
 
-
-
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
+{% endblock %}
 
 
 

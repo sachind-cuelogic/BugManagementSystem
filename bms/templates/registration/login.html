@@ -1,5 +1,8 @@
 {% extends "registration/common_login_reg.html" %}
 {% load static %}
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/loginStyle.css' %}">
+{% endblock %}
 
 {% block content %}
 {% for message in messages %}
@@ -56,5 +59,10 @@
         </div>
     </div>
 </form>
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/loginStyle.css' %}">
+
 {% endblock %}]
+{% block jsfile %}
+
+<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/login.js' %}"></script>
+{% endblock%}

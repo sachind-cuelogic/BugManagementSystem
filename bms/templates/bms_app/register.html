@@ -1,6 +1,8 @@
 {% extends "registration/common_login_reg.html" %}
 {% load static %}
-
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/registerStyle.css' %}">
+{% endblock %}
 {% block content %}
 <div id="loginbox" class="mainbox col-md-4">
     {% if form.errors %}
@@ -80,5 +82,9 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/registerStyle.css' %}">
+
 {% endblock %}
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
+{% endblock%}

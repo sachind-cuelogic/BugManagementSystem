@@ -1,6 +1,10 @@
 {% extends "registration/header_sidebar.html" %}
 {% load static %}
 
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_project.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class="col-sm-12 col-md-12" id="content">
@@ -123,7 +127,9 @@
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_project.css' %}">
+{% endblock %}
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
 
 {% endblock %}
-

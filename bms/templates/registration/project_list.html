@@ -1,8 +1,11 @@
 {% extends "registration/header_sidebar.html" %}
 {% load static %}
 
-{% block content %}
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/project_list.css' %}">
+{% endblock %}
 
+{% block content %}
 <div class="page-header"><p class="title">Project List</p></div>
 <div class="col-md-12" id="table-row">
     <div class="table-responsive">
@@ -71,14 +74,16 @@
                 </div>
             </div>
         </div>
-
-
         {% if user_list %}        
         <div class="clearfix"></div>
 
         {% endif %}
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/project_list.css' %}">
 
+{% endblock %}
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/project_list.js' %}"></script>
 {% endblock %}

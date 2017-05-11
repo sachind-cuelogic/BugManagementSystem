@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/layout.css' %}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+{% block cssfile %}
 
+{% endblock %}
 </head>
 
 <body>
@@ -115,17 +117,17 @@
                 </div>
             </div>
         </div>
-    {% block extra_js %}{% endblock extra_js %}
-    </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/sidebar.js' %}"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/createbug.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/project_list.js' %}"></script>
+
+{% block jsfile %}
+
+{% endblock%}
+    </body>
+
 </html>

@@ -32,9 +32,7 @@ $(document).ready(function() {
         var del_proj_id = $(this).attr('id');   
         var row = $(this).closest("tr");
         var confirmation = confirm("are you sure you want to remove the item?");
-       /* alert(del_proj_id)*/
-        /*var project_id = $('#project_id').val();*/
-        console.log("delete project id==>",del_proj_id)
+
         if (confirmation) {
             $.ajax({
                 data:{ del_proj_id: del_proj_id},  
@@ -43,16 +41,13 @@ $(document).ready(function() {
                 url: "../delete_project/",
                 success: function(result) 
                 {   
-                    console.log(result)
-                    console.log(result.success)
                     if (result.success)
                     {
-                        console.log("true");
                         row.remove();
                     }
                     else
-                    {   alert("You don't have rights to delete project.")
-                        console.log("False");
+                    {   
+                        alert("You don't have rights to delete project.")
                     }
                 }
             });

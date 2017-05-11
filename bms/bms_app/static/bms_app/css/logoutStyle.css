@@ -1,6 +1,8 @@
 body{
     background-image:url('/static/bms_app/images/templates.jpg');
+    background-attachment:fixed;
     background-size:cover;
+    overflow-y: hidden;
 }
 .panel-title{
     text-align: center;
@@ -30,4 +32,17 @@ position: absolute;
   bottom: 0;
   left: 0;
   display: table;
+}
+
+@media (max-width: 767px){
+#loginbox {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: table;
+}
+
 }

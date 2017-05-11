@@ -146,18 +146,16 @@ def delete_project(request):
     if request.method == 'POST':
         del_project = request.POST.get("del_proj_id")
 
-        check_admin = ProductUser.objects.filter(product_id=del_project,prod_user_id=current_user.id, prod_user_role_id=8)
-        print "check_admin==>",check_admin
-        print "project delete id==>",del_project
+        check_admin = ProductUser.objects.filter(product_id=del_project,
+                            prod_user_id=current_user.id, prod_user_role_id=8)
 
         if check_admin:
-            print "ready to delete"
+
             ProductDetails.objects.filter(id=del_project).delete()
 
             return HttpResponse(json.dumps({'success': True}), 
                             content_type="application/json")
         else:
-            print "You are not admin for this project"
        
             return HttpResponse(json.dumps({'success': False}), 
                             content_type="application/json")
@@ -170,7 +168,6 @@ def create_bug(request):
     pid=0
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
-        print "project bug pid==>",pid
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
@@ -189,7 +186,6 @@ def create_bug(request):
             "FROM auth_user au "
             "JOIN bms_app_productuser pu on pu.prod_user_id=au.id "
             "where pu.product_id = %s ", [pid])
-        print "bug owner==>",bug_owner
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
@@ -219,7 +215,6 @@ def bug_list(request):
     pid = 0
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
-        print "bug list pid==>",pid
 
     if request.method == 'GET':
         project_name_list = ProductDetails.objects.raw("SELECT *"
