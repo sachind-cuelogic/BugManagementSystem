@@ -119,7 +119,6 @@ $('textarea').on('keyup',function() {
 /* bug list group active on click */
 
 $(function(){
-    console.log('ready');
     
     $('.list-group a').click(function(e) {
         e.preventDefault()
@@ -140,6 +139,5 @@ $('#project_id').change(function() {
 
 
 $(document).ready(function() {
-    console.log("inside table");
     $('#bug-list-column').DataTable();
 } );

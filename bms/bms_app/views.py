@@ -140,25 +140,27 @@ def project_list(request):
     return render(request, 'registration/project_list.html')
 
 def delete_project(request):
+    import pdb;
+    pdb.set_trace()
     if request.user.is_authenticated():
         current_user = request.user
 
-    if request.method == 'POST':
-        del_project = request.POST.get("del_proj_id")
+        if request.method == 'POST':
+            del_project = request.POST.get("del_proj_id")
 
-        check_admin = ProductUser.objects.filter(product_id=del_project,
-                            prod_user_id=current_user.id, prod_user_role_id=8)
+            check_admin = ProductUser.objects.filter(product_id=del_project,
+                                prod_user_id=current_user.id, prod_user_role_id=8)
 
-        if check_admin:
+            if check_admin:
 
-            ProductDetails.objects.filter(id=del_project).delete()
+                ProductDetails.objects.filter(id=del_project).delete()
 
-            return HttpResponse(json.dumps({'success': True}), 
-                            content_type="application/json")
-        else:
-       
-            return HttpResponse(json.dumps({'success': False}), 
-                            content_type="application/json")
+                return HttpResponse(json.dumps({'success': True}), 
+                                content_type="application/json")
+            else:
+           
+                return HttpResponse(json.dumps({'success': False}), 
+                                content_type="application/json")
 
 
 @login_required(login_url='/login/')
@@ -323,7 +325,7 @@ def contact_us(request):
     return render(request, 'registration/contact.html')
 
 def privacy(request):
-    return render(request, 'registration/privacy.html')
+    return render(request, {'privacy': 'privacy'} ,'registration/privacy.html')
 
 def terms_use(request):
     return render(request, 'registration/terms_use.html')

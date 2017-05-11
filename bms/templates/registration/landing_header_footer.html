@@ -13,6 +13,7 @@
 </head>
 <body>
 	<div id="wrap">
+	<header>
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -28,15 +29,19 @@
 					</div>
 				</div>
 				<div class="collapse navbar-collapse" id="header-navbar">
+				{% with request.resolver_match.url_name as url_name %}
 					<ul class="nav navbar-nav pull-right">
-						<li class="active"><a href="/" id="head-menu">HOME</a></li>
-						<li><a href="/services" id="head-menu" class="nav-link">SERVICES</a></li>
-						<li><a href="/about" id="head-menu" class="nav-link">ABOUT</a></li>
-						<li><a href="/contact" id="head-menu" class="nav-link">CONTACT</a></li>
+						<li class="{% if url_name == 'home' %}active{% endif %}"><a href="/" id="head-menu">HOME</a></li>
+						<li class="{% if url_name == 'services' %}active{% endif %}"><a href="/services" id="head-menu" class="nav-link">SERVICES</a></li>
+						<li class="{% if url_name == 'about' %}active{% endif %}"><a href="/about" id="head-menu" class="nav-link">ABOUT</a></li>
+						<li class="{% if url_name == 'contact' %}active{% endif %}"><a href="/contact" id="head-menu" class="nav-link">CONTACT</a></li>
 					</ul>
+					 {% endwith %} 
 				</div>
 			</div>
 		</div>
+	</header>
+	<section>
 		<div class="center-content">  
 		<div class="container"> 
 			{% block content %}
@@ -44,36 +49,39 @@
             {% endblock %}
 		</div>
 		</div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-				<li><a href="#">Languages</a></li>
-				<li><a href="/privacy">Privacy Policy</a></li>
-				<li><a href="/terms_use">Terms of use</a></li>
-				<li><a href="#">Copyright@2017 Cuelogic</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-		<div class="social">
-			<ul>
-				<li><a href="https://www.facebook.com/ybts.ybts.9"><i class="fa fa-lg fa-facebook"></i></a></li>
-				<li><a href="https://twitter.com/YBTS_Tool"><i class="fa fa-lg fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fa fa-lg fa-linkedin"></i></a></li>
-				<li><a href="#"><i class="fa fa-lg fa-youtube-play"></i></a></li>
-			</ul>
-		</div>
-      </ul>
-    </div>
-  </div>
-</nav>
+	</section>
+	<footer>
+		
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+					<li><a href="#">Languages</a></li>
+					<li><a href="/privacy">Privacy Policy</a></li>
+					<li><a href="/terms_use">Terms of use</a></li>
+					<li><a href="#">Copyright@2017 Cuelogic</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+			<div class="social">
+				<ul>
+					<li><a href="https://www.facebook.com/ybts.ybts.9"><i class="fa fa-lg fa-facebook"></i></a></li>
+					<li><a href="https://twitter.com/YBTS_Tool"><i class="fa fa-lg fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-lg fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fa fa-lg fa-youtube-play"></i></a></li>
+				</ul>
+			</div>
+	      </ul>
+	    </div>
+	  </div>
+		</nav>
+	</footer>
 
 	</div>
 </body>
