@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% for bugmessage in messages %}=
+<div id="bug-message"></div>
+{% endfor %}
 
 <div class="page-header"><p class="title">Task List</p></div>
   
@@ -176,6 +178,7 @@
 {% endblock %}
 
 {% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
 {% endblock %}
 

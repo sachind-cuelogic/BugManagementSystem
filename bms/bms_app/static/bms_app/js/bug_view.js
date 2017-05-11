@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  if(document.getElementById('message')!==null){
+  if(document.getElementById('bug-message')!==null){
     $.notify.defaults({ className: "success" })
     $.notify( 
       "You have successfully created bug",
