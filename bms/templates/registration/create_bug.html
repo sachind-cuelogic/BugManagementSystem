@@ -14,6 +14,7 @@
                 <label for="project_name" class="control-label col-sm-3">Project Name:</label>
                 <div class="col-sm-5">
                     <select id="project_name" name="project_name" class="selectpicker form-control" required="required">
+                    <option value="">Select Project</option>
                         {% for pt in project_name %}
                         <option value={{pt.product_id}} {%if pid == pt.id%} selected {%endif%}>{{pt.product}}</option>
                         {% endfor %}

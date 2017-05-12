@@ -22,8 +22,8 @@
                 <div class="form-group required" id="nameofprodtype">
                     <label for="prodType" class="control-label col-sm-3">Project Type:</label>
                     <div class="col-sm-5">
-                        <select id="producttype" class="selectpicker form-control" required="required">
-                            <option value="">Select your option</option>
+                        <select id="producttype" class="selectpicker form-control placeholder" required="required">
+                            <option value="">Select Project Type</option>
                             {% for pt in prod_types %}
 
                             <option value={{pt.id}}>{{pt.project_type_name}}</option>
@@ -118,19 +118,16 @@
                     </div>
                 </div>
 
-
-            <div class="form-group" id="nameofbuton">
-                <div class="controls col-sm-offset-3">
-                    <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                    <button class="btn btn-sm btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>
+                <div class="form-group" id="nameofbuton">
+                    <div class="controls col-sm-offset-3">
+                        <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                        <button class="btn btn-sm btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>
+                    </div>
                 </div>
-            </div>
-
 
             </form>
         </div>
     </div>
-
 
 {% endblock %}
 {% block jsfile %}
