@@ -104,11 +104,6 @@ $('textarea').on('keyup',function() {
     }
 });
 
-
-});
-
-/* bug list group active on click */
-
 $(function(){
     
     $('.list-group a').click(function(e) {
@@ -127,8 +122,12 @@ $('#project_id').change(function() {
     var selected_proj_id = $(this).val();
     window.location = "/bug_list/?pid="+selected_proj_id;
 });
-
-
-$(document).ready(function() {
     $('#bug-list-column').DataTable();
-} );
+
+});
+
+
+
+
+
+

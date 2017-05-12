@@ -9,7 +9,7 @@
     padding: 15px;
     height: calc(100vh - 100px);
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #FFFFFF;
 }
 
 #logo {
@@ -55,7 +55,7 @@
 
 #login-button {
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #FFFFFF;
     margin-right: 40px;
     padding-left: 30px;
     padding-right: 30px;
@@ -65,7 +65,7 @@
 #register-button {
 
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #FFFFFF;
     padding-left: 30px;
     padding-right: 30px;
     border-radius: 25px;
@@ -81,7 +81,7 @@
 
 #head-menu {
     font-size: 15px;
-    color: black;
+    color: #000000;
     font-weight: bold;
 }
 .leftside{
@@ -107,7 +107,7 @@
     padding: 15px;
     height: calc(100vh - 100px);
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #FFFFFF;
 }
 
 }
