@@ -9,7 +9,7 @@
 
 .table>thead {
     background-color: #101010;
-    color: white;
+    color: #FFFFFF;
 }
 
 .pagination {
@@ -23,4 +23,10 @@ tr td:first-child:before{
 
 .table-responsive{
     padding-top: 10px;
+}
+
+th:after{
+	color: #fff;
+	font-size: 12px;
+	opacity: 1.0 !important;
 }

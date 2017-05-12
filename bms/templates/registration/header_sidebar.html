@@ -1,4 +1,4 @@
-{% load static %}
+ {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +10,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/layout.css' %}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css"> {% block cssfile %} {% endblock %}
 </head>
 
 <body>
+<header>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -37,7 +37,6 @@
                             </div>
                         </div>
                     </form>
-                    <li class="navbar-left"><a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>                   
                     <li class="dropdown">
                         {% if user.is_authenticated %}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -57,9 +56,7 @@
                                         <div class="col-lg-8">
                                             <p class="text-left"><strong>{{ user.username }}</strong></p>
                                             <p class="text-left small">{{ user.email }}</p>
-                                            <p class="text-left">
-                                                <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                                            </p>
+                                            <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,21 +70,21 @@
                         </ul>
                         {% endif %}
                     </li>
-                </div>
+                </ul>
             </div>
-        </nav>
-        <div id="wrapper" class="toggled">
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <br>
-                    </li>
-                   <li>
+        </div>
+    </nav>
+</header>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                </li>
+                <li>
                     <a href="/website_home"><span class="glyphicon glyphicon-home" aria-hidden="true" id="sidebar-link"></span> Home</a>
                 </li>
                 <li>
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    <font color="#337AB7"> Project</font>
+                    <span class="glyphicon glyphicon-search side-main-menu" aria-hidden="true">Project</span>
                 </li>
                 <li>
                     <a href="/create_project"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-plus-circle" aria-hidden="true"></i></span> Create Project</a>
@@ -96,8 +93,7 @@
                     <a href="/project_list"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-list" aria-hidden="true"></i></span>Project List</a>
                 </li>
                 <li>
-                    <span class="fa fa-bug" aria-hidden="true"></span>
-                    <font color="#337AB7"> Bug</font>
+                    <span class="fa fa-bug side-main-menu" aria-hidden="true">Bug</span>
                 </li>
                 <li>
                     <a href="/create_bug"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-plus-circle" aria-hidden="true"></i></span> Create Bug</a>
@@ -105,27 +101,20 @@
                 <li>
                     <a href="/bug_list"><span aria-hidden="true" id="sidebar-link"><i class="fa fa-eye" aria-hidden="true"></i></span>Bug View</a>
                 </li>
-                </ul>
-            </div>
-
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
-                {% block content %}
-                {% endblock %}
-                </div>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                {% block content %} {% endblock %}
             </div>
         </div>
-
-    </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/sidebar.js' %}"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'bms_app/js/sidebar.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    {% block jsfile %} {% endblock%}
+</body>
 
 </html>
-

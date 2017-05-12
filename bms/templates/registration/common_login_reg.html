@@ -7,16 +7,20 @@
 <title>Registration Form</title>
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/bootstrap-theme.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/bootstrap/css/style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/registerStyle.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/style.css' %}">
+{% block cssfile %}
+
+{% endblock %}
 </head>
 <body>
     {% block content %}
     {% endblock %}
-</body>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
-<script type="text/javascript" src="{% static 'bms_app/js/style.js' %}"></script>
-<script type="text/javascript" src="{% static 'bms_app/js/login.js' %}"></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>    
+{% block jsfile %}
+
+{% endblock%}
+</body>
+
 </html>
