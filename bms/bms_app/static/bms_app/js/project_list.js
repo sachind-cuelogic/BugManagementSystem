@@ -41,15 +41,17 @@ $(document).ready(function() {
                 url: "../delete_project/",
                 success: function(result) 
                 {   
-                    if (result.success)
-                    {
-                        row.remove();
-                    }
-                    else
-                    {   
-                        alert("You don't have rights to delete project.")
-                    }
-                }
+
+                     if (result.success)
+                     {
+                        
+                         row.remove();
+                     }
+                     else
+                     {   alert("You don't have rights to delete project.");
+                         
+                     }
+                  }
             });
         }
     });

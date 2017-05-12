@@ -5,14 +5,14 @@
 
 <div class="page-header"><p class="title">Create Bug</p></div>
 <div class="row">
-    <div class="col-md-12" id="table-row">
+    <div class="col-sm-offset-3" id="table-row">
         {{ bug_form.non_field_errors }}
-        <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+        <form method="POST" class="form-horizontal" id="create-bug-form" enctype="multipart/form-data"> {% csrf_token %}
             <input type="hidden" id="csrf" value="{%csrf_token%}">
 
             <div class="form-group required">
-                <label for="project_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
-                <div class="col-sm-4">
+                <label for="project_name" class="control-label col-sm-3">Project Name:</label>
+                <div class="col-sm-5">
                     <select id="project_name" name="project_name" class="selectpicker form-control" required="required">
                         {% for pt in project_name %}
                         <option value={{pt.product_id}} {%if pid == pt.id%} selected {%endif%}>{{pt.product}}</option>
@@ -22,15 +22,15 @@
             </div>
 
             <div class="form-group required">
-                <label for="title" class="control-label col-sm-2 col-sm-offset-2">Bug Title:</label>
-                <div class="col-sm-4">
+                <label for="title" class="control-label col-sm-3">Bug Title:</label>
+                <div class="col-sm-5">
                     <input id="title" type="text" class="form-control" name="title" placeholder="Enter bug title" required="required">
                 </div>
             </div>
 
             <div class="form-group required">
-                <label for="bug_type" class="control-label col-sm-2 col-sm-offset-2">Bug Type:</label>
-                <div class="col-sm-4">
+                <label for="bug_type" class="control-label col-sm-3">Bug Type:</label>
+                <div class="col-sm-5">
                     <select id="bug_type" name="bug_type" class="selectpicker form-control" required="required">
                         {% for pt in bug_type %}
 
@@ -41,8 +41,8 @@
             </div>
 
             <div class="form-group required">
-                <label for="status" class="control-label col-sm-2 col-sm-offset-2">Bug Status:</label>
-                <div class="col-sm-4">
+                <label for="status" class="control-label col-sm-3">Bug Status:</label>
+                <div class="col-sm-5">
                     <select id="status" name="status" class="selectpicker form-control" required="required">
                         {% for pt in status %}
 
@@ -54,16 +54,16 @@
 
             <div class="form-group">
                 
-                <label for="build_version" class="control-label col-sm-2 col-sm-offset-2">Build Version:</label>
-                <div class="col-sm-4">
+                <label for="build_version" class="control-label col-sm-3">Build Version:</label>
+                <div class="col-sm-5">
                     <input id="build_version" type="text" class="form-control" name="build_version" placeholder="Enter build Version">
                 </div>
             </div>
 
             <div class="form-group">
                 
-                <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Sprint No:</label>
-                <div class="col-sm-4">
+                <label for="sprint_no" class="control-label col-sm-3">Sprint No:</label>
+                <div class="col-sm-5">
                     <input id="sprint_no" type="text" class="form-control" name="sprint_no" placeholder="Enter build Version">
                 </div>
             </div>
@@ -71,23 +71,23 @@
 
             <div class="form-group">
                
-                <label for="sprint_no" class="control-label col-sm-2 col-sm-offset-2">Dependent Module:</label>
-                <div class="col-sm-4">
+                <label for="sprint_no" class="control-label col-sm-3">Dependent Module:</label>
+                <div class="col-sm-5">
                     <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" disabled="disabled">
                 </div>
             </div>
 
 
             <div class="form-group " id="description">
-                <label for="description" class="control-label col-sm-2 col-sm-offset-2">Bug Description:</label>
-                <div class="col-sm-4">
+                <label for="description" class="control-label col-sm-3">Bug Description:</label>
+                <div class="col-sm-5">
                     <textarea class="form-control" cols="40" id="description" name="description" rows="3" placeholder="Enter Bug Description"></textarea>
                 </div>
             </div>
 
             <div class="form-group required" id="nameofprodtype">
-                <label for="bug_owner" class="control-label col-sm-2 col-sm-offset-2">Owner:</label>
-                <div class="col-sm-4">
+                <label for="bug_owner" class="control-label col-sm-3">Owner:</label>
+                <div class="col-sm-5">
                     <select id="bug_owner" name="bug_owner" class="selectpicker form-control">
                         {% if user.is_authenticated %}
                         {% for pt in bug_owner %}
@@ -100,8 +100,8 @@
             </div>
 
             <div class="form-group required" id="nameofprodtype">
-                <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Assigned To:</label>
-                <div class="col-sm-4">
+                <label for="prodType" class="control-label col-sm-3">Assigned To:</label>
+                <div class="col-sm-5">
                     <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control" required="required">
                         {% if user.is_authenticated %}
                         {% for pt in bug_owner %}
@@ -114,8 +114,8 @@
             </div>
 
             <div class="form-group" id="nameoffile">
-                <label for="bug_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
-                <div class="col-sm-4">
+                <label for="bug_file" class="control-label col-sm-3">Upload File:</label>
+                <div class="col-sm-5">
                     <input id="bug_file" name="bug_file" type="file" class="file">
                 </div>
             </div>

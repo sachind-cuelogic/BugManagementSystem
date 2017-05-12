@@ -11,9 +11,9 @@
     <div class="table-responsive">
         {% if user_list %}
         <table id="mytable" class="table table-bordered table-striped">
-            <thead>
+            <thead align="left">
                 <th> Sr. No </th>
-                <th data-filter-control="input" data-sortable="true">Project Id</th>
+                <th>Project Id</th>
                 <th>Project Name</th>
                 <th>Project Version</th>
                 <th>Access Type</th>
@@ -28,7 +28,7 @@
                 <tr>
                     <td> </td>
                     <td>{{ item.product_id }}</td>
-                    <td>{{ item.prod_name }}</td>
+                    <td class="text-right">{{ item.prod_name }}</td>
                     <td>{{item.prod_version}}</td>
                     <td>{{ item.role }}</td>
                     <td>{{ item.bugcount }}</td>

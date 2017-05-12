@@ -1,12 +1,3 @@
-$(document).ready(function(){
-  if(document.getElementById('bug-message')!==null){
-    $.notify.defaults({ className: "success" })
-    $.notify( 
-      "You have successfully created bug",
-      { position:"top center" }
-      );
-  }
-});
 
 function getCookie(name) {
     var cookieValue = null;
@@ -78,6 +69,7 @@ $(document).ready(function() {
         event.preventDefault();
         var comment_text = $('#comment').val();
         var username = $("#username").text();
+        console.log("username==>",username);
         var bid = document.getElementsByClassName("list-group-item active")[0].id;
 
         $.ajax({

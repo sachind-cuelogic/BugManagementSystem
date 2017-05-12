@@ -140,8 +140,6 @@ def project_list(request):
     return render(request, 'registration/project_list.html')
 
 def delete_project(request):
-    import pdb;
-    pdb.set_trace()
     if request.user.is_authenticated():
         current_user = request.user
 

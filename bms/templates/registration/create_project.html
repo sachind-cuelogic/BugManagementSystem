@@ -10,20 +10,20 @@
 
     <div class="page-header"><p class="title">Create Project</p></div>
     <div class="row">
-        <div class="col-md-12" id="table-row">
+        <div class="col-md-8 col-sm-offset-3" id="table-row">
             <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                 <input type="hidden" id="csrf" value="{%csrf_token%}">
                 <div class="form-group required" id="nameofprod">
-                    <label for="prod_name" class="control-label col-sm-2 col-sm-offset-2">Project Name:</label>
-                    <div class="col-sm-4">
+                    <label for="prod_name" class="control-label col-sm-3">Project Name:</label>
+                    <div class="col-sm-5">
                         <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
                     </div>
                 </div>
                 <div class="form-group required" id="nameofprodtype">
-                    <label for="prodType" class="control-label col-sm-2 col-sm-offset-2">Project Type:</label>
-                    <div class="col-sm-4">
+                    <label for="prodType" class="control-label col-sm-3">Project Type:</label>
+                    <div class="col-sm-5">
                         <select id="producttype" class="selectpicker form-control" required="required">
-
+                            <option value="">Select your option</option>
                             {% for pt in prod_types %}
 
                             <option value={{pt.id}}>{{pt.project_type_name}}</option>
@@ -32,13 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group required" id="add-user-plus-button">
-                    <label for="add_user" class="control-label col-sm-2 col-sm-offset-2">Add User:</label>
+                    <label for="add_user" class="control-label col-sm-3">Add User:</label>
                     <div class="col-md-6">
                         <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user" required="required"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-4 col-md-offset-4 user-box">
+                    <div class="col-sm-5 col-md-offset-3 user-box">
                         <div class="panel panel-default collapse" id="collapseExample">
                             <div class="panel-body">
                                 <div class="form-group alert alert-info fade in alert-dismissable selected-user-role" id="user_info" style="display:none;">
@@ -100,29 +100,33 @@
                 </div>
                 
                 <div class="form-group" id="nameofversion">
-                    <label for="prod_version" class="control-label col-sm-2 col-sm-offset-2">Project Version:</label>
-                    <div class="col-sm-4">
+                    <label for="prod_version" class="control-label col-sm-3">Project Version:</label>
+                    <div class="col-sm-5">
                         <input type="text" name="prod_version" class="form-control col-md-4" id="prod_version" placeholder="Enter your project version">
                     </div>
                 </div>
                 <div class="form-group" id="nameofdesc">
-                    <label for="prod_description" class="control-label col-sm-2 col-sm-offset-2">Project Description:</label>
-                    <div class="col-sm-4">
+                    <label for="prod_description" class="control-label col-sm-3">Project Description:</label>
+                    <div class="col-sm-5">
                         <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
                     </div>
                 </div>
-                <div class="form-group" id="nameoffile">
-                    <label for="prod_file" class="control-label col-sm-2 col-sm-offset-2">Upload File:</label>
+                <div class="form-group" id="name-of-file">
+                    <label for="prod_file" class="control-label col-sm-3">Upload File:</label>
                     <div class="col-sm-4">
                         <input id="prod_file" type="file" class="file">
                     </div>
                 </div>
-                <div class="form-group" id="nameofbuton">
-                    <div class="controls">
-                        <a class="btn btn-sm btn-primary col-sm-offset-5" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                        <button class="btn btn-sm btn-primary" id="submit-data" type="submit"> <strong>Create project</strong> </button>
-                    </div>
+
+
+            <div class="form-group" id="nameofbuton">
+                <div class="controls col-sm-offset-3">
+                    <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                    <button class="btn btn-sm btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>
                 </div>
+            </div>
+
+
             </form>
         </div>
     </div>

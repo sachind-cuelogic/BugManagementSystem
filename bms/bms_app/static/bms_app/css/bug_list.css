@@ -92,3 +92,7 @@ hr{
 #nameofbuton{
   text-align: center;
 }
+
+#username{
+  display: none;
+}

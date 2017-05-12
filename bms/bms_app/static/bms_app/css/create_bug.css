@@ -1,3 +1,13 @@
 #nameofbuton{
 	text-align: center;
 }
+
+
+
+@media (max-width: 767px){
+#create-bug-form{
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+}
