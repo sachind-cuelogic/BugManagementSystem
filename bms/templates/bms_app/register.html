@@ -4,20 +4,24 @@
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/common_login_layout.css' %}">
 {% endblock %}
 {% block content %}
-<div id="register-box" class="mainbox col-md-4 col-md-offset-4">
     {% if form.errors %}
     <div class="alert alert-danger" role="alert">
         <strong>Looks like a username with that email already exists!</strong>
     </div>
     {% endif %}
+<form class="form-horizontal" action=" " method="POST" id="reg_form">
+                {% csrf_token %}
+                <div class="container">
+<div class="row">
+<div id="register-box" class="mainbox col-md-4 col-md-offset-4">
+
     <div class="panel panel-primary" >
         <div class="panel-heading">
             <div class="panel-title">SIGN UP</div>
         </div> 
 
         <div class="panel-body">
-            <form class="form-horizontal" action=" " method="POST" id="reg_form">
-                {% csrf_token %}
+                    <form id="loginform" class="form-horizontal" role="form">
 
                 <div class="form-group">
                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -65,12 +69,14 @@
                         </a>
                     </div>
                 </div> 
-
-            </form>
+                </form>
+            
         </div>
     </div>
 </div>
-
+</div>
+</div>
+</form>
 {% endblock %}
 
 {% block jsfile %}
