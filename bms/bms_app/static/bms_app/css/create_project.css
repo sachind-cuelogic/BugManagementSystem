@@ -22,3 +22,18 @@
 .form-inline > div{
     padding-bottom: 15px;
 }
+
+.placeholder{color: #808080;}
+
+#name-of-file
+{
+	margin-bottom: 40px;
+}
+
+@media (max-width: 767px){
+
+#nameofbuton{
+	text-align: center;
+}
+
+}

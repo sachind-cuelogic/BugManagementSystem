@@ -61,8 +61,6 @@ $(document).ready(function() {
             }
         }
         var ptype = $('#producttype').val()
-        console.log($('.user-name').length)
-        console.log(user_data)
         formdata = new FormData(this);
          if($("#prod_file")[0].files.length>0)
        		formdata.append("prod_file",$("#prod_file")[0].files[0]);
@@ -82,7 +80,6 @@ $(document).ready(function() {
                 {
                     $("#output-text").html(result['response']);
                     window.location.href = "/project_list/"
-                    console.log(data);
                 }
             }
         });
