@@ -26,7 +26,7 @@ tr td:first-child:before{
 }
 
 th:after{
-	color: white;
-	font-size: 15px;
+	color: #fff;
+	font-size: 12px;
 	opacity: 1.0 !important;
 }

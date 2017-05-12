@@ -69,7 +69,6 @@ $(document).ready(function() {
         event.preventDefault();
         var comment_text = $('#comment').val();
         var username = $("#username").text();
-        console.log("username==>",username);
         var bid = document.getElementsByClassName("list-group-item active")[0].id;
 
         $.ajax({
