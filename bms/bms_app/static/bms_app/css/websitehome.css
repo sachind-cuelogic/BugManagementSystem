@@ -4,4 +4,6 @@
     height: calc(100vh - 50px);
     margin-top: 28px;
     bottom: 0px;
+    overflow: scroll;
+/*    -webkit-background-size: 100%;*/
 }

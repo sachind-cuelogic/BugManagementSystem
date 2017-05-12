@@ -71,7 +71,6 @@ var $form = $(e.target);
 var bv = $form.data('bootstrapValidator');
 
 $.post($form.attr('action'), $form.serialize(), function(result) {
-    console.log(result);
 }, 'json');
 });
 });
