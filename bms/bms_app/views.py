@@ -78,13 +78,16 @@ def website_home(request):
 @login_required(login_url='/login/')
 def create_project(request):
 
+    project_name_list = header_sidebar(request)
+    print "project list===>",project_name_list
+    
     if request.method == 'GET':
         users = User.objects.all()
         roles = UserRole.objects.all()
         prod_types = ProjectType.objects.all()
 
         return render(request, 'registration/create_project.html', 
-            {'users': users, 'roles': roles, 'prod_types': prod_types})
+            {'users': users, 'roles': roles, 'prod_types': prod_types,'project_name_list':project_name_list})
     else:
         data = request.POST
         data1 = request.FILES
@@ -119,6 +122,9 @@ def create_project(request):
 @login_required(login_url='/login/')
 def project_list(request):
 
+    project_name_list = header_sidebar(request)
+    print "project list===>",project_name_list
+
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
@@ -134,7 +140,7 @@ def project_list(request):
 
         messages.success(request, "You have successfully created project!")
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list)})
+                        {'user_list': list(user_list),'project_name_list':project_name_list})
 
 
     return render(request, 'registration/project_list.html')
@@ -165,20 +171,23 @@ def delete_project(request):
 def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
-    pid=0
+    # pid=0
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
         # print "request session in create bug====>",pid
     
+    project_name_list = header_sidebar(request)
+    print "project list===>",project_name_list
+
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
-        if pid == 0:
-            intcount = 0
-            for projectIds in project_name: 
-                if intcount == 0:
-                    pid = projectIds.id
-                intcount += 1 
+        # if pid == 0:
+        #     intcount = 0
+        #     for projectIds in project_name: 
+        #         if intcount == 0:
+        #             pid = projectIds.id
+        #         intcount += 1 
         
         bug_type = BugType.objects.all()
         status = BugStatus.objects.all()
@@ -191,7 +200,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner, 'pid':pid})
+            'bug_owner':bug_owner, 'pid':pid,'project_name_list':project_name_list})
 
     if request.method == 'POST':
         
@@ -213,24 +222,34 @@ def create_bug(request):
 def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
+    # pid=0
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
         # print "request session in create bug====>",pid
 
-    if request.GET.get('pid'):
-        pid = int(request.GET.get('pid'))
-        # print "bug list pid===>",pid
-        request.session['pid'] = pid
+    # if request.GET.get('pid'):
+    #     pid = int(request.GET.get('pid'))
+    #     # print "bug list pid===>",pid
+    #     request.session['pid'] = pid
         # print "bug list session id==>",request.session['pid']
+
+    project_name_list = header_sidebar(request)
+    print "project list===>",project_name_list
 
     if request.method == 'GET':
 
+        # if pid == 0:
+        #     intcount = 0
+        #     for projectIds in project_name: 
+        #         if intcount == 0:
+        #             pid = projectIds.id
+        #         intcount += 1 
 
-        project_name_list = ProductDetails.objects.raw("SELECT *"
-            "FROM bms_app_productdetails pd "
-            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
-            "where pu.prod_user_id = %s ", [current_user.id])
+        # project_name_list = ProductDetails.objects.raw("SELECT *"
+        #     "FROM bms_app_productdetails pd "
+        #     "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+        #     "where pu.prod_user_id = %s ", [current_user.id])
 
         bug_data = BugDetails.objects.raw("SELECT "
             " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, "
@@ -242,8 +261,7 @@ def bug_list(request):
             "where pu.prod_user_id = %s and pd.id = %s ", [current_user.id, pid])
        
         return render(request, 'registration/bug_list.html', 
-                        {'bug_data': list(bug_data),
-                        'project_name_list' :project_name_list,'pid' : pid })
+                        {'bug_data': list(bug_data),'project_name_list':project_name_list})
 
     if request.method == 'POST':
 
@@ -322,7 +340,6 @@ def comment_section(request):
 
     return render(request, 'registration/bug_list.html')
 
-
 def services(request):
     return render(request, 'registration/services.html')
 
@@ -338,8 +355,6 @@ def privacy(request):
 def terms_use(request):
     return render(request, 'registration/terms_use.html')
 
-def header_sidebar(request):
-    return render(request, 'registration/header_sidebar.html')
 
 def landing_header_footer(request):
     return render(request, 'registration/landing_header_footer.html')
@@ -347,3 +362,29 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
+
+
+def header_sidebar(request):
+    # import pdb;
+    # pdb.set_trace()
+    if request.user.is_authenticated():
+        current_user = request.user
+
+    if request.session.has_key('pid'):
+        pid = request.session['pid']
+        # print "request session in create bug====>",pid
+
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+        # print "bug list pid===>",pid
+        request.session['pid'] = pid
+        # print "bug list session id==>",request.session['pid']
+
+
+    project_name_list = ProductDetails.objects.raw("SELECT *"
+            "FROM bms_app_productdetails pd "
+            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "where pu.prod_user_id = %s ", [current_user.id])
+    
+    return project_name_list
+    

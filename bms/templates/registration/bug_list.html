@@ -13,16 +13,6 @@
 
 <div class="page-header"><p class="title">Task List</p></div>
   
-<form class="form-inline project-dropdown" method="get" action="" id="frmprojectlist">
-  <div class="form-group">
-    <label class="control-label">Project name:</label>
-    <select id="project_id" name="pid" class="selectpicker form-control">
-            {% for pt in project_name_list %}
-            <option value="{{pt.id}}" {%if request.session.pid == pt.id%} selected {%endif%}>{{pt.prod_name}}</option>
-            {% endfor %}
-    </select>
-  </div>
-</form>
 
     {% if bug_data %}
     <div class="row bug-list-row">

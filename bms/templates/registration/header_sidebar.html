@@ -27,9 +27,12 @@
                 <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
                 <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
             </div>
-            
+
+
+
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+
                     <form class="navbar-form navbar-left" action="#">
                         <div class="input-group">
                             <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
@@ -73,6 +76,18 @@
                         {% endif %}
                     </li>
                 </ul>
+
+            <form class="form-inline project-dropdown" method="get" action="" id="frmprojectlist">
+                    <select id="project_id" name="pid" class="selectpicker form-control">
+                        {% for pt in project_name_list %}
+                       
+                        <option value="{{pt.id}}" {%if request.session.pid == pt.id%} selected{%endif%}>{{pt.prod_name}}</option>
+                        {% endfor %}
+                    </select>
+               
+            </form>
+
+
             </div>
         </div>
     </nav>

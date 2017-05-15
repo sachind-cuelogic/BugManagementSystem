@@ -120,15 +120,15 @@ $(function(){
 
 /* pass project id to view */
 
-$('#project_id').change(function() {
+/*$('#project_id').change(function() {
    $("#frmprojectlist").submit();
 
 });
+*/
 
 
 
-
-var monkeyList = new List('listgroup', {
+var pageList = new List('listgroup', {
   valueNames: ['bug'],
   page: 5,
   pagination: true

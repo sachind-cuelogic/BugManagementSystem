@@ -18,4 +18,9 @@ $(document).ready(function() {
 
     $("[data-toggle=tooltip]").tooltip();
 
+$('#project_id').change(function() {
+   $("#frmprojectlist").submit();
+
+});
+
 });
