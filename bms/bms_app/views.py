@@ -166,9 +166,11 @@ def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
     pid=0
-    if request.GET.get('pid'):
-        pid = int(request.GET.get('pid'))
 
+    if request.session.has_key('pid'):
+        pid = request.session['pid']
+        # print "request session in create bug====>",pid
+    
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
         if pid == 0:
@@ -212,22 +214,23 @@ def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
 
-    pid = 0
+    if request.session.has_key('pid'):
+        pid = request.session['pid']
+        # print "request session in create bug====>",pid
+
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
+        # print "bug list pid===>",pid
+        request.session['pid'] = pid
+        # print "bug list session id==>",request.session['pid']
 
     if request.method == 'GET':
+
+
         project_name_list = ProductDetails.objects.raw("SELECT *"
             "FROM bms_app_productdetails pd "
             "JOIN bms_app_productuser pu on pu.product_id=pd.id "
             "where pu.prod_user_id = %s ", [current_user.id])
-
-        if pid == 0:
-            intcount = 0
-            for projectIds in project_name_list: 
-                if intcount == 0:
-                    pid = projectIds.id
-                intcount += 1 
 
         bug_data = BugDetails.objects.raw("SELECT "
             " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, "
@@ -249,10 +252,11 @@ def bug_list(request):
 
         bug_comment =  get_comments(bugid)
 
+
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, "
-            "bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, "
-            "bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name, "
+            "bd.description, bd.bug_file, "
+            "bd.dependent_module, bs.status_name, "
             "bt.bug_name, au.username as bugowner, auu.username as bugassign "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
@@ -277,6 +281,7 @@ def bug_list(request):
                 "bug_type" : bugs.bug_name,
                 "bug_owner" : bugs.bugassign,
                 "bug_assign" : bugs.bugowner
+                # "bug_file" : bugs.bug_file
             }
 
             bug_comment_list = []       
@@ -286,8 +291,13 @@ def bug_list(request):
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
             
-        bugdata = json.dumps(bug_response)
 
+
+        bugdata = json.dumps(bug_response)
+        # bugdata = json.dumps(serializers.serialize('json', bug_response, fields=('project_name',
+        #                             'title','build_version','sprint_no','description',
+        #                             'status','bug_type','bug_owner','bug_assign','bug_file')))
+        # print "bug data===>",bugdata
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
@@ -323,7 +333,7 @@ def contact_us(request):
     return render(request, 'registration/contact.html')
 
 def privacy(request):
-    return render(request, {'privacy': 'privacy'} ,'registration/privacy.html')
+    return render(request, 'registration/privacy.html')
 
 def terms_use(request):
     return render(request, 'registration/terms_use.html')

@@ -1,4 +1,5 @@
-body{
+body, html{
+     height: 100%;
     counter-reset: Serial;      
 }
 #wrapper {
@@ -9,9 +10,6 @@ body{
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled {
-    padding-left: 250px;
-}
 
 #sidebar-wrapper {
     position: fixed;
@@ -134,10 +132,6 @@ body{
 .form-group.required .control-label:after {
   content:"*";
   color:#FF0000;
-}
-
-.row{
-    padding-top: 20px;
 }
 
 .side-main-menu{

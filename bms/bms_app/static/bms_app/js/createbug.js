@@ -1,5 +1,5 @@
 
-window.onload = function() {
+/*window.onload = function() {
     var selItem = sessionStorage.getItem("SelItem");  
     $('#project_name').val(selItem);
     }
@@ -8,4 +8,4 @@ window.onload = function() {
         sessionStorage.setItem("SelItem", project_id);
         window.location = "/create_bug/?pid="+project_id;
     });
-    
+    */

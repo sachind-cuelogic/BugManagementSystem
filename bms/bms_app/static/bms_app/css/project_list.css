@@ -1,5 +1,5 @@
 .table>tbody>tr>td {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
 }
 
@@ -12,6 +12,15 @@
     color: #FFFFFF;
 }
 
+/*.table td:first-child {
+    text-align: center;
+}
+*/
+
+.table td:nth-child(1) {
+    text-align: center;
+}
+
 .pagination {
     margin: 0px;
 }
@@ -19,6 +28,7 @@
 tr td:first-child:before{
   counter-increment: Serial;    
   content:counter(Serial); 
+  text-align: center;
 }
 
 .table-responsive{
