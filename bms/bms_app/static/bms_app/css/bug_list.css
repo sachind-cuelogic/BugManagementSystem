@@ -167,7 +167,7 @@ hr{
     .panel{
       margin-bottom: 0px;
     }
-
-    .bootstrap-styles {
-  @import (less) url("bootstrap.css");
+    .panel-body {
+     padding: 0px; 
 }
+

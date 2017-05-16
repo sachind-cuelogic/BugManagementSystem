@@ -31,12 +31,16 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group required" id="add-user-plus-button">
+                 {% if user.is_authenticated %}
+                <div class="form-group" id="add-user-plus-button">
                     <label for="add_user" class="control-label col-sm-4">Add User:</label>
                     <div class="col-sm-8">
-                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add user" required="required"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" title="Click here to add multiple user" required="required"><span class="glyphicon glyphicon-plus"></span></button>
+                        <span class="label label-default">By default <strong>{{ user.username }}</strong> is selected with admin role.</span>
+
                     </div>
                 </div>
+                {% endif %}
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-4 user-box">
                         <div class="panel panel-default collapse" id="collapseExample">
@@ -74,16 +78,16 @@
                                         <div class="form-group">
                                             <select id="user-role" class="user-role form-control">
                                                 {% for each in roles%}
-                                                <option value="{{each.id}}" role="{{each.role}}" {% if each.id == 4 %}selected{% endif %}>{{each.role}}</option>
+                                                <option value="{{each.id}}" role="{{each.role}}" {% if each.id == 8 %}selected{% endif %}>{{each.role}}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
+
                                         <div class="form-group">
                                             <button class="btn-xs btn-danger" data-role="remove">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +95,6 @@
                                 <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
                                 <a type="button" data-dismiss="modal" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" id="submit-sample-data">Save changes</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -147,5 +150,5 @@
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/file_upload.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/theme-clouds.js"></script>
+
 {% endblock %}

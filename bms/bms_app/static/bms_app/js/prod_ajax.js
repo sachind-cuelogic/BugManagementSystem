@@ -29,20 +29,30 @@ $(document).ready(function() {
     });
 
     $("#submit-sample-data").on("click", function () {
+
+        console.log("inside submit function");
+
         if($('.user-name').length){
+
+            console.log("inside if username ");
             
             var htmlUser = "";
+        
             for (i = 0; i <= ($('.user-name').length-1); i++) {
-
-                    var user_name = $(".user-name option:selected").eq(i).text();
-                    var user_role = $(".user-role option:selected").eq(i).text();
                     
+                console.log("inside for loop");
+                
+                var user_name = $(".user-name option:selected").eq(i).text();
+                var user_role = $(".user-role option:selected").eq(i).text(); 
 
-                    htmlUser += "<div>";
-                    htmlUser += "<span>"+user_name+" - "+"</span>";
-                    htmlUser += "<span>"+user_role+"</span>";
-                    htmlUser += "</div>";
-            }
+                console.log("username==>",user_name);
+                console.log("role ==>",user_role);
+
+                htmlUser += "<div>";
+                htmlUser += "<span>"+user_name+" - "+"</span>";
+                htmlUser += "<span>"+user_role+"</span>";
+                htmlUser += "</div>";
+            }   
 
             $("#user_info").show();
             $("#user_info").html(htmlUser);

@@ -46,11 +46,6 @@
 
 }
 
-/*.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: #fff;
-    opacity: 1;
-}
-*/
 .image-preview-input {
     position: relative;
 	overflow: hidden;
@@ -77,3 +72,13 @@
 	margin-left: 30px;
 }
 
+.label-default{
+	font-size: 13px;
+}
+
+.popover {
+position: absolute;
+display: block;
+
+margin: 20px;
+}

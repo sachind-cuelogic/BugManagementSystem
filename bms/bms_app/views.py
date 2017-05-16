@@ -73,7 +73,8 @@ def login(request):
         return HttpResponseRedirect('/login')
 
 def website_home(request):
-    return render(request, 'registration/website_home.html')
+    project_name_list = header_sidebar(request)
+    return render(request, 'registration/website_home.html',{'project_name_list':project_name_list})
 
 @login_required(login_url='/login/')
 def create_project(request):
@@ -171,7 +172,7 @@ def delete_project(request):
 def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
-    # pid=0
+    pid=0
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
@@ -182,12 +183,12 @@ def create_bug(request):
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
-        # if pid == 0:
-        #     intcount = 0
-        #     for projectIds in project_name: 
-        #         if intcount == 0:
-        #             pid = projectIds.id
-        #         intcount += 1 
+        if pid == 0:
+            intcount = 0
+            for projectIds in project_name: 
+                if intcount == 0:
+                    pid = projectIds.id
+                intcount += 1 
         
         bug_type = BugType.objects.all()
         status = BugStatus.objects.all()
@@ -200,7 +201,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner, 'pid':pid,'project_name_list':project_name_list})
+            'bug_owner':bug_owner,'project_name_list':project_name_list})
 
     if request.method == 'POST':
         
@@ -222,29 +223,29 @@ def create_bug(request):
 def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
-    # pid=0
+    pid=0
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
-        # print "request session in create bug====>",pid
+        print "request session in create bug====>",pid
 
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
         # print "bug list pid===>",pid
-        request.session['pid'] = pid
-        print "bug list session id==>",request.session['pid']
+        # request.session['pid'] = pid
+        # print "bug list session id==>",request.session['pid']
 
     project_name_list = header_sidebar(request)
     print "project list===>",project_name_list
 
     if request.method == 'GET':
-
-        # if pid == 0:
-        #     intcount = 0
-        #     for projectIds in project_name: 
-        #         if intcount == 0:
-        #             pid = projectIds.id
-        #         intcount += 1 
+        
+        if pid == 0:
+            intcount = 0
+            for projectIds in header_sidebar(request): 
+                if intcount == 0:
+                    pid = projectIds.id
+                intcount += 1 
 
         # project_name_list = ProductDetails.objects.raw("SELECT *"
         #     "FROM bms_app_productdetails pd "

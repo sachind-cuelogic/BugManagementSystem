@@ -130,7 +130,7 @@ $(function(){
 
 var pageList = new List('listgroup', {
   valueNames: ['bug'],
-  page: 5,
+  page: 10,
   pagination: true
 });
 
