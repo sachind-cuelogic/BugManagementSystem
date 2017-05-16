@@ -228,11 +228,11 @@ def bug_list(request):
         pid = request.session['pid']
         # print "request session in create bug====>",pid
 
-    # if request.GET.get('pid'):
-    #     pid = int(request.GET.get('pid'))
-    #     # print "bug list pid===>",pid
-    #     request.session['pid'] = pid
-        # print "bug list session id==>",request.session['pid']
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+        # print "bug list pid===>",pid
+        request.session['pid'] = pid
+        print "bug list session id==>",request.session['pid']
 
     project_name_list = header_sidebar(request)
     print "project list===>",project_name_list

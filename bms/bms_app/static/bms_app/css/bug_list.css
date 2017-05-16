@@ -114,6 +114,28 @@ hr{
   margin: 0px;
 }
 
+
+.pagination>li>a, .pagination>li>span {
+     
+
+     padding: 0px 5px; 
+     margin-left: -1px; 
+     line-height: 1.42857143; 
+    color: #337ab7;
+     text-decoration: none; 
+     background-color: #f5f5f5; 
+     border: 0px solid #ddd; 
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+
+   
+    cursor: default;
+    
+    border-color: #337ab7;
+}
+
+
 .list-group > ul > li{
   margin-top: 10px;
 }
@@ -145,3 +167,7 @@ hr{
     .panel{
       margin-bottom: 0px;
     }
+
+    .bootstrap-styles {
+  @import (less) url("bootstrap.css");
+}

@@ -135,6 +135,8 @@ var pageList = new List('listgroup', {
 });
 
 
+$(".pagination").removeAttr("style");
+
 /*$('.list-group').easyPaginate({
     paginateElement: 'a',
     elementsPerPage: 3,

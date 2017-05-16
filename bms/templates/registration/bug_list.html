@@ -13,7 +13,6 @@
 
 <div class="page-header"><p class="title">Task List</p></div>
   
-
     {% if bug_data %}
     <div class="row bug-list-row">
         <div class="col-md-4">
@@ -42,7 +41,6 @@
                         <input type="hidden" id="csrf" value="{%csrf_token%}">
 
                         <div class="form-group">
-
                             <label for="title" class="control-label col-sm-3 col-sm-offset-1">Bug Title:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="title"></p>
@@ -64,7 +62,6 @@
                         </div>                                
 
                         <div class="form-group">
-
                             <label for="build_version" class="control-label col-sm-3 col-sm-offset-1">Build Version:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="build_version"></p>
@@ -72,7 +69,6 @@
                         </div>
 
                         <div class="form-group">
-
                             <label for="sprint_no" class="control-label col-sm-3 col-sm-offset-1">Sprint No:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="sprint_no"></p>
@@ -114,21 +110,17 @@
 
                         <div class="form-group">
 
-                            <div class="comments col-sm-9 col-sm-offset-1">
-
-
-                   
-                            
+                            <div class="comments col-sm-10 col-sm-offset-1">
                             <fieldset>     
-                                    <legend>Previous Comments</legend>
-                                    
-                                    <div class="panel panel-default">
-                                        <div class="panel-body comment-list">
-                                            <div id="comment-text"></div>
-                                        </div>
+                                <legend>Previous Comments</legend>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-body comment-list">
+                                        <div id="comment-text"></div>
                                     </div>
+                                </div>
                                     
-                                </fieldset>             
+                            </fieldset>             
                                 
                                 <div class="clearfix"></div>
        
