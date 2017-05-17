@@ -46,8 +46,7 @@ $(document).ready(function() {
                 jQuery('#comment-text').html('');
                 for(var i = 0; i < result[1].length; i++) 
                 {
-                    $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</div><hr>');
-
+                    $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + "<br>" + result[1][i]['comment_time'] +'</div><hr>');
                 }
 
                 $("#title").text(result[0]['title']);
@@ -60,7 +59,6 @@ $(document).ready(function() {
                 $("#bug_owner").text(result[0]['bug_owner']);
                 $("#bug_assign").text(result[0]['bug_assign']);
                /* $("#bug_file").text(result[0]['bug_file']);*/
-
 
             }
         });

@@ -11,6 +11,8 @@
 <div id="bug-message"></div>
 {% endfor %}
 
+
+
 <div class="page-header"><p class="title">Task List</p></div>
   
     {% if bug_data %}
@@ -33,7 +35,7 @@
                 </div>
             </div>
         </div>
-
+<p>{{current_time}}</p>
         <div class="col-md-8">
             <div id="col2">
                 <div class="well bug-list-background">
@@ -113,7 +115,6 @@
                             <div class="comments col-sm-10 col-sm-offset-1">
                             <fieldset>     
                                 <legend>Previous Comments</legend>
-                                
                                 <div class="panel panel-default">
                                     <div class="panel-body comment-list">
                                         <div id="comment-text"></div>

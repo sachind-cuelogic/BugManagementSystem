@@ -19,6 +19,11 @@ from .models import BugDetails, Comments
 from .forms import Bug_Details_Form, comment_form
 from django.core import serializers
 from itertools import chain
+import datetime
+from django.utils.timezone import utc
+from django.utils.timezone import localtime, now
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -80,7 +85,7 @@ def website_home(request):
 def create_project(request):
 
     project_name_list = header_sidebar(request)
-    print "project list===>",project_name_list
+    # print "project list===>",project_name_list
     
     if request.method == 'GET':
         users = User.objects.all()
@@ -124,7 +129,7 @@ def create_project(request):
 def project_list(request):
 
     project_name_list = header_sidebar(request)
-    print "project list===>",project_name_list
+    # print "project list===>",project_name_list
 
     if request.user.is_authenticated():
         current_user = request.user
@@ -179,7 +184,7 @@ def create_bug(request):
         # print "request session in create bug====>",pid
     
     project_name_list = header_sidebar(request)
-    print "project list===>",project_name_list
+    # print "project list===>",project_name_list
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
@@ -227,7 +232,7 @@ def bug_list(request):
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
-        print "request session in create bug====>",pid
+        # print "request session in create bug====>",pid
 
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
@@ -236,7 +241,7 @@ def bug_list(request):
         # print "bug list session id==>",request.session['pid']
 
     project_name_list = header_sidebar(request)
-    print "project list===>",project_name_list
+    # print "project list===>",project_name_list
 
     if request.method == 'GET':
         
@@ -304,7 +309,7 @@ def bug_list(request):
             }
 
             bug_comment_list = []       
-            for x in bug_comment.values("comment", "user__username"):
+            for x in bug_comment.values("comment", "user__username","comment_time"):
                 bug_comment_list.append(x)
 
             bug_response.append(bug_data)
@@ -312,16 +317,21 @@ def bug_list(request):
             
 
 
-        bugdata = json.dumps(bug_response)
+        bugdata = json.dumps(bug_response,cls=DjangoJSONEncoder)
         # bugdata = json.dumps(serializers.serialize('json', bug_response, fields=('project_name',
         #                             'title','build_version','sprint_no','description',
         #                             'status','bug_type','bug_owner','bug_assign','bug_file')))
-        # print "bug data===>",bugdata
+        print "bug data===>",bugdata
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
 
 def comment_section(request):
+
+    if request.method == 'GET':
+
+        current_time = datetime.datetime.now().replace(microsecond=0)
+        return render_to_response(request, 'registration/bug_list.html',{'current_time':current_time})
 
     if request.method == 'POST':
         if request.user.is_authenticated():
@@ -331,9 +341,14 @@ def comment_section(request):
             bid = request.POST.get("bid")
             userid = current_user.id
 
+            current_time = datetime.datetime.now().replace(second=0, microsecond=0)
+            #current_time=datetime.datetime.strptime(timestring, "%H:%M:%S.%f").time()
+            print "current time==>",current_time
+
             commment_save = Comments(comment=comment_text,
                                         bug_id=bid,
-                                        user_id=userid)
+                                        user_id=userid,
+                                        comment_time=current_time)
             commment_save.save()  
 
         comment_data = serializers.serialize('json',{})
@@ -362,6 +377,7 @@ def landing_header_footer(request):
     
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
+    print "post comment==>",post_comment
     return post_comment
 
 

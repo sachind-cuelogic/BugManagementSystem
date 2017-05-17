@@ -100,3 +100,4 @@ $(function() {
         reader.readAsDataURL(file);
     });  
 });
+

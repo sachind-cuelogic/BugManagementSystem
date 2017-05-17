@@ -23,10 +23,7 @@
     padding-bottom: 15px;
 }
 
-.form-inline > .form-group{
-   margin-right: 20px;
-   margin-left: 30px;
-}
+
 
 .project-row{
 	padding-top: 20px;	
@@ -71,14 +68,21 @@
 .modal-title{
 	margin-left: 30px;
 }
+/*.form-horizontal .form-group {
+    margin-right: -15px;
+    margin-left: 0px; 
+}*/
 
-.label-default{
-	font-size: 13px;
+.remove{
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: red;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
 }
 
-.popover {
-position: absolute;
-display: block;
-
-margin: 20px;
+.panel-body > .form-group > div{
+	padding-bottom: 5px;
 }
