@@ -1,17 +1,17 @@
 body{
-    background-image:url('/static/bms_app/images/templates.jpg');
-    background-attachment:fixed;
-    background-size:cover;
+  background-image:url('/static/bms_app/images/templates.jpg');
+  background-attachment:fixed;
+  background-size:cover;
 }
 
 .panel-title{
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .panel-body{
-	padding: 20px 40px 0 40px;
+  padding: 20px 40px 0 40px;
 }
 
 #loginbox{
@@ -30,16 +30,16 @@ body{
 }
 
 .sign-up-here{
-	padding: 20px;
+  padding: 20px;
 }
 
 .alreadymember{
-    border-top: 1px solid#888;
-    padding-top:20px; 
-    font-size:15px;
-    text-align: center;
+  border-top: 1px solid#888;
+  padding-top:20px; 
+  font-size:15px;
+  text-align: center;
 }
 
 #logcenter{
-    text-align: center;
+  text-align: center;
 }

@@ -85,7 +85,6 @@ def website_home(request):
 def create_project(request):
 
     project_name_list = header_sidebar(request)
-    # print "project list===>",project_name_list
     
     if request.method == 'GET':
         users = User.objects.all()
@@ -129,7 +128,6 @@ def create_project(request):
 def project_list(request):
 
     project_name_list = header_sidebar(request)
-    # print "project list===>",project_name_list
 
     if request.user.is_authenticated():
         current_user = request.user
@@ -181,10 +179,8 @@ def create_bug(request):
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
-        # print "request session in create bug====>",pid
     
     project_name_list = header_sidebar(request)
-    # print "project list===>",project_name_list
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
@@ -232,16 +228,11 @@ def bug_list(request):
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
-        # print "request session in create bug====>",pid
 
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
-        # print "bug list pid===>",pid
-        # request.session['pid'] = pid
-        # print "bug list session id==>",request.session['pid']
 
     project_name_list = header_sidebar(request)
-    # print "project list===>",project_name_list
 
     if request.method == 'GET':
         
@@ -251,11 +242,6 @@ def bug_list(request):
                 if intcount == 0:
                     pid = projectIds.id
                 intcount += 1 
-
-        # project_name_list = ProductDetails.objects.raw("SELECT *"
-        #     "FROM bms_app_productdetails pd "
-        #     "JOIN bms_app_productuser pu on pu.product_id=pd.id "
-        #     "where pu.prod_user_id = %s ", [current_user.id])
 
         bug_data = BugDetails.objects.raw("SELECT "
             " pd.id as projectid,pd.prod_name, bd.id, bd.title, bd.build_version, "
@@ -305,7 +291,6 @@ def bug_list(request):
                 "bug_type" : bugs.bug_name,
                 "bug_owner" : bugs.bugassign,
                 "bug_assign" : bugs.bugowner
-                # "bug_file" : bugs.bug_file
             }
 
             bug_comment_list = []       
@@ -318,10 +303,7 @@ def bug_list(request):
 
 
         bugdata = json.dumps(bug_response,cls=DjangoJSONEncoder)
-        # bugdata = json.dumps(serializers.serialize('json', bug_response, fields=('project_name',
-        #                             'title','build_version','sprint_no','description',
-        #                             'status','bug_type','bug_owner','bug_assign','bug_file')))
-        print "bug data===>",bugdata
+
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
@@ -330,9 +312,11 @@ def comment_section(request):
 
     if request.method == 'GET':
 
-        current_time = datetime.datetime.now().replace(microsecond=0)
-        return render_to_response(request, 'registration/bug_list.html',{'current_time':current_time})
+        current_time = datetime.datetime.now().replace(second=0, microsecond=0)
+        return render(request, 'registration/bug_list.html',{'current_time':current_time})
 
+
+ 
     if request.method == 'POST':
         if request.user.is_authenticated():
             current_user = request.user
@@ -342,8 +326,6 @@ def comment_section(request):
             userid = current_user.id
 
             current_time = datetime.datetime.now().replace(second=0, microsecond=0)
-            #current_time=datetime.datetime.strptime(timestring, "%H:%M:%S.%f").time()
-            print "current time==>",current_time
 
             commment_save = Comments(comment=comment_text,
                                         bug_id=bid,
@@ -377,26 +359,19 @@ def landing_header_footer(request):
     
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
-    print "post comment==>",post_comment
     return post_comment
 
 
 def header_sidebar(request):
-    # import pdb;
-    # pdb.set_trace()
     if request.user.is_authenticated():
         current_user = request.user
 
     if request.session.has_key('pid'):
         pid = request.session['pid']
-        # print "request session in create bug====>",pid
 
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
-        # print "bug list pid===>",pid
         request.session['pid'] = pid
-        # print "bug list session id==>",request.session['pid']
-
 
     project_name_list = ProductDetails.objects.raw("SELECT *"
             "FROM bms_app_productdetails pd "

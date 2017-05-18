@@ -7,20 +7,19 @@
 }
 
 @media (max-width: 767px){
-#create-bug-form{
-	padding-right: 20px;
-	padding-left: 20px;
-}
-
+	#create-bug-form{
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 }
 
 .image-preview-input {
-    position: relative;
+	position: relative;
 	overflow: hidden;
 	margin: 0px;    
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;    
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;    
 }
 .image-preview-input input[type=file] {
 	position: absolute;
@@ -34,5 +33,5 @@
 	filter: alpha(opacity=0);
 }
 .image-preview-input-title {
-    margin-left:2px;
+	margin-left:2px;
 }

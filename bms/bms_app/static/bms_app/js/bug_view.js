@@ -41,12 +41,11 @@ $(document).ready(function() {
             url: "../bug_list/",
             success: function(result) 
             {
-                console.log(result);
 
                 jQuery('#comment-text').html('');
                 for(var i = 0; i < result[1].length; i++) 
                 {
-                    $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + "<br>" + result[1][i]['comment_time'] +'</div><hr>');
+                    $("#comment-text").prepend('<div><b>' + result[1][i]['user__username'] +"</b>: "+result[1][i]['comment'] +'</div><hr>');
                 }
 
                 $("#title").text(result[0]['title']);
@@ -58,7 +57,6 @@ $(document).ready(function() {
                 $("#description").text(result[0]['description']);
                 $("#bug_owner").text(result[0]['bug_owner']);
                 $("#bug_assign").text(result[0]['bug_assign']);
-               /* $("#bug_file").text(result[0]['bug_file']);*/
 
             }
         });
@@ -116,16 +114,6 @@ $(function(){
     $('a.bug').eq(0).trigger('click')
 })
 
-/* pass project id to view */
-
-/*$('#project_id').change(function() {
-   $("#frmprojectlist").submit();
-
-});
-*/
-
-
-
 var pageList = new List('listgroup', {
   valueNames: ['bug'],
   page: 10,
@@ -135,12 +123,6 @@ var pageList = new List('listgroup', {
 
 $(".pagination").removeAttr("style");
 
-/*$('.list-group').easyPaginate({
-    paginateElement: 'a',
-    elementsPerPage: 3,
-    effect: 'climb'
-});
-*/
 });
 
 

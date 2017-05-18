@@ -32,13 +32,12 @@
                     </div>
                 </div>
 
-                 {% if user.is_authenticated %}
                 <div class="form-group" id="add-user-plus-button">
                     <label for="add_user" class="control-label col-sm-4">Add User:</label>
                     <div class="col-sm-8">
-                 
+                    
                        <div class="form-inline">
-                            <select id="user-name" class="user-name form-control">
+                            <select id="user-name" class="user-name form-control" title="Select user for your project">
                                 {% if user.is_authenticated %}
                                 {% for pt in users %}
                                 <option value="{{pt.id}}" {% if pt.username == user.username %}selected{% endif %}>{{pt.username}}</option>
@@ -47,22 +46,32 @@
                                 {% endif %}
                             </select>
 
-                            <select id="user-role" class="user-role form-control">
+                            <select id="user-role" class="user-role form-control" title="Select user role">
                                 {% for each in roles%}
                                 <option value="{{each.id}}" role="{{each.role}}" {% if each.id == 8 %}selected{% endif %}>{{each.role}}</option>
                                 {% endfor %}
                             </select>
 
-                            <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="Click here to add one more user">Add</button>
+                            <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
                         </div>
                     </div>
                 </div>
               
+                {% if user.is_authenticated %}
+                <p id="get_username">{{ user.id }}</p>
+
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-4 user-box">
                         <div class="panel panel-default" id="collapseExample">
                             <div class="panel-body">
                                 <div class="form-group selected-user-role" id="user_info">
+                                <div id="user-count">
+                                    <span class="selected-user-name">{{ user.username }}</span>
+                                    <span class="selected-user-id" style="display: none;">{{ user.id }}</span>
+                                    <span id="dash"> : </span>
+                                    <span>Admin</span>
+                                    <span class="selected-role-id" style="display: none;">8</span>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -90,17 +99,15 @@
 
                       <div class="input-group image-preview" data-original-title="" title="">
                         <span class="input-group-btn">
-                            <!-- image-preview-clear button -->
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
                             </button>
-                            <!-- image-preview-input -->
                             <div class="btn btn-default image-preview-input">
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input id="prod_file" type="file" class="file" accept="image/png, image/jpeg, image/gif, image/jpg, .pdf, .doc" name="input-file-preview"> <!-- rename it -->
+                                <input id="prod_file" type="file" class="file" accept="image/png, image/jpeg, image/gif, image/jpg, .pdf, .doc" name="input-file-preview">
                             </div>
-                        </span><input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                        </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
                         
                     </div>
                 </div>

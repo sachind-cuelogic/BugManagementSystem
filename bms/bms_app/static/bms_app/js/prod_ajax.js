@@ -28,42 +28,44 @@ $(document).ready(function() {
         }
     });
 
+    var getuser = $('#get_username').text();
+
+    var select=document.getElementById('user-name');
+
+    for (i=0;i<select.length;  i++) {
+       if (select.options[i].value==getuser) {
+         select.remove(i);
+       }
+    }
+
     $("#submit-sample-data").on("click", function () {
 
-        
         var htmlUser = "";
-
         var user_name = $(".user-name option:selected").text();
         var user_id = $(".user-name option:selected").val();
-        console.log("username==>",user_name,user_id);
         var user_role = $(".user-role option:selected").text(); 
         var user_role_id = $(".user-role option:selected").val(); 
-        console.log("role==>",user_role,user_role_id);
-        htmlUser += "<div>";
-        htmlUser += "<span class='selected-user-name'>"+user_name+"</span>";
+        htmlUser += "<div id='user-count'>";
+        htmlUser += "<span class='selected-user-name'>"+user_name+"</span>";        
         htmlUser += "<span class='selected-user-id' style='display: none;'>"+user_id+"</span>";
-        htmlUser += "<span> - </span>";
+        htmlUser += "<span id='dash'> : </span>";
         htmlUser += "<span>"+user_role+"</span>";
-        htmlUser += "<span class='remove pull-right'>" + "x" + "</span>";
+        htmlUser += "<span class='selected-role-id' style='display: none;'>"+user_role_id+"</span>";
+        htmlUser += "<span class='remove pull-right' id='removeBtn'>" + "x" + "</span>";
         htmlUser += "</div>";
-        
+
         $("#user_info").append(htmlUser);
-        // $("#user_info").html(htmlUser);
 
         $('#user-name').each(function() {
             $(this).find(":selected").remove();
             $('option[value=' + $(this).val() + ']').remove();
         });
-    });
-
+});
+ 
     $(".selected-user-role").on("click", ".remove", function(){
         var removeUser = $(this).siblings(".selected-user-name").text();
-        console.log("remove id==>",removeUser);
         var removeUserId = $(this).siblings(".selected-user-id").text();
-        console.log("remove id==>",removeUserId);
         $(this).parent().remove();
-        
-        /*console.log(removeUser);*/
 
         $('#user-name').append($('<option>', {
             value: removeUserId,
@@ -73,21 +75,18 @@ $(document).ready(function() {
     });
 
     $('#file-form').on('submit', function(event) {
-        console.log("inside submit function");
         event.preventDefault();
         user_data = []
-        if($('.user-name').length){
-            console.log("inside length",($('.user-name').length));
-            for (i = 0; i <= ($('.user-name').length-1); i++) {
-                console.log("inside for loop");
-                console.log("user id==>",$('.user-name').eq(i).val());
-                console.log("user role==>",$('.user-role').eq(i).val());
+        if($('.selected-user-role div').length){
+            for (i = 0; i <= ($('.selected-user-role div').length-1); i++) {
                 user_data.push({
-                    'user_id': $('.user-name').eq(i).val(),
-                    'user_role': $('.user-role').eq(i).val()
+                    'user_id': $('.selected-user-id').eq(i).text(),
+                    'user_role': $('.selected-role-id').eq(i).text()
                 })
-                console.log("user data==>",user_data);
             }
+        }
+        else{
+            
         }
         var ptype = $('#producttype').val()
         formdata = new FormData(this);

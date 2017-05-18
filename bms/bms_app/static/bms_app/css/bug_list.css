@@ -1,13 +1,13 @@
 .bug-list{
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .bug-list-background{
-	padding: 5px;
+  padding: 5px;
 }
 
 input[type="submit"]{
- 
+
   padding: 5px 0px;
   font-weight: bold;
 }
@@ -54,7 +54,6 @@ input[type="submit"]{
   border-radius: 5px;
   height: 250px;
   overflow-y: auto;
-
   background: #fff;
 }
 
@@ -83,7 +82,7 @@ hr{
 }
 
 .list-group {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 #nameofbuton{
   text-align: center;
@@ -101,73 +100,59 @@ hr{
 }
 
 .col-md-10 {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .bug-list-row{
   margin-top: 20px;
 }
 
-
 .pagination{
   margin: 0px;
 }
 
-
 .pagination>li>a, .pagination>li>span {
-     
-
-     padding: 0px 5px; 
-     margin-left: -1px; 
-     line-height: 1.42857143; 
-    color: #337ab7;
-     text-decoration: none; 
-     background-color: #f5f5f5; 
-     border: 0px solid #ddd; 
+  padding: 0px 5px; 
+  margin-left: -1px; 
+  line-height: 1.42857143; 
+  color: #337ab7;
+  text-decoration: none; 
+  background-color: #f5f5f5; 
+  border: 0px solid #ddd; 
 }
-
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-
-   
-    cursor: default;
-    
-    border-color: #337ab7;
-}
-
 
 .list-group > ul > li{
   margin-top: 10px;
 }
 
-    fieldset 
-  {
-    border: 1px solid #ddd !important;
-    margin: 0;
-    xmin-width: 0;
-    padding: 10px;       
-    position: relative;
-    border-radius:4px;
-    background-color:#f5f5f5;
-    padding-left:10px!important;
-  } 
-  
-    legend
-    {
-      font-size:14px;
-      font-weight:bold;
-      margin-bottom: 0px; 
-      width: 35%; 
-      border: 1px solid #ddd;
-      border-radius: 4px; 
-      padding: 5px 5px 5px 10px; 
-      background-color: #ffffff;
-    }
+fieldset 
+{
+  border: 1px solid #ddd !important;
+  margin: 0;
+  xmin-width: 0;
+  padding: 10px;       
+  position: relative;
+  border-radius:4px;
+  background-color:#f5f5f5;
+  padding-left:10px!important;
+} 
 
-    .panel{
-      margin-bottom: 0px;
-    }
-    .panel-body {
-     padding: 0px; 
+legend
+{
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom: 0px; 
+  width: 35%; 
+  border: 1px solid #ddd;
+  border-radius: 4px; 
+  padding: 5px 5px 5px 10px; 
+  background-color: #ffffff;
 }
 
+.panel{
+  margin-bottom: 0px;
+}
+.panel-body {
+  padding: 0px; 
+}

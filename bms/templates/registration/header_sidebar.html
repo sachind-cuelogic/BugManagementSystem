@@ -28,12 +28,11 @@
                 <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
             </div>
 
-
-
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
                     <form class="navbar-form navbar-left" action="#">
+
                         <div class="input-group">
                             <input class="form-control" placeholder="Search..." id="query" name="search" value="" type="text">
                             <div class="input-group-btn">
@@ -78,13 +77,15 @@
                 </ul>
 
             <form class="form-inline project-dropdown" method="get" action="" id="frmprojectlist">
+            <div class="form-group header-project-name">
+                    <label for="prod_name" class="control-label project-name-label">Project Name:</label>
                     <select id="project_id" name="pid" class="selectpicker form-control">
                         {% for pt in project_name_list %}
                        
                         <option value="{{pt.id}}" {%if request.session.pid == pt.id%} selected{%endif%}>{{pt.prod_name}}</option>
                         {% endfor %}
                     </select>
-               
+               </div>
             </form>
 
 
