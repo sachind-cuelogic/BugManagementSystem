@@ -177,18 +177,19 @@ def create_bug(request):
         current_user = request.user
     pid=0
 
-    if request.session.has_key('pid'):
-        pid = request.session['pid']
-    
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+
     project_name_list = header_sidebar(request)
 
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
+        
         if pid == 0:
             intcount = 0
             for projectIds in project_name: 
                 if intcount == 0:
-                    pid = projectIds.id
+                    pid = projectIds.product_id
                 intcount += 1 
         
         bug_type = BugType.objects.all()
@@ -299,8 +300,6 @@ def bug_list(request):
 
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
-            
-
 
         bugdata = json.dumps(bug_response,cls=DjangoJSONEncoder)
 
