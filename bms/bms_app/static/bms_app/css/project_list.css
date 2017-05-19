@@ -1,5 +1,5 @@
 .table>tbody>tr>td {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
 }
 
@@ -19,6 +19,7 @@
 tr td:first-child:before{
   counter-increment: Serial;    
   content:counter(Serial); 
+  text-align: center;
 }
 
 .table-responsive{

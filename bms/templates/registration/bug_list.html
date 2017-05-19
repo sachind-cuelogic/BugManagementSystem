@@ -7,182 +7,162 @@
 {% endblock %}
 
 {% block content %}
-{% for bugmessage in messages %}=
+{% for bugmessage in messages %}
 <div id="bug-message"></div>
 {% endfor %}
 
+
+
 <div class="page-header"><p class="title">Task List</p></div>
   
-<form class="form-inline project-dropdown" >
-  <div class="form-group">
-    <label class="control-label">Project name:</label>
-    <select id="project_id" name="project_id" class="selectpicker form-control">
-            {% for pt in project_name_list %}
-            <option value="{{pt.id}}" {%if pid == pt.id%} selected {%endif%}>{{pt.prod_name}}</option>
-            {% endfor %}
-    </select>
-  </div>
-</form>
+    {% if bug_data %}
+    <div class="row bug-list-row">
+        <div class="col-md-4">
+            <div id="col1" class="well bug-list-background">
+                <div class="list-group" id="listgroup">
+                    <input type="text" placeholder="Search..." class="search"/>
+                    <ul class="list list-unstyled">
+                        {% for pt in bug_data %}
+                        <li>
+                            <a href="#" class="list-group-item bug-list bug" name="bug" id="{{pt.id}}" val="{{pt.projectid}}">
+                                <h4 class="list-group-item-heading" value={{pt.id}}>Bug Id - {{pt.id}}</h4>
+                                <p class="list-group-item-text">{{pt.prod_name}} : {{pt.title}}</p>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="pagination"></ul>
+                </div>
+            </div>
+        </div>
 
-{% if bug_data %}
-<div class="row bug-list-row">
-    <div class="table-responsive">
-        <table id="bug-table" class="table">
-        <thead>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-            <tbody>
-                <tr>
-                    <td class="col-md-5">
-                        <div class="col-md-12">
-                            <div id="col1" class="well bug-list-background">
-                                <div class="list-group">
-                                    <table class="table table-bordered table-striped" id="bug-list-column">
-                                        <thead>
-                                            <tr>
-                                                <th>Bug List</th>
-                                            </tr>
-                                        </thead>    
-                                    <tbody>
-                                        {% for pt in bug_data %}
-                                        <tr>
-                                            <td> 
-                                                <a href="#" class="list-group-item bug-list bug" name="bug" id="{{pt.id}}" val="{{pt.projectid}}">
-                                                    <h4 class="list-group-item-heading" value={{pt.id}}>Bug Id - {{pt.id}}</h4>
-                                                    <p class="list-group-item-text">{{pt.prod_name}} : {{pt.title}}</p>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+        <div class="col-md-8">
+            <div id="col2">
+                <div class="well bug-list-background">
+                    <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                        <input type="hidden" id="csrf" value="{%csrf_token%}">
+
+                        <div class="form-group">
+                            <label for="title" class="control-label col-sm-3 col-sm-offset-1">Bug Title:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="title"></p>
                             </div>
                         </div>
-                    </td>
-                    <td class="col-md-7"> 
-                        <div>
-                            <div id="col2">
-                                <div class="well bug-list-background">
-                                    <form method="POST" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
-                                        <input type="hidden" id="csrf" value="{%csrf_token%}">
-                                        <div class="form-group">
-                                            <label for="title" class="control-label col-sm-3 col-sm-offset-1">Bug Title:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="title"></p>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="bug_type" class="control-label col-sm-3 col-sm-offset-1">Bug Type:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="bug_type"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="status" class="control-label col-sm-3 col-sm-offset-1">Bug Status:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="status"></p>
-                                            </div>
-                                        </div>                                
-
-                                        <div class="form-group">
-
-                                            <label for="build_version" class="control-label col-sm-3 col-sm-offset-1">Build Version:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="build_version"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="sprint_no" class="control-label col-sm-3 col-sm-offset-1">Sprint No:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="sprint_no"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="dependent_module" class="control-label col-sm-3 col-sm-offset-1">Dependent Module:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="dependent_module"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="description" class="control-label col-sm-3 col-sm-offset-1">Bug Description:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="description"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" id="nameofprodtype">
-                                            <label for="bug_owner" class="control-label col-sm-3 col-sm-offset-1">Owner:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="bug_owner"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" id="nameofprodtype">
-                                            <label for="prodType" class="control-label col-sm-3 col-sm-offset-1">Assigned To:</label>
-                                            <div class="col-sm-6">
-                                                <p class="form-control-static" id="bug_assign"></p>
-                                            </div>
-                                        </div>
-
-                                        {% if user.is_authenticated %}
-                                            <p id="username">{{ user.username }}</p>
-                                        {% endif %}
-
-                                        <div class="form-group">
-                                            <div class="comments col-sm-9 col-sm-offset-1">
-                                                <div class="list-comments comment-list" id="list-comments">
-                                                    <div id="comment-text"></div>
-                                                </div>
-
-                                                <div class="editor comment-editor">   
-                                                    <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Type your comment here..."></textarea>
-                                                </div>
-
-                                                <input class="btn btn-sm btn-block comment" id="comment" name="comment-button" type="button" value="Comment"> 
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" id="nameofbuton">
-                                            <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                                            <button class="btn btn-sm btn-primary" type="submit"> <strong>Update</strong> </button>
-
-                                        </div>
-                                    </form>
-                                </div>
+                        <div class="form-group">
+                            <label for="bug_type" class="control-label col-sm-3 col-sm-offset-1">Bug Type:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="bug_type"></p>
                             </div>
-                        </div></td>
+                        </div>
 
-                    </tr>
-                </tbody>
-            </table>
+                        <div class="form-group">
+                            <label for="status" class="control-label col-sm-3 col-sm-offset-1">Bug Status:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="status"></p>
+                            </div>
+                        </div>                                
+
+                        <div class="form-group">
+                            <label for="build_version" class="control-label col-sm-3 col-sm-offset-1">Build Version:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="build_version"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sprint_no" class="control-label col-sm-3 col-sm-offset-1">Sprint No:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="sprint_no"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="dependent_module" class="control-label col-sm-3 col-sm-offset-1">Dependent Module:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="dependent_module"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="control-label col-sm-3 col-sm-offset-1">Bug Description:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="description"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="nameofprodtype">
+                            <label for="bug_owner" class="control-label col-sm-3 col-sm-offset-1">Owner:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="bug_owner"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="nameofprodtype">
+                            <label for="prodType" class="control-label col-sm-3 col-sm-offset-1">Assigned To:</label>
+                            <div class="col-sm-6">
+                                <p class="form-control-static" id="bug_assign"></p>
+                            </div>
+                        </div>
+
+                        {% if user.is_authenticated %}
+                            <p id="username">{{ user.username }}</p>
+                        {% endif %}
+
+                        <div class="form-group">
+
+                            <div class="comments col-sm-10 col-sm-offset-1">
+                            <fieldset>     
+                                <legend>Previous Comments</legend>
+                                <div class="panel panel-default">
+                                    <div class="panel-body comment-list">
+                                        <div id="comment-text"></div>
+                                    </div>
+                                </div>
+                                    
+                            </fieldset>             
+                                
+                                <div class="clearfix"></div>
+       
+
+                                <div class="editor comment-editor">   
+                                    <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Type your comment here..."></textarea>
+                                </div>
+
+                                <input class="btn btn-sm btn-block comment" id="comment" name="comment-button" type="button" value="Add Comment"> 
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="nameofbuton">
+                            <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                            <button class="btn btn-sm btn-primary" type="submit"> <strong>Update</strong> </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
-{% else %}
-<div class="alert alert-info alert-message">
-    Records Not Found.
-</div>
-{% endif %}
+    <p>{{Comments.comment_time}}</p>
 
+    {% else %}
+    <div class="alert alert-info alert-message">
+        Records Not Found.
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block jsfile %}
 <script type="text/javascript" src="{% static 'bms_app/js/notify.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/bug_view.js' %}"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>  
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 {% endblock %}
 
 
-
+    
 

@@ -17,5 +17,12 @@ $(document).ready(function() {
     });
 
     $("[data-toggle=tooltip]").tooltip();
+});
+
+$(document).ready(function() {
+
+    $('#project_id').change(function() {
+     $("#frmprojectlist").submit();
+ });
 
 });

@@ -1,29 +1,27 @@
-#cancel-button{
-    margin-right: 20px;
-}
-
-.selected-user-role{
-	margin: -10px;
-}
 
 .user-box{
 	margin-bottom: -15px;
 }
 
 .panel-body {
-    padding: 30px;
+    padding: 10px 10px 0px 10px;
 }
 
 .modal-body {
-    height: 170px;
-    overflow-y: auto;
+	height: 170px;
+	overflow-y: auto;
 }
 
 .form-inline > div{
-    padding-bottom: 15px;
+	padding-bottom: 15px;
 }
 
-.placeholder{color: #808080;}
+.project-row{
+	padding-top: 20px;	
+}
+.placeholder{
+	color: #808080;
+}
 
 #name-of-file
 {
@@ -32,8 +30,85 @@
 
 @media (max-width: 767px){
 
-#nameofbuton{
+	#nameofbuton{
+		text-align: center;
+	}
+
+}
+
+.image-preview-input {
+	position: relative;
+	overflow: hidden;
+	margin: 0px;    
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+	margin-left:2px;
+}
+.modal-title{
+	margin-left: 30px;
+}
+
+.remove{
+    margin-right: 10px;
+}
+
+.glyphicon-remove{
+	font-size: 14px;
+	top: 0px;
+}
+
+#user-role{
+	margin-left: 5px;
+}
+
+#submit-sample-data{
+	float: right;
+}
+
+#get_username{
+	display: none;
+}
+
+.selected-user-name{
+    padding-left: 10px;
+    width: 180px;
+    max-width: 180px;
+    display: inline-block;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+#dash{
+	padding-right: 10px;
 	text-align: center;
 }
 
+#user-count{
+    background-color: #81d4e4;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+@media (max-width: 767px){
+#user-role{
+	margin: 15px 0px 15px 0px;
+}
+#submit-sample-data{
+	float: right;
+}
 }

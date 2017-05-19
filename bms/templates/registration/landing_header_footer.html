@@ -59,12 +59,14 @@
 						</button>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
+					{% with request.resolver_match.url_name as url_name %}
 						<ul class="nav navbar-nav">
 							<li><a href="#">Languages</a></li>
-							<li><a href="/privacy">Privacy Policy</a></li>
-							<li><a href="/terms_use">Terms of use</a></li>
+							<li class="{% if url_name == 'privacy' %}active{% endif %}"><a href="/privacy">Privacy Policy</a></li>
+							<li class="{% if url_name == 'terms_use' %}active{% endif %}"><a href="/terms_use">Terms of use</a></li>
 							<li><a href="#">Copyright@2017 Cuelogic</a></li>
 						</ul>
+					{% endwith %}
 						<ul class="nav navbar-nav navbar-right">
 							<div class="social">
 								<ul>
