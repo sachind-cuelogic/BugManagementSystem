@@ -126,7 +126,9 @@ body, html{
 }
 
 .page-header{
-    margin-top: 60px;
+    padding-bottom: 9px;
+    margin: 70px 0 0px; 
+    border-bottom: 1px solid #eee;
 
 }
 .form-group.required .control-label:after {

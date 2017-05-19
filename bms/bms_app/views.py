@@ -153,22 +153,22 @@ def delete_project(request):
     if request.user.is_authenticated():
         current_user = request.user
 
-        if request.method == 'POST':
-            del_project = request.POST.get("del_proj_id")
+    if request.method == 'POST':
+        del_project = request.POST.get("del_proj_id")
 
-            check_admin = ProductUser.objects.filter(product_id=del_project,
-                                prod_user_id=current_user.id, prod_user_role_id=8)
+        check_admin = ProductUser.objects.filter(product_id=del_project,
+                            prod_user_id=current_user.id, prod_user_role_id=8)
 
-            if check_admin:
+        if check_admin:
 
-                ProductDetails.objects.filter(id=del_project).delete()
+            ProductDetails.objects.filter(id=del_project).delete()
 
-                return HttpResponse(json.dumps({'success': True}), 
-                                content_type="application/json")
-            else:
-           
-                return HttpResponse(json.dumps({'success': False}), 
-                                content_type="application/json")
+            return HttpResponse(json.dumps({'success': True}), 
+                            content_type="application/json")
+        else:
+       
+            return HttpResponse(json.dumps({'success': False}), 
+                            content_type="application/json")
 
 
 @login_required(login_url='/login/')
@@ -314,8 +314,6 @@ def comment_section(request):
         current_time = datetime.datetime.now().replace(second=0, microsecond=0)
         return render(request, 'registration/bug_list.html',{'current_time':current_time})
 
-
- 
     if request.method == 'POST':
         if request.user.is_authenticated():
             current_user = request.user

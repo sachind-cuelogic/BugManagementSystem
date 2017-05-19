@@ -51,13 +51,13 @@ $(document).ready(function() {
         htmlUser += "<span id='dash'> : </span>";
         htmlUser += "<span>"+user_role+"</span>";
         htmlUser += "<span class='selected-role-id' style='display: none;'>"+user_role_id+"</span>";
-        htmlUser += "<span class='remove pull-right' id='removeBtn'>" + "x" + "</span>";
+        htmlUser += "<span class='remove pull-right' id='removeBtn'>" + "X" + "</span>";
         htmlUser += "</div>";
 
         $("#user_info").append(htmlUser);
 
         $('#user-name').each(function() {
-            $(this).find(":selected").remove();
+            /*$(this).find(":selected").remove();*/
             $('option[value=' + $(this).val() + ']').remove();
         });
 });

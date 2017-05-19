@@ -1,14 +1,10 @@
 
-.selected-user-role{
-	margin: -10px;
-}
-
 .user-box{
 	margin-bottom: -15px;
 }
 
 .panel-body {
-	padding: 30px;
+    padding: 10px 10px 0px 10px;
 }
 
 .modal-body {
@@ -68,18 +64,16 @@
 
 .remove{
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
 	background: #da4f49;
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;
 	margin-right: 20px;
+	margin-top: 2px;
 }
 
-.panel-body > .form-group > div{
-	margin-bottom: 8px;
-}
 #user-role{
 	margin-left: 5px;
 }
@@ -105,4 +99,5 @@
 #user-count{
 	background-color: #81d4e4;
 	border-radius: 8px;
+	margin-bottom: 10px;
 }
