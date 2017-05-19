@@ -19,6 +19,11 @@ from .models import BugDetails, Comments
 from .forms import Bug_Details_Form, comment_form
 from django.core import serializers
 from itertools import chain
+import datetime
+from django.utils.timezone import utc
+from django.utils.timezone import localtime, now
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 def home(request):
     return render(request, 'bms_app/home.html')
@@ -73,18 +78,21 @@ def login(request):
         return HttpResponseRedirect('/login')
 
 def website_home(request):
-    return render(request, 'registration/website_home.html')
+    project_name_list = header_sidebar(request)
+    return render(request, 'registration/website_home.html',{'project_name_list':project_name_list})
 
 @login_required(login_url='/login/')
 def create_project(request):
 
+    project_name_list = header_sidebar(request)
+    
     if request.method == 'GET':
         users = User.objects.all()
         roles = UserRole.objects.all()
         prod_types = ProjectType.objects.all()
 
         return render(request, 'registration/create_project.html', 
-            {'users': users, 'roles': roles, 'prod_types': prod_types})
+            {'users': users, 'roles': roles, 'prod_types': prod_types,'project_name_list':project_name_list})
     else:
         data = request.POST
         data1 = request.FILES
@@ -119,6 +127,8 @@ def create_project(request):
 @login_required(login_url='/login/')
 def project_list(request):
 
+    project_name_list = header_sidebar(request)
+
     if request.user.is_authenticated():
         current_user = request.user
         user_list = ProductUser.objects.raw("SELECT "
@@ -134,7 +144,7 @@ def project_list(request):
 
         messages.success(request, "You have successfully created project!")
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list)})
+                        {'user_list': list(user_list),'project_name_list':project_name_list})
 
 
     return render(request, 'registration/project_list.html')
@@ -143,22 +153,22 @@ def delete_project(request):
     if request.user.is_authenticated():
         current_user = request.user
 
-        if request.method == 'POST':
-            del_project = request.POST.get("del_proj_id")
+    if request.method == 'POST':
+        del_project = request.POST.get("del_proj_id")
 
-            check_admin = ProductUser.objects.filter(product_id=del_project,
-                                prod_user_id=current_user.id, prod_user_role_id=8)
+        check_admin = ProductUser.objects.filter(product_id=del_project,
+                            prod_user_id=current_user.id, prod_user_role_id=8)
 
-            if check_admin:
+        if check_admin:
 
-                ProductDetails.objects.filter(id=del_project).delete()
+            ProductDetails.objects.filter(id=del_project).delete()
 
-                return HttpResponse(json.dumps({'success': True}), 
-                                content_type="application/json")
-            else:
-           
-                return HttpResponse(json.dumps({'success': False}), 
-                                content_type="application/json")
+            return HttpResponse(json.dumps({'success': True}), 
+                            content_type="application/json")
+        else:
+       
+            return HttpResponse(json.dumps({'success': False}), 
+                            content_type="application/json")
 
 
 @login_required(login_url='/login/')
@@ -166,16 +176,20 @@ def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
     pid=0
+
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
 
+    project_name_list = header_sidebar(request)
+
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
+        
         if pid == 0:
             intcount = 0
             for projectIds in project_name: 
                 if intcount == 0:
-                    pid = projectIds.id
+                    pid = projectIds.product_id
                 intcount += 1 
         
         bug_type = BugType.objects.all()
@@ -189,7 +203,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner, 'pid':pid})
+            'bug_owner':bug_owner,'project_name_list':project_name_list})
 
     if request.method == 'POST':
         
@@ -211,20 +225,21 @@ def create_bug(request):
 def bug_list(request):
     if request.user.is_authenticated():
         current_user = request.user
+    pid=0
 
-    pid = 0
+    if request.session.has_key('pid'):
+        pid = request.session['pid']
+
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
 
-    if request.method == 'GET':
-        project_name_list = ProductDetails.objects.raw("SELECT *"
-            "FROM bms_app_productdetails pd "
-            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
-            "where pu.prod_user_id = %s ", [current_user.id])
+    project_name_list = header_sidebar(request)
 
+    if request.method == 'GET':
+        
         if pid == 0:
             intcount = 0
-            for projectIds in project_name_list: 
+            for projectIds in header_sidebar(request): 
                 if intcount == 0:
                     pid = projectIds.id
                 intcount += 1 
@@ -239,8 +254,7 @@ def bug_list(request):
             "where pu.prod_user_id = %s and pd.id = %s ", [current_user.id, pid])
        
         return render(request, 'registration/bug_list.html', 
-                        {'bug_data': list(bug_data),
-                        'project_name_list' :project_name_list,'pid' : pid })
+                        {'bug_data': list(bug_data),'project_name_list':project_name_list})
 
     if request.method == 'POST':
 
@@ -249,10 +263,11 @@ def bug_list(request):
 
         bug_comment =  get_comments(bugid)
 
+
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, "
-            "bd.description, bd.bug_file, bd.bug_assigned_to_id, bd.bug_owner_id, "
-            "bd.bug_type_id, bd.status_id, bd.dependent_module, bs.status_name, "
+            "bd.description, bd.bug_file, "
+            "bd.dependent_module, bs.status_name, "
             "bt.bug_name, au.username as bugowner, auu.username as bugassign "
             "FROM bms_app_bugdetails bd "
             "JOIN bms_app_productdetails pd on pd.id=bd.project_name_id "
@@ -280,19 +295,24 @@ def bug_list(request):
             }
 
             bug_comment_list = []       
-            for x in bug_comment.values("comment", "user__username"):
+            for x in bug_comment.values("comment", "user__username","comment_time"):
                 bug_comment_list.append(x)
 
             bug_response.append(bug_data)
             bug_response.append(bug_comment_list)
-            
-        bugdata = json.dumps(bug_response)
+
+        bugdata = json.dumps(bug_response,cls=DjangoJSONEncoder)
 
         return HttpResponse(bugdata, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
 
 def comment_section(request):
+
+    if request.method == 'GET':
+
+        current_time = datetime.datetime.now().replace(second=0, microsecond=0)
+        return render(request, 'registration/bug_list.html',{'current_time':current_time})
 
     if request.method == 'POST':
         if request.user.is_authenticated():
@@ -302,16 +322,18 @@ def comment_section(request):
             bid = request.POST.get("bid")
             userid = current_user.id
 
+            current_time = datetime.datetime.now().replace(second=0, microsecond=0)
+
             commment_save = Comments(comment=comment_text,
                                         bug_id=bid,
-                                        user_id=userid)
+                                        user_id=userid,
+                                        comment_time=current_time)
             commment_save.save()  
 
         comment_data = serializers.serialize('json',{})
         return HttpResponse(comment_data, content_type='application/json')
 
     return render(request, 'registration/bug_list.html')
-
 
 def services(request):
     return render(request, 'registration/services.html')
@@ -323,13 +345,11 @@ def contact_us(request):
     return render(request, 'registration/contact.html')
 
 def privacy(request):
-    return render(request, {'privacy': 'privacy'} ,'registration/privacy.html')
+    return render(request, 'registration/privacy.html')
 
 def terms_use(request):
     return render(request, 'registration/terms_use.html')
 
-def header_sidebar(request):
-    return render(request, 'registration/header_sidebar.html')
 
 def landing_header_footer(request):
     return render(request, 'registration/landing_header_footer.html')
@@ -337,3 +357,23 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
+
+
+def header_sidebar(request):
+    if request.user.is_authenticated():
+        current_user = request.user
+
+    if request.session.has_key('pid'):
+        pid = request.session['pid']
+
+    if request.GET.get('pid'):
+        pid = int(request.GET.get('pid'))
+        request.session['pid'] = pid
+
+    project_name_list = ProductDetails.objects.raw("SELECT *"
+            "FROM bms_app_productdetails pd "
+            "JOIN bms_app_productuser pu on pu.product_id=pd.id "
+            "where pu.prod_user_id = %s ", [current_user.id])
+    
+    return project_name_list
+    

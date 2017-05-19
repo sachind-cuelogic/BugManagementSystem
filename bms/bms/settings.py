@@ -10,8 +10,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['172.21.32.79','stagedhost','127.0.0.1']
 
-
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bug.system.app1@gmail.com'
@@ -95,7 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
 

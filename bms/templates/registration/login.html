@@ -2,7 +2,7 @@
 {% load static %} 
 {% block cssfile %}
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/common_login_layout.css' %}"> {% endblock %} {% block content %} {% for message in messages %}
-<div id="message"></div>
+<div id="register-message"></div>
 {% endfor %} {% if form.errors %}
 <div class="alert alert-danger" role="alert">
     <strong>Your username and password didn't match. Please try again.</strong>

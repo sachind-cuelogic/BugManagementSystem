@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 
 class ProjectType(models.Model):
     project_type_name = models.CharField(max_length=50)
@@ -66,6 +67,7 @@ class Comments(models.Model):
     user = models.ForeignKey(User)
     bug = models.ForeignKey(BugDetails,null=True)
     comment = models.TextField()
+    comment_time = models.DateTimeField(default = datetime.now, blank=True)
 
     def __unicode__(self):
         return self.comment

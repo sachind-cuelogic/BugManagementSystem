@@ -38,26 +38,25 @@ $(document).ready(function() {
             data:{ bug_id: bug_id},  
             dataType: "JSON",
             type: 'POST',
-            url: "bug_list/",
+            url: "../bug_list/",
             success: function(result) 
             {
 
-              jQuery('#comment-text').html('');
-              for(var i = 0; i < result[1].length; i++) 
-              {
-                $("#comment-text").prepend('<div><b>' + result[1][i]['user__username']  +"</b>: "+result[1][i]['comment'] + '</div><hr>');
+                jQuery('#comment-text').html('');
+                for(var i = 0; i < result[1].length; i++) 
+                {
+                    $("#comment-text").prepend('<div><b>' + result[1][i]['user__username'] +"</b>: "+result[1][i]['comment'] +'</div><hr>');
+                }
 
-              }
-
-              $("#title").text(result[0]['title']);
-              $("#bug_type").text(result[0]['bug_type']);
-              $("#status").text(result[0]['status']);
-              $("#build_version").text(result[0]['build_version']);
-              $("#sprint_no").text(result[0]['sprint_no']);
-              $("#dependent_module").text(result[0]['dependent_module']);
-              $("#description").text(result[0]['description']);
-              $("#bug_owner").text(result[0]['bug_owner']);
-              $("#bug_assign").text(result[0]['bug_assign']);
+                $("#title").text(result[0]['title']);
+                $("#bug_type").text(result[0]['bug_type']);
+                $("#status").text(result[0]['status']);
+                $("#build_version").text(result[0]['build_version']);
+                $("#sprint_no").text(result[0]['sprint_no']);
+                $("#dependent_module").text(result[0]['dependent_module']);
+                $("#description").text(result[0]['description']);
+                $("#bug_owner").text(result[0]['bug_owner']);
+                $("#bug_assign").text(result[0]['bug_assign']);
 
             }
         });
@@ -108,7 +107,6 @@ $(function(){
     
     $('.list-group a').click(function(e) {
         e.preventDefault()
-        
         $that = $(this);
         $('.list-group').find('a').removeClass('active');
         $that.addClass('active');
@@ -116,13 +114,14 @@ $(function(){
     $('a.bug').eq(0).trigger('click')
 })
 
-/* pass project id to view */
-
-$('#project_id').change(function() {
-    var selected_proj_id = $(this).val();
-    window.location = "/bug_list/?pid="+selected_proj_id;
+var pageList = new List('listgroup', {
+  valueNames: ['bug'],
+  page: 10,
+  pagination: true
 });
-    $('#bug-list-column').DataTable();
+
+
+$(".pagination").removeAttr("style");
 
 });
 

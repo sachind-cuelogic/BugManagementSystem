@@ -28,37 +28,64 @@ $(document).ready(function() {
         }
     });
 
+    var getuser = $('#get_username').text();
+
+    var select=document.getElementById('user-name');
+
+    for (i=0;i<select.length;  i++) {
+       if (select.options[i].value==getuser) {
+         select.remove(i);
+       }
+    }
+
     $("#submit-sample-data").on("click", function () {
-        if($('.user-name').length){
-            
-            var htmlUser = "";
-            for (i = 0; i <= ($('.user-name').length-1); i++) {
 
-                    var user_name = $(".user-name option:selected").eq(i).text();
-                    var user_role = $(".user-role option:selected").eq(i).text();
-                    
+        var htmlUser = "";
+        var user_name = $(".user-name option:selected").text();
+        var user_id = $(".user-name option:selected").val();
+        var user_role = $(".user-role option:selected").text(); 
+        var user_role_id = $(".user-role option:selected").val(); 
+        htmlUser += "<div id='user-count'>";
+        htmlUser += "<span class='selected-user-name'>"+user_name+"</span>";        
+        htmlUser += "<span class='selected-user-id' style='display: none;'>"+user_id+"</span>";
+        htmlUser += "<span id='dash'> : </span>";
+        htmlUser += "<span>"+user_role+"</span>";
+        htmlUser += "<span class='selected-role-id' style='display: none;'>"+user_role_id+"</span>";
+        htmlUser += "<span class='remove pull-right close' id='removeBtn aria-label='Close''>" + "<span class='glyphicon glyphicon-remove'></span>" + "</span>";
+        htmlUser += "</div>";
 
-                    htmlUser += "<div>";
-                    htmlUser += "<span>"+user_name+" - "+"</span>";
-                    htmlUser += "<span>"+user_role+"</span>";
-                    htmlUser += "</div>";
-            }
+        $("#user_info").append(htmlUser);
 
-            $("#user_info").show();
-            $("#user_info").html(htmlUser);
-        }
+        $('#user-name').each(function() {
+            $('option[value=' + $(this).val() + ']').remove();
+        });
+});
+ 
+    $(".selected-user-role").on("click", ".remove", function(){
+        var removeUser = $(this).siblings(".selected-user-name").text();
+        var removeUserId = $(this).siblings(".selected-user-id").text();
+        $(this).parent().remove();
+
+        $('#user-name').append($('<option>', {
+            value: removeUserId,
+            text: removeUser
+        }));
+
     });
 
     $('#file-form').on('submit', function(event) {
         event.preventDefault();
         user_data = []
-        if($('.user-name').length){
-            for (i = 0; i <= ($('.user-name').length-1); i++) {
+        if($('.selected-user-role div').length){
+            for (i = 0; i <= ($('.selected-user-role div').length-1); i++) {
                 user_data.push({
-                    'user_id': $('.user-name').eq(i).val(),
-                    'user_role': $('.user-role').eq(i).val()
+                    'user_id': $('.selected-user-id').eq(i).text(),
+                    'user_role': $('.selected-role-id').eq(i).text()
                 })
             }
+        }
+        else{
+            
         }
         var ptype = $('#producttype').val()
         formdata = new FormData(this);
