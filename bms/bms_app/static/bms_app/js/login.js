@@ -1,5 +1,5 @@
 
-if(document.getElementById('message')!==null)
+if(document.getElementById('register-message')!= null)
 {
 	$.notify.defaults({ className: "success" })
 	$.notify( 

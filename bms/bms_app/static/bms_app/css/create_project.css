@@ -63,15 +63,12 @@
 }
 
 .remove{
-	display: block;
-	width: 15px;
-	height: 15px;
-	background: #da4f49;
-	border-radius: 5px;
-	text-align: center;
-	cursor: pointer;
-	margin-right: 20px;
-	margin-top: 2px;
+    margin-right: 10px;
+}
+
+.glyphicon-remove{
+	font-size: 14px;
+	top: 0px;
 }
 
 #user-role{
@@ -87,17 +84,31 @@
 }
 
 .selected-user-name{
-	padding-left: 20px;
+    padding-left: 10px;
+    width: 180px;
+    max-width: 180px;
+    display: inline-block;
+    vertical-align: top;
+    word-wrap: break-word;
 }
 
 #dash{
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-right: 10px;
 	text-align: center;
 }
 
 #user-count{
-	background-color: #81d4e4;
-	border-radius: 8px;
-	margin-bottom: 10px;
+    background-color: #81d4e4;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+@media (max-width: 767px){
+#user-role{
+	margin: 15px 0px 15px 0px;
+}
+#submit-sample-data{
+	float: right;
+}
 }
