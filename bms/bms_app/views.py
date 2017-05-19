@@ -295,7 +295,7 @@ def bug_list(request):
             }
 
             bug_comment_list = []       
-            for x in bug_comment.values("comment", "user__username","comment_time"):
+            for x in bug_comment.values("comment", "user__username"):
                 bug_comment_list.append(x)
 
             bug_response.append(bug_data)
@@ -309,11 +309,6 @@ def bug_list(request):
 
 def comment_section(request):
 
-    if request.method == 'GET':
-
-        current_time = datetime.datetime.now().replace(second=0, microsecond=0)
-        return render(request, 'registration/bug_list.html',{'current_time':current_time})
-
     if request.method == 'POST':
         if request.user.is_authenticated():
             current_user = request.user
@@ -322,12 +317,9 @@ def comment_section(request):
             bid = request.POST.get("bid")
             userid = current_user.id
 
-            current_time = datetime.datetime.now().replace(second=0, microsecond=0)
-
             commment_save = Comments(comment=comment_text,
                                         bug_id=bid,
-                                        user_id=userid,
-                                        comment_time=current_time)
+                                        user_id=userid)
             commment_save.save()  
 
         comment_data = serializers.serialize('json',{})
