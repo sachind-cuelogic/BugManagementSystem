@@ -67,7 +67,6 @@ class Comments(models.Model):
     user = models.ForeignKey(User)
     bug = models.ForeignKey(BugDetails,null=True)
     comment = models.TextField()
-    comment_time = models.DateTimeField(default = datetime.now, blank=True)
 
     def __unicode__(self):
         return self.comment
