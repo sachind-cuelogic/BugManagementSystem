@@ -1,23 +1,26 @@
 {% extends "registration/header_sidebar.html" %}
+{% block title %}Project List{% endblock %}
 {% load static %}
 
-{% block content %}
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/project_list.css' %}">
+{% endblock %}
 
+{% block content %}
 <div class="page-header"><p class="title">Project List</p></div>
 <div class="col-md-12" id="table-row">
     <div class="table-responsive">
         {% if user_list %}
         <table id="mytable" class="table table-bordered table-striped">
-            <thead>
+            <thead align="left">
                 <th> Sr. No </th>
-                <th data-filter-control="input" data-sortable="true">Project Id</th>
+                <th>Project Id</th>
                 <th>Project Name</th>
                 <th>Project Version</th>
                 <th>Access Type</th>
                 <th>Bug Count</th>
                 <th>Open Bugs</th>
                 <th>Action</th>
-
             </thead>
             <tbody>
 
@@ -35,7 +38,7 @@
 
                         <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-row-id="1166"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                        <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" id="{{ item.id }}" data-row-id="1166"> <span class="glyphicon glyphicon-trash"></span></button>
+                        <button class="btn btn-danger btn-xs delete-project-confirm" value="{{ item.product_id }}" id="{{ item.product_id }}"> <span class="glyphicon glyphicon-trash"></span></button>
 
                     </td>
                 </tr>
@@ -66,27 +69,8 @@
                             <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
                         </div>
                     </div>
-                    <div class="modal-footer ">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading">Delete this entry {{ item.id }}</h4>
-                    </div>
-                    {{ item.prod_name }}
-                    <div class="modal-body">
-                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-                    </div>
-                    <div class="modal-footer" id="{{ item.id }}">
-                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                     </div>
                 </div>
             </div>
@@ -97,6 +81,10 @@
         {% endif %}
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/project_list.css' %}">
 
+{% endblock %}
+
+{% block jsfile %}
+<script type="text/javascript" src="{% static 'bms_app/js/prod_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'bms_app/js/project_list.js' %}"></script>
 {% endblock %}
