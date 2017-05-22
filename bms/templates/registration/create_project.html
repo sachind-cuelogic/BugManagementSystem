@@ -1,4 +1,5 @@
 {% extends "registration/header_sidebar.html" %}
+{% block title %}Create Project{% endblock %}
 {% load static %}
 
 {% block cssfile %}
@@ -10,7 +11,7 @@
 
     <div class="page-header"><p class="title">Create Project</p></div>
     <div class="row project-row">
-        <div class="col-sm-6 col-sm-offset-3" id="table-row">
+        <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3" id="table-row">
             <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                 <input type="hidden" id="csrf" value="{%csrf_token%}">
                 <div class="form-group required" id="nameofprod">
@@ -39,20 +40,22 @@
                        <div class="form-inline">
                             <select id="user-name" class="user-name form-control" title="Select user for your project">
                                 {% if user.is_authenticated %}
+                         
                                 {% for pt in users %}
-                                <option value="{{pt.id}}" {% if pt.username == user.username %}selected{% endif %}>{{pt.username}}</option>
+                                <option value="{{pt.id}}">{{pt.username}}</option>
                                 {% endfor %}
 
                                 {% endif %}
                             </select>
 
                             <select id="user-role" class="user-role form-control" title="Select user role">
+                            <option>Select Role</option>
                                 {% for each in roles%}
-                                <option value="{{each.id}}" role="{{each.role}}" {% if each.id == 8 %}selected{% endif %}>{{each.role}}</option>
+                                <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
                                 {% endfor %}
                             </select>
 
-                            <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
+                            <button type="button" id="submit-sample-data" class="btn btn-sm btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
                         </div>
                     </div>
                 </div>
@@ -69,8 +72,8 @@
                                     <span class="selected-user-name">{{ user.username }}</span>
                                     <span class="selected-user-id" style="display: none;">{{ user.id }}</span>
                                     <span id="dash"> : </span>
-                                    <span>Admin</span>
-                                    <span class="selected-role-id" style="display: none;">8</span>
+                                    <span class='selected-user-role'>Admin</span>
+                                    <span class="selected-role-id" style="display: none;">4</span>
                                 </div>
                                 </div>
                             </div>
@@ -96,31 +99,29 @@
                 <div class="form-group" id="name-of-file">
                     <label for="prod_file" class="control-label col-sm-4">Upload File:</label>
                     <div class="col-sm-8">
-
-                      <div class="input-group image-preview" data-original-title="" title="">
+                      <div class="input-group image-preview" data-original-title="" title="" id="">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
                             </button>
-                            <div class="btn btn-default image-preview-input">
+                            <div class="btn btn-default image-preview-input" id="project_file">
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input id="prod_file" type="file" class="file" accept="image/png, image/jpeg, image/gif, image/jpg, .pdf, .doc" name="input-file-preview">
+                                <input id="prod_file" name="prod_file" type="file" class="file">
                             </div>
+                            <div class="help-block with-errors"></div>
                         </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
-                        
                     </div>
                 </div>
                 </div>
 
-
-                <div class="form-group" id="nameofbuton">
-                    <div class="controls col-sm-offset-3">
-                        <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                        <button class="btn btn-sm btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>
+                <div class="form-group" id="nameofversion">
+                   
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <button class="btn btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>    
+                        <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
@@ -130,5 +131,6 @@
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/file_upload.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
-
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>    
+<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 {% endblock %}

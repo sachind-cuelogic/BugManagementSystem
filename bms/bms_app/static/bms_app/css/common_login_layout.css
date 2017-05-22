@@ -43,3 +43,18 @@ body{
 #logcenter{
   text-align: center;
 }
+
+
+@media all and (orientation:landscape) { 
+
+#loginbox{
+  position: relative;
+  top: calc(50vh - 150px);
+}
+
+#register-box{
+  position: relative;
+  top: calc(50vh - 180px);
+}
+
+}

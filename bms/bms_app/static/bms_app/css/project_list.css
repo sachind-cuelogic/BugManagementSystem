@@ -16,12 +16,6 @@
     margin: 0px;
 }
 
-tr td:first-child:before{
-  counter-increment: Serial;    
-  content:counter(Serial); 
-  text-align: center;
-}
-
 .table-responsive{
     padding-top: 10px;
 }

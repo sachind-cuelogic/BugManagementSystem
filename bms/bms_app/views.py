@@ -156,8 +156,10 @@ def delete_project(request):
     if request.method == 'POST':
         del_project = request.POST.get("del_proj_id")
 
+        print "del projoect id==>",del_project
+
         check_admin = ProductUser.objects.filter(product_id=del_project,
-                            prod_user_id=current_user.id, prod_user_role_id=8)
+                            prod_user_id=current_user.id, prod_user_role_id=4)
 
         if check_admin:
 
