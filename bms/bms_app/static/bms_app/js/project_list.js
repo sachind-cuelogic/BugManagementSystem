@@ -57,3 +57,10 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+
+    $('#producttype').change(function() {
+     $("#frmprojectlist").submit();
+ });
+
+});

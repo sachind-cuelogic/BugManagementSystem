@@ -130,11 +130,11 @@ body, html{
 }
 
 .page-header{
-    padding-bottom: 9px;
     margin: 70px 0 0px; 
     border-bottom: 1px solid #eee;
-
+    padding: 0px 15px 0px 15px;
 }
+
 .form-group.required .control-label:after {
   content:"*";
   color:#FF0000;
@@ -187,3 +187,4 @@ body, html{
     margin-right: 10px;
     margin-left: 10px;
 }
+

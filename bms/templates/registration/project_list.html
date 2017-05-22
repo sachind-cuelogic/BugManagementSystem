@@ -7,7 +7,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header"><p class="title">Project List</p></div>
+<div class="page-header">
+     <h3 class="">Project List</small>
+    <div class="btn-group btn-group-sm pull-right">
+        <a class="btn btn-default create-project-button" type="button" href="/create_project/"> <strong>Create New Project </strong> </a>
+    </div>
+  </h3>
+</div>
+<form class="project-dropdown" method="get" action="" id="frmprojectlist">
+<div class="col-sm-4">
+
+    <select id="producttype" class="selectpicker form-control placeholder" required="required">
+        <option value="">Select Project Type</option>
+        {% for pt in prod_types %}
+        <option value={{pt.id}}>{{pt.project_type_name}}</option>
+        {% endfor %}
+    </select>
+
+</div>
+</form>
 <div class="col-md-12" id="table-row">
     <div class="table-responsive">
         {% if user_list %}

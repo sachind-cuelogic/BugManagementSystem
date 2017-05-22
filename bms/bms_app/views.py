@@ -131,6 +131,7 @@ def project_list(request):
 
     if request.user.is_authenticated():
         current_user = request.user
+        prod_types = ProjectType.objects.all()
         user_list = ProductUser.objects.raw("SELECT "
             "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, "
             "ur.role, pd.id as product_id, "
@@ -144,10 +145,10 @@ def project_list(request):
 
         messages.success(request, "You have successfully created project!")
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list),'project_name_list':project_name_list})
-
+                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types': prod_types})
 
     return render(request, 'registration/project_list.html')
+
 
 def delete_project(request):
     if request.user.is_authenticated():
@@ -352,6 +353,11 @@ def get_comments(bid):
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
 
+def project_list_by_status(request):
+    if request.GET.get('typeid'):
+        typeid = int(request.GET.get('typeid'))
+
+    print "type id==>",typeid
 
 def header_sidebar(request):
     if request.user.is_authenticated():
