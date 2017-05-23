@@ -57,3 +57,19 @@ $(document).ready(function() {
     });
 });
 
+
+/*$('#producttype').change(function() {
+    var selected_type_id = $(this).val();
+    window.location = "/project_list/?typeid="+selected_type_id;
+});
+
+*/
+window.onload = function() {
+    var selItem = sessionStorage.getItem("SelItem");  
+    $('#producttype').val(selItem);
+    }
+    $('#producttype').change(function() { 
+        var typeid = $(this).val();
+        sessionStorage.setItem("SelItem", typeid);
+        window.location = "/project_list/?typeid="+typeid;
+    });

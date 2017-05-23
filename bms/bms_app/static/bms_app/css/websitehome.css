@@ -1,8 +1,87 @@
-.content {
-    background: url(/static/bms_app/images/home_background.jpg);
-    background-size: cover;
-    height: calc(100vh - 50px);
-    margin-top: 28px;
-    bottom: 0px;
-    overflow: scroll;
+body{
+	background-color: #edeff5;
+
+}
+
+.menu-row{
+	padding-top: 70px;
+}
+
+.card-box {
+    border: 1px solid rgba(54, 64, 74, 0.05);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}
+.card-box .bg-icon-info {
+    background-color: #34d3eb;
+}
+.project-counter{
+   color: #34d3eb;	
+}
+
+.card-box .bg-icon {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-clip: padding-box;
+    overflow: hidden;
+}
+.text-dark {
+    color: #797979 !important;
+}
+h3 {
+    line-height: 20px;
+}
+.bg-icon{
+	margin-top: 15px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #505458;
+    font-family: "Helvetica Neue";
+    margin: 10px 0;
+}
+.card-box .bg-icon i {
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+}
+
+.card-box .bg-icon-pink {
+    background-color: #fb6d9d;
+}
+.bug-counter{
+   color: #fb6d9d;	
+}
+.card-box .bg-icon-purple {
+    background-color: #7266ba;
+}
+
+.task-counter{
+   color: #7266ba;	
+}
+.card-box .bg-icon-success {
+    background-color: #81c868;
+}
+.feature-counter{
+   color: #81c868;	
+}
+.icon-box{
+	min-height: 70px;
+	background-color: #fbfbfb;
+}
+
+.center-box{
+	display: inline-block;
+	text-align: center;
+}
+
+strong {
+    font-weight: 500;
 }
