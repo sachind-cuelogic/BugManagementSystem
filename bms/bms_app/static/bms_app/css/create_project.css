@@ -19,10 +19,10 @@
 .project-row{
 	padding-top: 20px;	
 }
+
 .placeholder{
 	color: #808080;
 }
-
 
 .image-preview-input {
 	position: relative;
@@ -32,6 +32,7 @@
 	background-color: #fff;
 	border-color: #ccc;    
 }
+
 .image-preview-input input[type=file] {
 	position: absolute;
 	top: 0;
@@ -43,6 +44,7 @@
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
+
 .image-preview-input-title {
 	margin-left:2px;
 }
@@ -82,11 +84,9 @@
     word-wrap: break-word;
 }
 
-
 .selected-user-role{
     word-wrap: break-word;
 }
-
 
 #dash{
 	padding-right: 10px;
@@ -141,9 +141,7 @@
 }
 }
 
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px){ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){ 
 
 #user-name{
 	width: 100%;
@@ -155,8 +153,7 @@ and (max-device-width : 1024px){
 }
 }
 
-@media only screen and (min-device-width: 320px)
-{
+@media only screen and (min-device-width: 320px){
 .selected-user-name{
     padding-left: 10px;
     display: inline-block;

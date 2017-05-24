@@ -18,7 +18,6 @@
 <body>
 <header>
     <nav class="navbar navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="fa fa-bars" aria-hidden="true"></span></a>
                 <a class="navbar-brand" href="/" id="logo-tag">YBTS</a>
             </div>
 
@@ -35,7 +34,7 @@
 
                     <li>
 
-                        <div class="dropdown">
+                        <div class="dropdown create-dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="header-create-btn" type="button" data-toggle="dropdown">Create
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
@@ -47,7 +46,7 @@
 
                     {% if user.is_authenticated %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user"></i> {{user.username}} <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user"></i> {{user.username}} <strong class="caret down-caret"></strong></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -56,44 +55,40 @@
                     </li>
                     {% endif %}
                 </ul>
-                <form class="navbar-form">
-                <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
-                            <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
-                        </div>
-                    </div>
+                <form role="search" class="navbar-left app-search pull-left">
+                    <input type="text" placeholder="Search..." class="form-control">
+                    <a href=""><i class="fa fa-search"></i></a>
                 </form>
             </div>
-        </div>
+  
     </nav>
 </header>
-    <div id="wrapper" class="toggled">
+    <div id="wrapper" class="">
         <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="active">
-                <a href="/website_home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="/website_home"><i class="fa fa-fw fa-dashboard side-fa"></i> Dashboard</a>
             </li>
 
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-folder-open-o"></i> Project <i class="fa fa-fw fa-caret-right"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-folder-open-o side-fa"></i> Project <i class="fa fa-fw fa-caret-right pull-right"></i></a>
                 <ul id="demo" class="collapse">
                     <li>
-                        <a href="/create_project"><i class="fa fa-fw fa-plus-circle"></i>Create Project</a>
+                        <a href="/create_project"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Project</a>
                     </li>
                     <li>
-                        <a href="/project_list"><i class="fa fa-fw fa-list"></i>Project List</a>
+                        <a href="/project_list"><i class="fa fa-fw fa-list side-fa"></i>Project List</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bug"></i> Bug <i class="fa fa-fw fa-caret-right"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bug side-fa"></i> Bug <i class="fa fa-fw fa-caret-right pull-right side-fa"></i></a>
                 <ul id="demo1" class="collapse">
                     <li>
-                        <a href="/create_bug"><i class="fa fa-fw fa-plus-circle"></i>Create Bug</a>
+                        <a href="/create_bug"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Bug</a>
                     </li>
                     <li>
-                        <a href="/bug_list"><i class="fa fa-fw fa-eye"></i>Bug View</a>
+                        <a href="/bug_list"><i class="fa fa-fw fa-eye side-fa"></i>Bug View</a>
                     </li>
                 </ul>
             </li>

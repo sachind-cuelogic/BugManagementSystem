@@ -10,7 +10,7 @@
 
     <div class="page-header"><p class="title">Create Project</p></div>
     <div class="row project-row">
-        <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3" id="table-row">
+        <div class="col-sm-8" id="table-row">
             <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                 <input type="hidden" id="csrf" value="{%csrf_token%}">
                 <div class="form-group required" id="nameofprod">

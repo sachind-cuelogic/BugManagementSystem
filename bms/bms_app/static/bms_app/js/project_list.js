@@ -17,7 +17,14 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 $(document).ready(function() {
+    if(!getParameterByName('typeid'))
+        $('#producttype').trigger('change');
     var csrftoken = getCookie('csrftoken');
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -72,4 +79,5 @@ window.onload = function() {
         var typeid = $(this).val();
         sessionStorage.setItem("SelItem", typeid);
         window.location = "/project_list/?typeid="+typeid;
+        return
     });

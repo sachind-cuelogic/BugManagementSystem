@@ -1,21 +1,15 @@
 body, html{
     height: 100%;    
 }
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+header{
+    min-height: 51px; 
 }
 
 #sidebar-wrapper {
     position: fixed;
-    left: 220px;
+    left:-220px;
     z-index: 1000;
     overflow-y: auto;
-    margin-left: -220px;
-    width: 0;
     height: 100%;
     background: #293044;
     -webkit-transition: all 0.5s ease;
@@ -23,14 +17,26 @@ body, html{
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
-#wrapper.toggled #sidebar-wrapper {
+#page-content-wrapper{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.toggled #sidebar-wrapper{
+    left:0;
+}
+#wrapper #sidebar-wrapper {
     width: 220px;
 }
-    
+
+.toggled #page-content-wrapper {
+    margin-left:220px;
+}    
 .sidebar-nav {
-    position: absolute;
+    position: relative;
     top: 0;
+    margin: 0;
     padding: 0;
     width: 220px;
     list-style: none;
@@ -45,15 +51,30 @@ body, html{
   list-style-type: none;
 
 }
+#demo, #demo1{
+    padding-left: 0px;
+}
+
+.fa-caret-right{
+    margin-top: 14px;
+}
 
 .sidebar-nav li a {
     display: block;
     color: #f5f5f5;
     text-decoration: none;
+    font-size: 15px;
+    font-weight: 300px;
+    padding: 10px 0;
+    border-bottom: solid 1px #343d56;
+}
+
+.sidebar-nav li ul {
+    background: #21273a;
 }
 
 .sidebar-nav li a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #343d56;
     color: #fff;
     text-decoration: none;
 }
@@ -77,135 +98,89 @@ body, html{
     color: #fff;
 }
 
-@media (min-width: 768px) {
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-    #sidebar-wrapper {
-        width: 220px;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
+@media (max-width: 768px) {
+
+.toggled #sidebar-wrapper {
+    left: 0;
+}
+#wrapper #sidebar-wrapper {
+    width: 220px;
+    z-index: 999999;
+}
+.toggled #page-content-wrapper {
+    margin-left: 0;
+}
 }
 
-#navbrand {
-    padding-left: 200px;
-}
-
-#sidebar-link{
-    padding-left: 28px;
-    margin-right: 8px;
-}
-
-.navbar-login{
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
-}
-
-.navbar-login-session{
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
-
-.icon-size{
-    font-size: 87px;
-}
 .navbar-brand {
     font-weight: bold;
+    color: #293044;;
 }
-.form-horizontal .control-label {
-    text-align: left;
+.fa-bars{
+    margin-left: 0px;
 }
-
-.title{ 
-    color:#000000; 
-    font-size:20px; 
-    font-weight: bold;
-    margin-bottom: -5px;
-}
-
-.page-header{
-    margin: 70px 0 0px; 
-    border-bottom: 1px solid #eee;
-    padding: 0px 15px 0px 15px;
-}
-
 .form-group.required .control-label:after {
   content:"*";
   color:#FF0000;
 }
 
-.side-main-menu{
-    color: #337AB7;
-}
 .navbar-inverse{
     color: #fff;
-}
-
-.content{
-    background-color: #5093e1;
-}
-
-
-@media (max-width: 767px)
-{
-.navbar-nav .open .dropdown-menu {
-    position: static;
-    float: none;
-    width: auto;
-    margin-top: 0;
-    background-color: #fff;
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
 }
 
 .project-dropdown {
     padding-top: 60px;
     text-align: center;
 }
-
-#logo-tag{
-    margin-left: 20px;
-}
-.header-project-name{
-    float: left;
-    margin-left: 50px;
-}
-.project-name-label{
-    color: #ffffff;
-    font-size: 15px;
+.down-caret{
+    margin-right: 5px;
 }
 
-.fa{
+.side-fa{
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .navbar{
     background-color: #fff;
+    box-shadow: 5px 0px 5px #9e9e9e;
 }
-
 
 #header-create-btn{
     background-color: #5093e1;
     color: #fff;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 15px;
     margin-top: 10px;
+    border:none;
 }
-.navbar-form > .form-group{
-    display: inline;
+#header-create-btn span {
+    margin-left: 5px;
 }
 
-.navbar-form > .form-group > .input-group{
-    display: table;
+.create-dropdown{
     padding-right: 15px;
 }
-header{
-    min-height: 51px; 
-    box-shadow: 5px 0px 5px #bdbdbd;
+
+.app-search {
+    position: relative;
+    margin: 10px 0px 0px 0px;
+    padding-left: 50px;
+}
+
+.app-search .form-control, .app-search .form-control:focus {
+    border: 1px solid #bdbdbd;
+    font-size: 13px;
+    color: #212121;
+    height: 30px;
+    font-weight: 400;
+}
+
+.app-search a {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    color: #c4c4cd;
+}
+.dropdown{
+    margin-right: 15px;
 }

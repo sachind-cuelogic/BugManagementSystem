@@ -1,26 +1,28 @@
 body{
-	background-color: #edeff5;
-
+    background-color: #edeff5;
 }
 
 .menu-row{
-	padding-top: 70px;
+    padding-top: 70px;
 }
 
 .card-box {
-    border: 1px solid rgba(54, 64, 74, 0.05);
+    border: 1px solid #dadee8;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
     margin-bottom: 20px;
     background-color: #ffffff;
+    display: table;
+    min-height: 92px;
+    width: 100%;
 }
 .card-box .bg-icon-info {
     background-color: #34d3eb;
 }
 .project-counter{
-   color: #34d3eb;	
+    color: #34d3eb;	
 }
 
 .card-box .bg-icon {
@@ -32,19 +34,16 @@ body{
     -moz-border-radius: 50%;
     background-clip: padding-box;
     overflow: hidden;
+    display: inline-block;
 }
-.text-dark {
-    color: #797979 !important;
-}
+
 h3 {
     line-height: 20px;
 }
-.bg-icon{
-	margin-top: 15px;
-}
+
 h1, h2, h3, h4, h5, h6 {
     color: #505458;
-    font-family: "Helvetica Neue";
+    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
     margin: 10px 0;
 }
 .card-box .bg-icon i {
@@ -57,31 +56,36 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #fb6d9d;
 }
 .bug-counter{
-   color: #fb6d9d;	
+    color: #fb6d9d;	
 }
 .card-box .bg-icon-purple {
     background-color: #7266ba;
 }
 
 .task-counter{
-   color: #7266ba;	
+    color: #7266ba;	
 }
 .card-box .bg-icon-success {
     background-color: #81c868;
 }
 .feature-counter{
-   color: #81c868;	
+    color: #81c868;	
 }
 .icon-box{
-	min-height: 70px;
-	background-color: #fbfbfb;
-}
-
-.center-box{
-	display: inline-block;
-	text-align: center;
+    background-color: #e5e9f5;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 strong {
-    font-weight: 500;
+    font-weight: 300;
+}
+
+.count-box{
+    padding-left: 10px;
+}
+.count-box h3{
+    margin: 20px 0 5px;
 }
