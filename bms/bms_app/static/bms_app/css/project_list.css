@@ -1,33 +1,126 @@
-.table>tbody>tr>td {
-    text-align: left;
-    vertical-align: middle;
+body{
+    background-color: #EEEDF2;
+}
+.page-header{
+    margin-top: 0px;
+}
+.card-box {
+    border: 1px solid #dadee8;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    display: table;
+    width: 100%;
+}
+.card-box .bg-icon-info {
+    background-color: #34d3eb;
+}
+.project-counter{
+   color: #34d3eb;  
 }
 
-.table>thead>tr>th {
+.card-box .bg-icon {
+    height: 40px;
+    width: 40px;
     text-align: center;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-clip: padding-box;
+    overflow: hidden;
+    display: inline-block;
 }
 
-.table>thead {
-    background-color: #101010;
-    color: #FFFFFF;
+h3 {
+    line-height: 20px;
 }
 
-.pagination {
-    margin: 0px;
+h1, h2, h3, h4, h5, h6 {
+    color: #505458;
+    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 10px 0;
+}
+.card-box .bg-icon i {
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
 }
 
-tr td:first-child:before{
-  counter-increment: Serial;    
-  content:counter(Serial); 
-  text-align: center;
+.card-box .bg-icon i {
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
 }
 
-.table-responsive{
-    padding-top: 10px;
+.card-box .bg-icon-pink {
+    background-color: #34d3eb;
+}
+.project-name{
+   color: #34d3eb; 
+   font-size: 20px; 
 }
 
-th:after{
-	color: #fff;
-	font-size: 12px;
-	opacity: 1.0 !important;
+.icon-box{
+    background-color: #e5e9f5;
+    display: table-cell;
+    vertical-align: middle;
+    width: 10%;
+}
+
+.count-box{
+    padding-left: 10px;
+    display: inline-block;
+    width: 50%;
+    padding-right: 10px;
+}
+.file-box{
+    display: inline-block;
+    width: 50%;
+    padding-left: 10px;
+}
+
+.count-box h3{
+    margin: 20px 0 5px;
+}
+.file-icon{
+    padding-right: 10px;
+}
+
+
+.user-count{
+    margin-top: 10px; 
+    color: #777;
+}
+
+.project-list-row{
+    padding-top: 20px;
+}
+
+.create-project-button{
+    background-color: #5093e1;
+    color: #fff;
+}
+
+.page-header h3{
+    font-size: 20px;
+}
+
+.btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.fa-file-pdf-o{
+    color: #FF0000;
+}
+
+@media (max-width: 768px) {
+
+.icon-box{
+    padding: 0 10px;
+}
+
 }

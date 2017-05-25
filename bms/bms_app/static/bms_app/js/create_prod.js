@@ -14,3 +14,4 @@ $(window).on("resize", function(){
 }); 
 
 });
+

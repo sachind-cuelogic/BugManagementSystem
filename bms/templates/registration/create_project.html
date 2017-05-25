@@ -1,4 +1,5 @@
 {% extends "registration/header_sidebar.html" %}
+{% block title %}Create Project{% endblock %}
 {% load static %}
 
 {% block cssfile %}
@@ -8,19 +9,19 @@
 {% block content %}
 
 
-    <div class="page-header"><p class="title">Create Project</p></div>
     <div class="row project-row">
-        <div class="col-sm-6 col-sm-offset-3" id="table-row">
+        <div class="col-sm-8" id="table-row">
+            <div class="page-header"><h3 class="title">Create Project</h3></div>
             <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                 <input type="hidden" id="csrf" value="{%csrf_token%}">
                 <div class="form-group required" id="nameofprod">
-                    <label for="prod_name" class="control-label col-sm-4">Project Name:</label>
+                    <label for="prod_name" class="control-label col-sm-3">Project Name:</label>
                     <div class="col-sm-8">
                         <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
                     </div>
                 </div>
                 <div class="form-group required" id="nameofprodtype">
-                    <label for="prodType" class="control-label col-sm-4">Project Type:</label>
+                    <label for="prodType" class="control-label col-sm-3">Project Type:</label>
                     <div class="col-sm-8">
                         <select id="producttype" class="selectpicker form-control placeholder" required="required">
                             <option value="">Select Project Type</option>
@@ -33,26 +34,29 @@
                 </div>
 
                 <div class="form-group" id="add-user-plus-button">
-                    <label for="add_user" class="control-label col-sm-4">Add User:</label>
+                    <label for="add_user" class="control-label col-sm-3">Add User:</label>
                     <div class="col-sm-8">
                     
-                       <div class="form-inline">
+                       <div class="form-group">
+                       <div class="col-sm-5">
                             <select id="user-name" class="user-name form-control" title="Select user for your project">
                                 {% if user.is_authenticated %}
                                 {% for pt in users %}
-                                <option value="{{pt.id}}" {% if pt.username == user.username %}selected{% endif %}>{{pt.username}}</option>
+                                <option value="{{pt.id}}">{{pt.username}}</option>
                                 {% endfor %}
-
                                 {% endif %}
                             </select>
-
+                        </div>
+                        <div class="col-sm-5">
                             <select id="user-role" class="user-role form-control" title="Select user role">
                                 {% for each in roles%}
-                                <option value="{{each.id}}" role="{{each.role}}" {% if each.id == 8 %}selected{% endif %}>{{each.role}}</option>
+                                <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
                                 {% endfor %}
                             </select>
-
+                        </div>
+                        <div class="col-sm-2">
                             <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +65,7 @@
                 <p id="get_username">{{ user.id }}</p>
 
                 <div class="form-group">
-                    <div class="col-sm-8 col-sm-offset-4 user-box">
+                    <div class="col-sm-8 col-sm-offset-3 user-box">
                         <div class="panel panel-default" id="collapseExample">
                             <div class="panel-body">
                                 <div class="selected-user-role" id="user_info">
@@ -69,8 +73,8 @@
                                     <span class="selected-user-name">{{ user.username }}</span>
                                     <span class="selected-user-id" style="display: none;">{{ user.id }}</span>
                                     <span id="dash"> : </span>
-                                    <span>Admin</span>
-                                    <span class="selected-role-id" style="display: none;">8</span>
+                                    <span class='selected-user-role'>Admin</span>
+                                    <span class="selected-role-id" style="display: none;">3</span>
                                 </div>
                                 </div>
                             </div>
@@ -82,45 +86,43 @@
 
                 
                 <div class="form-group" id="nameofversion">
-                    <label for="prod_version" class="control-label col-sm-4">Project Version:</label>
+                    <label for="prod_version" class="control-label col-sm-3">Project Version:</label>
                     <div class="col-sm-8">
                         <input type="text" name="prod_version" class="form-control" id="prod_version" placeholder="Enter your project version">
                     </div>
                 </div>
                 <div class="form-group" id="nameofdesc">
-                    <label for="prod_description" class="control-label col-sm-4">Project Description:</label>
+                    <label for="prod_description" class="control-label col-sm-3">Project Description:</label>
                     <div class="col-sm-8">
                         <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
                     </div>
                 </div>
                 <div class="form-group" id="name-of-file">
-                    <label for="prod_file" class="control-label col-sm-4">Upload File:</label>
+                    <label for="prod_file" class="control-label col-sm-3">Upload File:</label>
                     <div class="col-sm-8">
-
-                      <div class="input-group image-preview" data-original-title="" title="">
+                      <div class="input-group image-preview" data-original-title="" title="" id="">
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                            <button type="button" class="btn btn-default image-preview-clear" id="clear-button" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
                             </button>
-                            <div class="btn btn-default image-preview-input">
+                            <div class="btn btn-default image-preview-input" id="project_file">
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input id="prod_file" type="file" class="file" accept="image/png, image/jpeg, image/gif, image/jpg, .pdf, .doc" name="input-file-preview">
+                                <input id="prod_file" name="prod_file" type="file" class="file">
                             </div>
+                            <div class="help-block with-errors"></div>
                         </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
-                        
                     </div>
                 </div>
                 </div>
 
-
-                <div class="form-group" id="nameofbuton">
-                    <div class="controls col-sm-offset-3">
-                        <a class="btn btn-sm btn-primary" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                        <button class="btn btn-sm btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>
+                <div class="form-group" id="nameofversion">
+                   
+                    <div class="col-sm-8 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>    
+                        <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
@@ -130,5 +132,6 @@
 <script type="text/javascript" src="{% static 'bms_app/js/create_prod.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/file_upload.js' %}"></script>
 <script type="text/javascript" src="{% static 'bms_app/js/prod_ajax.js' %}"></script>
-
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>    
+<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 {% endblock %}

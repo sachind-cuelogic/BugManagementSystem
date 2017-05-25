@@ -17,8 +17,7 @@ class Bug_Details_Form(forms.ModelForm):
 	class Meta:
 		model = BugDetails
 		fields = ('project_name','title','bug_type','status',
-					'build_version','sprint_no','dependent_module','description',
-					'bug_owner','bug_assigned_to','bug_file',)
+					'bug_owner','bug_assigned_to',)
 		
 class comment_form(ModelForm):
 	class Meta:

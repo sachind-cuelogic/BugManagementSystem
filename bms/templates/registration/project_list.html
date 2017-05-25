@@ -1,4 +1,5 @@
 {% extends "registration/header_sidebar.html" %}
+{% block title %}Project List{% endblock %}
 {% load static %}
 
 {% block cssfile %}
@@ -6,79 +7,58 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header"><p class="title">Project List</p></div>
-<div class="col-md-12" id="table-row">
-    <div class="table-responsive">
+
+<div class="row project-list-row">
+
+    <div class="col-md-4 pull-right">
+        <div class="page-header">
+            <h3 class="">Filter</small>
+            </h3>
+        </div> 
+        <form method="get" action="" id="frmprojectlist">
+            <div class="">
+                <select id="producttype" name="producttype" class="selectpicker form-control placeholder" required="required">
+                    <option value="" disabled>Select Project Type</option>
+                    {% for pt in prod_types %}
+                    <option value="{{pt.id}}">{{pt.project_type_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form> 
+    </div>
+    <div class="col-md-8">
+        <div class="page-header">
+            <h3 class="">Project List</small>
+                <div class="pull-right">
+                    <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
+
+                </div>
+            </h3>
+        </div> 
         {% if user_list %}
-        <table id="mytable" class="table table-bordered table-striped">
-            <thead align="left">
-                <th> Sr. No </th>
-                <th>Project Id</th>
-                <th>Project Name</th>
-                <th>Project Version</th>
-                <th>Access Type</th>
-                <th>Bug Count</th>
-                <th>Open Bugs</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-
-                {% for item in user_list %}
-
-                <tr>
-                    <td> </td>
-                    <td>{{ item.product_id }}</td>
-                    <td>{{ item.prod_name }}</td>
-                    <td>{{item.prod_version}}</td>
-                    <td>{{ item.role }}</td>
-                    <td>{{ item.bugcount }}</td>
-                    <td>{{ item.openbug }}</td>
-                    <td>
-
-                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-row-id="1166"><span class="glyphicon glyphicon-pencil"></span></button>
-
-                        <button class="btn btn-danger btn-xs delete-project-confirm" value="{{ item.product_id }}" id="{{ item.product_id }}"> <span class="glyphicon glyphicon-trash"></span></button>
-
-                    </td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
+        {% for item in user_list %}
+        <div class="card-box">
+            <div class="icon-box text-center">
+                <div class="bg-icon bg-icon-pink">
+                    <i class="fa fa-mobile"></i>
+                </div>
+            </div>
+            <div class="count-box">
+                <h3 class="project-name">{{ item.prod_name }}</h3>
+                <p class="text-muted">{{ item.prod_description }}</p>
+            </div>
+            <div class="file-box">
+                <p class="user-count">Bug Count - <strong>{{ item.bugcount }}</strong></p>
+                <p class="text-muted"><i class="fa fa-file-pdf-o file-icon"></i>File Name / File Path</p>
+            </div>
+        </div>
+          {% endfor %}
         {% else %}
         <div class="alert alert-info">
             Records Not Found.
         </div>
         {% endif %}
-        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input class="form-control " type="text" placeholder="Mohsin">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control " type="text" placeholder="Irshad">
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% if user_list %}        
-        <div class="clearfix"></div>
 
-        {% endif %}
-    </div>
 </div>
 
 {% endblock %}

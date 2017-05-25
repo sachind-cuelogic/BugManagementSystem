@@ -41,3 +41,37 @@ $(function() {
     });  
 });
 
+$(document).ready(function () {
+    $('#name-of-file').bootstrapValidator({
+        live: 'enabled',
+        feedbackIcons: {
+        },
+        fields: {
+            prod_file: {
+                validators: {
+                    file: {
+                        extension: 'doc,docx,pdf,jpg,png,jpeg,xls,txt,xlsx',
+                        type: 'application/pdf,application/msword,image/jpeg,image/png,image/jpg,application/vnd.ms-excel,text/plain',
+                        maxSize: 1 * 1024 * 1024, // 5 MB
+                        message: 'The selected file is not valid, it should be (doc,docx,pdf,jpg,png,jpeg,xls,txt,xlsx) and 5 MB at maximum.'
+                    }
+                }
+            }
+        }
+    });
+
+
+/*    $('#clear-button').on('click', function () {
+        debugger;
+        document.getElementById('prod_file').value = "";
+        $('#name-of-file').bootstrapValidator('revalidateField', 'prod_file');
+    });*/
+
+
+/*$('#clear-button').on('click', function(){
+    var $form = $(this).closest("form");
+    $form.find('*').removeClass('has-success has-error glyphicon-ok glyphicon-remove');
+    $form.find('.help-block').remove();
+});
+*/
+});
