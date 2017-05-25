@@ -47,10 +47,6 @@ header{
     line-height: 40px;
 }
 
-.sidebar-nav li ul{
-  list-style-type: none;
-
-}
 #demo, #demo1{
     padding-left: 0px;
 }

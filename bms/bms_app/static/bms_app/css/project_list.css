@@ -13,7 +13,6 @@ body{
     margin-bottom: 20px;
     background-color: #ffffff;
     display: table;
-    min-height: 92px;
     width: 100%;
 }
 .card-box .bg-icon-info {
@@ -33,9 +32,7 @@ body{
     background-clip: padding-box;
     overflow: hidden;
     display: inline-block;
-
 }
-
 
 h3 {
     line-height: 20px;

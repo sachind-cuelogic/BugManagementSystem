@@ -24,7 +24,6 @@ from django.utils.timezone import utc
 from django.utils.timezone import localtime, now
 from django.core.serializers.json import DjangoJSONEncoder
 
-
 def home(request):
     return render(request, 'bms_app/home.html')
 
@@ -155,8 +154,6 @@ def delete_project(request):
 
     if request.method == 'POST':
         del_project = request.POST.get("del_proj_id")
-
-        print "del projoect id==>",del_project
 
         check_admin = ProductUser.objects.filter(product_id=del_project,
                             prod_user_id=current_user.id, prod_user_role_id=4)
@@ -350,12 +347,6 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
-
-def project_list_by_status(request):
-    if request.GET.get('typeid'):
-        typeid = int(request.GET.get('typeid'))
-
-    print "type id==>",typeid
 
 def header_sidebar(request):
     if request.user.is_authenticated():

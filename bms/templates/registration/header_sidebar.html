@@ -1,11 +1,11 @@
- {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<title>
-    {% block title %}{% endblock %}
-   </title>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +16,8 @@
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-fixed-top" role="navigation">
+    <header>
+        <nav class="navbar navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -35,78 +35,78 @@
                     <li>
 
                         <div class="dropdown create-dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="header-create-btn" type="button" data-toggle="dropdown">Create
+                            <button class="btn btn-primary dropdown-toggle" id="header-create-btn" type="button" data-toggle="dropdown">Create
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li><a href="/create_project">Create project</a></li>
                                     <li><a href="/create_bug">Create Bug</a></li>
                                 </ul>
                             </div>
+                        </li>
+
+                        {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user"></i> {{user.username}} <strong class="caret down-caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <form role="search" class="navbar-left app-search pull-left">
+                        <input type="text" placeholder="Search..." class="form-control">
+                        <a href=""><i class="fa fa-search"></i></a>
+                    </form>
+                </div>
+
+            </nav>
+        </header>
+        <div id="wrapper" class="">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="active">
+                        <a href="/website_home"><i class="fa fa-fw fa-dashboard side-fa"></i> Dashboard</a>
                     </li>
 
-                    {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user"></i> {{user.username}} <strong class="caret down-caret"></strong></a>
-                        <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-folder-open-o side-fa"></i> Project <i class="fa fa-fw fa-caret-right pull-right side-fa"></i></a>
+                        <ul id="demo" class="collapse">
                             <li>
-                                <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="/create_project"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Project</a>
+                            </li>
+                            <li>
+                                <a href="/project_list"><i class="fa fa-fw fa-list side-fa side-fa"></i>Project List</a>
                             </li>
                         </ul>
                     </li>
-                    {% endif %}
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bug side-fa"></i> Bug <i class="fa fa-fw fa-caret-right pull-right side-fa"></i></a>
+                        <ul id="demo1" class="collapse">
+                            <li>
+                                <a href="/create_bug"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Bug</a>
+                            </li>
+                            <li>
+                                <a href="/bug_list"><i class="fa fa-fw fa-eye side-fa"></i>Bug View</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-                <form role="search" class="navbar-left app-search pull-left">
-                    <input type="text" placeholder="Search..." class="form-control">
-                    <a href=""><i class="fa fa-search"></i></a>
-                </form>
             </div>
-  
-    </nav>
-</header>
-    <div id="wrapper" class="">
-        <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="active">
-                <a href="/website_home"><i class="fa fa-fw fa-dashboard side-fa"></i> Dashboard</a>
-            </li>
 
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-folder-open-o side-fa"></i> Project <i class="fa fa-fw fa-caret-right pull-right"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="/create_project"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Project</a>
-                    </li>
-                    <li>
-                        <a href="/project_list"><i class="fa fa-fw fa-list side-fa"></i>Project List</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bug side-fa"></i> Bug <i class="fa fa-fw fa-caret-right pull-right side-fa"></i></a>
-                <ul id="demo1" class="collapse">
-                    <li>
-                        <a href="/create_bug"><i class="fa fa-fw fa-plus-circle side-fa"></i>Create Bug</a>
-                    </li>
-                    <li>
-                        <a href="/bug_list"><i class="fa fa-fw fa-eye side-fa"></i>Bug View</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        </div>
-        
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                {% block content %} {% endblock %}
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    {% block content %} {% endblock %}
+                </div>
             </div>
         </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'bms_app/js/sidebar.js' %}"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    {% block jsfile %} {% endblock%}
-</body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'bms_app/js/sidebar.js' %}"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+        {% block jsfile %} {% endblock%}
+    </body>
 
-</html>
+    </html>
