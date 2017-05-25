@@ -1,0 +1,72 @@
+input{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.btn-primary{
+	background-color:  #5093e1;
+	border: none;
+	color: #fff;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #5093e1;
+}
+
+label {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: 400;
+}
+legend{
+	font-size: 14px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.form-horizontal .control-label {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.form-control {
+    border-radius: 3px;
+    border: 1px solid #ddd; 
+    color: #333;
+    height: 32px;
+    box-shadow: none;
+}
+
+.form-control:focus {
+  border-color:#ddd;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.image-preview-input {
+	position: relative;
+	overflow: hidden;
+	margin: 0px;    
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;    
+}
+
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.image-preview-input-title {
+	margin-left:2px;
+}

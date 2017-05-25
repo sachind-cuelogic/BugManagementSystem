@@ -48,7 +48,7 @@ def register(request):
                   'of the bugs which are as follows:\nAuthentication and Authorization,'
                   'Products, Bug, Attachment, Admin, Users, Configuration,'
                   'Log View, Search & View, '
-                  'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
+                  'Comments and tagging.\n\nLogin: http://172.21.31.90:8001  '
                   '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
                   ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
@@ -144,7 +144,7 @@ def project_list(request):
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id, typeid])
 
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types})
+                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types,'typeid':typeid})
    
     return render(request, 'registration/project_list.html')
 

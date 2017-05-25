@@ -2,41 +2,21 @@
 .user-box{
 	margin-bottom: -15px;
 }
-
+.page-header{
+	margin-top: 0px;
+	margin-left: 15px;
+}
+.project-row{
+	padding-top: 20px;
+}
 .panel-body {
 	padding: 10px 10px 0;
 }
-
-.page-header {
-	padding-bottom: 9px;
-	margin:  20px 0;
-	border-bottom: 1px solid #eee;
-}
-h1, h2, h3, h4, h5, h6 {
-	color: #505458;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	margin: 10px 0;
-	font-size: 20px;
-	font-weight: 500px;
+.panel{
+	margin-bottom: 15px;
+	color: #333;
 }
 
-h3 {
-	line-height: 20px;
-}
-.form-horizontal .control-label {
-	padding-top: 7px;
-	margin-bottom: 0;
-	text-align: left;
-}
-strong{
-	font-weight: 500;
-}
-label {
-	display: inline-block;
-	max-width: 100%;
-	margin-bottom: 5px;
-	font-weight: 500;
-}
 .modal-body {
 	height: 170px;
 	overflow-y: auto;
@@ -46,34 +26,10 @@ label {
 	padding-bottom: 15px;
 }
 
-.placeholder{
-	color: #808080;
+#add-user-plus-button{
+	margin-bottom: 0px;
 }
 
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;    
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;    
-}
-
-.image-preview-input input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
-}
-
-.image-preview-input-title {
-	margin-left:2px;
-}
 .modal-title{
 	margin-left: 30px;
 }
@@ -90,9 +46,6 @@ label {
 
 #submit-sample-data{
 	float: right;
-	background-color:  #5093e1;
-	border: none;
-	color: #fff;
 }
 
 #get_username{
@@ -118,22 +71,15 @@ label {
 }
 
 #user-count{
-	background-color: #81d4e4;
+	background-color: #D0D0D0;
 	border-radius: 4px;
 	margin-bottom: 10px;
 	padding: 5px 0;
 }
 
-#submit-data{
-	margin-right: 30px;
-	background-color:  #5093e1;
-	border: none;
-	color: #fff;
-}
-
 @media (max-width: 767px){
 	#user-role{
-		margin: 15px 0px;
+		margin: 15px 0px 15px 0px;
 	}
 
 	.remove{
@@ -167,18 +113,6 @@ label {
 	}
 }
 
-/*@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){ 
-
-#user-name{
-width: 100%;
-}
-#user-role{
-width: 100%;
-margin: 15px 0px 15px 0px;
-
-}
-}*/
-
 @media only screen and (min-device-width: 320px){
 	.selected-user-name{
 		padding-left: 10px;
@@ -187,7 +121,6 @@ margin: 15px 0px 15px 0px;
 		word-wrap: break-word;
 	}
 }
-
 
 @media (max-width: 767px){
 
