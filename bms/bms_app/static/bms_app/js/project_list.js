@@ -17,11 +17,6 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-/*function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-}*/
-
 $(document).ready(function() {
     if(!getParameterByName('typeid'))
         $('#producttype').trigger('change');
@@ -64,13 +59,6 @@ $(document).ready(function() {
     });
 });
 
-
-/*$('#producttype').change(function() {
-    var selected_type_id = $(this).val();
-    window.location = "/project_list/?typeid="+selected_type_id;
-});
-
-*/
 window.onload = function() {
     var selItem = sessionStorage.getItem("SelItem");  
     $('#producttype').val(selItem);
