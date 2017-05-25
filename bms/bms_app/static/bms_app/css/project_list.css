@@ -120,8 +120,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
 
 .icon-box{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0 10px;
 }
 
 }

@@ -4,12 +4,12 @@
 }
 
 .panel-body {
-	padding: 10px 10px 0px 10px;
+	padding: 10px 10px 0;
 }
 
 .page-header {
 	padding-bottom: 9px;
-	margin: 20px 0 20px;
+	margin:  20px 0;
 	border-bottom: 1px solid #eee;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -85,8 +85,6 @@ label {
 
 .glyphicon-remove{
 	font-size: 14px;
-	top: 0;
-	right: 0;
 }
 
 
@@ -135,7 +133,7 @@ label {
 
 @media (max-width: 767px){
 	#user-role{
-		margin: 15px 0px 15px 0px;
+		margin: 15px 0px;
 	}
 
 	.remove{
@@ -190,18 +188,6 @@ margin: 15px 0px 15px 0px;
 	}
 }
 
-/*@media only screen and (min-width: 768px) {
-
-#user-name{
-width: 100%;
-}
-#user-role{
-width: 100%;
-margin: 15px 0px 15px 0px;
-
-}
-
-}*/
 
 @media (max-width: 767px){
 
