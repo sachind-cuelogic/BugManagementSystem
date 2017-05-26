@@ -70,3 +70,12 @@ legend{
 .image-preview-input-title {
 	margin-left:2px;
 }
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

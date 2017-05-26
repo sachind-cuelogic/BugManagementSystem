@@ -25,7 +25,7 @@
                             {{ request.session.pid }}
                             <option value="" disabled="disabled">Select Project Name</option>
                             {% for pt in project_name %}
-                            <option value={{pt.product_id}} {%if request.session.pid == pt.product_id%} selected {%endif%}>{{pt.product}}</option>
+                            <option value={{pt.product_id}} {%if pid == pt.id%} selected {%endif%}>{{pt.product}}</option>
                             {% endfor %}
                         </select>
                     </div>

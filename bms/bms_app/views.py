@@ -175,20 +175,16 @@ def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
     pid=0
-
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
 
-    project_name_list = header_sidebar(request)
-
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
-        
         if pid == 0:
             intcount = 0
             for projectIds in project_name: 
                 if intcount == 0:
-                    pid = projectIds.product_id
+                    pid = projectIds.id
                 intcount += 1 
         
         bug_type = BugType.objects.all()
@@ -202,7 +198,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner,'project_name_list':project_name_list})
+            'bug_owner':bug_owner, 'pid':pid})
 
     if request.method == 'POST':
         
@@ -219,7 +215,6 @@ def create_bug(request):
 
     return render(request, 'registration/create_bug.html', 
                     {'bug_form' : bug_form})
-
 @login_required(login_url='/login/')
 def bug_list(request):
     if request.user.is_authenticated():
