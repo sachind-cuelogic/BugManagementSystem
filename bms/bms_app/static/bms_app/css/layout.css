@@ -141,8 +141,7 @@ header{
 
 .app-search {
     position: relative;
-    margin: 10px 0px 0px 0px;
-    margin-right: 15px;
+    margin: 10px 15px 0px 0px;
 }
 
 .app-search .form-control, .app-search .form-control:focus {
