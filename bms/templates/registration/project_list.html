@@ -8,85 +8,72 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-sm-8">
-        <div class="page-header">
+<div class="row project-list-row">
+
+    <div class="col-md-4 filter-column">
+        <div class="page-header filter-title">
+            <h3 class="">Filter</small>
+            </h3>
+        </div> 
+        <form method="get" action="" id="frmprojectlist">
+            <div class="">
+                <select id="producttype" name="producttype" class="selectpicker form-control placeholder" required="required">
+                    <option value="" disabled>Select Project Type</option>
+                    {% for pt in prod_types %}
+                    <option value="{{pt.id}}">{{pt.project_type_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form> 
+    </div>
+    <div class="col-md-8">
+        <div class="page-header project-header">
             <h3 class="">Project List</small>
-                <div class="btn-group btn-group-sm pull-right">
-                    <a class="btn btn-default create-project-button" type="button" href="/create_project/"> <strong>Create New Project </strong> </a>
+                <div class="pull-right">
+                    <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
+
                 </div>
             </h3>
         </div> 
+        {% if user_list %}
+        {% for item in user_list %}
         <div class="card-box">
-            <div class="col-xs-1 icon-box center-box">
+            <div class="icon-box text-center">
                 <div class="bg-icon bg-icon-pink">
+                {% if typeid == '1' %}
+                    <i class="fa fa-globe " id="type-icon"></i>
+                
+                {% elif typeid == '3' %}
+                <i class="fa fa-desktop" id="type-icon"></i>
 
+                {% elif typeid == '4' %}
+                <i class="fa fa-database" id="type-icon"></i>
+
+                {% elif typeid == '5' %}
+                <i class="fa fa-cloud" id="type-icon"></i>
+
+                {% elif typeid == '2' %}
+                <i class="fa fa-mobile" id="type-icon"></i>
+                {%endif%}
+                
                 </div>
             </div>
-            <div class="col-xs-11">    
-                <div>
-                    <h3 class="text-dark"><strong class="bug-counter">Bug Management System</strong></h3>
-                    <p class="text-muted">Total bugs assigned to you</p>
-                </div>
-            </div>    
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="card-box">
-            <div class="col-xs-1 icon-box center-box">
-                <div class="bg-icon bg-icon-pink">
-
-                </div>
+            <div class="count-box">
+                <h3 class="project-name">{{ item.prod_name }}</h3>
+                <p class="text-muted">{{ item.prod_description }}</p>
             </div>
-            <div class="col-xs-11">    
-                <div>
-                    <h3 class="text-dark"><strong class="bug-counter">Bug Management System</strong></h3>
-                    <p class="text-muted">Total bugs assigned to you</p>
-                </div>
-            </div>    
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="card-box">
-            <div class="col-xs-1 icon-box center-box">
-                <div class="bg-icon bg-icon-pink">
-
-                </div>
+            <div class="file-box">
+                <p class="user-count">Bug Count - <strong>{{ item.bugcount }}</strong></p>
+                <p class="text-muted"><i class="fa fa-file-pdf-o file-icon"></i>File Name / File Path</p>
             </div>
-            <div class="col-xs-11">    
-                <div>
-                    <h3 class="text-dark"><strong class="bug-counter">Bug Management System</strong></h3>
-                    <p class="text-muted">Total bugs assigned to you</p>
-                </div>
-            </div>    
-            <div class="clearfix"></div>
         </div>
-
-        <div class="card-box">
-            <div class="col-xs-1 icon-box center-box">
-                <div class="bg-icon bg-icon-pink">
-
-                </div>
-            </div>
-            <div class="col-xs-11">    
-                <div>
-                    <h3 class="text-dark"><strong class="bug-counter">Bug Management System</strong></h3>
-                    <p class="text-muted">Total bugs assigned to you</p>
-                </div>
-            </div>    
-            <div class="clearfix"></div>
+          {% endfor %}
+        {% else %}
+        <div class="alert alert-info">
+            Records Not Found. Please select project type.
         </div>
+        {% endif %}
 
-
-
-    </div>
-
-    <div class="col-sm-4">
-        <div class="page-header">
-            <h3 class="">Filter</small>
-            </h3>
-        </div>  
-    </div>
 </div>
 
 {% endblock %}

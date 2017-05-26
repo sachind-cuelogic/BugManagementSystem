@@ -1,46 +1,49 @@
+body{
+    background-color: #EEEDF2;
+}
 .page-header{
     margin-top: 0px;
 }
 .card-box {
-    border: 1px solid rgba(54, 64, 74, 0.05);
+    border: 1px solid #dadee8;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
     margin-bottom: 20px;
     background-color: #ffffff;
+    display: table;
+    width: 100%;
 }
 .card-box .bg-icon-info {
     background-color: #34d3eb;
 }
 .project-counter{
-   color: #34d3eb;  
+    color: #34d3eb;  
 }
 
 .card-box .bg-icon {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     text-align: center;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     -moz-border-radius: 50%;
     background-clip: padding-box;
     overflow: hidden;
+    display: inline-block;
 }
-.text-dark {
-    color: #797979 !important;
+
+.filter-column{
+    float: right;
 }
-h3 {
-    line-height: 20px;
+
+.card-box .bg-icon i {
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
 }
-.bg-icon{
-    margin-top: 15px;
-}
-h1, h2, h3, h4, h5, h6 {
-    color: #505458;
-    font-family: "Helvetica Neue";
-    margin: 10px 0;
-}
+
 .card-box .bg-icon i {
     font-size: 20px;
     line-height: 40px;
@@ -48,8 +51,82 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-box .bg-icon-pink {
-    background-color: #fb6d9d;
+    background-color: #34d3eb;
 }
-.bug-counter{
-   color: #fb6d9d;  
+.project-name{
+    color: #34d3eb; 
+    font-size: 20px; 
+}
+
+.icon-box{
+    background-color: #e5e9f5;
+    display: table-cell;
+    vertical-align: middle;
+    width: 10%;
+}
+
+.count-box{
+    padding-left: 10px;
+    display: inline-block;
+    width: 50%;
+    padding-right: 10px;
+    vertical-align: top;
+}
+.file-box{
+    display: inline-block;
+    width: 50%;
+    padding-left: 10px;
+}
+
+.count-box h3{
+    margin: 20px 0 5px;
+}
+.file-icon{
+    padding-right: 10px;
+}
+
+.user-count{
+    margin-top: 10px; 
+    color: #777;
+}
+
+.project-list-row{
+    padding-top: 20px;
+}
+
+.create-project-button{
+    background-color: #5093e1;
+    color: #fff;
+}
+
+.btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.fa-file-pdf-o{
+    color: #FF0000;
+}
+
+@media (max-width: 768px) {
+
+    .icon-box{
+        padding: 0 10px;
+    }
+    .filter-column{
+        float: none;
+        margin: 0px;
+    }
+    .filter-title{
+        margin: 0px;
+        padding: 0px;
+    }
+    .project-list-row{
+        padding-top: 40px;
+    }
+    .project-header{
+        padding-bottom: 20px;
+        margin: 0px;
+    }
+
 }
