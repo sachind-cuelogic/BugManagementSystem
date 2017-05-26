@@ -72,6 +72,9 @@ input[type="submit"]{
   margin-bottom: 5px;
 }
 
+.page-header{
+  margin-top: 0px;
+}
 .comments{
   margin-bottom: 20px;
 }
@@ -92,7 +95,6 @@ hr{
   display: none;
 }
 .comment {
-
   color: #080808;
   background: #b2b2b2;
   font-size: 12px;
@@ -156,3 +158,20 @@ legend
 .panel-body {
   padding: 0px; 
 }
+
+.project-dropdown{
+  padding-top: 20px;
+}
+.form-horizontal .control-label {
+  padding-top: 7px;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+    .project-dropdown{
+        padding-top: 50px;  
+    }
+
+}
+

@@ -2,9 +2,20 @@
 .user-box{
 	margin-bottom: -15px;
 }
-
+.page-header{
+	margin-top: 0px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.project-row{
+	padding-top: 20px;
+}
 .panel-body {
-    padding: 10px 10px 0px 10px;
+	padding: 10px 10px 0;
+}
+.panel{
+	margin-bottom: 15px;
+	color: #333;
 }
 
 .modal-body {
@@ -16,64 +27,23 @@
 	padding-bottom: 15px;
 }
 
-.project-row{
-	padding-top: 20px;	
-}
-.placeholder{
-	color: #808080;
+#add-user-plus-button{
+	margin-bottom: 0px;
 }
 
-#name-of-file
-{
-	margin-bottom: 40px;
-}
-
-@media (max-width: 767px){
-
-	#nameofbuton{
-		text-align: center;
-	}
-
-}
-
-.image-preview-input {
-	position: relative;
-	overflow: hidden;
-	margin: 0px;    
-	color: #333;
-	background-color: #fff;
-	border-color: #ccc;    
-}
-.image-preview-input input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
-}
-.image-preview-input-title {
-	margin-left:2px;
-}
 .modal-title{
 	margin-left: 30px;
 }
 
 .remove{
-    margin-right: 10px;
+	margin-right: 10px;
+	vertical-align: top;
 }
 
 .glyphicon-remove{
 	font-size: 14px;
-	top: 0px;
 }
 
-#user-role{
-	margin-left: 5px;
-}
 
 #submit-sample-data{
 	float: right;
@@ -84,12 +54,16 @@
 }
 
 .selected-user-name{
-    padding-left: 10px;
-    width: 180px;
-    max-width: 180px;
-    display: inline-block;
-    vertical-align: top;
-    word-wrap: break-word;
+	padding-left: 10px;
+	width: 120px;
+	max-width: 120px;
+	display: inline-block;
+	vertical-align: top;
+	word-wrap: break-word;
+}
+
+.selected-user-role{
+	word-wrap: break-word;
 }
 
 #dash{
@@ -98,17 +72,68 @@
 }
 
 #user-count{
-    background-color: #81d4e4;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    padding: 5px 0;
+	background-color: #D0D0D0;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	padding: 5px 0;
+}
+
+#submit-data{
+	margin-right: 15px;
 }
 
 @media (max-width: 767px){
-#user-role{
-	margin: 15px 0px 15px 0px;
+	#user-role{
+		margin: 15px 0px;
+	}
+
+	.remove{
+		margin-right: 10px;
+		vertical-align: top;
+	}
+	.project-row{
+		padding-top: 40px;
+	}
 }
-#submit-sample-data{
-	float: right;
+
+
+@media all and (orientation:landscape) { 
+
+	.selected-user-name{
+		padding-left: 10px;
+		width: 250px;
+		max-width: 250px;
+		display: inline-block;
+		vertical-align: top;
+		word-wrap: break-word;
+	}
+
 }
+
+@media screen and (min-width: 1200px) {
+	.selected-user-name{
+		padding-left: 10px;
+		width: 170px;
+		max-width: 170px;
+		display: inline-block;
+		vertical-align: top;
+		word-wrap: break-word;
+	}
+}
+
+@media only screen and (min-device-width: 320px){
+	.selected-user-name{
+		padding-left: 10px;
+		display: inline-block;
+		vertical-align: top;
+		word-wrap: break-word;
+	}
+}
+
+@media (max-width: 767px){
+
+	#nameofbuton{
+		text-align: center;
+	}
+
 }

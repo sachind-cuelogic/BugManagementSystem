@@ -98,6 +98,15 @@
     padding-top: 50px;
     padding-bottom: 50px;
 }
+#wrap > .center-content {
+    padding: 50px 0;
+}
+.trans {
+    height: auto;
+}
+#login-button {
+    margin: 0 0 10px;
+}
 
 }
 
@@ -110,4 +119,26 @@
     color: #FFFFFF;
 }
 
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+  .land-button{
+    margin-bottom: 70px;
+}
+.para3>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
+.para1>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
+
+.para2>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
 }

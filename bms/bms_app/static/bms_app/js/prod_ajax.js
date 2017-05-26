@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     var select=document.getElementById('user-name');
 
-    for (i=0;i<select.length;  i++) {
+    for (i=0;i<select.length; i++) {
        if (select.options[i].value==getuser) {
          select.remove(i);
        }
@@ -49,7 +49,7 @@ $(document).ready(function() {
         htmlUser += "<span class='selected-user-name'>"+user_name+"</span>";        
         htmlUser += "<span class='selected-user-id' style='display: none;'>"+user_id+"</span>";
         htmlUser += "<span id='dash'> : </span>";
-        htmlUser += "<span>"+user_role+"</span>";
+        htmlUser += "<span class='selected-user-role'>"+user_role+"</span>";
         htmlUser += "<span class='selected-role-id' style='display: none;'>"+user_role_id+"</span>";
         htmlUser += "<span class='remove pull-right close' id='removeBtn aria-label='Close''>" + "<span class='glyphicon glyphicon-remove'></span>" + "</span>";
         htmlUser += "</div>";
@@ -59,8 +59,9 @@ $(document).ready(function() {
         $('#user-name').each(function() {
             $('option[value=' + $(this).val() + ']').remove();
         });
+
 });
- 
+
     $(".selected-user-role").on("click", ".remove", function(){
         var removeUser = $(this).siblings(".selected-user-name").text();
         var removeUserId = $(this).siblings(".selected-user-id").text();
@@ -112,3 +113,4 @@ $(document).ready(function() {
         });
     });
 });
+

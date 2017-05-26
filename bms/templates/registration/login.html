@@ -1,4 +1,5 @@
 {% extends "registration/common_login_reg.html" %} 
+{% block title %}Login Page{% endblock %}
 {% load static %} 
 {% block cssfile %}
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/common_login_layout.css' %}"> {% endblock %} {% block content %} {% for message in messages %}
@@ -11,7 +12,7 @@
 <form method="POST" class="container">
     {% csrf_token %}
     <div class="row">
-        <div id="loginbox" class="mainbox col-md-4 col-md-offset-4">
+        <div id="loginbox" class="mainbox col-sm-4 col-sm-offset-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">LOG IN</div>

@@ -24,7 +24,6 @@ from django.utils.timezone import utc
 from django.utils.timezone import localtime, now
 from django.core.serializers.json import DjangoJSONEncoder
 
-
 def home(request):
     return render(request, 'bms_app/home.html')
 
@@ -49,7 +48,7 @@ def register(request):
                   'of the bugs which are as follows:\nAuthentication and Authorization,'
                   'Products, Bug, Attachment, Admin, Users, Configuration,'
                   'Log View, Search & View, '
-                  'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
+                  'Comments and tagging.\n\nLogin: http://172.21.31.90:8001  '
                   '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
                   ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
@@ -128,25 +127,25 @@ def create_project(request):
 def project_list(request):
 
     project_name_list = header_sidebar(request)
-
     if request.user.is_authenticated():
+        typeid = request.GET.get('typeid')
+        prod_types = ProjectType.objects.all()
         current_user = request.user
+        
         user_list = ProductUser.objects.raw("SELECT "
             "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, "
-            "ur.role, pd.id as product_id, "
+            "ur.role, pd.id as product_id, pd.prod_description, "
             "(select count(id) from bms_app_bugdetails where status_id <> 22 and project_name_id = pd.id) as openbug "
             "FROM bms_app_productuser pu "
             "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
             "JOIN bms_app_userrole ur ON ur.id = pu.prod_user_role_id "
             "LEFT JOIN bms_app_bugdetails bd ON bd.project_name_id = pd.id "
-            "where pu.prod_user_id = %s "
-            "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id])
+            "where pu.prod_user_id = %s and pd.prod_type_id = %s "
+            "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id, typeid])
 
-        messages.success(request, "You have successfully created project!")
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list),'project_name_list':project_name_list})
-
-
+                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types,'typeid':typeid})
+   
     return render(request, 'registration/project_list.html')
 
 def delete_project(request):
@@ -157,7 +156,7 @@ def delete_project(request):
         del_project = request.POST.get("del_proj_id")
 
         check_admin = ProductUser.objects.filter(product_id=del_project,
-                            prod_user_id=current_user.id, prod_user_role_id=8)
+                            prod_user_id=current_user.id, prod_user_role_id=4)
 
         if check_admin:
 
@@ -176,20 +175,16 @@ def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
     pid=0
-
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
 
-    project_name_list = header_sidebar(request)
-
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
-        
         if pid == 0:
             intcount = 0
             for projectIds in project_name: 
                 if intcount == 0:
-                    pid = projectIds.product_id
+                    pid = projectIds.id
                 intcount += 1 
         
         bug_type = BugType.objects.all()
@@ -203,7 +198,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner,'project_name_list':project_name_list})
+            'bug_owner':bug_owner, 'pid':pid})
 
     if request.method == 'POST':
         
@@ -220,7 +215,6 @@ def create_bug(request):
 
     return render(request, 'registration/create_bug.html', 
                     {'bug_form' : bug_form})
-
 @login_required(login_url='/login/')
 def bug_list(request):
     if request.user.is_authenticated():
@@ -262,7 +256,6 @@ def bug_list(request):
         bugid = request.POST.get("bug_id")
 
         bug_comment =  get_comments(bugid)
-
 
         bug_result = BugDetails.objects.raw("SELECT "
             "bd.id, pd.prod_name, bd.title, bd.build_version, bd.sprint_no, "
@@ -349,7 +342,6 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
-
 
 def header_sidebar(request):
     if request.user.is_authenticated():
