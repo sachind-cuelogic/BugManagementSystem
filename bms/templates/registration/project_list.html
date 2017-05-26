@@ -27,13 +27,13 @@
         </form> 
     </div>
     <div class="col-md-8">
-        <div class="page-header project-header">
-            <h3 class="">Project List</small>
-                <div class="pull-right">
-                    <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
-
-                </div>
+        <div class="page-header project-header clearfix">
+            <h3 class="pull-left">Project List</small>
             </h3>
+            <div class="pull-right">
+                <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
+
+            </div>
         </div> 
         {% if user_list %}
         {% for item in user_list %}

@@ -2,7 +2,7 @@ body{
     background-color: #EEEDF2;
 }
 .page-header{
-    margin-top: 0px;
+    margin: 0 0 10px;
 }
 .card-box {
     border: 1px solid #dadee8;
@@ -36,6 +36,7 @@ body{
 
 .filter-column{
     float: right;
+    margin-bottom: 40px
 }
 
 .card-box .bg-icon i {
@@ -115,18 +116,19 @@ body{
     }
     .filter-column{
         float: none;
-        margin: 0px;
+        margin: 0 0 20px;
     }
     .filter-title{
         margin: 0px;
         padding: 0px;
     }
     .project-list-row{
-        padding-top: 40px;
+        padding-top: 50px;
     }
     .project-header{
         padding-bottom: 20px;
         margin: 0px;
     }
+
 
 }

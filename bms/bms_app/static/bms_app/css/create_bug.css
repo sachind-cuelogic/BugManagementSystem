@@ -1,11 +1,15 @@
 .page-header{
 	margin-left: 15px;
+	margin-right: 15px;
 }
 .bug-row{
 	padding-top: 20px;
 }
 .page-header{
 	margin-top: 0px;
+}
+#create-button{
+	margin-right: 15px;
 }
 
 @media (max-width: 767px){
