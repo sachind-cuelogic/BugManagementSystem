@@ -10,8 +10,8 @@
 
 <div class="row project-list-row">
 
-    <div class="col-md-4 pull-right">
-        <div class="page-header">
+    <div class="col-md-4 filter-column">
+        <div class="page-header filter-title">
             <h3 class="">Filter</small>
             </h3>
         </div> 
@@ -27,20 +27,35 @@
         </form> 
     </div>
     <div class="col-md-8">
-        <div class="page-header">
-            <h3 class="">Project List</small>
-                <div class="pull-right">
-                    <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
-
-                </div>
+        <div class="page-header project-header clearfix">
+            <h3 class="pull-left">Project List</small>
             </h3>
+            <div class="pull-right">
+                <a class="btn create-project-button" type="button" href="/create_project/">Create New Project</a>
+
+            </div>
         </div> 
         {% if user_list %}
         {% for item in user_list %}
         <div class="card-box">
             <div class="icon-box text-center">
                 <div class="bg-icon bg-icon-pink">
-                    <i class="fa fa-mobile"></i>
+                {% if typeid == '1' %}
+                    <i class="fa fa-globe " id="type-icon"></i>
+                
+                {% elif typeid == '3' %}
+                <i class="fa fa-desktop" id="type-icon"></i>
+
+                {% elif typeid == '4' %}
+                <i class="fa fa-database" id="type-icon"></i>
+
+                {% elif typeid == '5' %}
+                <i class="fa fa-cloud" id="type-icon"></i>
+
+                {% elif typeid == '2' %}
+                <i class="fa fa-mobile" id="type-icon"></i>
+                {%endif%}
+                
                 </div>
             </div>
             <div class="count-box">
@@ -55,7 +70,7 @@
           {% endfor %}
         {% else %}
         <div class="alert alert-info">
-            Records Not Found.
+            Records Not Found. Please select project type.
         </div>
         {% endif %}
 

@@ -1,7 +1,14 @@
+
+window.onload = function() {
+    var selItem = sessionStorage.getItem("SelItem");  
+    $('#project_name').val(selItem);
+    }
     $('#project_name').change(function() { 
         var project_id = $(this).val();
+        sessionStorage.setItem("SelItem", project_id);
         window.location = "/create_bug/?pid="+project_id;
     });
+    ;
 
     $(document).ready(function () {
     $('#nameoffile').bootstrapValidator({
@@ -25,18 +32,10 @@
 
 });
 
-    $('#bug_type').change(function() {
-    	if ($(this).children('option:first-child').is(':selected')) {
-    		$(this).addClass('placeholder');
-    	} else {
-    		$(this).removeClass('placeholder');
-    	}
-    });
-
-        $('#status').change(function() {
-    	if ($(this).children('option:first-child').is(':selected')) {
-    		$(this).addClass('placeholder');
-    	} else {
-    		$(this).removeClass('placeholder');
-    	}
+    $('select').change(function() {
+     if ($(this).children('option:first-child').is(':selected')) {
+       $(this).addClass('placeholder');
+     } else {
+      $(this).removeClass('placeholder');
+     }
     });

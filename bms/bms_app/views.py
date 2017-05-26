@@ -48,7 +48,7 @@ def register(request):
                   'of the bugs which are as follows:\nAuthentication and Authorization,'
                   'Products, Bug, Attachment, Admin, Users, Configuration,'
                   'Log View, Search & View, '
-                  'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
+                  'Comments and tagging.\n\nLogin: http://172.21.31.90:8001  '
                   '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
                   ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
@@ -144,7 +144,7 @@ def project_list(request):
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id, typeid])
 
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types})
+                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types,'typeid':typeid})
    
     return render(request, 'registration/project_list.html')
 
@@ -175,20 +175,16 @@ def create_bug(request):
     if request.user.is_authenticated():
         current_user = request.user
     pid=0
-
     if request.GET.get('pid'):
         pid = int(request.GET.get('pid'))
 
-    project_name_list = header_sidebar(request)
-
     if request.method == 'GET':
         project_name = ProductUser.objects.all().filter(prod_user_id = current_user.id)
-        
         if pid == 0:
             intcount = 0
             for projectIds in project_name: 
                 if intcount == 0:
-                    pid = projectIds.product_id
+                    pid = projectIds.id
                 intcount += 1 
         
         bug_type = BugType.objects.all()
@@ -202,7 +198,7 @@ def create_bug(request):
 
         return render(request, 'registration/create_bug.html', 
             {'project_name': project_name,'bug_type':bug_type,'status':status,
-            'bug_owner':bug_owner,'project_name_list':project_name_list})
+            'bug_owner':bug_owner, 'pid':pid})
 
     if request.method == 'POST':
         
@@ -219,7 +215,6 @@ def create_bug(request):
 
     return render(request, 'registration/create_bug.html', 
                     {'bug_form' : bug_form})
-
 @login_required(login_url='/login/')
 def bug_list(request):
     if request.user.is_authenticated():

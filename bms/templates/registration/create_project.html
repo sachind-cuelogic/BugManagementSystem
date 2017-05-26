@@ -4,128 +4,155 @@
 
 {% block cssfile %}
 <link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_project.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/form.css' %}">
+
 {% endblock %}
 
 {% block content %}
 
-
-    <div class="row project-row">
-        <div class="col-sm-8" id="table-row">
-            <div class="page-header"><h3 class="title">Create Project</h3></div>
-            <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
-                <input type="hidden" id="csrf" value="{%csrf_token%}">
-                <div class="form-group required" id="nameofprod">
-                    <label for="prod_name" class="control-label col-sm-3">Project Name:</label>
-                    <div class="col-sm-8">
-                        <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required" autofocus="autofocus">
-                    </div>
-                </div>
-                <div class="form-group required" id="nameofprodtype">
-                    <label for="prodType" class="control-label col-sm-3">Project Type:</label>
-                    <div class="col-sm-8">
-                        <select id="producttype" class="selectpicker form-control placeholder" required="required">
-                            <option value="">Select Project Type</option>
-                            {% for pt in prod_types %}
-
-                            <option value={{pt.id}}>{{pt.project_type_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group" id="add-user-plus-button">
-                    <label for="add_user" class="control-label col-sm-3">Add User:</label>
-                    <div class="col-sm-8">
-                    
-                       <div class="form-group">
-                       <div class="col-sm-5">
-                            <select id="user-name" class="user-name form-control" title="Select user for your project">
-                                {% if user.is_authenticated %}
-                                {% for pt in users %}
-                                <option value="{{pt.id}}">{{pt.username}}</option>
-                                {% endfor %}
-                                {% endif %}
-                            </select>
-                        </div>
-                        <div class="col-sm-5">
-                            <select id="user-role" class="user-role form-control" title="Select user role">
-                                {% for each in roles%}
-                                <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-              
-                {% if user.is_authenticated %}
-                <p id="get_username">{{ user.id }}</p>
-
-                <div class="form-group">
-                    <div class="col-sm-8 col-sm-offset-3 user-box">
-                        <div class="panel panel-default" id="collapseExample">
-                            <div class="panel-body">
-                                <div class="selected-user-role" id="user_info">
-                                <div id="user-count">
-                                    <span class="selected-user-name">{{ user.username }}</span>
-                                    <span class="selected-user-id" style="display: none;">{{ user.id }}</span>
-                                    <span id="dash"> : </span>
-                                    <span class='selected-user-role'>Admin</span>
-                                    <span class="selected-role-id" style="display: none;">3</span>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-
-                
-                <div class="form-group" id="nameofversion">
-                    <label for="prod_version" class="control-label col-sm-3">Project Version:</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="prod_version" class="form-control" id="prod_version" placeholder="Enter your project version">
-                    </div>
-                </div>
-                <div class="form-group" id="nameofdesc">
-                    <label for="prod_description" class="control-label col-sm-3">Project Description:</label>
-                    <div class="col-sm-8">
-                        <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
-                    </div>
-                </div>
-                <div class="form-group" id="name-of-file">
-                    <label for="prod_file" class="control-label col-sm-3">Upload File:</label>
-                    <div class="col-sm-8">
-                      <div class="input-group image-preview" data-original-title="" title="" id="">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default image-preview-clear" id="clear-button" style="display:none;">
-                                <span class="glyphicon glyphicon-remove"></span> Clear
-                            </button>
-                            <div class="btn btn-default image-preview-input" id="project_file">
-                                <span class="glyphicon glyphicon-folder-open"></span>
-                                <span class="image-preview-input-title">Browse</span>
-                                <input id="prod_file" name="prod_file" type="file" class="file">
-                            </div>
-                            <div class="help-block with-errors"></div>
-                        </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
-                    </div>
-                </div>
-                </div>
-
-                <div class="form-group" id="nameofversion">
-                   
-                    <div class="col-sm-8 col-sm-offset-3">
-                        <button class="btn btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>    
-                        <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
-                    </div>
-                </div>
-            </form>
-        </div>
+<div class="row project-row">
+    <div class="page-header">
+        <h3 class="">Create Project</small>
+        </h3>
     </div>
+    <form method="POST" id="file-form" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="container-fluid">
+            <div class="row">
+                <input type="hidden" id="csrf" value="{%csrf_token%}"> 
+                <div class="col-sm-6" id="project-row">
+                    <fieldset class="content-group">
+
+                        <legend class="text-bold">PROJECT DETAILS</legend>
+
+                        <div class="form-group required" id="nameofprod">
+                            <label for="prod_name" class="control-label col-sm-3">Project Name:</label>
+                            <div class="col-sm-9">
+                                <input id="prod_name" type="text" class="form-control" name="prod_name" placeholder="Enter your project name" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group required" id="nameofprodtype">
+                            <label for="prodType" class="control-label col-sm-3">Project Type:</label>
+                            <div class="col-sm-9">
+                                <select id="producttype" class="selectpicker form-control placeholder" required="required">
+                                    <option value="">Select Project Type</option>
+                                    {% for pt in prod_types %}
+
+                                    <option value={{pt.id}}>{{pt.project_type_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="nameofversion">
+                            <label for="prod_version" class="control-label col-sm-3">Project Version:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="prod_version" class="form-control" id="prod_version" placeholder="Enter your project version">
+                            </div>
+                        </div>
+                        <div class="form-group" id="nameofdesc">
+                            <label for="prod_description" class="control-label col-sm-3">Project Description:</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" cols="40" id="prod_description" name="prod_description" rows="3" placeholder="Description of project"></textarea>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+                <div class="col-sm-6">
+                    <fieldset class="content-group">
+                        <legend class="text-bold">ADD USER</legend>
+                        <div class="form-group" id="add-user-plus-button">
+                            <label for="add_user" class="control-label col-sm-3">Add User:</label>
+                            <div class="col-sm-9">
+
+                                <div class="form-group">
+                                    <div class="col-sm-5">
+                                        <select id="user-name" class="user-name form-control" title="Select user for your project">
+                                            {% if user.is_authenticated %}
+                                            {% for pt in users %}
+                                            <option value="{{pt.id}}">{{pt.username}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <select id="user-role" class="user-role form-control" title="Select user role">
+                                            {% for each in roles%}
+                                            <option value="{{each.id}}" role="{{each.role}}">{{each.role}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" id="submit-sample-data" class="btn btn-primary adduser" title="If you want to add multiple user first select user and role then click here">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if user.is_authenticated %}
+                        <p id="get_username">{{ user.id }}</p>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3 user-box">
+                                <div class="panel panel-default" id="collapseExample">
+                                    <div class="panel-body">
+                                        <div class="selected-user-role" id="user_info">
+                                            <div id="user-count">
+                                                <span class="selected-user-name">{{ user.username }}</span>
+                                                <span class="selected-user-id" style="display: none;">{{ user.id }}</span>
+                                                <span id="dash"> : </span>
+                                                <span class='selected-user-role'>Admin</span>
+                                                <span class="selected-role-id" style="display: none;">3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+
+
+                        <div class="form-group" id="name-of-file">
+                            <label for="prod_file" class="control-label col-sm-3">Upload File:</label>
+                            <div class="col-sm-9">
+                                <div class="input-group image-preview" data-original-title="" title="" id="">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default image-preview-clear" id="clear-button" style="display:none;">
+                                            <span class="glyphicon glyphicon-remove"></span> Clear
+                                        </button>
+                                        <div class="btn btn-default image-preview-input" id="project_file">
+                                            <span class="glyphicon glyphicon-folder-open"></span>
+                                            <span class="image-preview-input-title">Browse</span>
+                                            <input id="prod_file" name="prod_file" type="file" class="file">
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">      
+                    <div class="form-group" id="nameofversion">
+
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button class="btn btn-primary" type="submit" id="submit-data"> <strong>Create</strong> </button>    
+                            <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
 
 {% endblock %}
 {% block jsfile %}

@@ -1,148 +1,171 @@
 {% extends "registration/header_sidebar.html" %}
 {% block title %}Create Bug{% endblock %}
 {% load static %}
-
+{% block cssfile %}
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_bug.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/form.css' %}">
+{% endblock %}
 {% block content %}
 
-<div class="page-header"><p class="title">Create Bug</p></div>
 <div class="row bug-row">
-    <div class="col-sm-6 col-sm-offset-3" id="table-row">
-        {{ bug_form.non_field_errors }}
-        <form method="POST" class="form-horizontal" id="create-bug-form" enctype="multipart/form-data"> {% csrf_token %}
-            <input type="hidden" id="csrf" value="{%csrf_token%}">
-
-            <div class="form-group required">
-                <label for="project_name" class="control-label col-sm-4">Project Name:</label>
-                <div class="col-sm-8">
-                    <select id="project_name" name="project_name" class="selectpicker form-control placeholder" required="required">
-                        {{ request.session.pid }}
-                        {% for pt in project_name %}
-                        <option value={{pt.product_id}} {%if request.session.pid == pt.product_id%} selected {%endif%}>{{pt.product}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group required">
-                <label for="title" class="control-label col-sm-4">Bug Title:</label>
-                <div class="col-sm-8">
-                    <input id="title" type="text" class="form-control" name="title" placeholder="Enter bug title" required="required">
-                </div>
-            </div>
-
-            <div class="form-group required">
-                <label for="bug_type" class="control-label col-sm-4">Bug Type:</label>
-                <div class="col-sm-8">
-                    <select id="bug_type" name="bug_type" class="selectpicker form-control placeholder" required="required">
-                        <option value="">Select Bug Type</option>
-                        {% for pt in bug_type %}
-                        <option value={{pt.id}}>{{pt.bug_name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group required">
-                <label for="status" class="control-label col-sm-4">Bug Status:</label>
-                <div class="col-sm-8">
-                    <select id="status" name="status" class="selectpicker form-control placeholder" required="required">
-                        <option value="">Select Bug Status</option>
-                        {% for pt in status %}
-                        <option value={{pt.id}}>{{pt.status_name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>                                
-            <div class="form-group required" id="nameofprodtype">
-                <label for="bug_owner" class="control-label col-sm-4">Owner:</label>
-                <div class="col-sm-8">
-                    <select id="bug_owner" name="bug_owner" class="selectpicker form-control placeholder" required="required">
-                        {% if user.is_authenticated %}
-                        <option value="">Select User</option>
-                        {% for pt in bug_owner %}
-                        <option value="{{pt.id}}">{{pt.username}}</option>
-                        {% endfor %}
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group required" id="nameofprodtype">
-                <label for="prodType" class="control-label col-sm-4">Assigned To:</label>
-                <div class="col-sm-8">
-                    <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control placeholder" required="required">
-                        {% if user.is_authenticated %}
-                        <option value="">Select User to assign bug</option>
-                        {% for pt in bug_owner %}
-                        <option value="{{pt.id}}">{{pt.username}}</option>
-                        {% endfor %}
-
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                
-                <label for="build_version" class="control-label col-sm-4">Build Version:</label>
-                <div class="col-sm-8">
-                    <input id="build_version" type="text" class="form-control" name="build_version" placeholder="Enter build Version">
-                </div>
-            </div>
-
-            <div class="form-group">
-                
-                <label for="sprint_no" class="control-label col-sm-4">Sprint No:</label>
-                <div class="col-sm-8">
-                    <input id="sprint_no" type="text" class="form-control" name="sprint_no" placeholder="Enter sprint number">
-                </div>
-            </div>
-
-            <div class="form-group">
-               
-                <label for="sprint_no" class="control-label col-sm-4">Dependent Module:</label>
-                <div class="col-sm-8">
-                    <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" disabled="disabled">
-                </div>
-            </div>
-
-
-            <div class="form-group " id="description">
-                <label for="description" class="control-label col-sm-4">Bug Description:</label>
-                <div class="col-sm-8">
-                    <textarea class="form-control" cols="40" id="description" name="description" rows="3" placeholder="Enter Bug Description"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group" id="nameoffile">
-                <label for="bug_file" class="control-label col-sm-4">Upload File:</label>
-                <div class="col-sm-8">
-                    
-                    <div class="input-group image-preview" data-original-title="" title="">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                <span class="glyphicon glyphicon-remove"></span> Clear
-                            </button>
-                            <div class="btn btn-default image-preview-input">
-                                <span class="glyphicon glyphicon-folder-open"></span>
-                                <span class="image-preview-input-title">Browse</span>
-                                <input id="bug_file" name="bug_file" type="file" class="file">
+    <div class="page-header">
+        <h3 class="">Create Bug</small>
+        </h3>
+    </div> 
+    {{ bug_form.non_field_errors }}
+    <form method="POST" class="form-horizontal" id="create-bug-form" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="container-fluid">
+            <div class="row">
+                <input type="hidden" id="csrf" value="{%csrf_token%}">
+                <div class="col-sm-6" id="table-row">
+                    <fieldset class="content-group">
+                        <legend class="text-bold">BUG DETAILS</legend>
+                        <div class="form-group required">
+                            <label for="project_name" class="control-label col-sm-4">Project Name:</label>
+                            <div class="col-sm-8">
+                                <select id="project_name" name="project_name" class="selectpicker form-control placeholder" required="required">
+                                    {{ request.session.pid }}
+                                    <option value="">Select Project Name</option>
+                                    {% for pt in project_name %}
+                                    <option value={{pt.product_id}} {%if pid == pt.id%} selected {%endif%}>{{pt.product}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                        </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="title" class="control-label col-sm-4">Bug Title:</label>
+                            <div class="col-sm-8">
+                                <input id="title" type="text" class="form-control" name="title" placeholder="Enter bug title" required="required">
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="bug_type" class="control-label col-sm-4">Bug Type:</label>
+                            <div class="col-sm-8">
+                                <select id="bug_type" name="bug_type" class="selectpicker form-control placeholder" required="required">
+                                    <option value="">Select Bug Type</option>
+                                    {% for pt in bug_type %}
+                                    <option value={{pt.id}}>{{pt.bug_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="status" class="control-label col-sm-4">Bug Status:</label>
+                            <div class="col-sm-8">
+                                <select id="status" name="status" class="selectpicker form-control placeholder" required="required">
+                                    <option value="">Select Bug Status</option>
+                                    {% for pt in status %}
+                                    <option value={{pt.id}}>{{pt.status_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>                                
+                        <div class="form-group required" id="nameofprodtype">
+                            <label for="bug_owner" class="control-label col-sm-4">Owner:</label>
+                            <div class="col-sm-8">
+                                <select id="bug_owner" name="bug_owner" class="selectpicker form-control placeholder" required="required">
+                                    {% if user.is_authenticated %}
+                                    <option value="">Select User</option>
+                                    {% for pt in bug_owner %}
+                                    <option value="{{pt.id}}">{{pt.username}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group required" id="nameofprodtype">
+                            <label for="prodType" class="control-label col-sm-4">Assigned To:</label>
+                            <div class="col-sm-8">
+                                <select id="bug_assigned_to" name="bug_assigned_to" class="selectpicker form-control placeholder" required="required">
+                                    {% if user.is_authenticated %}
+                                    <option value="">Select User to assign bug</option>
+                                    {% for pt in bug_owner %}
+                                    <option value="{{pt.id}}">{{pt.username}}</option>
+                                    {% endfor %}
+
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        </fieldset>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <fieldset class="content-group">
+                            <legend class="text-bold">ADDITIONAL DETAILS</legend>
+                            <div class="form-group">
+
+                                <label for="build_version" class="control-label col-sm-4">Build Version:</label>
+                                <div class="col-sm-8">
+                                    <input id="build_version" type="text" class="form-control" name="build_version" placeholder="Enter build Version">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="sprint_no" class="control-label col-sm-4">Sprint No:</label>
+                                <div class="col-sm-8">
+                                    <input id="sprint_no" type="text" class="form-control" name="sprint_no" placeholder="Enter sprint number">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="sprint_no" class="control-label col-sm-4">Dependent Module:</label>
+                                <div class="col-sm-8">
+                                    <input id="dependent_module" type="text" class="form-control" name="dependent_module" placeholder="Dependent Module" disabled="disabled">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group " id="description">
+                                <label for="description" class="control-label col-sm-4">Bug Description:</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" cols="40" id="description" name="description" rows="3" placeholder="Enter Bug Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="nameoffile">
+                                <label for="bug_file" class="control-label col-sm-4">Upload File:</label>
+                                <div class="col-sm-8">
+
+                                    <div class="input-group image-preview" data-original-title="" title="">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                <span class="glyphicon glyphicon-remove"></span> Clear
+                                            </button>
+                                            <div class="btn btn-default image-preview-input">
+                                                <span class="glyphicon glyphicon-folder-open"></span>
+                                                <span class="image-preview-input-title">Browse</span>
+                                                <input id="bug_file" name="bug_file" type="file" class="file">
+                                            </div>
+                                        </span><input type="text" class="form-control image-preview-filename" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group" id="nameofbuton">
-                <div class="col-sm-8 col-sm-offset-4">
-                    <button class="btn btn-primary" type="submit" id="create-button"> <strong>Create</strong> </button>
-                    <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                <div class="row">
+                    <div class="col-md-6">      
+                        <div class="form-group" id="nameofbuton">
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <button class="btn btn-primary" type="submit" id="create-button"> <strong>Create</strong> </button>
+                                <a class="btn btn-default" type="button" href="/website_home/" id="cancel-button"> <strong>Cancel </strong> </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-        </form>
-    </div>
+        </div>
+
+    </form>
 </div>
-<link rel="stylesheet" type="text/css" href="{% static 'bms_app/css/create_bug.css' %}">
+
 {% endblock %}
 {% block jsfile %}
 <script type="text/javascript" src="{% static 'bms_app/js/createbug.js' %}"></script>

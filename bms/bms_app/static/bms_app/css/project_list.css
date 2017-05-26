@@ -2,7 +2,7 @@ body{
     background-color: #EEEDF2;
 }
 .page-header{
-    margin-top: 0px;
+    margin: 0 0 10px;
 }
 .card-box {
     border: 1px solid #dadee8;
@@ -19,7 +19,7 @@ body{
     background-color: #34d3eb;
 }
 .project-counter{
-   color: #34d3eb;  
+    color: #34d3eb;  
 }
 
 .card-box .bg-icon {
@@ -34,15 +34,11 @@ body{
     display: inline-block;
 }
 
-h3 {
-    line-height: 20px;
+.filter-column{
+    float: right;
+    margin-bottom: 40px
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #505458;
-    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin: 10px 0;
-}
 .card-box .bg-icon i {
     font-size: 20px;
     line-height: 40px;
@@ -59,8 +55,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #34d3eb;
 }
 .project-name{
-   color: #34d3eb; 
-   font-size: 20px; 
+    color: #34d3eb; 
+    font-size: 20px; 
 }
 
 .icon-box{
@@ -75,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     width: 50%;
     padding-right: 10px;
+    vertical-align: top;
 }
 .file-box{
     display: inline-block;
@@ -88,7 +85,6 @@ h1, h2, h3, h4, h5, h6 {
 .file-icon{
     padding-right: 10px;
 }
-
 
 .user-count{
     margin-top: 10px; 
@@ -104,10 +100,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
-.page-header h3{
-    font-size: 20px;
-}
-
 .btn:hover {
     color: #fff;
     text-decoration: none;
@@ -119,8 +111,24 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
 
-.icon-box{
-    padding: 0 10px;
-}
+    .icon-box{
+        padding: 0 10px;
+    }
+    .filter-column{
+        float: none;
+        margin: 0 0 20px;
+    }
+    .filter-title{
+        margin: 0px;
+        padding: 0px;
+    }
+    .project-list-row{
+        padding-top: 50px;
+    }
+    .project-header{
+        padding-bottom: 20px;
+        margin: 0px;
+    }
+
 
 }

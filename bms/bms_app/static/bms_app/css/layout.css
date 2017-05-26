@@ -94,20 +94,6 @@ header{
     color: #fff;
 }
 
-@media (max-width: 768px) {
-
-.toggled #sidebar-wrapper {
-    left: 0;
-}
-#wrapper #sidebar-wrapper {
-    width: 220px;
-    z-index: 999999;
-}
-.toggled #page-content-wrapper {
-    margin-left: 0;
-}
-}
-
 .navbar-brand {
     font-weight: bold;
     color: #293044;;
@@ -116,18 +102,14 @@ header{
     margin-left: 0px;
 }
 .form-group.required .control-label:after {
-  content:"*";
-  color:#FF0000;
+    content:"*";
+    color:#FF0000;
 }
 
 .navbar-inverse{
     color: #fff;
 }
 
-.project-dropdown {
-    padding-top: 60px;
-    text-align: center;
-}
 .down-caret{
     margin-right: 5px;
 }
@@ -139,7 +121,7 @@ header{
 
 .navbar{
     background-color: #fff;
-    box-shadow: 5px 0px 5px #9e9e9e;
+    box-shadow: 0 0px 5px #9e9e9e;
 }
 
 #header-create-btn{
@@ -159,8 +141,7 @@ header{
 
 .app-search {
     position: relative;
-    margin: 10px 0px 0px 0px;
-    padding-left: 50px;
+    margin: 10px 15px 0px 0px;
 }
 
 .app-search .form-control, .app-search .form-control:focus {
@@ -180,3 +161,67 @@ header{
 .dropdown{
     margin-right: 15px;
 }
+h1, h2, h3, h4, h5, h6 {
+    color: #505458;
+    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 10px 0;
+}
+h3 {
+    line-height: 20px;
+}
+
+.page-header h3{
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .toggled #sidebar-wrapper {
+        left: 0;
+    }
+    #wrapper #sidebar-wrapper {
+        width: 220px;
+        z-index: 999999;
+    }
+    .toggled #page-content-wrapper {
+        margin-left: 0;
+    }
+}
+@media (max-width: 768px){
+    .app-search{
+        width: 100%;
+        margin: 0 auto;   
+        padding-bottom: 5px;  
+    }
+
+    .navbar-nav{
+        float: right;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+    .navbar-header{
+        float: left;
+    }
+    .dropdown {
+        margin-right: 0;
+    }
+    .navbar-nav> li.dropdown>a{
+        padding: 13px 0 0 0;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+    .app-search{
+        width: 100%;
+        padding-bottom: 5px;  
+    }
+
+    .navbar-nav{
+        float: right;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+    .navbar-header{
+        float: left;
+    }  
+}
+
