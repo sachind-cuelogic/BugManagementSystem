@@ -1,25 +1,6 @@
-.placeholder{
-	color: gray;
-}
-select option:first-child{
-	color: gray;
-}
-select option{
-	color: #555;
-}
 
-#create-button{
-	margin-right: 30px;
-}
-
-.page-header{
-	margin-left: 15px;
-}
 .bug-row{
-	padding-top: 20px;
-}
-.page-header{
-	margin-top: 0px;
+	padding-top: 20px;	
 }
 
 @media (max-width: 767px){
@@ -27,4 +8,34 @@ select option{
 		padding-right: 20px;
 		padding-left: 20px;
 	}
+}
+
+.image-preview-input {
+	position: relative;
+	overflow: hidden;
+	margin: 0px;    
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+	margin-left:2px;
+}
+.placeholder{color: #808080;}
+
+select option{color: #555;}	
+
+#create-button{
+	margin-right: 30px;
 }

@@ -60,15 +60,10 @@ $(document).ready(function() {
 
 /*$('#producttype').change(function() {
     var selected_type_id = $(this).val();
-    console.log("typeid",selected_type_id);
-    if(selected_type_id == 1)
-    {
-        $('#type-icon').removeClass().addClass("fa-globe");
-    }
+    window.location = "/project_list/?typeid="+selected_type_id;
+});
 
-});*/
-
-
+*/
 window.onload = function() {
     var selItem = sessionStorage.getItem("SelItem");  
     $('#producttype').val(selItem);
@@ -78,6 +73,3 @@ window.onload = function() {
         sessionStorage.setItem("SelItem", typeid);
         window.location = "/project_list/?typeid="+typeid;
     });
-
-
-

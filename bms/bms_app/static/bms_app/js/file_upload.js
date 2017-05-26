@@ -60,4 +60,18 @@ $(document).ready(function () {
         }
     });
 
+
+/*    $('#clear-button').on('click', function () {
+        debugger;
+        document.getElementById('prod_file').value = "";
+        $('#name-of-file').bootstrapValidator('revalidateField', 'prod_file');
+    });*/
+
+
+/*$('#clear-button').on('click', function(){
+    var $form = $(this).closest("form");
+    $form.find('*').removeClass('has-success has-error glyphicon-ok glyphicon-remove');
+    $form.find('.help-block').remove();
+});
+*/
 });

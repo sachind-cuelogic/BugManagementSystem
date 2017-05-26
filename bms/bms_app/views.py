@@ -24,6 +24,7 @@ from django.utils.timezone import utc
 from django.utils.timezone import localtime, now
 from django.core.serializers.json import DjangoJSONEncoder
 
+
 def home(request):
     return render(request, 'bms_app/home.html')
 
@@ -48,7 +49,7 @@ def register(request):
                   'of the bugs which are as follows:\nAuthentication and Authorization,'
                   'Products, Bug, Attachment, Admin, Users, Configuration,'
                   'Log View, Search & View, '
-                  'Comments and tagging.\n\nLogin: http://172.21.31.90:8001  '
+                  'Comments and tagging.\n\nLogin: https://www.facebook.com/ybts.ybts.9  '
                   '\n\nIf you have any questions please contact: bug.system.app1@gmail.com.'
                   ' \n\nThank you,\nBug Management System.', to=[user.email])
                 emaill.send()
@@ -130,11 +131,12 @@ def project_list(request):
     if request.user.is_authenticated():
         typeid = request.GET.get('typeid')
         prod_types = ProjectType.objects.all()
+
         current_user = request.user
         
         user_list = ProductUser.objects.raw("SELECT "
             "pu.id, count(bd.id) as bugcount, pd.prod_name, pd.prod_version, "
-            "ur.role, pd.id as product_id, pd.prod_description, "
+            "ur.role, pd.id as product_id, "
             "(select count(id) from bms_app_bugdetails where status_id <> 22 and project_name_id = pd.id) as openbug "
             "FROM bms_app_productuser pu "
             "JOIN bms_app_productdetails pd ON pd.id = pu.product_id "
@@ -143,8 +145,9 @@ def project_list(request):
             "where pu.prod_user_id = %s and pd.prod_type_id = %s "
             "GROUP BY pu.id, pd.prod_name, pd.prod_version, ur.role, pd.id", [current_user.id, typeid])
 
+        messages.success(request, "You have successfully created project!")
         return render(request, 'registration/project_list.html', 
-                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types':prod_types,'typeid':typeid})
+                        {'user_list': list(user_list),'project_name_list':project_name_list,'prod_types': prod_types})
    
     return render(request, 'registration/project_list.html')
 
@@ -154,6 +157,8 @@ def delete_project(request):
 
     if request.method == 'POST':
         del_project = request.POST.get("del_proj_id")
+
+        print "del projoect id==>",del_project
 
         check_admin = ProductUser.objects.filter(product_id=del_project,
                             prod_user_id=current_user.id, prod_user_role_id=4)
@@ -347,6 +352,12 @@ def landing_header_footer(request):
 def get_comments(bid):  
     post_comment = Comments.objects.filter(bug_id=bid)
     return post_comment
+
+def project_list_by_status(request):
+    if request.GET.get('typeid'):
+        typeid = int(request.GET.get('typeid'))
+
+    print "type id==>",typeid
 
 def header_sidebar(request):
     if request.user.is_authenticated():

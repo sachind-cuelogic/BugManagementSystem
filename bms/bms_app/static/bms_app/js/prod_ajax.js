@@ -31,6 +31,7 @@ $(document).ready(function() {
     var getuser = $('#get_username').text();
 
     var select=document.getElementById('user-name');
+    console.log("length==>",select.length)
 
     for (i=0;i<select.length; i++) {
        if (select.options[i].value==getuser) {
