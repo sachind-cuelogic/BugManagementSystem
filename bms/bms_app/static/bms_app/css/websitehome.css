@@ -89,3 +89,19 @@ strong {
 .count-box h3{
     margin: 20px 0 5px;
 }
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+.icon-box{
+    width: 20%;
+}
+
+}
+@media (max-width: 768px) {
+
+    .icon-box{
+        padding: 0 10px;
+        width: 20%;
+    }
+
+
+}

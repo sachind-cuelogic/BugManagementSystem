@@ -120,3 +120,25 @@
 }
 
 }
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+  .land-button{
+    margin-bottom: 70px;
+}
+.para3>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
+.para1>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
+
+.para2>p {
+    margin: 0px;
+    text-align: center;
+    font-size: 14px; 
+}
+}
